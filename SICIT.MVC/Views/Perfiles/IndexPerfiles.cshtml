@@ -1,0 +1,445 @@
+﻿<script src="~/Content/jQueryv3.6.2/jQuery_v3.6.2.js"></script>
+<script src="~/Content/DataTables/datatables.js"></script>
+<script src="~/Content/Bootstrap5.2.3/js/bootstrap.js"></script>
+
+
+
+<script src="~/Scripts/Perfiles/Perfiles.js"></script>
+<link href="~/Content/DataTables/datatables.css" rel="stylesheet" />
+@*<link href="~/Content/Bootstrap5.2.3/css/bootstrap.css" rel="stylesheet" />*@
+@*<link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
+    rel="stylesheet">*@
+
+<link href="~/Content/toastr/toastr.css" rel="stylesheet" />
+@*<link href="~/Content/Start/css/sb-admin-2.css" rel="stylesheet" />*@
+<script src="~/Content/toastr/toastr.js"></script>
+<script src="~/Scripts/Validate/jquery.validate.js"></script>
+
+<!-- [ Main Content ] start -->
+<div class="pcoded-main-container">
+
+
+
+    <div class="pcoded-wrapper">
+        <div class="pcoded-content">
+            <div class="pcoded-inner-content">
+                <!-- [ breadcrumb ] start -->
+                <div class="page-header">
+                    <div class="page-block">
+                        <div class="row align-items-center">
+                            <div class="col-md-12">
+                                <div class="page-header-title">
+                                    @* <h5 class="m-b-10">Bootstrap Basic Tables</h5>*@
+                                </div>
+                                <ul class="breadcrumb">
+                                    <li class="breadcrumb-item"><a href="@Url.Action("Index", "Home")"><i class="fas fa-home"></i></a></li>
+                                    <li class="breadcrumb-item"><a>Seguridad</a></li>
+                                    <li class="breadcrumb-item"><a>Entidades</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
+
+
+
+
+                <!-- [ breadcrumb ] end -->
+                <div class="main-body">
+
+
+                    <div class="nav nav-pills mb-10 d-flex justify-content-center" id="pills-tab" role="tablist">
+                        <div class="col-xl-3 col-md-6 mb-4">
+                            <div class="card border-bottom-primary shadow h-100 py-2 active" data-bs-toggle="pill" data-bs-target="#pills-home" type="button" role="tab" aria-controls="pills-home" aria-selected="true">
+                                <div class="card-body">
+                                    <div class="row no-gutters align-items-center">
+                                        <div class="col mr-2">
+                                            <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">
+                                                @*<button class="nav-link active" id="pills-home-tab" data-bs-toggle="pill" data-bs-target="#pills-home" type="button" role="tab" aria-controls="pills-home" aria-selected="true">Todos</button>*@
+                                            </div>
+                                            <div class="h5 mb-0 font-weight-bold text-gray-800">Todos</div>
+                                        </div>
+                                        <div class="col-auto">
+                                            <i class="fas fa-calendar fa-2x text-gray-300"></i>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-xl-3 col-md-6 mb-4">
+                            <div class="card border-bottom-success shadow h-100 py-2" data-bs-toggle="pill" data-bs-target="#pills-profile" type="button" role="tab" aria-controls="pills-profile" aria-selected="false" onclick="GetAllDataPerfilVigentes()">
+                                <div class="card-body">
+                                    <div class="row no-gutters align-items-center">
+                                        <div class="col mr-2">
+                                            <div class="text-xs font-weight-bold text-success text-uppercase mb-1">
+                                                @*<button class="nav-link" id="pills-profile-tab" data-bs-toggle="pill" data-bs-target="#pills-profile" type="button" role="tab" aria-controls="pills-profile" aria-selected="false">Profile</button>*@
+                                            </div>
+                                            <div class="h5 mb-0 font-weight-bold text-gray-800">Vigentes</div>
+                                        </div>
+                                        <div class="col-auto">
+                                            <i class="fas fa-database fa-2x text-gray-300"></i>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+
+                        <div class="col-xl-3 col-md-6 mb-4">
+                            <div class="card border-bottom-info shadow h-100 py-2" data-bs-toggle="pill" data-bs-target="#pills-contact" type="button" role="tab" aria-controls="pills-contact" aria-selected="false" onclick="GetAllDataPerfilHistorial()">
+                                <div class="card-body">
+                                    <div class="row no-gutters align-items-center">
+                                        <div class="col mr-2">
+                                            <div class="text-xs font-weight-bold text-info text-uppercase mb-1">
+                                                @*<button class="nav-link" id="pills-contact-tab" >Contact</button>*@
+                                            </div>
+                                            <div class="row no-gutters align-items-center">
+                                                <div class="col-auto">
+                                                    <div class="h5 mb-0 mr-3 font-weight-bold text-gray-800">Historial</div>
+                                                </div>
+                                                <div class="col">
+                                                    @*<div class="progress progress-sm mr-2">
+                                                            <div class="progress-bar bg-info" role="progressbar"
+                                                                 style="width: 50%" aria-valuenow="50" aria-valuemin="0"
+                                                                 aria-valuemax="100"></div>
+                                                        </div>*@
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-auto">
+                                            <i class="fas fa-clipboard-list fa-2x text-gray-300"></i>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="tab-content" id="pills-tabContent">
+                        <div class="tab-pane fade show active" id="pills-home" role="tabpanel" aria-labelledby="pills-home-tab">
+
+
+
+                            <!-- [ Main Content ] start -->
+                            <div class="row">
+                                <!-- [ tabs ] start -->
+                                <div class="col-sm-12">
+
+
+                                    <!-- DataTales Example -->
+                                    <div class="card shadow mb-4">
+                                        <div class="card-header py-3">
+                                            @*<h6 class="m-0 font-weight-bold text-primary">Afores</h6>*@
+                                            <button type="button" class="btn btn-primary" data-toggle="modal" onclick="OpenModalAddUpdateEntidades(0);">
+                                                Agregar Entidad
+                                            </button>
+                                        </div>
+                                        <div>
+                                            <!-- Button trigger modal -->
+
+                                        </div>
+                                        <div class="card-body">
+                                            <div class="table-responsive" style="width:100%">
+                                                <table id="dataTablePerfiles" class="table table-hover no-wrap" data-page-size="10" style="width:100%">
+                                                    <thead>
+                                                        <tr class="text-center">
+
+                                                            <th class="text-center">
+                                                                Clave
+                                                            </th>
+                                                            <th class="text-center">
+                                                                Descripción
+                                                            </th>
+
+                                                            <th class="text-center" hidden>
+                                                                Fecha Inicio
+                                                            </th>
+
+                                                            <th class="text-center" hidden>
+                                                                Fecha Final
+                                                            </th>
+
+                                                            <th class="text-center">
+                                                                Acciones
+                                                            </th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody class="tbody"></tbody>
+                                                </table>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- [ tabs ] end -->
+                            </div>
+                            <!-- [ Main Content ] end -->
+
+
+
+
+                        </div>
+                        <div class="tab-pane fade" id="pills-profile" role="tabpanel" aria-labelledby="pills-profile-tab">
+
+
+                            <!-- [ Main Content ] start -->
+                            <div class="row">
+                                <!-- [ tabs ] start -->
+                                <div class="col-sm-12">
+
+
+                                    <!-- DataTales Example -->
+                                    <div class="card shadow mb-4">
+                                        <div class="card-header py-3">
+                                            @*<h6 class="m-0 font-weight-bold text-primary">Afores</h6>*@
+                                            <button type="button" class="btn btn-primary" data-toggle="modal" onclick="OpenModalAddUpdateEntidades(0);">
+                                                Agregar Entidad
+                                            </button>
+                                        </div>
+                                        <div>
+                                            <!-- Button trigger modal -->
+
+                                        </div>
+                                        <div class="card-body">
+                                            <div class="table-responsive" style="width:100%">
+                                                <table id="dataTablePerfilesVigentes" class="table table-hover no-wrap" data-page-size="10" style="width:100%">
+                                                    <thead>
+                                                        <tr class="text-center">
+
+                                                            <th class="text-center">
+                                                                Clave
+                                                            </th>
+                                                            <th class="text-center">
+                                                                Descripción
+                                                            </th>
+
+                                                            <th class="text-center" hidden>
+                                                                Fecha Inicio
+                                                            </th>
+
+                                                            <th class="text-center" hidden>
+                                                                Fecha Final
+                                                            </th>
+
+                                                            <th class="text-center">
+                                                                Acciones
+                                                            </th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody class="tbody"></tbody>
+                                                </table>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- [ tabs ] end -->
+                            </div>
+                            <!-- [ Main Content ] end -->
+
+
+
+                        </div>
+                        <div class="tab-pane fade" id="pills-contact" role="tabpanel" aria-labelledby="pills-contact-tab">
+
+
+                            <!-- [ Main Content ] start -->
+                            <div class="row">
+                                <!-- [ tabs ] start -->
+                                <div class="col-sm-12">
+
+
+                                    <!-- DataTales Example -->
+                                    <div class="card shadow mb-4">
+                                        <div class="card-header py-3">
+                                            @*<h6 class="m-0 font-weight-bold text-primary">Afores</h6>*@
+                                            @*<button type="button" class="btn btn-primary" data-toggle="modal" onclick="OpenModalAddUpdateEntidades(0);">
+                                                    Agregar Entidad
+                                                </button>*@
+                                        </div>
+                                        <div>
+                                            <!-- Button trigger modal -->
+
+                                        </div>
+                                        <div class="card-body">
+                                            <div class="table-responsive" style="width:100%">
+                                                <table id="dataTablePerfilesHistorial" class="table table-hover no-wrap" data-page-size="10" style="width:100%">
+                                                    <thead>
+                                                        <tr class="text-center">
+
+                                                            <th class="text-center">
+                                                                Clave
+                                                            </th>
+                                                            <th class="text-center">
+                                                                Descripción
+                                                            </th>
+
+                                                            <th class="text-center" hidden>
+                                                                Fecha Inicio
+                                                            </th>
+
+                                                            <th class="text-center" hidden>
+                                                                Fecha Final
+                                                            </th>
+
+                                                            <th class="text-center">
+                                                                Acciones
+                                                            </th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody class="tbody"></tbody>
+                                                </table>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- [ tabs ] end -->
+                            </div>
+                            <!-- [ Main Content ] end -->
+
+
+                        </div>
+                    </div>
+
+                    <div class="page-wrapper">
+
+
+
+
+
+
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- [ Main Content ] end -->
+<!-- Modal ModalAddUpdateUser-->
+<div class="modal fade" style="padding-top:3%!important" id="ModalAddUpdateEntidades" tabindex="-1" role="dialog" data-backdrop="static" data-keyboard="false">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 class="m-0 font-weight-bold text-primary" id="ModalCenterTitle"><span class="fas fa-user-o fa-lg" aria-hidden="true"></span> Registro de Entidad</h3>
+                <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <!-- Overflow Hidden -->
+                <form class="needs-validation form-group" autocomplete="off" registration novalidate>
+                    <div class="card mb-2">
+                        <div class="card-header py-3 text-center">
+                            <h6 id="ModalCenterTitleH6" class="m-0 font-weight-bold text-primary"></h6>
+                        </div>
+
+                        <div class="card-body">
+                            <div class="form-group">
+                                <div class="input-group col-md-12">
+                                    <input type="text" class="form-control" id="IdEntidadHidden" hidden>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="input-group col-md-12">
+                                    <input type="text" class="form-control" id="IdTipoEntidadHidden" hidden>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="input-group col-md-12" id="IDdivIDUsuario">
+                                    <input type="text" class="form-control" id="IDUsuario" maxlength="5" placeholder="ID" hidden>
+                                </div>
+                            </div>
+                            <div class="form-row">
+                                <div class="col-md-2 mb-3">
+                                    <label class="my-1 mr-2" for="lblClave">Clave:</label>
+                                    <input type="text" class="form-control" id="IdInputClave" placeholder="Clave" required>
+                                </div>
+                            </div>
+                            <div class="form-row">
+                                <div class="col-md-9 mb-3">
+                                    <label class="my-1 mr-2" for="lblDescripcion">Descripción:</label>
+                                    <input type="text" class="form-control" id="IdinputDescripcion" placeholder="Descripción" required>
+                                </div>
+                            </div>
+                            <div class="form-row">
+                                <div class="col-md-9 mb-3">
+                                    <label for="lblSiglas">Siglas</label>
+                                    <input type="text" class="form-control" id="IdInputSiglas" placeholder="Siglas" required>
+                                    <div class="invalid-feedback">
+                                        Please provide a valid city.
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-row">
+                                <div class="col-md-5 mb-3">
+                                    <label for="lblSelectedTipo">Tipo</label>
+                                    <select class="form-select" id="IdSelectedTipo" name="IdSelectedTipo"></select>
+                                    <div class="invalid-feedback">
+                                        Please provide a valid city.
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                    @*<div class="border-top my-3 border-5"></div>*@
+                    <!-- Overflow Hidden -->
+
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-primary float-right" onclick="AddUpdateEntidades();" type="submit" value="submit">Aceptar</button>
+                <button class="btn btn-danger float-right" onclick="CloseModalAddUpdateEntidades();">Cancelar</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<!-- Extra large modal -->
+
+<div class="modal fade" id="exampleModalXl" tabindex="-1" role="dialog" aria-labelledby="myExtraLargeModalLabel" style="display: none;" aria-hidden="true">
+    <div class="modal-dialog modal-xl" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Extra Large Modal</h5>
+                <button class="btn-close" type="button" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <p>This is an example of an extra large modal!</p>
+            </div>
+            <div class="modal-footer"><button class="btn btn-primary" type="button" data-bs-dismiss="modal">Close</button></div>
+        </div>
+    </div>
+</div>
+
+
+
+
+<!-- Modal ModalDelete -->
+<div class="modal fade" style="padding-top:3%!important" id="ModalDelete" tabindex="-1" role="dialog" data-backdrop="static" data-keyboard="false">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title">Eliminar Entidad</h4>
+                <button type="button" class="close" data-bs-dismiss="modal"
+                        aria-hidden="true">
+                    &times;
+                </button>
+            </div>
+            <div class="modal-body" style="height: 75px">
+                <p>¿Estás seguro de eliminar el registro?</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary" id="confirm-delete-ok" onclick="DeleteEntidad();">Aceptar</button>
+                <button type="button" class="btn btn-danger" onclick="CloseModalDelete();">Cancelar</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
