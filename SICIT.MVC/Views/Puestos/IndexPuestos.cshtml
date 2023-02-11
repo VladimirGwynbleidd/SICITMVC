@@ -131,7 +131,7 @@
                                     <div class="card shadow mb-4">
                                         <div class="card-header py-3">
                                             @*<h6 class="m-0 font-weight-bold text-primary">Afores</h6>*@
-                                            <button type="button" class="btn btn-primary" data-toggle="modal" onclick="OpenModalAddUpdateEntidades(0);">
+                                            <button type="button" class="btn btn-primary" data-toggle="modal" onclick="OpenModalAddUpdatePuesto(0);">
                                                 Agregar Puesto
                                             </button>
                                         </div>
@@ -346,11 +346,11 @@
 </div>
 <!-- [ Main Content ] end -->
 <!-- Modal ModalAddUpdateUser-->
-<div class="modal fade" style="padding-top:3%!important" id="ModalAddUpdatePuestos" tabindex="-1" role="dialog" data-backdrop="static" data-keyboard="false">
+<div class="modal fade" style="padding-top:3%!important" id="ModalAddUpdatePuesto" tabindex="-1" role="dialog" data-backdrop="static" data-keyboard="false">
     <div class="modal-dialog modal-lg" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h3 class="m-0 font-weight-bold text-primary" id="ModalCenterTitle"><span class="fas fa-user-o fa-lg" aria-hidden="true"></span> Registro de Entidad</h3>
+                <h3 class="m-0 font-weight-bold text-primary" id="ModalCenterTitle"><span class="fas fa-user-o fa-lg" aria-hidden="true"></span> Registro de Puesto</h3>
                 <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
@@ -380,6 +380,33 @@
                                 </div>
                             </div>
                             <div class="form-row">
+                                <div class="col-md-5 mb-3">
+                                    <label for="lblSelectedTipoEntidad">Tipo de Entidad</label>
+                                    <select class="form-select" id="IdSelectedTipoEntidad" name="IdSelectedTipoEntidad"></select>
+                                    <div class="invalid-feedback">
+                                        Please provide a valid city.
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-row">
+                                <div class="col-md-5 mb-3">
+                                    <label for="lblSelectedEntidad">Entidad</label>
+                                    <select class="form-select" id="IdSelectedEntidad" name="IdSelectedEntidad"></select>
+                                    <div class="invalid-feedback">
+                                        Please provide a valid city.
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-row">
+                                <div class="col-md-5 mb-3">
+                                    <label for="lblSelectedArea">Area</label>
+                                    <select class="form-select" id="IdSelectedArea" name="IdSelectedArea"></select>
+                                    <div class="invalid-feedback">
+                                        Please provide a valid city.
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-row">
                                 <div class="col-md-2 mb-3">
                                     <label class="my-1 mr-2" for="lblClave">Clave:</label>
                                     <input type="text" class="form-control" id="IdInputClave" placeholder="Clave" required>
@@ -391,7 +418,7 @@
                                     <input type="text" class="form-control" id="IdinputDescripcion" placeholder="Descripción" required>
                                 </div>
                             </div>
-                            <div class="form-row">
+                            @*<div class="form-row">
                                 <div class="col-md-9 mb-3">
                                     <label for="lblSiglas">Siglas</label>
                                     <input type="text" class="form-control" id="IdInputSiglas" placeholder="Siglas" required>
@@ -408,7 +435,7 @@
                                         Please provide a valid city.
                                     </div>
                                 </div>
-                            </div>
+                            </div>*@
                         </div>
 
                     </div>
@@ -418,8 +445,8 @@
                 </form>
             </div>
             <div class="modal-footer">
-                <button class="btn btn-primary float-right" onclick="AddUpdateEntidades();" type="submit" value="submit">Aceptar</button>
-                <button class="btn btn-danger float-right" onclick="CloseModalAddUpdateEntidades();">Cancelar</button>
+                <button class="btn btn-primary float-right" onclick="AddUpdatePuestos();" type="submit" value="submit">Aceptar</button>
+                <button class="btn btn-danger float-right" onclick="CloseModalAddUpdatePuesto();">Cancelar</button>
             </div>
         </div>
     </div>
@@ -461,7 +488,7 @@
                 <p>¿Estás seguro de eliminar el registro?</p>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-primary" id="confirm-delete-ok" onclick="DeleteEntidad();">Aceptar</button>
+                <button type="button" class="btn btn-primary" id="confirm-delete-ok" onclick="DeletePuesto();">Aceptar</button>
                 <button type="button" class="btn btn-danger" onclick="CloseModalDelete();">Cancelar</button>
             </div>
         </div>
