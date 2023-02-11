@@ -506,9 +506,9 @@ function OpenModalDelete(IdEntidadHidden, IdTipoEntidadHidden) {
 }
 
 
-function CloseModalAddUpdateUsuarios() {
+function CloseModalAddUpdatePuesto() {
     //$("#frmAddUpdateUsuario").trigger("reset");
-    $("#ModalAddUpdateUsuarios").modal('hide');
+    $("#ModalAddUpdatePuesto").modal('hide');
     //$("#frmAddUpdateUsuario").data('validator').resetForm();
 }
 
