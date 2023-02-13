@@ -32,7 +32,7 @@
                                 <ul class="breadcrumb">
                                     <li class="breadcrumb-item"><a href="@Url.Action("Index", "Home")"><i class="fas fa-home"></i></a></li>
                                     <li class="breadcrumb-item"><a>Seguridad</a></li>
-                                    <li class="breadcrumb-item"><a>Entidades</a></li>
+                                    <li class="breadcrumb-item"><a>Áreas</a></li>
                                 </ul>
                             </div>
                         </div>
@@ -131,7 +131,7 @@
                                         <div class="card-header py-3">
                                             @*<h6 class="m-0 font-weight-bold text-primary">Afores</h6>*@
                                             <button type="button" class="btn btn-primary" data-toggle="modal" onclick="OpenModalAddUpdateAreas(0);">
-                                                Agregar Entidad
+                                                Agregar Área
                                             </button>
                                         </div>
                                         <div>
@@ -143,7 +143,7 @@
                                                 <table id="dataTableAreas" class="table table-hover no-wrap" data-page-size="10" style="width:100%">
                                                     <thead>
                                                         <tr class="text-center">
-                                                            
+
                                                             <th class="text-center">
                                                                 Clave
                                                             </th>
@@ -196,7 +196,7 @@
                                         <div class="card-header py-3">
                                             @*<h6 class="m-0 font-weight-bold text-primary">Afores</h6>*@
                                             <button type="button" class="btn btn-primary" data-toggle="modal" onclick="OpenModalAddUpdateAreas(0);">
-                                                Agregar Entidad
+                                                Agregar Área
                                             </button>
                                         </div>
                                         <div>
@@ -331,7 +331,7 @@
     <div class="modal-dialog modal-lg" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h3 class="m-0 font-weight-bold text-primary" id="ModalCenterTitle"><span class="fas fa-user-o fa-lg" aria-hidden="true"></span> Registro de Entidad</h3>
+                <h3 class="m-0 font-weight-bold text-primary" id="ModalCenterTitle"><span class="fas fa-user-o fa-lg" aria-hidden="true"></span> Registro de Áreas</h3>
                 <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
@@ -347,17 +347,35 @@
                         <div class="card-body">
                             <div class="form-group">
                                 <div class="input-group col-md-12">
+                                    <input type="text" class="form-control" id="IdTipoEntidadHidden" hidden>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="input-group col-md-12">
                                     <input type="text" class="form-control" id="IdEntidadHidden" hidden>
                                 </div>
                             </div>
                             <div class="form-group">
                                 <div class="input-group col-md-12">
-                                    <input type="text" class="form-control" id="IdTipoEntidadHidden" hidden>
+                                    <input type="text" class="form-control" id="IdAreaHidden" hidden>
                                 </div>
                             </div>
-                            <div class="form-group">
-                                <div class="input-group col-md-12" id="IDdivIDUsuario">
-                                    <input type="text" class="form-control" id="IDUsuario" maxlength="5" placeholder="ID" hidden>
+                            <div class="form-row">
+                                <div class="col-md-5 mb-3">
+                                    <label for="lblSelectedTipoEntidad">Tipo de Entidad</label>
+                                    <select class="form-select" id="IdSelectedTipoEntidad" name="IdSelectedTipoEntidad"></select>
+                                    <div class="invalid-feedback">
+                                        Please provide a valid city.
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-row">
+                                <div class="col-md-5 mb-3">
+                                    <label for="lblSelectedEntidad">Entidad</label>
+                                    <select class="form-select" id="IdSelectedEntidad" name="IdSelectedEntidad"></select>
+                                    <div class="invalid-feedback">
+                                        Please provide a valid city.
+                                    </div>
                                 </div>
                             </div>
                             <div class="form-row">
@@ -372,30 +390,8 @@
                                     <input type="text" class="form-control" id="IdinputDescripcion" placeholder="Descripción" required>
                                 </div>
                             </div>
-                            <div class="form-row">
-                                <div class="col-md-9 mb-3">
-                                    <label for="lblSiglas">Siglas</label>
-                                    <input type="text" class="form-control" id="IdInputSiglas" placeholder="Siglas" required>
-                                    <div class="invalid-feedback">
-                                        Please provide a valid city.
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="form-row">
-                                <div class="col-md-5 mb-3">
-                                    <label for="lblSelectedTipo">Tipo</label>
-                                    <select class="form-select" id="IdSelectedTipo" name="IdSelectedTipo"></select>
-                                    <div class="invalid-feedback">
-                                        Please provide a valid city.
-                                    </div>
-                                </div>
-                            </div>
                         </div>
-
                     </div>
-                    @*<div class="border-top my-3 border-5"></div>*@
-                    <!-- Overflow Hidden -->
-
                 </form>
             </div>
             <div class="modal-footer">
@@ -442,7 +438,7 @@
                 <p>¿Estás seguro de eliminar el registro?</p>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-primary" id="confirm-delete-ok" onclick="DeleteEntidad();">Aceptar</button>
+                <button type="button" class="btn btn-primary" id="confirm-delete-ok" onclick="DeleteArea();">Aceptar</button>
                 <button type="button" class="btn btn-danger" onclick="CloseModalDelete();">Cancelar</button>
             </div>
         </div>

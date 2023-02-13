@@ -1,6 +1,9 @@
 ﻿$(document).ready(function () {
 
     GetAllPuestos();
+    GetAllTipoEntidades();
+    GetAllEntidades();
+    GetAllAreas();
 });
 
 
@@ -49,7 +52,7 @@ async function GetAllEntidades() {
     var url = '';
 
     //url = $("#FQDN").val() + 'api/Entidades/GetEntidades';
-    url = 'http://localhost:6435/Api/Entidades/GetTipoEntidades';
+    url = 'http://localhost:6435/Api/Entidades/GetEntidades';
 
 
     try {
@@ -72,7 +75,7 @@ async function fetchEntidadesAsync(urlString, methodType, args) {
         type: methodType
     }).then(function (response) {
 
-        var s = '<option value="-1">Selecciona un Tipo de Entidad</option>';
+        var s = '<option value="-1">Selecciona una Entidad</option>';
         for (var i = 0; i < response.length; i++) {
             s += '<option value="' + response[i].ID_T_ENT + '">' + response[i].DESC_T_ENT + '</option>';
         }
@@ -86,7 +89,7 @@ async function GetAllAreas() {
     var url = '';
 
     //url = $("#FQDN").val() + 'api/Entidades/GetEntidades';
-    url = 'http://localhost:6435/Api/Entidades/GetTipoEntidades';
+    url = 'http://localhost:6435/Api/Areas/GetAreas';
 
 
     try {
@@ -109,9 +112,9 @@ async function fetchAreasAsync(urlString, methodType, args) {
         type: methodType
     }).then(function (response) {
 
-        var s = '<option value="-1">Selecciona un Tipo de Entidad</option>';
+        var s = '<option value="-1">Selecciona un Área</option>';
         for (var i = 0; i < response.length; i++) {
-            s += '<option value="' + response[i].ID_T_ENT + '">' + response[i].DESC_T_ENT + '</option>';
+            s += '<option value="' + response[i].ID_AREA + '">' + response[i].DESC_AREA + '</option>';
         }
         $("#IdSelectedArea").html(s);
     });
@@ -185,7 +188,7 @@ async function fetchDataAsyncTablePuestos(urlString, methodType, args) {
 
                 {
                     data: "Acciones", render: function (data, type, row) {
-                        return '<a title="Editar" href="#" onclick="return OpenModalAddUpdatePuesto(' + row.CVE_ID_ENT + ',' + '\'' + row.DESC_ENT + '\'' + ',\'' + row.SIGLAS_ENT + '\'' + ',\'' + row.ID_T_ENT + '\'' + ')"><i style="color:black" class="fas fa-fw fa-edit fa-lg"></i></a> | <a title="Eliminar" href="#" onclick="OpenModalDelete(' + row.CVE_ID_ENT + ',\'' + row.ID_T_ENT + '\'' + ')"><i style="color:red" class="fas fa-solid fa-trash fa-lg"></i></a>';
+                        return '<a title="Editar" href="#" onclick="return OpenModalAddUpdatePuesto(' + row.ID_PUESTO + ',' + '\'' + row.DESCRIPCION_PUESTO + '\'' + ',\'' + row.ID_T_ENT + '\'' + ',\'' + row.CVE_ID_ENT + '\'' + ',\'' + row.ID_AREA + '\'' + ')"><i style="color:black" class="fas fa-fw fa-edit fa-lg"></i></a> | <a title="Eliminar" href="#" onclick="OpenModalDelete(' + row.ID_PUESTO + ')"><i style="color:red" class="fas fa-solid fa-trash fa-lg"></i></a>';
                     }, sortable: false, className: "uniqueClassName"
                 }
             ],
@@ -265,7 +268,7 @@ async function fetchDataAsyncTablePuestosVigentes(urlString, methodType, args) {
 
                 {
                     data: "Acciones", render: function (data, type, row) {
-                        return '<a title="Editar" href="#" onclick="return OpenModalAddUpdatePuesto(' + row.CVE_ID_ENT + ',' + '\'' + row.DESC_ENT + '\'' + ',\'' + row.SIGLAS_ENT + '\'' + ',\'' + row.ID_T_ENT + '\'' + ')"><i style="color:black" class="fas fa-fw fa-edit fa-lg"></i></a> | <a title="Eliminar" href="#" onclick="OpenModalDelete(' + row.CVE_ID_ENT + ',\'' + row.ID_T_ENT + '\'' + ')"><i style="color:red" class="fas fa-solid fa-trash fa-lg"></i></a>';
+                        return '<a title="Editar" href="#" onclick="return OpenModalAddUpdatePuesto(' + row.ID_PUESTO + ',' + '\'' + row.DESCRIPCION_PUESTO + '\'' + ',\'' + row.DESC_T_ENT + '\'' + ',\'' + row.SIGLAS_ENT + '\'' + ',\'' + row.DESC_AREA + '\'' + ')"><i style="color:black" class="fas fa-fw fa-edit fa-lg"></i></a> | <a title="Eliminar" href="#" onclick="OpenModalDelete(' + row.ID_PUESTO + ')"><i style="color:red" class="fas fa-solid fa-trash fa-lg"></i></a>';
                     }, sortable: false, className: "uniqueClassName"
                 }
             ],
@@ -348,7 +351,7 @@ async function fetchDataAsyncTablePuestosHistorial(urlString, methodType, args) 
 
                 {
                     data: "Acciones", render: function (data, type, row) {
-                        return '<a title="Editar" href="#" onclick="return OpenModalAddUpdatePuesto(' + row.CVE_ID_ENT + ',' + '\'' + row.DESC_ENT + '\'' + ',\'' + row.SIGLAS_ENT + '\'' + ',\'' + row.ID_T_ENT + '\'' + ')"><i style="color:black" class="fas fa-fw fa-edit fa-lg"></i></a> | <a title="Eliminar" href="#" onclick="OpenModalDelete(' + row.CVE_ID_ENT + ',\'' + row.ID_T_ENT + '\'' + ')"><i style="color:red" class="fas fa-solid fa-trash fa-lg"></i></a>';
+                        return '<a title="Editar" href="#" onclick="return OpenModalAddUpdatePuesto(' + row.ID_PUESTO + ',' + '\'' + row.DESCRIPCION_PUESTO + '\'' + ',\'' + row.DESC_T_ENT + '\'' + ',\'' + row.SIGLAS_ENT + '\'' + ',\'' + row.DESC_AREA + '\'' + ')"><i style="color:black" class="fas fa-fw fa-edit fa-lg"></i></a> | <a title="Eliminar" href="#" onclick="OpenModalDelete(' + row.ID_PUESTO + ')"><i style="color:red" class="fas fa-solid fa-trash fa-lg"></i></a>';
                     }, sortable: false, className: "uniqueClassName"
                 }
             ],
@@ -427,11 +430,20 @@ async function AddUpdatePuestos() {
 }
 
 
-function OpenModalAddUpdatePuesto(CVE_ID_ENT, DESC_ENT, SIGLAS_ENT, ID_T_ENT) {
+function OpenModalAddUpdatePuesto(ID_PUESTO, DESCRIPCION_PUESTO, ID_T_ENT, CVE_ID_ENT, ID_AREA) {
 
-    if (CVE_ID_ENT != 0) {
+    if (ID_PUESTO != 0) {
         $("#ModalCenterTitle").html('Editar Entidad');
         $("#ModalCenterTitleH6").html('Editar Entidad');
+
+        $("#IdSelectedTipoEntidad").val(ID_T_ENT);
+        $("#IdSelectedEntidad").val(CVE_ID_ENT);
+        $("#IdSelectedTipoEntidad").val(ID_AREA);
+
+        $("#IdInputClave").val(ID_PUESTO);
+        $("#IdinputDescripcion").val(DESCRIPCION_PUESTO);
+        
+        
 
     }
     else {
@@ -441,7 +453,7 @@ function OpenModalAddUpdatePuesto(CVE_ID_ENT, DESC_ENT, SIGLAS_ENT, ID_T_ENT) {
         //ResetControls();
     }
 
-
+    $("#IdPuestoHidden").val(ID_PUESTO);
     $('#ModalAddUpdatePuesto').modal({ backdrop: 'static', keyboard: false });
     $('#ModalAddUpdatePuesto').modal('show');
 
@@ -506,9 +518,9 @@ function OpenModalDelete(IdEntidadHidden, IdTipoEntidadHidden) {
 }
 
 
-function CloseModalAddUpdatePuesto() {
+function CloseModalDelete() {
     //$("#frmAddUpdateUsuario").trigger("reset");
-    $("#ModalAddUpdatePuesto").modal('hide');
+    $("#ModalDelete").modal('hide');
     //$("#frmAddUpdateUsuario").data('validator').resetForm();
 }
 

@@ -62,13 +62,13 @@ async function fetchDataAsyncTablePerfil(urlString, methodType, args) {
             columns: [
                 { 'data': 'ID_PERFIL', className: "uniqueClassName" },
                 { 'data': 'DESCRIPCION_PERFIL', className: "uniqueClassName" },
-                
+
                 { 'data': 'FECH_INI_VIG', className: "uniqueClassName", "visible": false },
                 { 'data': 'FECH_FIN_VIG', className: "uniqueClassName", "visible": false },
 
                 {
                     data: "Acciones", render: function (data, type, row) {
-                        return '<a title="Editar" href="#" onclick="return OpenModalAddUpdatePerfiles(' + row.CVE_ID_ENT + ',' + '\'' + row.DESC_ENT + '\'' + ',\'' + row.SIGLAS_ENT + '\'' + ',\'' + row.ID_T_ENT + '\'' + ')"><i style="color:black" class="fas fa-fw fa-edit fa-lg"></i></a> | <a title="Eliminar" href="#" onclick="OpenModalDelete(' + row.CVE_ID_ENT + ',\'' + row.ID_T_ENT + '\'' + ')"><i style="color:red" class="fas fa-solid fa-trash fa-lg"></i></a>';
+                        return '<a title="Editar" href="#" onclick="return OpenModalAddUpdatePerfiles(' + row.ID_PERFIL + ',' + '\'' + row.DESCRIPCION_PERFIL + '\'' + ')"><i style="color:black" class="fas fa-fw fa-edit fa-lg"></i></a> | <a title="Eliminar" href="#" onclick="OpenModalDelete(' + row.ID_PERFIL + ')"><i style="color:red" class="fas fa-solid fa-trash fa-lg"></i></a>';
                     }, sortable: false, className: "uniqueClassName"
                 }
             ],
@@ -144,7 +144,7 @@ async function fetchDataAsyncTablePerfilVigentes(urlString, methodType, args) {
 
                 {
                     data: "Acciones", render: function (data, type, row) {
-                        return '<a title="Editar" href="#" onclick="return OpenModalAddUpdatePerfiles(' + row.CVE_ID_ENT + ',' + '\'' + row.DESC_ENT + '\'' + ',\'' + row.SIGLAS_ENT + '\'' + ',\'' + row.ID_T_ENT + '\'' + ')"><i style="color:black" class="fas fa-fw fa-edit fa-lg"></i></a> | <a title="Eliminar" href="#" onclick="OpenModalDelete(' + row.CVE_ID_ENT + ',\'' + row.ID_T_ENT + '\'' + ')"><i style="color:red" class="fas fa-solid fa-trash fa-lg"></i></a>';
+                        return '<a title="Editar" href="#" onclick="return OpenModalAddUpdatePerfiles(' + row.ID_PERFIL + ',' + '\'' + row.DESCRIPCION_PERFIL + '\'' + ')"><i style="color:black" class="fas fa-fw fa-edit fa-lg"></i></a> | <a title="Eliminar" href="#" onclick="OpenModalDelete(' + row.ID_PERFIL + ',\'' + ')"><i style="color:red" class="fas fa-solid fa-trash fa-lg"></i></a>';
                     }, sortable: false, className: "uniqueClassName"
                 }
             ],
@@ -221,7 +221,7 @@ async function fetchDataAsyncTablePerfilHistorial(urlString, methodType, args) {
 
                 {
                     data: "Acciones", render: function (data, type, row) {
-                        return '<a title="Editar" href="#" onclick="return OpenModalAddUpdatePerfiles(' + row.CVE_ID_ENT + ',' + '\'' + row.DESC_ENT + '\'' + ',\'' + row.SIGLAS_ENT + '\'' + ',\'' + row.ID_T_ENT + '\'' + ')"><i style="color:black" class="fas fa-fw fa-edit fa-lg"></i></a> | <a title="Eliminar" href="#" onclick="OpenModalDelete(' + row.CVE_ID_ENT + ',\'' + row.ID_T_ENT + '\'' + ')"><i style="color:red" class="fas fa-solid fa-trash fa-lg"></i></a>';
+                        return '<a title="Editar" href="#" onclick="return OpenModalAddUpdatePerfiles(' + row.ID_PERFIL + ',' + '\'' + row.DESCRIPCION_PERFIL + '\'' + ')"><i style="color:black" class="fas fa-fw fa-edit fa-lg"></i></a> | <a title="Eliminar" href="#" onclick="OpenModalDelete(' + row.ID_PERFIL + ',\'' + ')"><i style="color:red" class="fas fa-solid fa-trash fa-lg"></i></a>';
                     }, sortable: false, className: "uniqueClassName"
                 }
             ],
@@ -260,7 +260,7 @@ async function AddUpdatePerfiles() {
 
     try {
 
-        methodStr = $('#IdEntidadHidden').val() == 0 ? 'POST' : 'PUT';
+        methodStr = $('#IdPerfilHidden').val() == 0 ? 'POST' : 'PUT';
 
         response = await fetchDataAsync(url, methodStr, JSON.stringify(argsEntidades));
 
@@ -299,21 +299,23 @@ async function AddUpdatePerfiles() {
 }
 
 
-function OpenModalAddUpdatePerfiles(CVE_ID_ENT, DESC_ENT, SIGLAS_ENT, ID_T_ENT) {
-
-    if (CVE_ID_ENT != 0) {
-        $("#ModalCenterTitle").html('Editar Entidad');
-        $("#ModalCenterTitleH6").html('Editar Entidad');
-
+function OpenModalAddUpdatePerfiles(ID_PERFIL, DESCRIPCION_PERFIL) {
+    
+    if (ID_PERFIL != 0) {
+        $("#ModalCenterTitle").html('Editar Perfil');
+        $("#ModalCenterTitleH6").html('Editar Perfil');
+        $("#IdInputClave").val(ID_PERFIL);
+        $('#IdInputClave').attr('disabled', 'disabled');
+        $("#IdinputDescripcion").val(DESCRIPCION_PERFIL);
     }
     else {
-        $("#ModalCenterTitle").html('Registrar Entidad');
-        $("#ModalCenterTitleH6").html('Registrar Entidad');
+        $("#ModalCenterTitle").html('Registrar Perfil');
+        $("#ModalCenterTitleH6").html('Registrar Perfil');
 
         //ResetControls();
     }
 
-
+    $("#IdPerfilHidden").val(ID_PERFIL);
     $('#ModalAddUpdatePerfiles').modal({ backdrop: 'static', keyboard: false });
     $('#ModalAddUpdatePerfiles').modal('show');
 
@@ -323,7 +325,7 @@ function OpenModalAddUpdatePerfiles(CVE_ID_ENT, DESC_ENT, SIGLAS_ENT, ID_T_ENT) 
 
 //*******************************DELETE************************************
 
-async function DeletePerfiles{
+async function DeletePerfiles() {
 
     //alert("1")
 
@@ -332,8 +334,8 @@ async function DeletePerfiles{
     var url = '';
 
     argsEntidades = {
-        CVE_ID_ENT: $('#IdEntidadHidden').val(),
-        ID_T_ENT: $('#IdTipoEntidadHidden').val()
+        CVE_ID_ENT: $('#IdPerfilHidden').val(),
+        
     };
 
     //url = $("#FQDN").val() + 'api/usuarios/delete';
@@ -366,13 +368,11 @@ async function DeletePerfiles{
 }
 
 
-function OpenModalDelete(IdEntidadHidden, IdTipoEntidadHidden) {
+function OpenModalDelete(ID_PERFIL) {
+    
+    $("#IdPerfilHidden").val(ID_PERFIL);
+    
 
-    $("#IdEntidadHidden").val(IdEntidadHidden);
-    $("#IdTipoEntidadHidden").val(IdTipoEntidadHidden);
-
-    console.log($("#IdEntidadHidden").val())
-    console.log($("#IdTipoEntidadHidden").val())
     $('#ModalDelete').modal({ backdrop: 'static', keyboard: false, show: true })
     $('#ModalDelete').modal('show');
 }
@@ -383,6 +383,11 @@ function CloseModalAddUpdatePerfiles() {
     $("#ModalAddUpdatePerfiles").modal('hide');
     //$("#frmAddUpdateUsuario").data('validator').resetForm();
 }
+
+function CloseModalDelete() {
+    $("#ModalDelete").modal('hide');
+}
+
 
 //***************************************************************************
 

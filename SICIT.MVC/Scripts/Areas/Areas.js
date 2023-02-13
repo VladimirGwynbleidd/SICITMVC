@@ -70,7 +70,7 @@ async function fetchDataAsyncTableAreas(urlString, methodType, args) {
 
                 {
                     data: "Acciones", render: function (data, type, row) {
-                        return '<a title="Editar" href="#" onclick="return OpenModalAddUpdateEntidades(' + row.CVE_ID_ENT + ',' + '\'' + row.DESC_ENT + '\'' + ',\'' + row.SIGLAS_ENT + '\'' + ',\'' + row.ID_T_ENT + '\'' + ')"><i style="color:black" class="fas fa-fw fa-edit fa-lg"></i></a> | <a title="Eliminar" href="#" onclick="OpenModalDelete(' + row.CVE_ID_ENT + ',\'' + row.ID_T_ENT + '\'' + ')"><i style="color:red" class="fas fa-solid fa-trash fa-lg"></i></a>';
+                        return '<a title="Editar" href="#" onclick="return OpenModalAddUpdateAreas(' + row.ID_AREA + ',' + '\'' + row.DESC_AREA + '\'' + ',\'' + row.DESC_T_ENT + '\'' + ',\'' + row.SIGLAS_ENT + '\'' + ')"><i style="color:black" class="fas fa-fw fa-edit fa-lg"></i></a> | <a title="Eliminar" href="#" onclick="OpenModalDelete(' + row.CVE_ID_ENT + ',\'' + row.ID_T_ENT + '\'' + ')"><i style="color:red" class="fas fa-solid fa-trash fa-lg"></i></a>';
                     }, sortable: false, className: "uniqueClassName"
                 }
             ],
@@ -148,7 +148,7 @@ async function fetchDataAsyncTableAreasVigentes(urlString, methodType, args) {
 
                 {
                     data: "Acciones", render: function (data, type, row) {
-                        return '<a title="Editar" href="#" onclick="return OpenModalAddUpdateEntidades(' + row.CVE_ID_ENT + ',' + '\'' + row.DESC_ENT + '\'' + ',\'' + row.SIGLAS_ENT + '\'' + ',\'' + row.ID_T_ENT + '\'' + ')"><i style="color:black" class="fas fa-fw fa-edit fa-lg"></i></a> | <a title="Eliminar" href="#" onclick="OpenModalDelete(' + row.CVE_ID_ENT + ',\'' + row.ID_T_ENT + '\'' + ')"><i style="color:red" class="fas fa-solid fa-trash fa-lg"></i></a>';
+                        return '<a title="Editar" href="#" onclick="return OpenModalAddUpdateAreas(' + row.ID_AREA + ',' + '\'' + row.DESC_AREA + '\'' + ',\'' + row.DESC_T_ENT + '\'' + ',\'' + row.SIGLAS_ENT + '\'' + ')"><i style="color:black" class="fas fa-fw fa-edit fa-lg"></i></a> | <a title="Eliminar" href="#" onclick="OpenModalDelete(' + row.CVE_ID_ENT + ',\'' + row.ID_T_ENT + '\'' + ')"><i style="color:red" class="fas fa-solid fa-trash fa-lg"></i></a>';
                     }, sortable: false, className: "uniqueClassName"
                 }
             ],
@@ -227,7 +227,7 @@ async function fetchDataAsyncTableAreasHistorial(urlString, methodType, args) {
 
                 {
                     data: "Acciones", render: function (data, type, row) {
-                        return '<a title="Editar" href="#" onclick="return OpenModalAddUpdateAreas(' + row.CVE_ID_ENT + ',' + '\'' + row.DESC_ENT + '\'' + ',\'' + row.SIGLAS_ENT + '\'' + ',\'' + row.ID_T_ENT + '\'' + ')"><i style="color:black" class="fas fa-fw fa-edit fa-lg"></i></a> | <a title="Eliminar" href="#" onclick="OpenModalDelete(' + row.CVE_ID_ENT + ',\'' + row.ID_T_ENT + '\'' + ')"><i style="color:red" class="fas fa-solid fa-trash fa-lg"></i></a>';
+                        return '<a title="Editar" href="#" onclick="return OpenModalAddUpdateAreas(' + row.ID_AREA + ',' + '\'' + row.DESC_AREA + '\'' + ',\'' + row.DESC_T_ENT + '\'' + ',\'' + row.SIGLAS_ENT + '\'' + ')"><i style="color:black" class="fas fa-fw fa-edit fa-lg"></i></a> | <a title="Eliminar" href="#" onclick="OpenModalDelete(' + row.CVE_ID_ENT + ',\'' + row.ID_T_ENT + '\'' + ')"><i style="color:red" class="fas fa-solid fa-trash fa-lg"></i></a>';
                     }, sortable: false, className: "uniqueClassName"
                 }
             ],
@@ -238,6 +238,7 @@ async function fetchDataAsyncTableAreasHistorial(urlString, methodType, args) {
         });
     });
 }
+
 
 
 //******************************ADD***************************************
@@ -265,7 +266,7 @@ async function AddUpdateAreas() {
 
     try {
 
-        methodStr = $('#IdEntidadHidden').val() == 0 ? 'POST' : 'PUT';
+        methodStr = $('#IdPerfilHidden').val() == 0 ? 'POST' : 'PUT';
 
         response = await fetchDataAsync(url, methodStr, JSON.stringify(argsEntidades));
 
@@ -304,21 +305,23 @@ async function AddUpdateAreas() {
 }
 
 
-function OpenModalAddUpdatePerfiles(CVE_ID_ENT, DESC_ENT, SIGLAS_ENT, ID_T_ENT) {
+function OpenModalAddUpdateAreas(ID_PERFIL, DESCRIPCION_PERFIL) {
 
-    if (CVE_ID_ENT != 0) {
-        $("#ModalCenterTitle").html('Editar Entidad');
-        $("#ModalCenterTitleH6").html('Editar Entidad');
-
+    if (ID_PERFIL != 0) {
+        $("#ModalCenterTitle").html('Editar Área');
+        $("#ModalCenterTitleH6").html('Editar Área');
+        $("#IdInputClave").val(ID_PERFIL);
+        $('#IdInputClave').attr('disabled', 'disabled');
+        $("#IdinputDescripcion").val(DESCRIPCION_PERFIL);
     }
     else {
-        $("#ModalCenterTitle").html('Registrar Entidad');
-        $("#ModalCenterTitleH6").html('Registrar Entidad');
+        $("#ModalCenterTitle").html('Registrar Área');
+        $("#ModalCenterTitleH6").html('Registrar Área');
 
         //ResetControls();
     }
 
-
+    $("#IdPerfilHidden").val(ID_PERFIL);
     $('#ModalAddUpdateAreas').modal({ backdrop: 'static', keyboard: false });
     $('#ModalAddUpdateAreas').modal('show');
 
@@ -328,7 +331,7 @@ function OpenModalAddUpdatePerfiles(CVE_ID_ENT, DESC_ENT, SIGLAS_ENT, ID_T_ENT) 
 
 //*******************************DELETE************************************
 
-async function DeletePerfiles{
+async function DeleteArea() {
 
     //alert("1")
 
