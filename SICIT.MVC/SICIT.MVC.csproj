@@ -126,6 +126,7 @@
     <Compile Include="Controllers\EntidadController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\LoginController.cs" />
+    <Compile Include="Controllers\MonitorController.cs" />
     <Compile Include="Controllers\PerfilesController.cs" />
     <Compile Include="Controllers\PuestosController.cs" />
     <Compile Include="Controllers\TipoEntidadController.cs" />
@@ -2379,6 +2380,7 @@
     <Content Include="Scripts\Entidad\EntidadJS.js" />
     <Content Include="Scripts\jquery.jcarousel.js" />
     <Content Include="Scripts\js.css" />
+    <Content Include="Scripts\Monitor\Monitor.js" />
     <Content Include="Scripts\Perfiles\Perfiles.js" />
     <Content Include="Scripts\Puestos\Puestos.js" />
     <Content Include="Scripts\TipoEntidad\TipoEntidad.js" />
@@ -2420,6 +2422,7 @@
     <Content Include="fonts\glyphicons-halflings-regular.ttf" />
     <Content Include="fonts\glyphicons-halflings-regular.eot" />
     <None Include="packages.config" />
+    <Content Include="Views\Monitor\IndexMonitor.cshtml" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
