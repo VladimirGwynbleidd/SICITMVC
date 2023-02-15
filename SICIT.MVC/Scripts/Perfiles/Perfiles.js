@@ -1,6 +1,8 @@
 ﻿$(document).ready(function () {
 
-    GetAllPerfil();
+    //GetAllPerfil();
+    GetAllDataPerfilVigentes();
+    //GetAllDataPerfilHistorial();
 });
 
 
@@ -219,15 +221,15 @@ async function fetchDataAsyncTablePerfilHistorial(urlString, methodType, args) {
                 { 'data': 'FECH_INI_VIG', className: "uniqueClassName", "visible": false },
                 { 'data': 'FECH_FIN_VIG', className: "uniqueClassName", "visible": false },
 
-                {
-                    data: "Acciones", render: function (data, type, row) {
-                        return '<a title="Editar" href="#" onclick="return OpenModalAddUpdatePerfiles(' + row.ID_PERFIL + ',' + '\'' + row.DESCRIPCION_PERFIL + '\'' + ')"><i style="color:black" class="fas fa-fw fa-edit fa-lg"></i></a> | <a title="Eliminar" href="#" onclick="OpenModalDelete(' + row.ID_PERFIL + ',\'' + ')"><i style="color:red" class="fas fa-solid fa-trash fa-lg"></i></a>';
-                    }, sortable: false, className: "uniqueClassName"
-                }
+                //{
+                //    data: "Acciones", render: function (data, type, row) {
+                //        return '<a title="Editar" href="#" onclick="return OpenModalAddUpdatePerfiles(' + row.ID_PERFIL + ',' + '\'' + row.DESCRIPCION_PERFIL + '\'' + ')"><i style="color:black" class="fas fa-fw fa-edit fa-lg"></i></a> | <a title="Eliminar" href="#" onclick="OpenModalDelete(' + row.ID_PERFIL + ',\'' + ')"><i style="color:red" class="fas fa-solid fa-trash fa-lg"></i></a>';
+                //    }, sortable: false, className: "uniqueClassName"
+                //}
             ],
 
             columnDefs: [
-                { className: "dt-center", targets: [0, 1, 2, 3, 4] }
+                { className: "dt-center", targets: [0, 1, 2, 3] }
             ]
         });
     });
@@ -249,14 +251,12 @@ async function AddUpdatePerfiles() {
 
     argsEntidades = {
 
-        CVE_ID_ENT: $('#IdInputClave').val(),
-        DESC_ENT: $('#IdinputDescripcion').val(),
-        SIGLAS_ENT: $('#IdInputSiglas').val(),
-        ID_T_ENT: $('#IdSelectedTipo').val()
+        ID_PERFIL: $('#IdPerfilHidden').val(),
+        DESCRIPCION_PERFIL: $('#IdinputDescripcion').val(),
     };
     //console.log($('#IdEntidadHidden').val())
     /*url = $('#IDUsuario').val() == 0 ? $("#FQDN").val() + 'api/usuarios/post' : $("#FQDN").val() + 'api/usuarios/put';*/
-    url = $('#IdEntidadHidden').val() == 0 ? 'http://localhost:6435/api/Entidades/Post' : 'http://localhost:6435/api/Entidades/Put';
+    url = $('#IdPerfilHidden').val() == 0 ? 'http://localhost:6435/api/Perfiles/Post' : 'http://localhost:6435/api/Perfiles/Put';
 
     try {
 
@@ -284,20 +284,36 @@ async function AddUpdatePerfiles() {
 
 
         if (response.Exito) {
-            GetAllDataEntidades();
+            
+            GetAllDataPerfilVigentes();
+            
             $("#ModalAddUpdatePerfiles").modal('hide');
-            toastr.info(response.Mensaje, 'Entidades').css("width", "250px");
+            toastr.info(response.Mensaje, 'Se ha agregado correctamente el perfil').css("width", "250px");
         }
         else {
-            toastr.error(response.Mensaje, 'Entidades').css("width", "200px");
+            toastr.error(response.Mensaje, 'Perfiles').css("width", "200px");
         }
     } catch (error) {
         response = error.responseJSON;
         mensaje = response.Mensaje;
-        toastr.error('Error', 'Usuarios').css("width", "150px");
+        toastr.error('Error', 'Perfiles').css("width", "150px");
     }
 }
 
+
+async function fetchDataAsync(urlString, methodType, args) {
+
+    return await $.ajax({
+        contentType: 'application/json',
+        url: urlString,
+        data: args,
+        dataType: 'json',
+        type: methodType
+    }).then(function (response) {
+        console.log(JSON.stringify(response));
+        return response;
+    });
+}
 
 function OpenModalAddUpdatePerfiles(ID_PERFIL, DESCRIPCION_PERFIL) {
     
@@ -311,8 +327,9 @@ function OpenModalAddUpdatePerfiles(ID_PERFIL, DESCRIPCION_PERFIL) {
     else {
         $("#ModalCenterTitle").html('Registrar Perfil');
         $("#ModalCenterTitleH6").html('Registrar Perfil');
+        $("#IdInputClave").attr('disabled', true);
 
-        //ResetControls();
+        ResetControls();
     }
 
     $("#IdPerfilHidden").val(ID_PERFIL);
@@ -334,36 +351,48 @@ async function DeletePerfiles() {
     var url = '';
 
     argsEntidades = {
-        CVE_ID_ENT: $('#IdPerfilHidden').val(),
+        ID_PERFIL: $('#IdPerfilHidden').val(),
         
     };
 
     //url = $("#FQDN").val() + 'api/usuarios/delete';
-    url = 'http://localhost:6435/api/Entidades/Delete';
+    url = 'http://localhost:6435/api/Perfiles/Delete';
 
     try {
         response = await fetchDataAsync('' + url + '', 'DELETE', JSON.stringify(argsEntidades));
-
         toastr.options = {
-            "timeOut": 2500,
-            "closeButton": true,
+            "closeButton": false,
+            "debug": false,
+            "newestOnTop": false,
             "progressBar": true,
-            "newestOnTop": true
+            "positionClass": "toast-top-center",
+            "preventDuplicates": true,
+            "onclick": null,
+            "showDuration": "100",
+            "hideDuration": "1000",
+            "timeOut": "5000",
+            "extendedTimeOut": "1000",
+            "showEasing": "swing",
+            "hideEasing": "linear",
+            "showMethod": "show",
+            "hideMethod": "hide"
         }
 
         if (response.Exito) {
-            GetAllDataVigentes();
+            
+            GetAllDataPerfilVigentes();
+            
             $("#ModalDelete").modal('hide');
 
-            toastr.success(response.Mensaje, 'Entidades').css("width", "250px");
+            toastr.success(response.Mensaje, 'Se ha eliminado correctamente el perfil').css("width", "250px");
         }
         else {
-            toastr.error(response.Mensaje, 'Entidades').css("width", "250px");
+            toastr.error(response.Mensaje, 'Perfiles').css("width", "250px");
         }
     } catch (error) {
         response = error.responseJSON;
         mensaje = response.Mensaje;
-        toastr.error('Error', 'Entidades').css("width", "250px");
+        toastr.error('Error', 'Perfiles').css("width", "250px");
     }
 }
 
@@ -391,3 +420,16 @@ function CloseModalDelete() {
 
 //***************************************************************************
 
+
+
+function ResetControls() {
+
+    $("#IdInputClave").val("");
+    //$("#IdInputClave").attr('disabled', false);
+
+
+    $("#IdinputDescripcion").val("");
+    
+
+
+}
