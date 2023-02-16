@@ -5,8 +5,6 @@
 });
 
 
-
-
 async function GetAllPerfil() {
 
     var url = '';
