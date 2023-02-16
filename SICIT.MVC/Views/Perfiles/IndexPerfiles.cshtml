@@ -13,8 +13,6 @@
 <link href="~/Content/toastr/toastr.css" rel="stylesheet" />
 @*<link href="~/Content/Start/css/sb-admin-2.css" rel="stylesheet" />*@
 <script src="~/Content/toastr/toastr.js"></script>
-<script src="~/Scripts/Validate/jquery.validate.js"></script>
-
 <!-- [ Main Content ] start -->
 
 
@@ -22,6 +20,10 @@
 
     .selected {
         background-color: blue;
+    }
+
+    .error {
+        font-size: 16px;
     }
 </style>
 
@@ -53,51 +55,51 @@
 
 
                 @*<div class="container">
-                    <ul class="nav nav-tabs">
-                        <li class="nav-item">
-                            <a class="nav-link active" href="#login-contents" id="login-tab" data-bs-toggle="tab">Log In</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="#register-contents" id="register-tab" data-bs-toggle="tab">Register</a>
-                        </li>
-                    </ul>
-                    <div class="tab-content">
-                        <div id="login-contents" class="tab-pane active">
-                            <table>
-                                <tr>
-                                    <td>Username :</td>
-                                    <td><input type="text" id="ip-username" placeholder="Username"></td>
-                                </tr>
-                                <tr>
-                                    <td>Password :</td>
-                                    <td><input type="text" placeholder="Password" id="ip-password"></td>
-                                </tr>
-                            </table>
+                        <ul class="nav nav-tabs">
+                            <li class="nav-item">
+                                <a class="nav-link active" href="#login-contents" id="login-tab" data-bs-toggle="tab">Log In</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="#register-contents" id="register-tab" data-bs-toggle="tab">Register</a>
+                            </li>
+                        </ul>
+                        <div class="tab-content">
+                            <div id="login-contents" class="tab-pane active">
+                                <table>
+                                    <tr>
+                                        <td>Username :</td>
+                                        <td><input type="text" id="ip-username" placeholder="Username"></td>
+                                    </tr>
+                                    <tr>
+                                        <td>Password :</td>
+                                        <td><input type="text" placeholder="Password" id="ip-password"></td>
+                                    </tr>
+                                </table>
+                            </div>
+                            <div id="register-contents" class="tab-pane fade">
+                                <table>
+                                    <tr>
+                                        <td>Name :</td>
+                                        <td><input type="text" placeholder="First Name" id="ip-f-name"></td>
+                                    </tr>
+                                    <tr>
+                                        <td>Last Name :</td>
+                                        <td><input type="text" placeholder="Last Name" id="ip-l-name"></td>
+                                    </tr>
+                                    <tr>
+                                        <td>E-Mail :</td>
+                                        <td><input type="text" placeholder="Your E-Mail Id" id="ip-e-mail"></td>
+                                    </tr>
+                                    <tr>
+                                        <td>A OTP will be sent to your mail id for verification.</td>
+                                        <td>
+                                            <Button class="btn btn-success" id="register-btn">Register</Button>
+                                        </td>
+                                    </tr>
+                                </table>
+                            </div>
                         </div>
-                        <div id="register-contents" class="tab-pane fade">
-                            <table>
-                                <tr>
-                                    <td>Name :</td>
-                                    <td><input type="text" placeholder="First Name" id="ip-f-name"></td>
-                                </tr>
-                                <tr>
-                                    <td>Last Name :</td>
-                                    <td><input type="text" placeholder="Last Name" id="ip-l-name"></td>
-                                </tr>
-                                <tr>
-                                    <td>E-Mail :</td>
-                                    <td><input type="text" placeholder="Your E-Mail Id" id="ip-e-mail"></td>
-                                </tr>
-                                <tr>
-                                    <td>A OTP will be sent to your mail id for verification.</td>
-                                    <td>
-                                        <Button class="btn btn-success" id="register-btn">Register</Button>
-                                    </td>
-                                </tr>
-                            </table>
-                        </div>
-                    </div>
-                </div>*@
+                    </div>*@
 
 
 
@@ -622,12 +624,11 @@
             </div>
             <div class="modal-body">
                 <!-- Overflow Hidden -->
-                <form class="needs-validation form-group" autocomplete="off" registration novalidate>
+                <form class="needs-validation form-group" id="formAddUpdatePerfiles" autocomplete="off" registration novalidate>
                     <div class="card mb-2">
                         <div class="card-header py-3 text-center">
                             <h6 id="ModalCenterTitleH6" class="m-0 font-weight-bold text-primary"></h6>
                         </div>
-
                         <div class="card-body">
                             <div class="form-group">
                                 <div class="input-group col-md-12">
@@ -643,8 +644,11 @@
                             <div class="form-row">
                                 <div class="col-md-9 mb-3">
                                     <label class="my-1 mr-2" for="lblDescripcion">Descripción:</label>
-                                    <input type="text" class="form-control" id="IdinputDescripcion" placeholder="Descripción" required>
+                                    <input type="text" class="form-control" id="IdinputDescripcion" name="IdinputDescripcion" placeholder="Descripción" required>
                                 </div>
+                            </div>
+                            <div class="form-row" id="divErrores">
+                                <ul id="lista"></ul>
                             </div>
                         </div>
                     </div>

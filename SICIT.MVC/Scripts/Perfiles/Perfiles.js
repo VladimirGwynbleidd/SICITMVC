@@ -1,5 +1,4 @@
 ﻿$(document).ready(function () {
-
     //GetAllPerfil();
     GetAllDataPerfilVigentes();
     //GetAllDataPerfilHistorial();
@@ -146,7 +145,7 @@ async function fetchDataAsyncTablePerfilVigentes(urlString, methodType, args) {
 
                 {
                     data: "Acciones", render: function (data, type, row) {
-                        return '<a title="Editar" href="#" onclick="return OpenModalAddUpdatePerfiles(' + row.ID_PERFIL + ',' + '\'' + row.DESCRIPCION_PERFIL + '\'' + ')"><i style="color:black" class="fas fa-fw fa-edit fa-lg"></i></a> | <a title="Eliminar" href="#" onclick="OpenModalDelete(' + row.ID_PERFIL + ',\'' + ')"><i style="color:red" class="fas fa-solid fa-trash fa-lg"></i></a>';
+                        return '<a title="Editar" href="#" onclick="return OpenModalAddUpdatePerfiles(' + row.ID_PERFIL + ',' + '\'' + row.DESCRIPCION_PERFIL + '\'' + ')"><i style="color:black" class="fas fa-fw fa-edit fa-lg"></i></a> | <a title="Eliminar" href="#" onclick="OpenModalDelete(' + row.ID_PERFIL  + ')"><i style="color:red" class="fas fa-solid fa-trash fa-lg"></i></a>';
                     }, sortable: false, className: "uniqueClassName"
                 }
             ],
@@ -241,63 +240,67 @@ async function fetchDataAsyncTablePerfilHistorial(urlString, methodType, args) {
 
 async function AddUpdatePerfiles() {
 
-    //if (!($('#frmAddUpdateUsuario').valid())) return false;
-
-
     var response;
     var argsUsuario;
     var methodStr = '';
     var url = '';
 
-    argsEntidades = {
+    $("#formAddUpdatePerfiles").validate(validateFormAcceso);
 
-        ID_PERFIL: $('#IdPerfilHidden').val(),
-        DESCRIPCION_PERFIL: $('#IdinputDescripcion').val(),
-    };
-    //console.log($('#IdEntidadHidden').val())
-    /*url = $('#IDUsuario').val() == 0 ? $("#FQDN").val() + 'api/usuarios/post' : $("#FQDN").val() + 'api/usuarios/put';*/
-    url = $('#IdPerfilHidden').val() == 0 ? 'http://localhost:6435/api/Perfiles/Post' : 'http://localhost:6435/api/Perfiles/Put';
+    if ($("#formAddUpdatePerfiles").valid()) {
 
-    try {
 
-        methodStr = $('#IdPerfilHidden').val() == 0 ? 'POST' : 'PUT';
+        argsEntidades = {
 
-        response = await fetchDataAsync(url, methodStr, JSON.stringify(argsEntidades));
+            ID_PERFIL: $('#IdPerfilHidden').val(),
+            DESCRIPCION_PERFIL: $('#IdinputDescripcion').val(),
+        };
+        //console.log($('#IdEntidadHidden').val())
+        /*url = $('#IDUsuario').val() == 0 ? $("#FQDN").val() + 'api/usuarios/post' : $("#FQDN").val() + 'api/usuarios/put';*/
+        url = $('#IdPerfilHidden').val() == 0 ? 'http://localhost:6435/api/Perfiles/Post' : 'http://localhost:6435/api/Perfiles/Put';
 
-        toastr.options = {
-            "closeButton": false,
-            "debug": false,
-            "newestOnTop": false,
-            "progressBar": true,
-            "positionClass": "toast-top-center",
-            "preventDuplicates": true,
-            "onclick": null,
-            "showDuration": "100",
-            "hideDuration": "1000",
-            "timeOut": "5000",
-            "extendedTimeOut": "1000",
-            "showEasing": "swing",
-            "hideEasing": "linear",
-            "showMethod": "show",
-            "hideMethod": "hide"
+        try {
+
+            methodStr = $('#IdPerfilHidden').val() == 0 ? 'POST' : 'PUT';
+
+            response = await fetchDataAsync(url, methodStr, JSON.stringify(argsEntidades));
+
+            toastr.options = {
+                "closeButton": false,
+                "debug": false,
+                "newestOnTop": false,
+                "progressBar": true,
+                "positionClass": "toast-top-center",
+                "preventDuplicates": true,
+                "onclick": null,
+                "showDuration": "100",
+                "hideDuration": "1000",
+                "timeOut": "5000",
+                "extendedTimeOut": "1000",
+                "showEasing": "swing",
+                "hideEasing": "linear",
+                "showMethod": "show",
+                "hideMethod": "hide"
+            }
+
+
+            if (response.Exito) {
+
+                GetAllDataPerfilVigentes();
+
+                $("#ModalAddUpdatePerfiles").modal('hide');
+                toastr.info(response.Mensaje, 'Se ha agregado correctamente el perfil').css("width", "250px");
+            }
+            else {
+                toastr.error(response.Mensaje, 'Perfiles').css("width", "200px");
+            }
+        } catch (error) {
+            response = error.responseJSON;
+            mensaje = response.Mensaje;
+            toastr.error('Error', 'Perfiles').css("width", "150px");
         }
-
-
-        if (response.Exito) {
-            
-            GetAllDataPerfilVigentes();
-            
-            $("#ModalAddUpdatePerfiles").modal('hide');
-            toastr.info(response.Mensaje, 'Se ha agregado correctamente el perfil').css("width", "250px");
-        }
-        else {
-            toastr.error(response.Mensaje, 'Perfiles').css("width", "200px");
-        }
-    } catch (error) {
-        response = error.responseJSON;
-        mensaje = response.Mensaje;
-        toastr.error('Error', 'Perfiles').css("width", "150px");
     }
+
 }
 
 
@@ -398,10 +401,7 @@ async function DeletePerfiles() {
 
 
 function OpenModalDelete(ID_PERFIL) {
-    
     $("#IdPerfilHidden").val(ID_PERFIL);
-    
-
     $('#ModalDelete').modal({ backdrop: 'static', keyboard: false, show: true })
     $('#ModalDelete').modal('show');
 }
@@ -427,9 +427,31 @@ function ResetControls() {
     $("#IdInputClave").val("");
     //$("#IdInputClave").attr('disabled', false);
 
-
     $("#IdinputDescripcion").val("");
-    
+}
 
 
+var validateFormAcceso = {
+    rules: {
+        IdinputDescripcion: { required: true }
+        //txtPassword: {required: true, minlength: 5, maxlength: 10 }
+    },
+    messages: {
+        //IdUser: {
+        //    required: function () {
+        //        messageAlert("Ingrese su Usuario.", 100)
+        //    },
+        //},
+        //Password: {
+        //    required: function () {
+        //        messageAlert("Ingrese su Contraseña.", 100)
+        //    },
+        //}
+        IdinputDescripcion: { required: "Ingrese la descripción" },
+        //txtPersonalizado: {required: "* Ingresa un valor", minlength: $.validator.format("* Ingresa {0} o mas caracteres"), maxlength: $.validator.format("* Ingresa {0} o menos caracteres") }
+    },
+    errorContainer: $("#divErrores"),
+    errorLabelContainer: "#divErrores ul",
+    errorElement: "span",
+    wrapper: "li",
 }

@@ -10,7 +10,7 @@ async function GetAllDataMonitor() {
     url = 'http://localhost:6435/api/Monitor/GetMonitor';
 
     try {
-        response = await fetchDataAsyncTable('' + url + '', 'GET', {});
+        response = await fetchDataAsyncTable('' + url + '', 'POST', { "USUARIO": "sar"} );
     } catch (error) {
         console.log(error)
         response = error.responseJSON;
@@ -24,7 +24,7 @@ async function fetchDataAsyncTable(urlString, methodType, args) {
     return await $.ajax({
         contentType: 'application/json',
         url: urlString,
-        data: args,
+        data: JSON.stringify(args),
         dataType: 'json',
         type: methodType
     }).then(function (response) {
@@ -49,6 +49,7 @@ async function fetchDataAsyncTable(urlString, methodType, args) {
                     "previous": "Anterior"
                 }
             },
+            select: true,
             destroy: true,
             data: response,
             sort: true,
@@ -56,28 +57,52 @@ async function fetchDataAsyncTable(urlString, methodType, args) {
             responsive: true,
             pagination: "bootstrap",
             columns: [
-                { 'data': 'NUM_FOLIO', className: "uniqueClassName" },
+         /*       { 'data': ''},*/
+                { 'data': 'NUM_FOLIO', className: "uniqueClassName"},
                 //{ 'data': 'ID_T_ENT', className: "uniqueClassName" },
-                { 'data': 'ID_PAQUETE', className: "text-center" },
+                { 'data': 'ID_PAQUETE', className: "text-center"},
                 { 'data': 'FECH_FIN_OPER', className: "text-left" },
-                { 'data': 'FECH_INI_OPER', className: "uniqueClassName", "visible": true },
-                { 'data': 'FECH_PROP_TERM', className: "uniqueClassName", "visible": true },
-                { 'data': 'ID_ESTATUS', className: "text-left" },
+                { 'data': 'FECH_INI_OPER', className: "uniqueClassName", "visible": true},
+                { 'data': 'FECH_PROP_TERM', className: "uniqueClassName", "visible": true},
+                //{ 'data': 'ID_ESTATUS', className: "text-left" },
 
                 {
                     data: "Acciones", render: function (data, type, row) {
+                        switch (row.ID_ESTATUS) {
+                            case 0:
+                                return '<a title="Editar" href="#" onclick="getReporte(' + row.NUM_FOLIO + ')"><i style="color:green" class="fas fa-solid fa-circle fa-lg"></i></a>';
+                                break;
+                            case 1:
+                                return '<i style="color:yellow" class="fas fa-solid fa-circle fa-lg"></i></a>';
+                                break;
+                            case 2:
+                                return '<i style="color:red" class="fas fa-solid fa-circle fa-lg"></i></a>';
+                                break;
+                        }
 
-                        if (row.ID_ESTATUS == 1)
-
-
-                        return '<a title="Editar" href="#" onclick="return OpenModalAddUpdateEntidades(' + row.CVE_ID_ENT + ',' + '\'' + row.DESC_ENT + '\'' + ',\'' + row.SIGLAS_ENT + '\'' + ',\'' + row.ID_T_ENT + '\'' + ')"><i style="color:black" class="fas fa-fw fa-edit fa-lg"></i></a> | <a title="Eliminar" href="#" onclick="OpenModalDelete(' + row.CVE_ID_ENT + ',\'' + row.ID_T_ENT + '\'' + ')"><i style="color:red" class="fas fa-solid fa-trash fa-lg"></i></a>';
                     }, sortable: false, className: "uniqueClassName"
                 }
             ],
 
             columnDefs: [
-                { className: "dt-center", targets: [0, 1, 2, 3, 4] }
-            ]
+                { className: "dt-center", targets: [0, 1, 2, 3, 4,5] }
+            ],
+            
         });
     });
+}
+
+function getReporte(data) {
+
+    $.ajax({
+        url: '/Monitor/GetReport',
+        type: 'GET',
+        data: { "numFolio": data },
+        success: function (result) {
+            //if (result == "Success") {
+            //    location.href = '@Url.Action("DownloadCSV", "ControllerName")';
+            //}
+        }
+    });
+
 }
