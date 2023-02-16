@@ -1,9 +1,10 @@
 ﻿$(document).ready(function () {
 
-    GetAllPuestos();
+    //GetAllPuestos();
     GetAllTipoEntidades();
     GetAllEntidades();
     GetAllAreas();
+    GetAllDataPuestosVigentes();
 });
 
 
