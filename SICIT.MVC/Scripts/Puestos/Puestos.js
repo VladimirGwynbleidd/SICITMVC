@@ -454,16 +454,16 @@ async function AddUpdatePuestos() {
 
         argsPuestos = {
 
-            //ID_PUESTO: $('#IdInputClavePuesto').val(),
+            ID_PUESTO: $('#IdInputClavePuesto').val(),
             DESCRIPCION_PUESTO: $('#IdinputDescripcionPuesto').val(),
             ID_T_ENT: $('#IdSelectedTipoEntidad').val(),
             CVE_ID_ENT: $('#IdSelectedEntidad').val(),
             ID_AREA: $('#IdSelectedArea').val()
         };
-        console.log($('#IdPuestoHidden').val())
-        console.log(argsPuestos)
+        //console.log($('#IdPuestoHidden').val())
+        //console.log(argsPuestos)
         /*url = $('#IDUsuario').val() == 0 ? $("#FQDN").val() + 'api/usuarios/post' : $("#FQDN").val() + 'api/usuarios/put';*/
-        url = $('#IdPuestoHidden').val() == 0 ? 'http://localhost:6435/Api/Puestos/Post' : 'http://localhost:6435/api/Entidades/Put';
+        url = $('#IdPuestoHidden').val() == 0 ? 'http://localhost:6435/Api/Puestos/Post' : 'http://localhost:6435/Api/Puestos/Put';
 
         try {
 
