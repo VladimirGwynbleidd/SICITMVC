@@ -303,7 +303,7 @@ async function AddUpdatePerfiles() {
 
 
 async function fetchDataAsync(urlString, methodType, args) {
-
+    alert("2")
     return await $.ajax({
         contentType: 'application/json',
         url: urlString,

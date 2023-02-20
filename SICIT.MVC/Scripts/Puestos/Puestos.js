@@ -2,14 +2,61 @@
 
     //GetAllPuestos();
     GetAllTipoEntidades();
-    GetAllEntidades();
-    GetAllAreas();
+    //GetAllEntidades();
+    //GetAllAreas();
     GetAllDataPuestosVigentes();
+
+
 });
 
 
+function changeEventHandler(event) {
+
+    var id = event.target.value
+
+    if (id == "-1") {
+
+        $("#IdSelectedEntidad").attr('disabled', true);
+        $('#IdSelectedEntidad').val("");
+        $('#IdSelectedArea').attr('disabled', true);
+        $('#IdSelectedArea').val("");
+
+        return;
+    }
+
+    $("#IdSelectedEntidad").attr('disabled', false);
+    $('#IdSelectedEntidad').val("");
+
+    /*alert(event.target.value);*/
+
+    GetAllEntidades(id);
+}
+
+function changeEventHandlerEntidad(event) {
+
+    var id = event.target.value
+
+
+    var id = event.target.value
+
+    if (id == "-1") {
+
+        //$("#IdSelectedEntidad").attr('disabled', true);
+        //$('#IdSelectedEntidad').val("");
+        $('#IdSelectedArea').attr('disabled', true);
+        $('#IdSelectedArea').val("");
+
+        return;
+    }
+
+    $('#IdSelectedArea').attr('disabled', false);
+    $('#IdSelectedArea').val("");
+
+    GetAllAreas(id);
+}
 
 async function GetAllTipoEntidades() {
+
 
     var url = '';
 
@@ -48,16 +95,31 @@ async function fetchTipoEntidadesAsync(urlString, methodType, args) {
 
 
 
-async function GetAllEntidades() {
+async function GetAllEntidades(id) {
 
+
+
+    if (id == "-1") {
+        $("#IdSelectedEntidad").attr('disabled', false);
+        $('#IdSelectedEntidad').val("-1");
+        return;
+    }
+    $("#IdSelectedEntidad").attr('disabled', false);
+    $('#IdSelectedEntidad').val("-1");
+
+    //alert(id)
     var url = '';
+    argsEntidades = {
 
+        ID_T_ENT: id
+    };
     //url = $("#FQDN").val() + 'api/Entidades/GetEntidades';
-    url = 'http://localhost:6435/Api/Entidades/GetEntidades';
+    url = 'http://localhost:6435/Api/Entidades/GetEntidadesById';
 
 
     try {
-        response = await fetchEntidadesAsync('' + url + '', 'GET', {});
+        response = await fetchEntidadesAsync('' + url + '', 'POST', JSON.stringify(argsEntidades));
+        console.log(response)
     } catch (error) {
         console.log(error)
         response = error.responseJSON;
@@ -75,26 +137,32 @@ async function fetchEntidadesAsync(urlString, methodType, args) {
         dataType: 'json',
         type: methodType
     }).then(function (response) {
-
+        console.log(response)
         var s = '<option value="-1">Selecciona una Entidad</option>';
         for (var i = 0; i < response.length; i++) {
-            s += '<option value="' + response[i].ID_T_ENT + '">' + response[i].DESC_T_ENT + '</option>';
+            s += '<option value="' + response[i].CVE_ID_ENT + '">' + response[i].SIGLAS_ENT + '</option>';
         }
         $("#IdSelectedEntidad").html(s);
     });
 }
 
 
-async function GetAllAreas() {
+async function GetAllAreas(idArea) {
 
     var url = '';
 
+    argsEntidades = {
+
+        CVE_ID_ENT: idArea,//$('#IdSelectedEntidad').val(),
+        ID_T_ENT: $('#IdSelectedTipoEntidad').val()
+    };
+
     //url = $("#FQDN").val() + 'api/Entidades/GetEntidades';
-    url = 'http://localhost:6435/Api/Areas/GetAreas';
+    url = 'http://localhost:6435/Api/Areas/GetAreasById';
 
 
     try {
-        response = await fetchAreasAsync('' + url + '', 'GET', {});
+        response = await fetchAreasAsync('' + url + '', 'POST', JSON.stringify(argsEntidades));
     } catch (error) {
         console.log(error)
         response = error.responseJSON;
@@ -269,7 +337,7 @@ async function fetchDataAsyncTablePuestosVigentes(urlString, methodType, args) {
 
                 {
                     data: "Acciones", render: function (data, type, row) {
-                        return '<a title="Editar" href="#" onclick="return OpenModalAddUpdatePuesto(' + row.ID_PUESTO + ',' + '\'' + row.DESCRIPCION_PUESTO + '\'' + ',\'' + row.DESC_T_ENT + '\'' + ',\'' + row.SIGLAS_ENT + '\'' + ',\'' + row.DESC_AREA + '\'' + ')"><i style="color:black" class="fas fa-fw fa-edit fa-lg"></i></a> | <a title="Eliminar" href="#" onclick="OpenModalDelete(' + row.ID_PUESTO + ')"><i style="color:red" class="fas fa-solid fa-trash fa-lg"></i></a>';
+                        return '<a title="Editar" href="#" onclick="return OpenModalAddUpdatePuesto(' + row.ID_PUESTO + ',' + '\'' + row.DESCRIPCION_PUESTO + '\'' + ',\'' + row.ID_T_ENT + '\'' + ',\'' + row.CVE_ID_ENT + ',\'' + row.ID_AREA + '\'' + ')"><i style="color:black" class="fas fa-fw fa-edit fa-lg"></i></a> | <a title="Eliminar" href="#" onclick="OpenModalDelete(' + row.ID_PUESTO + ')"><i style="color:red" class="fas fa-solid fa-trash fa-lg"></i></a>';
                     }, sortable: false, className: "uniqueClassName"
                 }
             ],
@@ -371,71 +439,93 @@ async function fetchDataAsyncTablePuestosHistorial(urlString, methodType, args) 
 
 async function AddUpdatePuestos() {
 
-    //if (!($('#frmAddUpdateUsuario').valid())) return false;
+
+    if (!($('#formAddUpdatePuestos').valid())) return false;
 
 
-    var response;
-    var argsUsuario;
-    var methodStr = '';
-    var url = '';
+    if ($("#formAddUpdatePuestos").valid()) {
 
-    argsEntidades = {
 
-        CVE_ID_ENT: $('#IdInputClave').val(),
-        DESC_ENT: $('#IdinputDescripcion').val(),
-        SIGLAS_ENT: $('#IdInputSiglas').val(),
-        ID_T_ENT: $('#IdSelectedTipo').val()
-    };
-    //console.log($('#IdEntidadHidden').val())
-    /*url = $('#IDUsuario').val() == 0 ? $("#FQDN").val() + 'api/usuarios/post' : $("#FQDN").val() + 'api/usuarios/put';*/
-    url = $('#IdEntidadHidden').val() == 0 ? 'http://localhost:6435/api/Entidades/Post' : 'http://localhost:6435/api/Entidades/Put';
+        var response;
+        var argsUsuario;
+        var methodStr = '';
+        var url = '';
 
-    try {
+        argsPuestos = {
 
-        methodStr = $('#IdEntidadHidden').val() == 0 ? 'POST' : 'PUT';
+            //ID_PUESTO: $('#IdInputClavePuesto').val(),
+            DESCRIPCION_PUESTO: $('#IdinputDescripcionPuesto').val(),
+            ID_T_ENT: $('#IdSelectedTipoEntidad').val(),
+            CVE_ID_ENT: $('#IdSelectedEntidad').val(),
+            ID_AREA: $('#IdSelectedArea').val()
+        };
+        console.log($('#IdPuestoHidden').val())
+        console.log(argsPuestos)
+        /*url = $('#IDUsuario').val() == 0 ? $("#FQDN").val() + 'api/usuarios/post' : $("#FQDN").val() + 'api/usuarios/put';*/
+        url = $('#IdPuestoHidden').val() == 0 ? 'http://localhost:6435/Api/Puestos/Post' : 'http://localhost:6435/api/Entidades/Put';
 
-        response = await fetchDataAsync(url, methodStr, JSON.stringify(argsEntidades));
+        try {
 
-        toastr.options = {
-            "closeButton": false,
-            "debug": false,
-            "newestOnTop": false,
-            "progressBar": true,
-            "positionClass": "toast-top-center",
-            "preventDuplicates": true,
-            "onclick": null,
-            "showDuration": "100",
-            "hideDuration": "1000",
-            "timeOut": "5000",
-            "extendedTimeOut": "1000",
-            "showEasing": "swing",
-            "hideEasing": "linear",
-            "showMethod": "show",
-            "hideMethod": "hide"
+            methodStr = $('#IdPuestoHidden').val() == 0 ? 'POST' : 'PUT';
+            
+            response = await fetchDataAsyncPuesto(url, methodStr, JSON.stringify(argsPuestos));
+
+            toastr.options = {
+                "closeButton": false,
+                "debug": false,
+                "newestOnTop": false,
+                "progressBar": true,
+                "positionClass": "toast-top-center",
+                "preventDuplicates": true,
+                "onclick": null,
+                "showDuration": "100",
+                "hideDuration": "1000",
+                "timeOut": "5000",
+                "extendedTimeOut": "1000",
+                "showEasing": "swing",
+                "hideEasing": "linear",
+                "showMethod": "show",
+                "hideMethod": "hide"
+            }
+
+
+            if (response.Exito) {
+                GetAllDataPuestosVigentes();
+                $("#ModalAddUpdatePuesto").modal('hide');
+                toastr.info(response.Mensaje, 'Puestos').css("width", "250px");
+            }
+            else {
+                toastr.error(response.Mensaje, 'Puestos').css("width", "200px");
+            }
+        } catch (error) {
+            response = error.responseJSON;
+            mensaje = response.Mensaje;
+            toastr.error('Error', 'Usuarios').css("width", "150px");
         }
-
-
-        if (response.Exito) {
-            GetAllDataEntidades();
-            $("#ModalAddUpdatePuesto").modal('hide');
-            toastr.info(response.Mensaje, 'Entidades').css("width", "250px");
-        }
-        else {
-            toastr.error(response.Mensaje, 'Entidades').css("width", "200px");
-        }
-    } catch (error) {
-        response = error.responseJSON;
-        mensaje = response.Mensaje;
-        toastr.error('Error', 'Usuarios').css("width", "150px");
     }
+
 }
 
+
+async function fetchDataAsyncPuesto(urlString, methodType, args) {
+    
+    return await $.ajax({
+        contentType: 'application/json',
+        url: urlString,
+        data: args,
+        dataType: 'json',
+        type: methodType
+    }).then(function (response) {
+        console.log(JSON.stringify(response));
+        return response;
+    });
+}
 
 function OpenModalAddUpdatePuesto(ID_PUESTO, DESCRIPCION_PUESTO, ID_T_ENT, CVE_ID_ENT, ID_AREA) {
 
     if (ID_PUESTO != 0) {
-        $("#ModalCenterTitle").html('Editar Entidad');
-        $("#ModalCenterTitleH6").html('Editar Entidad');
+        $("#ModalCenterTitle").html('Editar Puesto');
+        $("#ModalCenterTitleH6").html('Editar Puesto');
 
         $("#IdSelectedTipoEntidad").val(ID_T_ENT);
         $("#IdSelectedEntidad").val(CVE_ID_ENT);
@@ -443,22 +533,34 @@ function OpenModalAddUpdatePuesto(ID_PUESTO, DESCRIPCION_PUESTO, ID_T_ENT, CVE_I
 
         $("#IdInputClave").val(ID_PUESTO);
         $("#IdinputDescripcion").val(DESCRIPCION_PUESTO);
-        
-        
+
+
 
     }
     else {
-        $("#ModalCenterTitle").html('Registrar Entidad');
-        $("#ModalCenterTitleH6").html('Registrar Entidad');
+        $("#ModalCenterTitle").html('Registrar Puesto');
+        $("#ModalCenterTitleH6").html('Registrar Puesto');
+        $('#IdSelectedEntidad').val("");
+        $("#IdSelectedEntidad").html("");
+        $('#IdSelectedArea').val("");
 
-        //ResetControls();
+        ResetControlsPuestos();
     }
 
     $("#IdPuestoHidden").val(ID_PUESTO);
+
     $('#ModalAddUpdatePuesto').modal({ backdrop: 'static', keyboard: false });
     $('#ModalAddUpdatePuesto').modal('show');
 
 }
+
+
+function CloseModalAddUpdatePuesto() {
+    $("#formAddUpdatePuestos").trigger("reset");
+    $("#ModalAddUpdatePuesto").modal('hide');
+    $("#formAddUpdatePuestos").data('validator').resetForm();
+}
+
 //***************************************************************************
 
 
@@ -472,9 +574,13 @@ async function DeletePuesto() {
     var response;
     var url = '';
 
-    argsEntidades = {
-        CVE_ID_ENT: $('#IdEntidadHidden').val(),
-        ID_T_ENT: $('#IdTipoEntidadHidden').val()
+    argsPuestos = {
+
+        ID_PUESTO: $('#IdInputClavePuesto').val(),
+        
+        ID_T_ENT: $('#IdSelectedTipoEntidad').val(),
+        CVE_ID_ENT: $('#IdSelectedEntidad').val(),
+        ID_AREA: $('#IdSelectedArea').val()
     };
 
     //url = $("#FQDN").val() + 'api/usuarios/delete';
@@ -494,10 +600,10 @@ async function DeletePuesto() {
             GetAllDataVigentes();
             $("#ModalDelete").modal('hide');
 
-            toastr.success(response.Mensaje, 'Entidades').css("width", "250px");
+            toastr.success(response.Mensaje, 'Puestos').css("width", "250px");
         }
         else {
-            toastr.error(response.Mensaje, 'Entidades').css("width", "250px");
+            toastr.error(response.Mensaje, 'Puestos').css("width", "250px");
         }
     } catch (error) {
         response = error.responseJSON;
@@ -520,10 +626,120 @@ function OpenModalDelete(IdEntidadHidden, IdTipoEntidadHidden) {
 
 
 function CloseModalDelete() {
-    //$("#frmAddUpdateUsuario").trigger("reset");
     $("#ModalDelete").modal('hide');
-    //$("#frmAddUpdateUsuario").data('validator').resetForm();
+    $("#formAddUpdatePuestos").trigger("reset");
+    $("#formAddUpdatePuestos").data('validator').resetForm();
+
 }
 
 //***************************************************************************
 
+
+function ResetControlsPuestos() {
+
+    $("#IdInputClave").val("");
+    $("#IdInputClave").attr('disabled', false);
+
+
+    $("#IdSelectedEntidad").attr('disabled', true);
+    $('#IdSelectedEntidad').val("-1");
+
+    $("#IdSelectedArea").attr('disabled', true);
+    $('#IdSelectedArea').val("-1");
+
+
+
+    $("#IdinputDescripcion").val("");
+    $("#IdInputSiglas").val("");
+
+
+}
+
+
+$().ready(function () {
+
+
+    $.validator.addMethod('negativo', function (value, element) {
+        return (value != '-1');
+    }, 'Seleccione un elemento de la lista');
+
+
+
+    $("#formAddUpdatePuestos").validate({
+
+        errorElement: 'span',
+
+        errorPlacement: function (error, element) {
+
+            if (element.parent().hasClass('input-group')) {
+                error.insertAfter(element.parent());
+            } else {
+                error.insertAfter(element);
+            }
+
+        },
+
+        rules: {
+
+
+            IdSelectedTipoEntidad: { valueNotEquals: "-1" },
+            IdSelectedEntidad: { valueNotEquals: "-1" },
+            IdSelectedArea: { valueNotEquals: "-1" },
+
+            IdInputClavePuesto: "required",
+            IdInputClavePuesto: {
+                required: true,
+                minlength: 1,
+                maxlength: 500
+            },
+
+
+            IdinputDescripcionPuesto: "required",
+            IdinputDescripcionPuesto: {
+                required: true,
+                minlength: 1,
+                maxlength: 500
+            },
+
+
+            IdSelectedTipoEntidad: {
+                negativo: true
+            },
+            IdSelectedEntidad: {
+                negativo: true
+            },
+            IdSelectedArea: {
+                negativo: true
+            },
+
+        },
+        highlight: function (element) {
+            $(element).parent().addClass('error')
+        },
+        unhighlight: function (element) {
+            $(element).parent().removeClass('error')
+        },
+        messages: {
+
+            IdInputClavePuesto: {
+                required: "Por favor ingresa el clave",
+                minlength: "El nombre no debe ser menor a 1 caracter",
+                maxlength: "El nombre no debe de ser mayor a 500 caracteres"
+            },
+
+            IdinputDescripcionPuesto: {
+                required: "Por favor ingresa la Descripción",
+                minlength: "La Descripción no debe ser menor a 1 caracter",
+                maxlength: "La Descripción no debe de ser mayor a 500 caracteres"
+            },
+
+            IdSelectedTipoEntidad: {
+                negativo: "Seleccione un elemento de la lista"
+            },
+
+        }
+
+    });
+
+
+});
