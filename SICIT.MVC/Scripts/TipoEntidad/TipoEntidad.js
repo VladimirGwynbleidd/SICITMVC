@@ -6,7 +6,7 @@
 
 
 async function GetAllTipoEntidades() {
-
+    
     var url = '';
 
     //url = $("#FQDN").val() + 'api/Entidades/GetEntidades';
@@ -43,7 +43,7 @@ async function fetchPerfilesAsync(urlString, methodType, args) {
 
 
 async function GetAllDataTipoEntidad() {
-
+    CardStylesOne();
     var url = '';
 
     //url = $("#FQDN").val() + 'api/usuarios/ObtenerUsuarios';
@@ -118,7 +118,7 @@ async function fetchDataAsyncTableTipoEntidad(urlString, methodType, args) {
 
 
 async function GetAllDataTipoEntidadVigentes() {
-
+    CardStylesTwo();
     var url = '';
 
     //url = $("#FQDN").val() + 'api/usuarios/ObtenerUsuarios';
@@ -193,7 +193,7 @@ async function fetchDataAsyncTableTipoEntidadVigentes(urlString, methodType, arg
 
 
 async function GetAllDataTipoEntidadHistorial() {
-
+    CardStylesThree();
     var url = '';
 
     //url = $("#FQDN").val() + 'api/usuarios/ObtenerUsuarios';

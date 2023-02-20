@@ -46,7 +46,7 @@ async function fetchPerfilesAsync(urlString, methodType, args) {
 
 
 async function GetAllDataEntidades() {
-
+    CardStylesOne();
     var url = '';
 
     //url = $("#FQDN").val() + 'api/usuarios/ObtenerUsuarios';
@@ -186,7 +186,7 @@ async function AddUpdateEntidades() {
 
 
 async function GetAllDataVigentes() {
-
+    CardStylesTwo();
     var url = '';
 
     //url = $("#FQDN").val() + 'api/usuarios/ObtenerUsuarios';
@@ -262,7 +262,7 @@ async function fetchDataAsyncTableVigentes(urlString, methodType, args) {
 
 
 async function GetAllDataHistorial() {
-
+    CardStylesThree();
     var url = '';
 
     //url = $("#FQDN").val() + 'api/usuarios/ObtenerUsuarios';

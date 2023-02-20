@@ -7,6 +7,8 @@
 
 async function GetAllPerfil() {
 
+    CardStylesOne();
+
     var url = '';
 
     //url = $("#FQDN").val() + 'api/usuarios/ObtenerUsuarios';
@@ -100,6 +102,8 @@ async function fetchDataAsyncTablePerfil(urlString, methodType, args) {
 
 
 async function GetAllDataPerfilVigentes() {
+
+    CardStylesTwo();
 
     var url = '';
 
@@ -195,6 +199,7 @@ async function fetchDataAsyncTablePerfilVigentes(urlString, methodType, args) {
 
 
 async function GetAllDataPerfilHistorial() {
+    CardStylesThree();
 
     var url = '';
 

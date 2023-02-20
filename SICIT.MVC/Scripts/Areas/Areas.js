@@ -7,7 +7,7 @@
 
 
 async function GetAllAreas() {
-
+    CardStylesOne();
     var url = '';
 
     //url = $("#FQDN").val() + 'api/usuarios/ObtenerUsuarios';
@@ -85,7 +85,7 @@ async function fetchDataAsyncTableAreas(urlString, methodType, args) {
 
 
 async function GetAllDataAreasVigentes() {
-
+    CardStylesTwo();
     var url = '';
 
     //url = $("#FQDN").val() + 'api/usuarios/ObtenerUsuarios';
@@ -163,7 +163,7 @@ async function fetchDataAsyncTableAreasVigentes(urlString, methodType, args) {
 
 
 async function GetAllDataAreasHistorial() {
-
+    CardStylesThree();
     var url = '';
 
     //url = $("#FQDN").val() + 'api/usuarios/ObtenerUsuarios';
