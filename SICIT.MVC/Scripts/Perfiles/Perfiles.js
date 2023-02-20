@@ -7,6 +7,8 @@
 
 async function GetAllPerfil() {
 
+    CardStylesOne();
+
     var url = '';
 
     //url = $("#FQDN").val() + 'api/usuarios/ObtenerUsuarios';
@@ -58,22 +60,40 @@ async function fetchDataAsyncTablePerfil(urlString, methodType, args) {
             searching: true,
             responsive: true,
             pagination: "bootstrap",
+            dom: '<"top"Bf>rt<"bottom"lpi><"clear">',
+            buttons: [
+                {
+                    extend: 'excelHtml5',
+                    text: 'Exportar a Excel',
+                    titleAttr: 'Exportar a Excel',
+                    title: 'CatálogoPerfiles',
+                    className: 'btn btn-success',
+                    exportOptions: {
+                        columns: [0, 1, 4]
+                    }
+                },
+            ],
             columns: [
                 { 'data': 'ID_PERFIL', className: "uniqueClassName" },
                 { 'data': 'DESCRIPCION_PERFIL', className: "uniqueClassName" },
-
                 { 'data': 'FECH_INI_VIG', className: "uniqueClassName", "visible": false },
                 { 'data': 'FECH_FIN_VIG', className: "uniqueClassName", "visible": false },
+                { 'data': 'VIG_FLAG', className: "uniqueClassName", "visible": false },
 
                 {
                     data: "Acciones", render: function (data, type, row) {
-                        return '<a title="Editar" href="#" onclick="return OpenModalAddUpdatePerfiles(' + row.ID_PERFIL + ',' + '\'' + row.DESCRIPCION_PERFIL + '\'' + ')"><i style="color:black" class="fas fa-fw fa-edit fa-lg"></i></a> | <a title="Eliminar" href="#" onclick="OpenModalDelete(' + row.ID_PERFIL + ')"><i style="color:red" class="fas fa-solid fa-trash fa-lg"></i></a>';
+
+                        if (row.VIG_FLAG != 0) {
+                            return '<a title="Editar" href="#" onclick="return OpenModalAddUpdatePerfiles(' + row.ID_PERFIL + ',' + '\'' + row.DESCRIPCION_PERFIL + '\'' + ')"><i style="color:black" class="fas fa-fw fa-edit fa-lg"></i></a> | <a title="Eliminar" href="#" onclick="OpenModalDelete(' + row.ID_PERFIL + ')"><i style="color:red" class="fas fa-solid fa-trash fa-lg"></i></a>';
+                        } else {
+                            return '<i style="color:red" class="fas fa-solid fa-circle fa-lg"></i></a>';
+                        }
                     }, sortable: false, className: "uniqueClassName"
                 }
             ],
 
             columnDefs: [
-                { className: "dt-center", targets: [0, 1, 2, 3, 4] }
+                { className: "dt-center", targets: [0, 1, 2, 3, 4, 5] }
             ]
         });
     });
@@ -82,6 +102,8 @@ async function fetchDataAsyncTablePerfil(urlString, methodType, args) {
 
 
 async function GetAllDataPerfilVigentes() {
+
+    CardStylesTwo();
 
     var url = '';
 
@@ -134,22 +156,41 @@ async function fetchDataAsyncTablePerfilVigentes(urlString, methodType, args) {
             searching: true,
             responsive: true,
             pagination: "bootstrap",
+            dom: '<"top"Bf>rt<"bottom"lpi><"clear">',
+            buttons: [
+                {
+                    extend: 'excelHtml5',
+                    text: 'Exportar a Excel',
+                    titleAttr: 'Exportar a Excel',
+                    title: 'CatálogoPerfiles',
+                    className: 'btn btn-success',
+                    exportOptions: {
+                        columns: [0, 1, 4]
+                    }
+                },
+            ],
             columns: [
                 { 'data': 'ID_PERFIL', className: "uniqueClassName" },
                 { 'data': 'DESCRIPCION_PERFIL', className: "uniqueClassName" },
-
                 { 'data': 'FECH_INI_VIG', className: "uniqueClassName", "visible": false },
                 { 'data': 'FECH_FIN_VIG', className: "uniqueClassName", "visible": false },
+                { 'data': 'VIG_FLAG', className: "uniqueClassName", "visible": false },
 
                 {
                     data: "Acciones", render: function (data, type, row) {
-                        return '<a title="Editar" href="#" onclick="return OpenModalAddUpdatePerfiles(' + row.ID_PERFIL + ',' + '\'' + row.DESCRIPCION_PERFIL + '\'' + ')"><i style="color:black" class="fas fa-fw fa-edit fa-lg"></i></a> | <a title="Eliminar" href="#" onclick="OpenModalDelete(' + row.ID_PERFIL  + ')"><i style="color:red" class="fas fa-solid fa-trash fa-lg"></i></a>';
+
+                        if (row.VIG_FLAG != 0) {
+                            return '<a title="Editar" href="#" onclick="return OpenModalAddUpdatePerfiles(' + row.ID_PERFIL + ',' + '\'' + row.DESCRIPCION_PERFIL + '\'' + ')"><i style="color:black" class="fas fa-fw fa-edit fa-lg"></i></a> | <a title="Eliminar" href="#" onclick="OpenModalDelete(' + row.ID_PERFIL + ')"><i style="color:red" class="fas fa-solid fa-trash fa-lg"></i></a>';
+                        } else {
+                            return '<i style="color:red" class="fas fa-solid fa-circle fa-lg"></i></a>';
+                        }
+
                     }, sortable: false, className: "uniqueClassName"
                 }
             ],
 
             columnDefs: [
-                { className: "dt-center", targets: [0, 1, 2, 3, 4] }
+                { className: "dt-center", targets: [0, 1, 2, 3, 4, 5] }
             ]
         });
     });
@@ -158,6 +199,7 @@ async function fetchDataAsyncTablePerfilVigentes(urlString, methodType, args) {
 
 
 async function GetAllDataPerfilHistorial() {
+    CardStylesThree();
 
     var url = '';
 
@@ -211,22 +253,40 @@ async function fetchDataAsyncTablePerfilHistorial(urlString, methodType, args) {
             searching: true,
             responsive: true,
             pagination: "bootstrap",
+            dom: '<"top"Bf>rt<"bottom"lpi><"clear">',
+            buttons: [
+                {
+                    extend: 'excelHtml5',
+                    text: 'Exportar a Excel',
+                    titleAttr: 'Exportar a Excel',
+                    title: 'CatálogoPerfiles',
+                    className: 'btn btn-success',
+                    exportOptions: {
+                        columns: [0, 1, 4]
+                    }
+                },
+            ],
             columns: [
                 { 'data': 'ID_PERFIL', className: "uniqueClassName" },
                 { 'data': 'DESCRIPCION_PERFIL', className: "uniqueClassName" },
-
                 { 'data': 'FECH_INI_VIG', className: "uniqueClassName", "visible": false },
                 { 'data': 'FECH_FIN_VIG', className: "uniqueClassName", "visible": false },
+                { 'data': 'VIG_FLAG', className: "uniqueClassName", "visible": false },
+                {
+                    data: "Estatus", render: function (data, type, row) {
 
-                //{
-                //    data: "Acciones", render: function (data, type, row) {
-                //        return '<a title="Editar" href="#" onclick="return OpenModalAddUpdatePerfiles(' + row.ID_PERFIL + ',' + '\'' + row.DESCRIPCION_PERFIL + '\'' + ')"><i style="color:black" class="fas fa-fw fa-edit fa-lg"></i></a> | <a title="Eliminar" href="#" onclick="OpenModalDelete(' + row.ID_PERFIL + ',\'' + ')"><i style="color:red" class="fas fa-solid fa-trash fa-lg"></i></a>';
-                //    }, sortable: false, className: "uniqueClassName"
-                //}
+                        if (row.VIG_FLAG != 0) {
+                            return '<i style="color:green" class="fas fa-solid fa-circle fa-lg"></i></a>';
+                        } else {
+                            return '<i style="color:red" class="fas fa-solid fa-circle fa-lg"></i></a>';
+                        }
+
+                    }, sortable: false, className: "uniqueClassName"
+                }
             ],
 
             columnDefs: [
-                { className: "dt-center", targets: [0, 1, 2, 3] }
+                { className: "dt-center", targets: [0, 1, 2, 3, 4, 5] }
             ]
         });
     });

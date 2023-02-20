@@ -150,7 +150,6 @@ async function fetchEntidadesAsync(urlString, methodType, args) {
 
 
 async function GetAllAreas(idArea) {
-
     var url = '';
 
     argsEntidades = {
@@ -194,7 +193,7 @@ async function fetchAreasAsync(urlString, methodType, args) {
 
 
 async function GetAllPuestos() {
-
+    CardStylesOne();
     var url = '';
 
     //url = $("#FQDN").val() + 'api/usuarios/ObtenerUsuarios';
@@ -274,7 +273,7 @@ async function fetchDataAsyncTablePuestos(urlString, methodType, args) {
 
 
 async function GetAllDataPuestosVigentes() {
-
+    CardStylesTwo();
     var url = '';
 
     //url = $("#FQDN").val() + 'api/usuarios/ObtenerUsuarios';
@@ -354,7 +353,7 @@ async function fetchDataAsyncTablePuestosVigentes(urlString, methodType, args) {
 
 
 async function GetAllDataPuestosHistorial() {
-
+    CardStylesThree();
     var url = '';
 
     //url = $("#FQDN").val() + 'api/usuarios/ObtenerUsuarios';
