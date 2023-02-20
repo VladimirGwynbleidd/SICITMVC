@@ -5,6 +5,8 @@
     //GetAllEntidades();
     //GetAllAreas();
     GetAllDataPuestosVigentes();
+    $('#IdInputClavePuesto').attr('disabled', 'disabled');
+
 
 
 });
@@ -137,7 +139,7 @@ async function fetchEntidadesAsync(urlString, methodType, args) {
         dataType: 'json',
         type: methodType
     }).then(function (response) {
-        console.log(response)
+        //console.log(response)
         var s = '<option value="-1">Selecciona una Entidad</option>';
         for (var i = 0; i < response.length; i++) {
             s += '<option value="' + response[i].CVE_ID_ENT + '">' + response[i].SIGLAS_ENT + '</option>';
@@ -337,7 +339,7 @@ async function fetchDataAsyncTablePuestosVigentes(urlString, methodType, args) {
 
                 {
                     data: "Acciones", render: function (data, type, row) {
-                        return '<a title="Editar" href="#" onclick="return OpenModalAddUpdatePuesto(' + row.ID_PUESTO + ',' + '\'' + row.DESCRIPCION_PUESTO + '\'' + ',\'' + row.ID_T_ENT + '\'' + ',\'' + row.CVE_ID_ENT + ',\'' + row.ID_AREA + '\'' + ')"><i style="color:black" class="fas fa-fw fa-edit fa-lg"></i></a> | <a title="Eliminar" href="#" onclick="OpenModalDelete(' + row.ID_PUESTO + ')"><i style="color:red" class="fas fa-solid fa-trash fa-lg"></i></a>';
+                        return '<a title="Editar" href="#" onclick="return OpenModalAddUpdatePuesto(' + row.ID_PUESTO + ',' + '\'' + row.DESCRIPCION_PUESTO + '\'' + ',\'' + row.ID_T_ENT + '\'' + ',\'' + row.CVE_ID_ENT + '\'' + ',\'' + row.ID_AREA + '\'' + ')"><i style="color:black" class="fas fa-fw fa-edit fa-lg"></i></a> | <a title="Eliminar" href="#" onclick="OpenModalDelete(' + row.ID_PUESTO + ',' + '\'' + row.ID_T_ENT + '\'' + ',\'' + row.CVE_ID_ENT + '\'' + ',\'' + row.ID_AREA + '\'' + ')"><i style="color:red" class="fas fa-solid fa-trash fa-lg"></i></a>';
                     }, sortable: false, className: "uniqueClassName"
                 }
             ],
@@ -467,7 +469,7 @@ async function AddUpdatePuestos() {
         try {
 
             methodStr = $('#IdPuestoHidden').val() == 0 ? 'POST' : 'PUT';
-            
+
             response = await fetchDataAsyncPuesto(url, methodStr, JSON.stringify(argsPuestos));
 
             toastr.options = {
@@ -508,7 +510,7 @@ async function AddUpdatePuestos() {
 
 
 async function fetchDataAsyncPuesto(urlString, methodType, args) {
-    
+
     return await $.ajax({
         contentType: 'application/json',
         url: urlString,
@@ -521,20 +523,38 @@ async function fetchDataAsyncPuesto(urlString, methodType, args) {
     });
 }
 
-function OpenModalAddUpdatePuesto(ID_PUESTO, DESCRIPCION_PUESTO, ID_T_ENT, CVE_ID_ENT, ID_AREA) {
+async function OpenModalAddUpdatePuesto(ID_PUESTO, DESCRIPCION_PUESTO, ID_T_ENT, CVE_ID_ENT, ID_AREA) {
+
+    ResetControlsPuestos();
+
 
     if (ID_PUESTO != 0) {
+        console.log(ID_T_ENT)
+        console.log(CVE_ID_ENT)
+        console.log(ID_AREA)
+        console.log(ID_PUESTO)
+        console.log(DESCRIPCION_PUESTO)
         $("#ModalCenterTitle").html('Editar Puesto');
         $("#ModalCenterTitleH6").html('Editar Puesto');
 
         $("#IdSelectedTipoEntidad").val(ID_T_ENT);
+
+
+        $("#IdInputClavePuesto").val(ID_PUESTO);
+        $("#IdinputDescripcionPuesto").val(DESCRIPCION_PUESTO);
+
+        //Caragamos las entidades y areas
+        await GetAllEntidades(ID_T_ENT);
+        await GetAllAreas(CVE_ID_ENT);
+
+
         $("#IdSelectedEntidad").val(CVE_ID_ENT);
-        $("#IdSelectedTipoEntidad").val(ID_AREA);
-
-        $("#IdInputClave").val(ID_PUESTO);
-        $("#IdinputDescripcion").val(DESCRIPCION_PUESTO);
+        $("#IdSelectedArea").val(ID_AREA);
 
 
+        $("#IdSelectedEntidad").attr('disabled', false);
+        $('#IdSelectedArea').attr('disabled', false);
+        
 
     }
     else {
@@ -576,18 +596,18 @@ async function DeletePuesto() {
 
     argsPuestos = {
 
-        ID_PUESTO: $('#IdInputClavePuesto').val(),
-        
-        ID_T_ENT: $('#IdSelectedTipoEntidad').val(),
-        CVE_ID_ENT: $('#IdSelectedEntidad').val(),
-        ID_AREA: $('#IdSelectedArea').val()
+        ID_PUESTO: $('#IdPuestoHidden').val(),
+
+        ID_T_ENT: $('#IdTipoEntidadHidden').val(),
+        CVE_ID_ENT: $('#IdEntidadHidden').val(),
+        ID_AREA: $('#IdAreaHidden').val()
     };
 
     //url = $("#FQDN").val() + 'api/usuarios/delete';
-    url = 'http://localhost:6435/api/Entidades/Delete';
+    url = 'http://localhost:6435/Api/Puestos/Delete';
 
     try {
-        response = await fetchDataAsync('' + url + '', 'DELETE', JSON.stringify(argsEntidades));
+        response = await fetchDataAsyncPuesto('' + url + '', 'DELETE', JSON.stringify(argsPuestos));
 
         toastr.options = {
             "timeOut": 2500,
@@ -597,7 +617,7 @@ async function DeletePuesto() {
         }
 
         if (response.Exito) {
-            GetAllDataVigentes();
+            GetAllDataPuestosVigentes();
             $("#ModalDelete").modal('hide');
 
             toastr.success(response.Mensaje, 'Puestos').css("width", "250px");
@@ -608,18 +628,21 @@ async function DeletePuesto() {
     } catch (error) {
         response = error.responseJSON;
         mensaje = response.Mensaje;
-        toastr.error('Error', 'Entidades').css("width", "250px");
+        toastr.error('Error', 'Puestos').css("width", "250px");
     }
 }
 
 
-function OpenModalDelete(IdEntidadHidden, IdTipoEntidadHidden) {
+function OpenModalDelete(ID_PUESTO, ID_T_ENT, CVE_ID_ENT, ID_AREA) {
 
-    $("#IdEntidadHidden").val(IdEntidadHidden);
-    $("#IdTipoEntidadHidden").val(IdTipoEntidadHidden);
 
-    console.log($("#IdEntidadHidden").val())
-    console.log($("#IdTipoEntidadHidden").val())
+    $("#IdPuestoHidden").val(ID_PUESTO);
+    $("#IdTipoEntidadHidden").val(ID_T_ENT);
+    $("#IdEntidadHidden").val(CVE_ID_ENT);
+    $("#IdAreaHidden").val(ID_AREA);
+
+
+
     $('#ModalDelete').modal({ backdrop: 'static', keyboard: false, show: true })
     $('#ModalDelete').modal('show');
 }
@@ -686,12 +709,12 @@ $().ready(function () {
             IdSelectedEntidad: { valueNotEquals: "-1" },
             IdSelectedArea: { valueNotEquals: "-1" },
 
-            IdInputClavePuesto: "required",
-            IdInputClavePuesto: {
-                required: true,
-                minlength: 1,
-                maxlength: 500
-            },
+            //IdInputClavePuesto: "required",
+            //IdInputClavePuesto: {
+            //    required: true,
+            //    minlength: 1,
+            //    maxlength: 500
+            //},
 
 
             IdinputDescripcionPuesto: "required",
@@ -721,11 +744,11 @@ $().ready(function () {
         },
         messages: {
 
-            IdInputClavePuesto: {
-                required: "Por favor ingresa el clave",
-                minlength: "El nombre no debe ser menor a 1 caracter",
-                maxlength: "El nombre no debe de ser mayor a 500 caracteres"
-            },
+            //IdInputClavePuesto: {
+            //    required: "Por favor ingresa el clave",
+            //    minlength: "El nombre no debe ser menor a 1 caracter",
+            //    maxlength: "El nombre no debe de ser mayor a 500 caracteres"
+            //},
 
             IdinputDescripcionPuesto: {
                 required: "Por favor ingresa la Descripción",
