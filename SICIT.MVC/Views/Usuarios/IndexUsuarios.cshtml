@@ -12,6 +12,13 @@
 <script src="~/Content/toastr/toastr.js"></script>
 <script src="~/Scripts/Validate/jquery.validate.js"></script>
 
+<style>
+
+    .error {
+        font-size: 16px !important;
+    }
+</style>
+
 
 <!-- [ Main Content ] start -->
 <div class="pcoded-main-container">
@@ -130,7 +137,7 @@
                                     <div class="card shadow mb-4">
                                         <div class="card-header py-3">
                                             @*<h6 class="m-0 font-weight-bold text-primary">Afores</h6>*@
-                                            <button type="button" class="btn btn-primary" data-toggle="modal" onclick="OpenModalAddUpdateEntidades(0);">
+                                            <button type="button" class="btn btn-primary" data-toggle="modal" onclick="OpenModalAddUpdateUsuarios(0);">
                                                 Agregar Usuario
                                             </button>
                                         </div>
@@ -197,7 +204,7 @@
                                     <div class="card shadow mb-4">
                                         <div class="card-header py-3">
                                             @*<h6 class="m-0 font-weight-bold text-primary">Afores</h6>*@
-                                            <button type="button" class="btn btn-primary" data-toggle="modal" onclick="OpenModalAddUpdateEntidades(0);">
+                                            <button type="button" class="btn btn-primary" data-toggle="modal" onclick="OpenModalAddUpdateUsuarios(0);">
                                                 Agregar Entidad
                                             </button>
                                         </div>
@@ -344,7 +351,7 @@
             </div>
             <div class="modal-body">
                 <!-- Overflow Hidden -->
-                <form class="needs-validation form-group" autocomplete="off" registration novalidate>
+                <form id="formNewUser" class="needs-validation form-group" autocomplete="off" registration novalidate>
                     <div class="card">
                         <div class="card-header py-3 text-center">
                             <h6 id="ModalCenterTitleH6" class="m-0 font-weight-bold text-primary"></h6>
@@ -368,84 +375,84 @@
                             </div>
 
 
-
                             <div class="form-row">
                                 <div class="col-md-9 mb-3">
                                     <label class="my-1 mr-2" for="lblNombre">Nombre(s):</label>
-                                    <input type="text" class="form-control" id="IDNombre" maxlength="5" placeholder="Nombre(s)" required>
+                                    <input type="text" class="form-control" name="IDNombre" id="IDNombre" maxlength="20" placeholder="Nombre(s)" required>
                                 </div>
                             </div>
                             <div class="form-row">
                                 <div class="col-md-9 mb-3">
                                     <label class="my-1 mr-2" for="lblApellidoPaterno">Apellido Paterno:</label>
-                                    <input type="text" class="form-control" id="IDApellidoPaterno" maxlength="5" placeholder="Apellido Paterno" required>
+                                    <input type="text" class="form-control" name="IDApellidoPaterno" id="IDApellidoPaterno" maxlength="20" placeholder="Apellido Paterno" required>
                                 </div>
                             </div>
                             <div class="form-row">
                                 <div class="col-md-9 mb-3">
                                     <label class="my-1 mr-2" for="lblApellidoMaterno">Apellido Materno:</label>
-                                    <input type="text" class="form-control" id="IDApellidoMaterno" maxlength="5" placeholder="Apellido Materno" required>
+                                    <input type="text" class="form-control" name="IDApellidoMaterno" id="IDApellidoMaterno" maxlength="20" placeholder="Apellido Materno" required>
                                 </div>
                             </div>
                             <div class="form-row">
                                 <div class="col-md-9 mb-3">
                                     <label class="my-1 mr-2" for="lblDescripcion">Teléfono:</label>
-                                    <input type="text" class="form-control" id="IDTelefono" maxlength="5" placeholder="Apellido Materno" required>
+                                    <input type="text" class="form-control" name="IDTelefono" id="IDTelefono" maxlength="10" placeholder="Apellido Materno" required>
                                 </div>
                             </div>
                             <div class="form-row">
                                 <div class="col-md-9 mb-3">
                                     <label class="my-1 mr-2" for="lblEMail">E-Mail:</label>
-                                    <input type="text" class="form-control" id="IDEMail" maxlength="5" placeholder="E-Mail" required>
+                                    <input type="text" class="form-control" name="IDEMail" id="IDEMail" maxlength="20" placeholder="E-Mail" required>
                                 </div>
                             </div>
 
 
 
 
+
                             <div class="form-row">
-                                <div class="col-md-5 mb-3">
+                                <div class="col-md-9 mb-3">
                                     <label for="lblSelectedTipoEntidad">Tipo de Entidad</label>
                                     <select class="form-select" id="IdSelectedTipoEntidad" name="IdSelectedTipoEntidad"></select>
-                                    <div class="invalid-feedback">
-                                        Please provide a valid city.
-                                    </div>
+                                    @*<div class="invalid-feedback">
+                                            Please provide a valid city.
+                                        </div>*@
                                 </div>
                             </div>
                             <div class="form-row">
-                                <div class="col-md-5 mb-3">
+                                <div class="col-md-9 mb-3">
                                     <label for="lblSelectedEntidad">Entidad</label>
                                     <select class="form-select" id="IdSelectedEntidad" name="IdSelectedEntidad"></select>
-                                    <div class="invalid-feedback">
-                                        Please provide a valid city.
-                                    </div>
+                                    @*<div class="invalid-feedback">
+                                            Please provide a valid city.
+                                        </div>*@
                                 </div>
                             </div>
                             <div class="form-row">
-                                <div class="col-md-5 mb-3">
+                                <div class="col-md-9 mb-3">
                                     <label for="lblSelectedArea">Area</label>
                                     <select class="form-select" id="IdSelectedArea" name="IdSelectedArea"></select>
-                                    <div class="invalid-feedback">
-                                        Please provide a valid city.
-                                    </div>
+                                    @*<div class="invalid-feedback">
+                                            Please provide a valid city.
+                                        </div>*@
                                 </div>
                             </div>
                             <div class="form-row">
-                                <div class="col-md-5 mb-3">
+                                <div class="col-md-9 mb-3">
                                     <label for="lblSelectedPuesto">Puesto</label>
                                     <select class="form-select" id="IdSelectedPuesto" name="IdSelectedPuesto"></select>
-                                    <div class="invalid-feedback">
-                                        Please provide a valid city.
-                                    </div>
+                                    @*<div class="invalid-feedback">
+                                            Please provide a valid city.
+                                        </div>*@
                                 </div>
                             </div>
                             <div class="form-row">
-                                <div class="col-md-5 mb-3">
+                                <div class="col-md-9 mb-3">
                                     <label for="lblSelectedPerfil">Perfil</label>
                                     <select class="form-select" id="IdSelectedPerfil" name="IdSelectedPerfil"></select>
-                                    <div class="invalid-feedback">
-                                        Please provide a valid city.
-                                    </div>
+                                    @*<div class="invalid-feedback">
+                                            Please provide a valid city.
+                                        </div>*@
                                 </div>
                             </div>
 
@@ -454,18 +461,18 @@
                                 <div class="col-md-9 mb-3">
                                     <label for="lblSiglas">Usuario</label>
                                     <input type="text" class="form-control" id="IdInputUsuario" placeholder="Usuario" required>
-                                    <div class="invalid-feedback">
-                                        Please provide a valid city.
-                                    </div>
+                                    @*<div class="invalid-feedback">
+                                            Please provide a valid city.
+                                        </div>*@
                                 </div>
                             </div>
-
+                            <div class="form-row" id="divErrores">
+                                <ul id="lista"></ul>
+                            </div>
 
                         </div>
-
-                    </div>
-                    @*<div class="border-top my-3 border-5"></div>*@
-                    <!-- Overflow Hidden -->
+                        @*<div class="border-top my-3 border-5"></div>*@
+                        <!-- Overflow Hidden -->
 
                 </form>
             </div>
@@ -483,7 +490,7 @@
     <div class="modal-dialog modal-lg" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h3 class="m-0 font-weight-bold text-primary" id="ModalCenterTitle"><span class="fas fa-user-o fa-lg" aria-hidden="true"></span> Registro de Entidad</h3>
+                <h3 class="m-0 font-weight-bold text-primary" id="ModalCenterTitle"><span class="fas fa-user-o fa-lg" aria-hidden="true"></span> Registro de Usuario</h3>
                 <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
