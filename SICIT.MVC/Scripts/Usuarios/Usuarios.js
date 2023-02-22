@@ -466,11 +466,8 @@ function CloseModalAddUpdateUsuarios() {
 }
 
 function AddUpdateUsuarios() {
+
     $("#formNewUser").validate(validateFormAcceso);
-
-
-
-
 
     if ($("#formNewUser").valid()) {
 
@@ -497,6 +494,7 @@ var validateFormAcceso = {
         IDApellidoMaterno: { required: true },
         IDEMail: { required: true },
         IDTelefono: { required: true },
+        IdInputUsuario: { required: true },
         //txtPassword: {required: true, minlength: 5, maxlength: 10 }
     },
     messages: {
@@ -515,6 +513,7 @@ var validateFormAcceso = {
         IDEMail: { required: "Ingrese un correo electrónico" },
         IDApellidoMaterno: { required: "Ingrese su Apellido Materno" },
         IDTelefono: { required: "Ingrese el Teléfono" },
+        IdInputUsuario: { required: "Ingrese el Usuario" },
         //txtPersonalizado: {required: "* Ingresa un valor", minlength: $.validator.format("* Ingresa {0} o mas caracteres"), maxlength: $.validator.format("* Ingresa {0} o menos caracteres") }
     },
     //errorContainer: $("#divErrores"),
@@ -531,9 +530,9 @@ function ChangeStyleInputsForm() {
     elementos.forEach((elemento) => {
         console.log(elemento);
         var id = elemento.id;
-        var inpunt = '$("#' + id + '")';
+        var inpunt = "$('#" + id + "')";
         //var name = elemento.getAttribute(id);
-        var elementInput = elemento.attr('class');
+        var elementInput = inpunt.attr('class');
         (elementInput.includes('error')) ? this.removeClass('error') : this.addClass('')
     })
 
