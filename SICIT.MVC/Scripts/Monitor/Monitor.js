@@ -24,6 +24,7 @@ async function GetAllDataMonitorTodos() {
     }
 }
 
+
 async function fetchDataAsyncTableTodos(urlString, methodType, args) {
 
     return await $.ajax({
