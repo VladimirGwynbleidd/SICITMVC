@@ -521,7 +521,6 @@ var validateFormAcceso = {
             required: {
                 depends: function (element) {
                     if ('-1' == $('#IdSelectedTipoEntidad').val()) {
-                        //Set predefined value to blank.
                         $('#IdSelectedTipoEntidad').val('');
                     }
                     return true;
@@ -532,7 +531,6 @@ var validateFormAcceso = {
             required: {
                 depends: function (element) {
                     if ('-1' == $('#IdSelectedEntidad').val()) {
-                        //Set predefined value to blank.
                         $('#IdSelectedEntidad').val('');
                     }
                     return true;
