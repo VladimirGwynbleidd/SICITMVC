@@ -1,6 +1,9 @@
 ﻿$(document).ready(function () {
 
-    GetAllAreas();
+    //GetAllAreas();
+    GetAllDataAreasVigentes();
+    //DDL
+    GetAllDataTipoEntidadVigentes();
 });
 
 
@@ -399,4 +402,171 @@ function CloseModalDelete() {
 
 //***************************************************************************
 
+async function GetAllDataTipoEntidadVigentes() {
+    CardStylesTwo();
+    var url = '';
 
+    //url = $("#FQDN").val() + 'api/usuarios/ObtenerUsuarios';
+    url = 'http://localhost:6435/Api/TipoEntidad/GetTipoEntidadVigentes';
+
+    try {
+        response = await fetchDataAsyncTableTipoEntidadVigentes('' + url + '', 'GET', {});
+    } catch (error) {
+        console.log(error)
+        response = error.responseJSON;
+        mensaje = response.mensaje;
+    }
+}
+
+async function fetchDataAsyncTableTipoEntidadVigentes(urlString, methodType, args) {
+
+    return await $.ajax({
+        contentType: 'application/json',
+        url: urlString,
+        data: args,
+        dataType: 'json',
+        type: methodType
+    }).then(function (response) {
+
+        var s = '<option value="-1">Selecciona un Tipo de Entidad</option>';
+        for (var i = 0; i < response.length; i++) {
+            s += '<option value="' + response[i].ID_T_ENT + '">' + response[i].DESC_T_ENT + '</option>';
+        }
+        $("#IdSelectedTipoEntidad").html(s);
+    });
+}
+
+function SelectedTipoEntidad() {
+
+    var idTipoEntidad = $("#IdSelectedTipoEntidad").val();
+    GetAllEntidad(idTipoEntidad);
+}
+
+
+async function GetAllEntidad(idTipoEntidad) {
+    var url = '';
+
+    //url = $("#FQDN").val() + 'api/usuarios/ObtenerUsuarios';
+    url = 'http://localhost:6435/api/Entidades/GetEntidadesById';
+
+    try {
+        response = await fetchDataAsyncTableEntidad('' + url + '', 'POST', { "ID_T_ENT": idTipoEntidad });
+    } catch (error) {
+        console.log(error)
+        response = error.responseJSON;
+        mensaje = response.mensaje;
+    }
+}
+
+
+async function fetchDataAsyncTableEntidad(urlString, methodType, args) {
+
+    return await $.ajax({
+        contentType: 'application/json',
+        url: urlString,
+        data: JSON.stringify(args),
+        dataType: 'json',
+        type: methodType
+    }).then(function (response) {
+
+        var s = '<option value="-1">Selecciona una Entidad</option>';
+        for (var i = 0; i < response.length; i++) {
+            s += '<option value="' + response[i].ID_T_ENT + '">' + response[i].SIGLAS_ENT + '</option>';
+        }
+        $("#IdSelectedEntidad").html(s);
+    });
+}
+
+
+function AddUpdateAreas() {
+
+    var urlString = '';
+
+    //url = $("#FQDN").val() + 'api/usuarios/ObtenerUsuarios';
+    urlString = '';
+
+    var entidades = {
+        ID_T_ENT: $("IdSelectedTipoEntidad").val(),
+        CVE_ID_ENT: $("IdSelectedEntidad").val(),
+        DESC_ENT: $("IdinputDescripcion").val(),
+        SIGLAS_ENT: $("IdInputClave").val(),
+    };
+
+
+    $("#formNewArea").validate(validateFormAcceso);
+
+    if ($("#formNewArea").valid()) {
+
+        $.ajax({
+            contentType: 'application/json',
+            url: urlString,
+            data: JSON.stringify(entidades),
+            dataType: 'json',
+            type: 'POST'
+        }).then(function (response) {
+
+            var s = '<option value="-1">Selecciona una Entidad</option>';
+            for (var i = 0; i < response.length; i++) {
+                s += '<option value="' + response[i].ID_T_ENT + '">' + response[i].SIGLAS_ENT + '</option>';
+            }
+            $("#IdSelectedEntidad").html(s);
+        });
+    }
+
+}
+
+var validateFormAcceso = {
+    rules: {
+        IdSelectedTipoEntidad: {
+            required: {
+                depends: function (element) {
+                    if ('-1' == $('#IdSelectedTipoEntidad').val()) {
+                        //Set predefined value to blank.
+                        $('#IdSelectedTipoEntidad').val('');
+                    }
+                    return true;
+                }
+            }
+        },
+        IdSelectedEntidad: {
+            required: {
+                depends: function (element) {
+                    if ('-1' == $('#IdSelectedEntidad').val()) {
+                        //Set predefined value to blank.
+                        $('#IdSelectedEntidad').val('');
+                    }
+                    return true;
+                }
+            }
+        },
+        IdInputClave: { required: true },
+        //IDEMail: { required: true },
+        //IDTelefono: { required: true },
+        //IdInputUsuario: { required: true },
+        //txtPassword: {required: true, minlength: 5, maxlength: 10 }
+    },
+    messages: {
+        //IdUser: {
+        //    required: function () {
+        //        messageAlert("Ingrese su Usuario.", 100)
+        //    },
+        //},
+        //Password: {
+        //    required: function () {
+        //        messageAlert("Ingrese su Contraseña.", 100)
+        //    },
+        //}
+        IdSelectedTipoEntidad: { required: "Seleccione el Tipo de Entidad" },
+        IdSelectedEntidad: { required: "Seleccione la Entidad" },
+        IdInputClave: { required: "Ingrese una clave" },
+        IdinputDescripcion: { required: "Ingrese una descripción" },
+        //IDApellidoMaterno: { required: "Ingrese su Apellido Materno" },
+        //IDTelefono: { required: "Ingrese el Teléfono" },
+        //IdInputUsuario: { required: "Ingrese el Usuario" },
+        //txtPersonalizado: {required: "* Ingresa un valor", minlength: $.validator.format("* Ingresa {0} o mas caracteres"), maxlength: $.validator.format("* Ingresa {0} o menos caracteres") }
+    },
+    //errorContainer: $("#divErrores"),
+    //errorLabelContainer: "#divErrores ul",
+    //errorElement: "span",
+    //wrapper: "li",
+}

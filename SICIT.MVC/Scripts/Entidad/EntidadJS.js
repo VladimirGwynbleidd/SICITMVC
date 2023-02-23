@@ -190,7 +190,7 @@ async function GetAllDataVigentes() {
     var url = '';
 
     //url = $("#FQDN").val() + 'api/usuarios/ObtenerUsuarios';
-    url = 'http://localhost:6435/api/Entidades/GetEntidadesVigentes';
+    url = 'http://localhost:6435/Api/Entidades/GetEntidadesById';
 
     try {
         response = await fetchDataAsyncTableVigentes('' + url + '', 'GET', {});
