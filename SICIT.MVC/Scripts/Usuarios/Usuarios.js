@@ -1,13 +1,45 @@
 ﻿$(document).ready(function () {
 
-    GetAllDataUsuarios();
+    disabledDDL();
+    GetAllDataUsuariosVigentes();
     GetAllTipoEntidades();
-    GetAllEntidadVigentes();
-    GetAllDataAreasVigentes();
-    GetAllDataPuestosVigentes();
-    GetAllDataPerfilVigentes();
 });
 
+
+function disabledDDL() {
+    $("#IdSelectedEntidad").attr('disabled', true);
+    $("#IdSelectedEntidad").val("-1");
+    $('#IdSelectedArea').attr('disabled', true);
+    $('#IdSelectedArea').val("-1");
+    $('#IdSelectedPerfil').attr('disabled', true);
+    $('#IdSelectedPerfil').val("-1");
+    $('#IdSelectedPuesto').attr('disabled', true);
+    $('#IdSelectedPuesto').val("-1");
+}
+
+
+function changeEventHandlerTipoEntidad(event) {
+
+    var id = event.target.value;
+
+    if (id == "-1") {
+
+        $("#IdSelectedEntidad").attr('disabled', true);
+        $("#IdSelectedEntidad").val("-1");
+        $('#IdSelectedArea').attr('disabled', true);
+        $('#IdSelectedArea').val("-1");
+        $('#IdSelectedPerfil').attr('disabled', true);
+        $('#IdSelectedPerfil').val("-1");
+        $('#IdSelectedPuesto').attr('disabled', true);
+        $('#IdSelectedPuesto').val("-1");
+        return;
+    }
+
+    $("#IdSelectedEntidad").attr('disabled', false);
+    $('#IdSelectedEntidad').val("-1");
+
+    GetEntidadId(id);    
+}
 
 async function GetAllTipoEntidades() {
 
@@ -26,7 +58,6 @@ async function GetAllTipoEntidades() {
     }
 }
 
-
 async function fetchTipoEntidadesAsync(urlString, methodType, args) {
 
     return await $.ajax({
@@ -39,23 +70,28 @@ async function fetchTipoEntidadesAsync(urlString, methodType, args) {
 
         var s = '<option value="-1">Selecciona un Tipo de Entidad</option>';
         for (var i = 0; i < response.length; i++) {
-            s += '<option value="' + response[i].ID_T_ENT + '">' + response[i].DESC_ENT + '</option>';
+            s += '<option value="' + response[i].ID_T_ENT + '">' + response[i].DESC_T_ENT + '</option>';
         }
         $("#IdSelectedTipoEntidad").html(s);
     });
 }
 
-
-
-async function GetAllEntidadVigentes() {
+async function GetEntidadId(idTipoEntidad) {
 
     var url = '';
 
+    argsEntidades = {
+
+        CVE_ID_ENT: idTipoEntidad,//$('#IdSelectedEntidad').val(),
+        ID_T_ENT: $('#IdSelectedTipoEntidad').val()
+    };
+
+
     //url = $("#FQDN").val() + 'api/usuarios/ObtenerUsuarios';
-    url = 'http://localhost:6435/api/Entidades/GetEntidadesVigentes';
+    url = 'http://localhost:6435/api/Entidades/GetEntidadesById';
 
     try {
-        response = await fetchDataAsyncEntidadVigentes('' + url + '', 'GET', {});
+        response = await fetchDataAsyncEntidad('' + url + '', 'POST', JSON.stringify(argsEntidades));
     } catch (error) {
         console.log(error)
         response = error.responseJSON;
@@ -63,8 +99,7 @@ async function GetAllEntidadVigentes() {
     }
 }
 
-
-async function fetchDataAsyncEntidadVigentes(urlString, methodType, args) {
+async function fetchDataAsyncEntidad(urlString, methodType, args) {
 
     return await $.ajax({
         contentType: 'application/json',
@@ -76,22 +111,53 @@ async function fetchDataAsyncEntidadVigentes(urlString, methodType, args) {
 
         var s = '<option value="-1">Selecciona un Entidad</option>';
         for (var i = 0; i < response.length; i++) {
-            s += '<option value="' + response[i].ID_T_ENT + '">' + response[i].DESC_ENT + '</option>';
+            s += '<option value="' + response[i].CVE_ID_ENT + '">' + response[i].SIGLAS_ENT + '</option>';
         }
         $("#IdSelectedEntidad").html(s);
     });
 }
 
 
-async function GetAllDataAreasVigentes() {
+function changeEventHandlerEntidad(event) {
+
+    var id = event.target.value;
+
+    if (id == "-1") {
+
+        $("#IdSelectedArea").attr('disabled', true);
+        $("#IdSelectedArea").val("-1");
+
+        $("#IdSelectedPuesto").attr('disabled', true);
+        $("#IdSelectedPuesto").val("-1");
+
+        $("#IdSelectedPerfil").attr('disabled', true);
+        $("#IdSelectedPerfil").val("-1");
+        return;
+    }
+
+    $("#IdSelectedArea").attr('disabled', false);
+    $('#IdSelectedArea').val("-1");
+
+    GetAllDataAreasId(id);
+
+}
+
+
+async function GetAllDataAreasId(idEntidad) {
 
     var url = '';
 
+    argsAreas = {
+
+        CVE_ID_ENT: idEntidad,//$('#IdSelectedEntidad').val(),
+        ID_T_ENT: $('#IdSelectedTipoEntidad').val()
+    };
+
     //url = $("#FQDN").val() + 'api/usuarios/ObtenerUsuarios';
-    url = 'http://localhost:6435/Api/Areas/GetTipoAreasVigentes';
+    url = 'http://localhost:6435/Api/Areas/GetAreasById';
 
     try {
-        response = await fetchDataAsyncAreasVigentes('' + url + '', 'GET', {});
+        response = await fetchDataAsyncAreasId('' + url + '', 'POST', JSON.stringify(argsAreas));
     } catch (error) {
         console.log(error)
         response = error.responseJSON;
@@ -100,7 +166,7 @@ async function GetAllDataAreasVigentes() {
 }
 
 
-async function fetchDataAsyncAreasVigentes(urlString, methodType, args) {
+async function fetchDataAsyncAreasId(urlString, methodType, args) {
 
     return await $.ajax({
         contentType: 'application/json',
@@ -112,9 +178,73 @@ async function fetchDataAsyncAreasVigentes(urlString, methodType, args) {
 
         var s = '<option value="-1">Selecciona una Area</option>';
         for (var i = 0; i < response.length; i++) {
-            s += '<option value="' + response[i].ID_T_ENT + '">' + response[i].DESC_AREA + '</option>';
+            s += '<option value="' + response[i].ID_AREA + '">' + response[i].DESC_AREA + '</option>';
         }
         $("#IdSelectedArea").html(s);
+    });
+}
+
+
+function changeEventHandlerPuesto(event) {
+
+    var id = event.target.value;
+
+    if (id == "-1") {
+
+        $("#IdSelectedPuesto").attr('disabled', true);
+        $("#IdSelectedPuesto").val("-1");
+
+        $("#IdSelectedPerfil").attr('disabled', true);
+        $("#IdSelectedPerfil").val("-1");
+        return;
+    }
+
+    $("#IdSelectedPuesto").attr('disabled', false);
+    $('#IdSelectedPuesto').val("-1");
+
+    GetAllDataPuestoId(id);
+
+}
+
+
+async function GetAllDataPuestoId(idPuesto) {
+
+    var url = '';
+
+    argsPuestos = {
+        ID_T_ENT: $('#IdSelectedTipoEntidad').val(),//$('#IdSelectedEntidad').val(),
+        ID_AREA: $('#IdSelectedArea').val(),
+        CVE_ID_ENT: $('#IdSelectedEntidad').val(),
+    };
+
+    //url = $("#FQDN").val() + 'api/usuarios/ObtenerUsuarios';
+    url = 'http://localhost:6435/Api/Puestos/GetPuestoById';
+
+    try {
+        response = await fetchDataAsyncPuestoId('' + url + '', 'POST', JSON.stringify(argsPuestos));
+    } catch (error) {
+        console.log(error)
+        response = error.responseJSON;
+        mensaje = response.mensaje;
+    }
+}
+
+
+async function fetchDataAsyncPuestoId(urlString, methodType, args) {
+
+    return await $.ajax({
+        contentType: 'application/json',
+        url: urlString,
+        data: args,
+        dataType: 'json',
+        type: methodType
+    }).then(function (response) {
+
+        var s = '<option value="-1">Selecciona un Puesto</option>';
+        for (var i = 0; i < response.length; i++) {
+            s += '<option value="' + response[i].ID_T_ENT + '">' + response[i].DESCRIPCION_PUESTO + '</option>';
+        }
+        $("#IdSelectedPuesto").html(s);
     });
 }
 
@@ -154,6 +284,22 @@ async function fetchDataAsyncPuestoVigentes(urlString, methodType, args) {
 }
 
 
+function changeEventHandlerPerfil(event) {
+
+    var id = event.target.value;
+
+    if (id == "-1") {
+        $("#IdSelectedPerfil").attr('disabled', true);
+        $("#IdSelectedPerfil").val("-1");
+        return;
+    }
+
+    $("#IdSelectedPerfil").attr('disabled', false);
+    $('#IdSelectedPerfil').val("-1");
+
+    GetAllDataPerfilVigentes();
+}
+
 async function GetAllDataPerfilVigentes() {
 
     var url = '';
@@ -181,7 +327,7 @@ async function fetchDataAsyncPerfilVigentes(urlString, methodType, args) {
         type: methodType
     }).then(function (response) {
 
-        var s = '<option value="-1">Selecciona un Puesto</option>';
+        var s = '<option value="-1">Selecciona un Perfil</option>';
         for (var i = 0; i < response.length; i++) {
             s += '<option value="' + response[i].ID_T_ENT + '">' + response[i].DESCRIPCION_PERFIL + '</option>';
         }
@@ -191,7 +337,7 @@ async function fetchDataAsyncPerfilVigentes(urlString, methodType, args) {
 
 
 async function GetAllDataUsuarios() {
-
+    CardStylesOne();
     var url = '';
 
     //url = $("#FQDN").val() + 'api/usuarios/ObtenerUsuarios';
@@ -277,7 +423,7 @@ async function fetchDataAsyncTableUsuarios(urlString, methodType, args) {
 
 
 async function GetAllDataUsuariosVigentes() {
-
+    CardStylesTwo();
     var url = '';
 
     //url = $("#FQDN").val() + 'api/usuarios/ObtenerUsuarios';
@@ -356,10 +502,8 @@ async function fetchDataAsyncTableUsuariosVigentes(urlString, methodType, args) 
     });
 }
 
-
-
 async function GetAllDataUsuariosHistorial() {
-
+    CardStylesThree();
     var url = '';
 
     //url = $("#FQDN").val() + 'api/usuarios/ObtenerUsuarios';
@@ -374,7 +518,6 @@ async function GetAllDataUsuariosHistorial() {
         mensaje = response.mensaje;
     }
 }
-
 
 async function fetchDataAsyncTableUsuariosHistorial(urlString, methodType, args) {
 
@@ -467,86 +610,110 @@ function CloseModalAddUpdateUsuarios() {
 
 function AddUpdateUsuarios() {
 
-    $("#formNewUser").validate(validateFormAcceso);
 
     if ($("#formNewUser").valid()) {
 
     }
 
-    //ChangeStyleInputsForm();
-    //var inputs = $("#IDNombre").attr('class');
-
-    //if (inputs.includes('error')) {
-
-    //    alert("Hola");
-
-    //    $("#IDNombre").removeClass('error');
-    //} else {
-    //    alert("salida");
-    //}
-
-}
-
-var validateFormAcceso = {
-    rules: {
-        IDNombre: { required: true },
-        IDApellidoPaterno: { required: true },
-        IDApellidoMaterno: { required: true },
-        IDEMail: { required: true },
-        IDTelefono: { required: true },
-        IdInputUsuario: { required: true },
-        //txtPassword: {required: true, minlength: 5, maxlength: 10 }
-    },
-    messages: {
-        //IdUser: {
-        //    required: function () {
-        //        messageAlert("Ingrese su Usuario.", 100)
-        //    },
-        //},
-        //Password: {
-        //    required: function () {
-        //        messageAlert("Ingrese su Contraseña.", 100)
-        //    },
-        //}
-        IDNombre: { required: "Ingrese el Nombre" },
-        IDApellidoPaterno: { required: "Ingrese su Apellido Paterno" },
-        IDEMail: { required: "Ingrese un correo electrónico" },
-        IDApellidoMaterno: { required: "Ingrese su Apellido Materno" },
-        IDTelefono: { required: "Ingrese el Teléfono" },
-        IdInputUsuario: { required: "Ingrese el Usuario" },
-        //txtPersonalizado: {required: "* Ingresa un valor", minlength: $.validator.format("* Ingresa {0} o mas caracteres"), maxlength: $.validator.format("* Ingresa {0} o menos caracteres") }
-    },
-    //errorContainer: $("#divErrores"),
-    //errorLabelContainer: "#divErrores ul",
-    //errorElement: "span",
-    //wrapper: "li",
 }
 
 
-function ChangeStyleInputsForm() {
+$().ready(function () {
 
-    var elementos = document.querySelectorAll('input[type="text"]')
 
-    elementos.forEach((elemento) => {
-        console.log(elemento);
-        var id = elemento.id;
-        var inpunt = "$('#" + id + "')";
-        //var name = elemento.getAttribute(id);
-        var elementInput = inpunt.attr('class');
-        (elementInput.includes('error')) ? this.removeClass('error') : this.addClass('')
-    })
+    $.validator.addMethod('negativo', function (value, element) {
+        return (value != '-1');
+    }, 'Seleccione un elemento de la lista');
 
 
 
-    //$(".form-group > input").each(function () {
+    $("#formNewUser").validate({
 
-    //    var clss = this.attr('class');
+        errorElement: 'span',
 
-    //    if (clss.includes('error')) {
+        errorPlacement: function (error, element) {
 
-    //        this.removeClass('error');
-    //    }
-    //});
+            if (element.parent().hasClass('input-group')) {
+                error.insertAfter(element.parent());
+            } else {
+                error.insertAfter(element);
+            }
+
+        },
+
+        rules: {
+
+            IDNombre: { required: true },
+            IDApellidoPaterno: { required: true },
+            IdInputUsuario: { required: true },
+            IdSelectedTipoEntidad: { valueNotEquals: "-1" },
+            IdSelectedEntidad: { valueNotEquals: "-1" },
+            IdSelectedArea: { valueNotEquals: "-1" },
+            IdSelectedPuesto: { valueNotEquals: "-1" },
+            IdSelectedPerfil: { valueNotEquals: "-1" },
+
+            //IdInputClavePuesto: "required",
+            //IdInputClavePuesto: {
+            //    required: true,
+            //    minlength: 1,
+            //    maxlength: 500
+            //},
 
 
-}
+            //IdinputDescripcionPuesto: "required",
+            //IdinputDescripcionPuesto: {
+            //    required: true,
+            //    minlength: 1,
+            //    maxlength: 500
+            //},
+
+
+            IdSelectedTipoEntidad: {
+                negativo: true
+            },
+            IdSelectedEntidad: {
+                negativo: true
+            },
+            IdSelectedArea: {
+                negativo: true
+            },
+            IdSelectedPuesto: {
+                negativo: true
+            },
+            IdSelectedPerfil: {
+                negativo: true
+            },
+
+        },
+        highlight: function (element) {
+            $(element).parent().addClass('error')
+        },
+        unhighlight: function (element) {
+            $(element).parent().removeClass('error')
+        },
+        messages: {
+            IDNombre: { required: "Ingrese el Nombre" },
+            IDApellidoPaterno: { required: "Ingrese su Apellido Paterno" },
+            IdInputUsuario: { required: "Ingrese el Usuario" },
+            //IdInputClavePuesto: {
+            //    required: "Por favor ingresa el clave",
+            //    minlength: "El nombre no debe ser menor a 1 caracter",
+            //    maxlength: "El nombre no debe de ser mayor a 500 caracteres"
+            //},
+
+            //IdinputDescripcionPuesto: {
+            //    required: "Por favor ingresa la Descripción",
+            //    minlength: "La Descripción no debe ser menor a 1 caracter",
+            //    maxlength: "La Descripción no debe de ser mayor a 500 caracteres"
+            //},
+
+            //IdSelectedTipoEntidad: {
+            //    negativo: "Seleccione un elemento de la lista"
+            //},
+
+        }
+
+    });
+
+
+});
