@@ -1,184 +1,4 @@
-﻿<!--<script src="~/Content/jQueryv3.6.2/jQuery_v3.6.2.js"></script>
-<script src="~/Content/DataTables/datatables.js"></script>
-<script src="~/Scripts/Afores/Afores.js"></script>
-
-<link href="~/Content/DataTables/datatables.css" rel="stylesheet" />
-<link href="~/Content/Bootstrap5.2.3/css/bootstrap.css" rel="stylesheet" />
-<!-- [ Main Content ] start -->
-<!--<div class="pcoded-main-container">
-    <div class="pcoded-wrapper">
-        <div class="pcoded-content">
-            <div class="pcoded-inner-content">-->
-<!-- [ breadcrumb ] start -->
-<!--<div class="page-header">
-    <div class="page-block">
-        <div class="row align-items-center">
-            <div class="col-md-12">
-                <div class="page-header-title">-->
-@* <h5 class="m-b-10">Bootstrap Basic Tables</h5>*@
-<!--</div>
-                <ul class="breadcrumb">
-                    <li class="breadcrumb-item"><a href="@Url.Action("Index", "Home")"><i class="fas fa-home"></i></a></li>
-                    <li class="breadcrumb-item"><a>Entidades</a></li>
-                    <li class="breadcrumb-item"><a>Afores</a></li>
-                </ul>
-            </div>
-        </div>
-    </div>
-</div>-->
-<!-- [ breadcrumb ] end -->
-<!--<div class="main-body">
-    <div class="page-wrapper">-->
-<!-- [ Main Content ] start -->
-<!--<div class="row">-->
-<!-- [ tabs ] start -->
-<!--<div class="col-sm-12">-->
-<!-- DataTales Example -->
-<!--<div class="card shadow mb-4">
-    <div class="card-header py-3">-->
-@*<h6 class="m-0 font-weight-bold text-primary">Afores</h6>*@
-<!--<button type="button" class="btn btn-primary" data-toggle="modal" onclick="OpenModalAddUpdateAfores(0);">
-        Agregar Afore
-    </button>
-</div>
-<div>-->
-<!-- Button trigger modal -->
-<!--</div>
-        <div class="card-body">
-            <div class="table-responsive">
-                <table class="table table-bordered" id="dataTableAfores" width="100%" cellspacing="0">
-                    <thead>
-                        <tr class="text-center">
-                            <th class="text-center">
-                                ID
-                            </th>
-                            <th class="text-center">
-                                Clave
-                            </th>
-                            <th class="text-center">
-                                Descripción
-                            </th>
-                            <th class="text-center">
-                                Especificación
-                            </th>
-
-
-                            <th class="text-center">
-                                Acciones
-                            </th>
-                        </tr>
-                    </thead>
-                    <tbody class="tbody"></tbody>
-                </table>
-            </div>
-        </div>
-    </div>
-</div>-->
-<!-- [ tabs ] end -->
-<!--</div>-->
-<!-- [ Main Content ] end -->
-<!--</div>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>-->
-<!-- [ Main Content ] end -->
-<!-- Modal ModalAddUpdateUser-->
-<!--<div class="modal fade" style="padding-top:3%!important" id="ModalAddUpdateAfores" tabindex="-1" role="dialog" data-backdrop="static" data-keyboard="false">
-    <div class="modal-dialog modal-lg" role="document">
-        <div class="modal-content">
-            <div class="modal-header">-->
-@*<h3 class="modal-title" id="exampleModalCenterTitle"><span class="fas fa-user-o fa-lg" aria-hidden="true"></span> Registro de Entidad</h3>*@
-<!--<button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
-        <span aria-hidden="true">&times;</span>
-    </button>
-</div>
-<div class="modal-body">-->
-<!-- Overflow Hidden -->
-<!--<form class="needs-validation form-group" novalidate>
-    <div class="card mb-2">
-        <div class="card-header py-3">
-            <h6 class="m-0 font-weight-bold text-primary">Registro Tipo de Entidad</h6>
-        </div>
-
-        <div class="card-body">
-            <div class="form-row">
-                <div class="col-md-4 mb-3">
-                    <label class="my-1 mr-2" for="inlineFormCustomSelectPref">Clave:</label>
-                    <input type="text" class="form-control" id="validationCustom03" placeholder="Clave" required>
-                </div>
-            </div>
-            <div class="form-row">
-                <div class="col-md-4 mb-3">
-                    <label class="my-1 mr-2" for="inlineFormCustomSelectPref">Descripción:</label>
-                    <input type="text" class="form-control" id="validationCustom03" placeholder="Descripción" required>
-                </div>
-            </div>
-            <div class="form-row">
-                <div class="col-md-7 mb-3">
-                    <label for="validationCustom03">Especificación</label>
-                    <input type="text" class="form-control" id="validationCustom03" placeholder="Especificación" required>
-                    <div class="invalid-feedback">
-                        Please provide a valid city.
-                    </div>
-                </div>
-            </div>
-
-        </div>
-
-    </div>-->
-
-<!-- Overflow Hidden -->
-<!--</form>
-            </div>
-            <div class="modal-footer">
-                <button class="btn btn-primary float-right" onclick="AddUpdateUser();" type="submit" value="submit">Aceptar</button>
-                <button class="btn btn-danger float-right" onclick="CloseModalAddUpdateAfores();">Cancelar</button>
-            </div>
-        </div>
-    </div>
-</div>-->
-<!-- Extra large modal -->
-<!--<div class="modal fade" id="exampleModalXl" tabindex="-1" role="dialog" aria-labelledby="myExtraLargeModalLabel" style="display: none;" aria-hidden="true">
-    <div class="modal-dialog modal-xl" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title">Extra Large Modal</h5>
-                <button class="btn-close" type="button" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body">
-                <p>This is an example of an extra large modal!</p>
-            </div>
-            <div class="modal-footer"><button class="btn btn-primary" type="button" data-bs-dismiss="modal">Close</button></div>
-        </div>
-    </div>
-</div>-->
-<!-- Modal ModalDelete -->
-<!--<div class="modal fade" style="padding-top:3%!important" id="ModalDelete" tabindex="-1" role="dialog" data-backdrop="static" data-keyboard="false">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h4 class="modal-title">Eliminar Afore-Siefores</h4>
-                <button type="button" class="close" data-dismiss="modal"
-                        aria-hidden="true">
-                    &times;
-                </button>
-            </div>
-            <div class="modal-body" style="height: 75px">
-                <p>¿Estás seguro de eliminar el registro?</p>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-primary" id="confirm-delete-ok" onclick="DeleteUser();">Aceptar</button>
-                <button type="button" class="btn btn-danger" onclick="CloseModalDelete();">Cancelar</button>
-            </div>
-        </div>
-    </div>
-</div>-->
-
-
-
-
+﻿
 
 <script src="~/Content/jQueryv3.6.2/jQuery_v3.6.2.js"></script>
 <script src="~/Content/DataTables/datatables.js"></script>
@@ -194,7 +14,22 @@
 @*<link href="~/Content/Start/css/sb-admin-2.css" rel="stylesheet" />*@
 <script src="~/Content/toastr/toastr.js"></script>
 <script src="~/Scripts/Validate/jquery.validate.js"></script>
-<script src="~/Scripts/StylesCards.js"></script>
+<script src="~/Scripts/Methods/additional-methods.min.js"></script>
+
+<style>
+    .error {
+        color: #F00;
+    }
+
+    .selected {
+        background-color: blue;
+    }
+
+    .error {
+        font-size: 16px;
+    }
+</style>
+
 <!-- [ Main Content ] start -->
 <div class="pcoded-main-container">
 
@@ -230,63 +65,63 @@
                 <div class="main-body">
 
 
-                    <div class="nav nav-pills mb-10 d-flex justify-content-center" id="pills-tab" role="tablist">
-                        <div class="col-xl-3 col-md-6 mb-4">
-                            <div id="cardOne" class="card border-bottom-primary shadow h-100 py-2 active" data-bs-toggle="pill" data-bs-target="#pills-home" type="button" role="tab" aria-controls="pills-home"  onclick="CardStylesOne()" aria-selected="true">
-                                <div class="card-body">
-                                    <div class="row no-gutters align-items-center">
-                                        <div class="col mr-2">
-                                            <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">
-                                                @*<button class="nav-link active" id="pills-home-tab" data-bs-toggle="pill" data-bs-target="#pills-home" type="button" role="tab" aria-controls="pills-home" aria-selected="true">Todos</button>*@
-                                            </div>
-                                            <div id="textCardOne" class="h5 mb-0 font-weight-bold text-gray-800">Todos</div>
-                                        </div>
-                                        <div class="col-auto">
-                                            <i class="fas fa-calendar fa-2x text-gray-300"></i>
-                                        </div>
+                    <!--<div class="nav nav-pills mb-10 d-flex justify-content-center" id="pills-tab" role="tablist">
+                    <div class="col-xl-3 col-md-6 mb-4">
+                        <div id="cardOne" class="card border-bottom-primary shadow h-100 py-2 active" data-bs-toggle="pill" data-bs-target="#pills-home" type="button" role="tab" aria-controls="pills-home" onclick="CardStylesOne()" aria-selected="true">
+                            <div class="card-body">
+                                <div class="row no-gutters align-items-center">
+                                    <div class="col mr-2">
+                                        <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">-->
+                    @*<button class="nav-link active" id="pills-home-tab" data-bs-toggle="pill" data-bs-target="#pills-home" type="button" role="tab" aria-controls="pills-home" aria-selected="true">Todos</button>*@
+                    <!--</div>
+                                        <div id="textCardOne" class="h5 mb-0 font-weight-bold text-gray-800">Todos</div>
+                                    </div>
+                                    <div class="col-auto">
+                                        <i class="fas fa-calendar fa-2x text-gray-300"></i>
                                     </div>
                                 </div>
                             </div>
                         </div>
+                    </div>
 
-                        <div class="col-xl-3 col-md-6 mb-4">
-                            <div id="cardTwo" class="card border-bottom-success shadow h-100 py-2" data-bs-toggle="pill" data-bs-target="#pills-profile" type="button" role="tab" aria-controls="pills-profile" aria-selected="false" onclick="GetAllDataTipoEntidadVigentes()">
-                                <div class="card-body">
-                                    <div class="row no-gutters align-items-center">
-                                        <div class="col mr-2">
-                                            <div class="text-xs font-weight-bold text-success text-uppercase mb-1">
-                                                @*<button class="nav-link" id="pills-profile-tab" data-bs-toggle="pill" data-bs-target="#pills-profile" type="button" role="tab" aria-controls="pills-profile" aria-selected="false">Profile</button>*@
-                                            </div>
-                                            <div id="textCardTwo" class="h5 mb-0 font-weight-bold text-gray-800">Vigentes</div>
-                                        </div>
-                                        <div class="col-auto">
-                                            <i class="fas fa-database fa-2x text-gray-300"></i>
-                                        </div>
+                    <div class="col-xl-3 col-md-6 mb-4">
+                        <div id="cardTwo" class="card border-bottom-success shadow h-100 py-2" data-bs-toggle="pill" data-bs-target="#pills-profile" type="button" role="tab" aria-controls="pills-profile" aria-selected="false" onclick="GetAllDataTipoEntidadVigentes()">
+                            <div class="card-body">
+                                <div class="row no-gutters align-items-center">
+                                    <div class="col mr-2">
+                                        <div class="text-xs font-weight-bold text-success text-uppercase mb-1">-->
+                    @*<button class="nav-link" id="pills-profile-tab" data-bs-toggle="pill" data-bs-target="#pills-profile" type="button" role="tab" aria-controls="pills-profile" aria-selected="false">Profile</button>*@
+                    <!--</div>
+                                        <div id="textCardTwo" class="h5 mb-0 font-weight-bold text-gray-800">Vigentes</div>
+                                    </div>
+                                    <div class="col-auto">
+                                        <i class="fas fa-database fa-2x text-gray-300"></i>
                                     </div>
                                 </div>
                             </div>
                         </div>
+                    </div>
 
 
-                        <div class="col-xl-3 col-md-6 mb-4">
-                            <div id="cardThree" class="card border-bottom-info shadow h-100 py-2" data-bs-toggle="pill" data-bs-target="#pills-contact" type="button" role="tab" aria-controls="pills-contact" aria-selected="false" onclick="GetAllDataTipoEntidadHistorial()">
-                                <div class="card-body">
-                                    <div class="row no-gutters align-items-center">
-                                        <div class="col mr-2">
-                                            <div class="text-xs font-weight-bold text-info text-uppercase mb-1">
-                                                @*<button class="nav-link" id="pills-contact-tab" >Contact</button>*@
-                                            </div>
-                                            <div class="row no-gutters align-items-center">
-                                                <div class="col-auto">
-                                                    <div id="textCardThree" class="h5 mb-0 mr-3 font-weight-bold text-gray-800">Historial</div>
-                                                </div>
-                                                <div class="col">
-                                                    @*<div class="progress progress-sm mr-2">
-                                                            <div class="progress-bar bg-info" role="progressbar"
-                                                                 style="width: 50%" aria-valuenow="50" aria-valuemin="0"
-                                                                 aria-valuemax="100"></div>
-                                                        </div>*@
-                                                </div>
+                    <div class="col-xl-3 col-md-6 mb-4">
+                        <div id="cardThree" class="card border-bottom-info shadow h-100 py-2" data-bs-toggle="pill" data-bs-target="#pills-contact" type="button" role="tab" aria-controls="pills-contact" aria-selected="false" onclick="GetAllDataTipoEntidadHistorial()">
+                            <div class="card-body">
+                                <div class="row no-gutters align-items-center">
+                                    <div class="col mr-2">
+                                        <div class="text-xs font-weight-bold text-info text-uppercase mb-1">-->
+                    @*<button class="nav-link" id="pills-contact-tab" >Contact</button>*@
+                    <!--</div>
+                    <div class="row no-gutters align-items-center">
+                        <div class="col-auto">
+                            <div id="textCardThree" class="h5 mb-0 mr-3 font-weight-bold text-gray-800">Historial</div>
+                        </div>
+                        <div class="col">-->
+                    @*<div class="progress progress-sm mr-2">
+                            <div class="progress-bar bg-info" role="progressbar"
+                                 style="width: 50%" aria-valuenow="50" aria-valuemin="0"
+                                 aria-valuemax="100"></div>
+                        </div>*@
+                    <!--</div>
                                             </div>
                                         </div>
                                         <div class="col-auto">
@@ -296,9 +131,88 @@
                                 </div>
                             </div>
                         </div>
-                    </div>
+                    </div>-->
+
+
+
+
+                    <ul class="nav nav-pills mb-3 justify-content-center" id="pills-tab" role="tablist">
+                        <li class="nav-item col-xl-3 col-md-6 mb-4">
+                            <div class="">
+                                <div id="cardOne" class="card border-bottom-primary shadow h-100 py-2 " data-bs-toggle="pill" data-bs-target="#pills-home" type="button" role="tab" aria-controls="pills-home" aria-selected="false" onclick="GetAllDataTipoEntidad();">
+                                    <div class="card-body">
+                                        <div class="row no-gutters align-items-center">
+                                            <div class="col mr-2">
+                                                <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">
+                                                    @*<button class="nav-link active" id="pills-home-tab" data-bs-toggle="pill" data-bs-target="#pills-home" type="button" role="tab" aria-controls="pills-home" aria-selected="true">Todos</button>*@
+                                                </div>
+                                                <div id="textCardOne" class="h5 mb-0 font-weight-bold text-gray-800">Todos</div>
+                                            </div>
+                                            <div class="col-auto">
+                                                <i class="fas fa-calendar fa-2x text-gray-300"></i>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </li>
+                        <li class="nav-item col-xl-3 col-md-6 mb-4" role="presentation">
+
+                            <div class="">
+                                <div id="cardTwo" class="card border-bottom-success shadow h-100 py-2 active" data-bs-toggle="pill" data-bs-target="#pills-profile" type="button" role="tab" aria-controls="pills-profile" aria-selected="true" onclick="GetAllDataTipoEntidadVigentes();">
+                                    <div class="card-body">
+                                        <div class="row no-gutters align-items-center">
+                                            <div class="col mr-2">
+                                                <div class="text-xs font-weight-bold text-success text-uppercase mb-1">
+                                                    @*<button class="nav-link" id="pills-profile-tab" data-bs-toggle="pill" data-bs-target="#pills-profile" type="button" role="tab" aria-controls="pills-profile" aria-selected="false">Profile</button>*@
+                                                </div>
+                                                <div id="textCardTwo" class="h5 mb-0 font-weight-bold text-gray-800">Vigentes</div>
+                                            </div>
+                                            <div class="col-auto">
+                                                <i class="fas fa-database fa-2x text-gray-300"></i>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </li>
+                        <li class="nav-item col-xl-3 col-md-6 mb-4" role="presentation">
+
+                            <div class="">
+                                <div id="cardThree" class="card border-bottom-info shadow h-100 py-2" data-bs-toggle="pill" data-bs-target="#pills-contact" type="button" role="tab" aria-controls="pills-contact" aria-selected="false" onclick="GetAllDataTipoEntidadHistorial();">
+                                    <div class="card-body">
+                                        <div class="row no-gutters align-items-center">
+                                            <div class="col mr-2">
+                                                <div class="text-xs font-weight-bold text-info text-uppercase mb-1">
+                                                    @*<button class="nav-link" id="pills-contact-tab" >Contact</button>*@
+                                                </div>
+                                                <div class="row no-gutters align-items-center">
+                                                    <div class="col-auto">
+                                                        <div id="textCardThree" class="h5 mb-0 mr-3 font-weight-bold text-gray-800">Historial</div>
+                                                    </div>
+                                                    <div class="col">
+                                                        @*<div class="progress progress-sm mr-2">
+                                                                <div class="progress-bar bg-info" role="progressbar"
+                                                                     style="width: 50%" aria-valuenow="50" aria-valuemin="0"
+                                                                     aria-valuemax="100"></div>
+                                                            </div>*@
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-auto">
+                                                <i class="fas fa-clipboard-list fa-2x text-gray-300"></i>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </li>
+                    </ul>
+
+
+
                     <div class="tab-content" id="pills-tabContent">
-                        <div class="tab-pane fade show active" id="pills-home" role="tabpanel" aria-labelledby="pills-home-tab">
+                        <div class="tab-pane" id="pills-home" role="tabpanel" aria-labelledby="pills-home-tab">
 
 
 
@@ -325,17 +239,17 @@
                                                 <table id="dataTableTipoEntidad" class="table table-hover no-wrap" data-page-size="10" style="width:100%">
                                                     <thead>
                                                         <tr class="text-center">
-                                                            <th>
+                                                            @*<th>
                                                                 ID
-                                                            </th>
+                                                            </th>*@
                                                             <th class="text-center">
                                                                 Clave
                                                             </th>
                                                             <th class="text-center">
-                                                                Descripción
+                                                                Tipo
                                                             </th>
                                                             <th class="text-center">
-                                                                Siglas
+                                                                Especificación
                                                             </th>
                                                             <th class="text-center">
                                                                 Acciones
@@ -357,7 +271,7 @@
 
 
                         </div>
-                        <div class="tab-pane fade" id="pills-profile" role="tabpanel" aria-labelledby="pills-profile-tab">
+                        <div class="tab-pane fade show active" id="pills-profile" role="tabpanel" aria-labelledby="pills-profile-tab">
 
 
                             <!-- [ Main Content ] start -->
@@ -383,17 +297,17 @@
                                                 <table id="dataTableTipoEntidadVigentes" class="table table-hover no-wrap" data-page-size="10" style="width:100%">
                                                     <thead>
                                                         <tr class="text-center">
-                                                            <th>
+                                                            @*<th>
                                                                 ID
-                                                            </th>
+                                                            </th>*@
                                                             <th class="text-center">
                                                                 Clave
                                                             </th>
                                                             <th class="text-center">
-                                                                Descripción
+                                                                Tipo
                                                             </th>
                                                             <th class="text-center">
-                                                                Siglas
+                                                                Especificación
                                                             </th>
                                                             <th class="text-center">
                                                                 Acciones
@@ -440,17 +354,17 @@
                                                 <table id="dataTableTipoEntidadHistorial" class="table table-hover no-wrap" data-page-size="10" style="width:100%">
                                                     <thead>
                                                         <tr class="text-center">
-                                                            <th>
+                                                            @*<th>
                                                                 ID
-                                                            </th>
+                                                            </th>*@
                                                             <th class="text-center">
                                                                 Clave
                                                             </th>
                                                             <th class="text-center">
-                                                                Descripción
+                                                                Tipo
                                                             </th>
                                                             <th class="text-center">
-                                                                Siglas
+                                                                Especificación
                                                             </th>
                                                             <th class="text-center">
                                                                 Acciones
@@ -487,70 +401,46 @@
     </div>
 </div>
 <!-- [ Main Content ] end -->
-
-
 <!-- Modal ModalAddUpdateUser-->
 <div class="modal fade" style="padding-top:3%!important" id="ModalAddUpdateTipoEntidad" tabindex="-1" role="dialog" data-backdrop="static" data-keyboard="false">
     <div class="modal-dialog modal-lg" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h3 class="m-0 font-weight-bold text-primary" id="ModalCenterTitle"><span class="fas fa-user-o fa-lg" aria-hidden="true"></span> Registro de Entidad</h3>
+                @*<h3 class="m-0 font-weight-bold text-primary" id="ModalCenterTitle"><span class="fas fa-user-o fa-lg" aria-hidden="true"></span> Registro de Entidad</h3>*@
                 <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
             <div class="modal-body">
                 <!-- Overflow Hidden -->
-                <form class="needs-validation form-group" autocomplete="off" registration novalidate>
+                <form class="needs-validation form-group" id="formAddUpdateTipoEntidad" autocomplete="off" registration novalidate>
                     <div class="card mb-2">
                         <div class="card-header py-3 text-center">
-                            <h6 id="ModalCenterTitleH6" class="m-0 font-weight-bold text-primary"></h6>
+                            <h3 id="ModalCenterTitleH6" class="m-0 font-weight-bold text-primary"></h3>
                         </div>
 
                         <div class="card-body">
                             <div class="form-group">
                                 <div class="input-group col-md-12">
-                                    <input type="text" class="form-control" id="IdEntidadHidden" hidden>
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <div class="input-group col-md-12">
                                     <input type="text" class="form-control" id="IdTipoEntidadHidden" hidden>
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <div class="input-group col-md-12" id="IDdivIDUsuario">
-                                    <input type="text" class="form-control" id="IDUsuario" maxlength="5" placeholder="ID" hidden>
                                 </div>
                             </div>
                             <div class="form-row">
                                 <div class="col-md-2 mb-3">
                                     <label class="my-1 mr-2" for="lblClave">Clave:</label>
-                                    <input type="text" class="form-control" id="IdInputClave" placeholder="Clave" required>
+                                    <input type="text" class="form-control" id="IdInputTipoEntidadClave" name="IdInputTipoEntidadClave" placeholder="Clave">
                                 </div>
                             </div>
                             <div class="form-row">
                                 <div class="col-md-9 mb-3">
-                                    <label class="my-1 mr-2" for="lblDescripcion">Descripción:</label>
-                                    <input type="text" class="form-control" id="IdinputDescripcion" placeholder="Descripción" required>
+                                    <label for="lblDescripcion">Descripción:</label>
+                                    <input type="text" class="form-control" id="IdInputTipoEntidadDescripcion" name="IdInputTipoEntidadDescripcion" placeholder="Descripción">
                                 </div>
                             </div>
                             <div class="form-row">
                                 <div class="col-md-9 mb-3">
-                                    <label for="lblSiglas">Siglas</label>
-                                    <input type="text" class="form-control" id="IdInputSiglas" placeholder="Siglas" required>
-                                    <div class="invalid-feedback">
-                                        Please provide a valid city.
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="form-row">
-                                <div class="col-md-5 mb-3">
-                                    <label for="lblSelectedTipo">Tipo</label>
-                                    <select class="form-select" id="IdSelectedTipo" name="IdSelectedTipo"></select>
-                                    <div class="invalid-feedback">
-                                        Please provide a valid city.
-                                    </div>
+                                    <label class="my-1 mr-2" for="lblEspecificacion">Especificación:</label>
+                                    <input type="text" class="form-control" id="IdinputTipoEntidadEspecificacion" name="IdinputTipoEntidadEspecificacion" placeholder="Especificación">
                                 </div>
                             </div>
                         </div>
@@ -595,7 +485,7 @@
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                <h4 class="modal-title">Eliminar Entidad</h4>
+                <h4 class="modal-title">Eliminar Tipo de Entidad</h4>
                 <button type="button" class="close" data-bs-dismiss="modal"
                         aria-hidden="true">
                     &times;
@@ -605,7 +495,7 @@
                 <p>¿Estás seguro de eliminar el registro?</p>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-primary" id="confirm-delete-ok" onclick="DeleteEntidad();">Aceptar</button>
+                <button type="button" class="btn btn-primary" id="confirm-delete-ok" onclick="DeleteTipoEntidad();">Aceptar</button>
                 <button type="button" class="btn btn-danger" onclick="CloseModalDelete();">Cancelar</button>
             </div>
         </div>

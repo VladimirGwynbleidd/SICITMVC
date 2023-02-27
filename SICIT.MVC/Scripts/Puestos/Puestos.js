@@ -258,7 +258,18 @@ async function fetchDataAsyncTablePuestos(urlString, methodType, args) {
 
                 {
                     data: "Acciones", render: function (data, type, row) {
-                        return '<a title="Editar" href="#" onclick="return OpenModalAddUpdatePuesto(' + row.ID_PUESTO + ',' + '\'' + row.DESCRIPCION_PUESTO + '\'' + ',\'' + row.ID_T_ENT + '\'' + ',\'' + row.CVE_ID_ENT + '\'' + ',\'' + row.ID_AREA + '\'' + ')"><i style="color:black" class="fas fa-fw fa-edit fa-lg"></i></a> | <a title="Eliminar" href="#" onclick="OpenModalDelete(' + row.ID_PUESTO + ')"><i style="color:red" class="fas fa-solid fa-trash fa-lg"></i></a>';
+
+                        var armarAcciones = '';
+
+                        //alert(row.VIG_FLAG)
+                        if (row.VIG_FLAG == 1) {
+                            return '<a title="Editar" href="#" onclick="return OpenModalAddUpdatePuesto(' + row.ID_PUESTO + ',' + '\'' + row.DESCRIPCION_PUESTO + '\'' + ',\'' + row.ID_T_ENT + '\'' + ',\'' + row.CVE_ID_ENT + '\'' + ',\'' + row.ID_AREA + '\'' + ')"><i style="color:black" class="fas fa-fw fa-edit fa-lg"></i></a> | <a title="Eliminar" href="#" onclick="OpenModalDelete(' + row.ID_PUESTO + ')"><i style="color:red" class="fas fa-solid fa-trash fa-lg"></i></a>';
+                        }
+                        else {
+                            return '<a title="Editar" href="#" onclick="return OpenModalAddUpdatePuesto(' + row.ID_PUESTO + ',' + '\'' + row.DESCRIPCION_PUESTO + '\'' + ',\'' + row.ID_T_ENT + '\'' + ',\'' + row.CVE_ID_ENT + '\'' + ',\'' + row.ID_AREA + '\'' + ')"><i style="color:black;display:none" class="fas fa-fw fa-edit fa-lg"></i></a> <a title="Eliminar" href="#" onclick="OpenModalDelete(' + row.ID_PUESTO + ')"><i style="color:red;display:none" class="fas fa-solid fa-trash fa-lg"></i></a>';
+                        } 
+
+
                     }, sortable: false, className: "uniqueClassName"
                 }
             ],
@@ -419,11 +430,7 @@ async function fetchDataAsyncTablePuestosHistorial(urlString, methodType, args) 
                 { 'data': 'CVE_ID_ENT', className: "uniqueClassName", "visible": false },
                 { 'data': 'ID_AREA', className: "uniqueClassName", "visible": false },
 
-                {
-                    data: "Acciones", render: function (data, type, row) {
-                        return '<a title="Editar" href="#" onclick="return OpenModalAddUpdatePuesto(' + row.ID_PUESTO + ',' + '\'' + row.DESCRIPCION_PUESTO + '\'' + ',\'' + row.DESC_T_ENT + '\'' + ',\'' + row.SIGLAS_ENT + '\'' + ',\'' + row.DESC_AREA + '\'' + ')"><i style="color:black" class="fas fa-fw fa-edit fa-lg"></i></a> | <a title="Eliminar" href="#" onclick="OpenModalDelete(' + row.ID_PUESTO + ')"><i style="color:red" class="fas fa-solid fa-trash fa-lg"></i></a>';
-                    }, sortable: false, className: "uniqueClassName"
-                }
+
             ],
 
             columnDefs: [
@@ -553,7 +560,7 @@ async function OpenModalAddUpdatePuesto(ID_PUESTO, DESCRIPCION_PUESTO, ID_T_ENT,
 
         $("#IdSelectedEntidad").attr('disabled', false);
         $('#IdSelectedArea').attr('disabled', false);
-        
+
 
     }
     else {

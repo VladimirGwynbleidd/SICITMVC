@@ -303,7 +303,7 @@ async function AddUpdatePerfiles() {
     var methodStr = '';
     var url = '';
 
-    $("#formAddUpdatePerfiles").validate(validateFormAcceso);
+    if (!($('#formAddUpdatePerfiles').valid())) return false;
 
     if ($("#formAddUpdatePerfiles").valid()) {
 
@@ -311,7 +311,7 @@ async function AddUpdatePerfiles() {
         argsEntidades = {
 
             ID_PERFIL: $('#IdPerfilHidden').val(),
-            DESCRIPCION_PERFIL: $('#IdinputDescripcion').val(),
+            DESCRIPCION_PERFIL: $('#IdinputDescripcionPerfiles').val(),
         };
         //console.log($('#IdEntidadHidden').val())
         /*url = $('#IDUsuario').val() == 0 ? $("#FQDN").val() + 'api/usuarios/post' : $("#FQDN").val() + 'api/usuarios/put';*/
@@ -328,7 +328,7 @@ async function AddUpdatePerfiles() {
                 "debug": false,
                 "newestOnTop": false,
                 "progressBar": true,
-                "positionClass": "toast-top-center",
+                "positionClass": "toast-top-right",
                 "preventDuplicates": true,
                 "onclick": null,
                 "showDuration": "100",
@@ -347,7 +347,13 @@ async function AddUpdatePerfiles() {
                 GetAllDataPerfilVigentes();
 
                 $("#ModalAddUpdatePerfiles").modal('hide');
-                toastr.info(response.Mensaje, 'Se ha agregado correctamente el perfil').css("width", "250px");
+                if ($('#IdPerfilHidden').val() == 0) {
+                    toastr.success(response.Mensaje, 'Se ha agregado correctamente el perfil').css("width", "250px");
+                }
+                else {
+                    toastr.success(response.Mensaje, 'Se ha modificado correctamente el perfil').css("width", "250px");
+                }
+                
             }
             else {
                 toastr.error(response.Mensaje, 'Perfiles').css("width", "200px");
@@ -363,7 +369,7 @@ async function AddUpdatePerfiles() {
 
 
 async function fetchDataAsync(urlString, methodType, args) {
-    alert("2")
+    
     return await $.ajax({
         contentType: 'application/json',
         url: urlString,
@@ -381,14 +387,14 @@ function OpenModalAddUpdatePerfiles(ID_PERFIL, DESCRIPCION_PERFIL) {
     if (ID_PERFIL != 0) {
         $("#ModalCenterTitle").html('Editar Perfil');
         $("#ModalCenterTitleH6").html('Editar Perfil');
-        $("#IdInputClave").val(ID_PERFIL);
-        $('#IdInputClave').attr('disabled', 'disabled');
-        $("#IdinputDescripcion").val(DESCRIPCION_PERFIL);
+        $("#IdInputClavePerfiles").val(ID_PERFIL);
+        $('#IdInputClavePerfiles').attr('disabled', 'disabled');
+        $("#IdinputDescripcionPerfiles").val(DESCRIPCION_PERFIL);
     }
     else {
         $("#ModalCenterTitle").html('Registrar Perfil');
         $("#ModalCenterTitleH6").html('Registrar Perfil');
-        $("#IdInputClave").attr('disabled', true);
+        $("#IdInputClavePerfiles").attr('disabled', true);
 
         ResetControls();
     }
@@ -426,7 +432,7 @@ async function DeletePerfiles() {
             "debug": false,
             "newestOnTop": false,
             "progressBar": true,
-            "positionClass": "toast-top-center",
+            "positionClass": "toast-top-right",
             "preventDuplicates": true,
             "onclick": null,
             "showDuration": "100",
@@ -466,12 +472,15 @@ function OpenModalDelete(ID_PERFIL) {
 
 
 function CloseModalAddUpdatePerfiles() {
-    //$("#frmAddUpdateUsuario").trigger("reset");
+    $("#formAddUpdatePerfiles").trigger("reset");
+    $("#formAddUpdatePerfiles").data('validator').resetForm();
     $("#ModalAddUpdatePerfiles").modal('hide');
-    //$("#frmAddUpdateUsuario").data('validator').resetForm();
+    
 }
 
 function CloseModalDelete() {
+    $("#formAddUpdatePerfiles").trigger("reset");
+    $("#formAddUpdatePerfiles").data('validator').resetForm();
     $("#ModalDelete").modal('hide');
 }
 
@@ -483,33 +492,64 @@ function CloseModalDelete() {
 function ResetControls() {
 
     $("#IdInputClave").val("");
-    //$("#IdInputClave").attr('disabled', false);
 
     $("#IdinputDescripcion").val("");
 }
 
 
-var validateFormAcceso = {
-    rules: {
-        IdinputDescripcion: { required: true }
-        //txtPassword: {required: true, minlength: 5, maxlength: 10 }
-    },
-    messages: {
-        //IdUser: {
-        //    required: function () {
-        //        messageAlert("Ingrese su Usuario.", 100)
-        //    },
-        //},
-        //Password: {
-        //    required: function () {
-        //        messageAlert("Ingrese su Contraseña.", 100)
-        //    },
-        //}
-        IdinputDescripcion: { required: "Ingrese la descripción" },
-        //txtPersonalizado: {required: "* Ingresa un valor", minlength: $.validator.format("* Ingresa {0} o mas caracteres"), maxlength: $.validator.format("* Ingresa {0} o menos caracteres") }
-    },
-    errorContainer: $("#divErrores"),
-    errorLabelContainer: "#divErrores ul",
-    errorElement: "span",
-    wrapper: "li",
-}
+
+$().ready(function () {
+
+
+    $.validator.addMethod('negativo', function (value, element) {
+        return (value != '-1');
+    }, 'Seleccione un elemento de la lista');
+
+
+
+    $("#formAddUpdatePerfiles").validate({
+
+        errorElement: 'span',
+
+        errorPlacement: function (error, element) {
+
+            if (element.parent().hasClass('input-group')) {
+                error.insertAfter(element.parent());
+            } else {
+                error.insertAfter(element);
+            }
+
+        },
+
+        rules: {
+
+            IdinputDescripcionPerfiles: "required",
+            IdinputDescripcionPerfiles: {
+                required: true,
+                minlength: 1,
+                maxlength: 500
+            },
+
+        },
+        highlight: function (element) {
+            $(element).parent().addClass('error')
+        },
+        unhighlight: function (element) {
+            $(element).parent().removeClass('error')
+        },
+        messages: {
+
+
+
+            IdinputDescripcionPerfiles: {
+                required: "Por favor ingresa la Descripción",
+                minlength: "La Descripción no debe ser menor a 1 caracter",
+                maxlength: "La Descripción no debe de ser mayor a 500 caracteres"
+            },
+
+        }
+
+    });
+
+
+});

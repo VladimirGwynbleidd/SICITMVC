@@ -1,45 +1,11 @@
 ﻿$(document).ready(function () {
 
-    GetAllDataTipoEntidad();
+    //GetAllDataTipoEntidad();
     //GetAllTipoEntidades();
+    GetAllDataTipoEntidadVigentes();
+
 });
 
-
-async function GetAllTipoEntidades() {
-    
-    var url = '';
-
-    //url = $("#FQDN").val() + 'api/Entidades/GetEntidades';
-    url = 'http://localhost:6435/Api/Entidades/GetTipoEntidades';
-
-
-    try {
-        response = await fetchPerfilesAsync('' + url + '', 'GET', {});
-    } catch (error) {
-        console.log(error)
-        response = error.responseJSON;
-        mensaje = response.mensaje;
-    }
-}
-
-
-async function fetchPerfilesAsync(urlString, methodType, args) {
-
-    return await $.ajax({
-        contentType: 'application/json',
-        url: urlString,
-        data: args,
-        dataType: 'json',
-        type: methodType
-    }).then(function (response) {
-
-        var s = '<option value="-1">Selecciona un Tipo de Entidad</option>';
-        for (var i = 0; i < response.length; i++) {
-            s += '<option value="' + response[i].ID_T_ENT + '">' + response[i].DESC_T_ENT + '</option>';
-        }
-        $("#IdSelectedTipoEntidad").html(s);
-    });
-}
 
 
 async function GetAllDataTipoEntidad() {
@@ -97,19 +63,19 @@ async function fetchDataAsyncTableTipoEntidad(urlString, methodType, args) {
             pagination: "bootstrap",
             columns: [
                 { 'data': 'ID_T_ENT', className: "uniqueClassName" },
-                { 'data': 'SIGLAS_T_ENT', className: "text-left" },
-                { 'data': 'DESC_T_ENT', className: "uniqueClassName" },
+
+                { 'data': 'DESC_T_ENT', className: "text-left" },
                 { 'data': 'ESPC_T_ENT', className: "text-left" },
 
                 {
                     data: "Acciones", render: function (data, type, row) {
-                        return '<a title="Editar" href="#" onclick="return OpenModalAddUpdateTipoEntidad(' + row.ID_T_ENT + ',' + '\'' + row.DESC_T_ENT + '\'' + ',\'' + row.SIGLAS_T_ENT + '\'' + ',\'' + row.ESPC_T_ENT + '\'' + ')"><i style="color:black" class="fas fa-fw fa-edit fa-lg"></i></a> | <a title="Eliminar" href="#" onclick="OpenModalDelete(' + row.CVE_ID_ENT + ',\'' + row.ID_T_ENT + '\'' + ')"><i style="color:red" class="fas fa-solid fa-trash fa-lg"></i></a>';
+                        return '<a title="Editar" href="#" onclick="return OpenModalAddUpdateTipoEntidad(' + row.ID_T_ENT + ',' + '\'' + row.DESC_T_ENT + '\'' + ',\'' + row.ESPC_T_ENT + '\'' + ')"><i style="color:black" class="fas fa-fw fa-edit fa-lg"></i></a> | <a title="Eliminar" href="#" onclick="OpenModalDelete(' + row.ID_T_ENT + ')"><i style="color:red" class="fas fa-solid fa-trash fa-lg"></i></a>';
                     }, sortable: false, className: "uniqueClassName"
                 }
             ],
 
             columnDefs: [
-                { className: "dt-center", targets: [0, 1, 2, 3, 4] }
+                { className: "dt-center", targets: [0, 1, 2, 3] }
             ]
         });
     });
@@ -172,19 +138,19 @@ async function fetchDataAsyncTableTipoEntidadVigentes(urlString, methodType, arg
             pagination: "bootstrap",
             columns: [
                 { 'data': 'ID_T_ENT', className: "uniqueClassName" },
-                { 'data': 'SIGLAS_T_ENT', className: "text-left" },
-                { 'data': 'DESC_T_ENT', className: "uniqueClassName" },
+
+                { 'data': 'DESC_T_ENT', className: "text-left" },
                 { 'data': 'ESPC_T_ENT', className: "text-left" },
 
                 {
                     data: "Acciones", render: function (data, type, row) {
-                        return '<a title="Editar" href="#" onclick="return OpenModalAddUpdateTipoEntidad(' + row.ID_T_ENT + ',' + '\'' + row.DESC_T_ENT + '\'' + ',\'' + row.SIGLAS_T_ENT + '\'' + ',\'' + row.ESPC_T_ENT + '\'' + ')"><i style="color:black" class="fas fa-fw fa-edit fa-lg"></i></a> | <a title="Eliminar" href="#" onclick="OpenModalDelete(' + row.CVE_ID_ENT + ',\'' + row.ID_T_ENT + '\'' + ')"><i style="color:red" class="fas fa-solid fa-trash fa-lg"></i></a>';
+                        return '<a title="Editar" href="#" onclick="return OpenModalAddUpdateTipoEntidad(' + row.ID_T_ENT + ',' + '\'' + row.DESC_T_ENT + '\'' + ',\'' + row.ESPC_T_ENT + '\'' + ')"><i style="color:black" class="fas fa-fw fa-edit fa-lg"></i></a> | <a title="Eliminar" href="#" onclick="OpenModalDelete(' + row.ID_T_ENT + ')"><i style="color:red" class="fas fa-solid fa-trash fa-lg"></i></a>';
                     }, sortable: false, className: "uniqueClassName"
                 }
             ],
 
             columnDefs: [
-                { className: "dt-center", targets: [0, 1, 2, 3, 4] }
+                { className: "dt-center", targets: [0, 1, 2, 3] }
             ]
         });
     });
@@ -248,19 +214,19 @@ async function fetchDataAsyncTableUsuariosHistorial(urlString, methodType, args)
             pagination: "bootstrap",
             columns: [
                 { 'data': 'ID_T_ENT', className: "uniqueClassName" },
-                { 'data': 'SIGLAS_T_ENT', className: "text-left" },
-                { 'data': 'DESC_T_ENT', className: "uniqueClassName" },
+
+                { 'data': 'DESC_T_ENT', className: "text-left" },
                 { 'data': 'ESPC_T_ENT', className: "text-left" },
 
                 {
                     data: "Acciones", render: function (data, type, row) {
-                        return '<a title="Editar" href="#" onclick="return OpenModalAddUpdateTipoEntidad(' + row.ID_T_ENT + ',' + '\'' + row.DESC_T_ENT + '\'' + ',\'' + row.SIGLAS_T_ENT + '\'' + ',\'' + row.ESPC_T_ENT + '\'' + ')"><i style="color:black" class="fas fa-fw fa-edit fa-lg"></i></a> | <a title="Eliminar" href="#" onclick="OpenModalDelete(' + row.CVE_ID_ENT + ',\'' + row.ID_T_ENT + '\'' + ')"><i style="color:red" class="fas fa-solid fa-trash fa-lg"></i></a>';
+                        return '<a title="Editar" href="#" onclick="return OpenModalAddUpdateTipoEntidad(' + row.ID_T_ENT + ',' + '\'' + row.DESC_T_ENT + '\'' + ',\'' + row.ESPC_T_ENT + '\'' + ')"><i style="color:black" class="fas fa-fw fa-edit fa-lg"></i></a> | <a title="Eliminar" href="#" onclick="OpenModalDelete(' + row.ID_T_ENT + ')"><i style="color:red" class="fas fa-solid fa-trash fa-lg"></i></a>';
                     }, sortable: false, className: "uniqueClassName"
                 }
             ],
 
             columnDefs: [
-                { className: "dt-center", targets: [0, 1, 2, 3, 4] }
+                { className: "dt-center", targets: [0, 1, 2] }
             ]
         });
     });
@@ -270,85 +236,108 @@ async function fetchDataAsyncTableUsuariosHistorial(urlString, methodType, args)
 
 //******************************ADD***************************************
 
-async function AddUpdatePerfiles() {
-
-    //if (!($('#frmAddUpdateUsuario').valid())) return false;
+async function AddUpdateTipoEntidad() {
 
 
-    var response;
-    var argsUsuario;
-    var methodStr = '';
-    var url = '';
 
-    argsEntidades = {
+    if (!($('#formAddUpdateTipoEntidad').valid())) return false;
 
-        CVE_ID_ENT: $('#IdInputClave').val(),
-        DESC_ENT: $('#IdinputDescripcion').val(),
-        SIGLAS_ENT: $('#IdInputSiglas').val(),
-        ID_T_ENT: $('#IdSelectedTipo').val()
-    };
-    //console.log($('#IdEntidadHidden').val())
-    /*url = $('#IDUsuario').val() == 0 ? $("#FQDN").val() + 'api/usuarios/post' : $("#FQDN").val() + 'api/usuarios/put';*/
-    url = $('#IdEntidadHidden').val() == 0 ? 'http://localhost:6435/api/Entidades/Post' : 'http://localhost:6435/api/Entidades/Put';
+    if ($("#formAddUpdateTipoEntidad").valid()) {
 
-    try {
+        var response;
+        var argsUsuario;
+        var methodStr = '';
+        var url = '';
+        console.log($('#IdTipoEntidadHidden').val())
 
-        methodStr = $('#IdPerfilHidden').val() == 0 ? 'POST' : 'PUT';
+        argsTipoEntidades = {
 
-        response = await fetchDataAsync(url, methodStr, JSON.stringify(argsEntidades));
+            ID_T_ENT: $('#IdInputTipoEntidadClave').val(),
+            DESC_T_ENT: $('#IdInputTipoEntidadDescripcion').val(),
+            ESPC_T_ENT: $('#IdinputTipoEntidadEspecificacion').val()
+        };
+        console.log($('#IdTipoEntidadHidden').val())
+        /*url = $('#IDUsuario').val() == 0 ? $("#FQDN").val() + 'api/usuarios/post' : $("#FQDN").val() + 'api/usuarios/put';*/
+        url = $('#IdTipoEntidadHidden').val() == 0 ? 'http://localhost:6435/Api/TipoEntidad/Post' : 'http://localhost:6435/Api/TipoEntidad/Put';
 
-        toastr.options = {
-            "closeButton": false,
-            "debug": false,
-            "newestOnTop": false,
-            "progressBar": true,
-            "positionClass": "toast-top-center",
-            "preventDuplicates": true,
-            "onclick": null,
-            "showDuration": "100",
-            "hideDuration": "1000",
-            "timeOut": "5000",
-            "extendedTimeOut": "1000",
-            "showEasing": "swing",
-            "hideEasing": "linear",
-            "showMethod": "show",
-            "hideMethod": "hide"
+        try {
+
+            methodStr = $('#IdTipoEntidadHidden').val() == 0 ? 'POST' : 'PUT';
+
+            response = await fetchDataAsyncTipoEntidad(url, methodStr, JSON.stringify(argsTipoEntidades));
+
+            toastr.options = {
+                "closeButton": false,
+                "debug": false,
+                "newestOnTop": false,
+                "progressBar": true,
+                "positionClass": "toast-top-center",
+                "preventDuplicates": true,
+                "onclick": null,
+                "showDuration": "100",
+                "hideDuration": "1000",
+                "timeOut": "5000",
+                "extendedTimeOut": "1000",
+                "showEasing": "swing",
+                "hideEasing": "linear",
+                "showMethod": "show",
+                "hideMethod": "hide"
+            }
+
+
+            if (response.Exito) {
+                GetAllDataTipoEntidadVigentes();
+                $("#ModalAddUpdateTipoEntidad").modal('hide');
+                toastr.info(response.Mensaje, 'Entidades').css("width", "250px");
+            }
+            else {
+                toastr.error(response.Mensaje, 'Entidades').css("width", "200px");
+            }
+        } catch (error) {
+            response = error.responseJSON;
+            mensaje = response.Mensaje;
+            toastr.error('Error', 'Usuarios').css("width", "150px");
         }
-
-
-        if (response.Exito) {
-            GetAllDataEntidades();
-            $("#ModalAddUpdateTipoEntidad").modal('hide');
-            toastr.info(response.Mensaje, 'Entidades').css("width", "250px");
-        }
-        else {
-            toastr.error(response.Mensaje, 'Entidades').css("width", "200px");
-        }
-    } catch (error) {
-        response = error.responseJSON;
-        mensaje = response.Mensaje;
-        toastr.error('Error', 'Usuarios').css("width", "150px");
     }
 }
 
+async function fetchDataAsyncTipoEntidad(urlString, methodType, args) {
 
-function OpenModalAddUpdateTipoEntidad(ID_PERFIL, DESCRIPCION_PERFIL) {
+    return await $.ajax({
+        contentType: 'application/json',
+        url: urlString,
+        data: args,
+        dataType: 'json',
+        type: methodType
+    }).then(function (response) {
+        console.log(JSON.stringify(response));
+        return response;
+    });
+}
 
-    if (ID_PERFIL != 0) {
+function OpenModalAddUpdateTipoEntidad(ID_T_ENT, DESC_T_ENT, ESPC_T_ENT) {
+
+    if (ID_T_ENT != 0) {
         $("#ModalCenterTitle").html('Editar Tipo de Entidad');
         $("#ModalCenterTitleH6").html('Editar Tipo de Entidad');
-        $("#IdInputClave").val(ID_PERFIL);
-        $('#IdInputClave').attr('disabled', 'disabled');
-        $("#IdinputDescripcion").val(DESCRIPCION_PERFIL);
+        $("#IdInputTipoEntidadClave").val(ID_T_ENT);
+        $('#IdInputTipoEntidadClave').attr('disabled', 'disabled');
+        $("#IdInputTipoEntidadDescripcion").val(DESC_T_ENT);
+
+        $("#IdinputTipoEntidadEspecificacion").val(ESPC_T_ENT);
+
+
     }
     else {
         $("#ModalCenterTitle").html('Registrar Tipo de Entidad');
         $("#ModalCenterTitleH6").html('Registrar Tipo de Entidad');
+        $("#IdInputTipoEntidadClave").attr('disabled', true);
 
         //ResetControls();
     }
 
-    $("#IdPerfilHidden").val(ID_PERFIL);
+    $("#IdTipoEntidadHidden").val(ID_T_ENT);
+
     $('#ModalAddUpdateTipoEntidad').modal({ backdrop: 'static', keyboard: false });
     $('#ModalAddUpdateTipoEntidad').modal('show');
 
@@ -358,7 +347,7 @@ function OpenModalAddUpdateTipoEntidad(ID_PERFIL, DESCRIPCION_PERFIL) {
 
 //*******************************DELETE************************************
 
-async function DeletePerfiles() {
+async function DeleteTipoEntidad() {
 
     //alert("1")
 
@@ -366,16 +355,16 @@ async function DeletePerfiles() {
     var response;
     var url = '';
 
-    argsEntidades = {
-        CVE_ID_ENT: $('#IdPerfilHidden').val(),
+    argsTipoEntidades = {
+        ID_T_ENT: $('#IdTipoEntidadHidden').val(),
 
     };
 
     //url = $("#FQDN").val() + 'api/usuarios/delete';
-    url = 'http://localhost:6435/api/Entidades/Delete';
+    url = 'http://localhost:6435/Api/TipoEntidad/Delete';
 
     try {
-        response = await fetchDataAsync('' + url + '', 'DELETE', JSON.stringify(argsEntidades));
+        response = await fetchDataAsyncTipoEntidad('' + url + '', 'DELETE', JSON.stringify(argsTipoEntidades));
 
         toastr.options = {
             "timeOut": 2500,
@@ -385,7 +374,7 @@ async function DeletePerfiles() {
         }
 
         if (response.Exito) {
-            GetAllDataVigentes();
+            GetAllDataTipoEntidadVigentes();
             $("#ModalDelete").modal('hide');
 
             toastr.success(response.Mensaje, 'Entidades').css("width", "250px");
@@ -401,9 +390,9 @@ async function DeletePerfiles() {
 }
 
 
-function OpenModalDelete(ID_PERFIL) {
+function OpenModalDelete(ID_T_ENT) {
 
-    $("#IdPerfilHidden").val(ID_PERFIL);
+    $("#IdTipoEntidadHidden").val(ID_T_ENT);
 
 
     $('#ModalDelete').modal({ backdrop: 'static', keyboard: false, show: true })
@@ -411,17 +400,89 @@ function OpenModalDelete(ID_PERFIL) {
 }
 
 
-function CloseModalAddUpdatePerfiles() {
-    //$("#frmAddUpdateUsuario").trigger("reset");
+function CloseModalAddUpdateTipoEntidad() {
+    $("#formAddUpdateTipoEntidad").trigger("reset");
+    $("#formAddUpdateTipoEntidad").data('validator').resetForm();
     $("#ModalAddUpdateTipoEntidad").modal('hide');
-    //$("#frmAddUpdateUsuario").data('validator').resetForm();
+
 }
 
 function CloseModalDelete() {
+    $("#formAddUpdateTipoEntidad").trigger("reset");
+    $("#formAddUpdateTipoEntidad").data('validator').resetForm();
     $("#ModalDelete").modal('hide');
 }
 
 
 //***************************************************************************
 
+
+$().ready(function () {
+
+
+    $.validator.addMethod('negativo', function (value, element) {
+        return (value != '-1');
+    }, 'Seleccione un elemento de la lista');
+
+
+
+    $("#formAddUpdateTipoEntidad").validate({
+
+        errorElement: 'span',
+
+        errorPlacement: function (error, element) {
+
+            if (element.parent().hasClass('input-group')) {
+                error.insertAfter(element.parent());
+            } else {
+                error.insertAfter(element);
+            }
+
+        },
+
+        rules: {
+
+
+            IdInputTipoEntidadDescripcion: "required",
+            IdInputTipoEntidadDescripcion: {
+                required: true,
+                minlength: 1,
+                maxlength: 500
+            },
+
+            IdinputTipoEntidadEspecificacion: "required",
+            IdinputTipoEntidadEspecificacion: {
+                required: true,
+                minlength: 1,
+                maxlength: 500
+            },
+
+        },
+        highlight: function (element) {
+            $(element).parent().addClass('error')
+        },
+        unhighlight: function (element) {
+            $(element).parent().removeClass('error')
+        },
+        messages: {
+
+            IdInputTipoEntidadDescripcion: {
+                required: "Por favor ingresa el clave",
+                minlength: "El nombre no debe ser menor a 1 caracter",
+                maxlength: "El nombre no debe de ser mayor a 500 caracteres"
+            },
+
+            IdinputTipoEntidadEspecificacion: {
+                required: "Por favor ingresa la Descripción",
+                minlength: "La Descripción no debe ser menor a 1 caracter",
+                maxlength: "La Descripción no debe de ser mayor a 500 caracteres"
+            },
+
+
+        }
+
+    });
+
+
+});
 

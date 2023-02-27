@@ -1,6 +1,7 @@
 ﻿$(document).ready(function () {
     GetAllTipoEntidades();
-    GetAllDataEntidades();
+    //GetAllDataEntidades();
+    GetAllDataVigentes();
 });
 
 $('#frmAddUpdateUsuario').submit(function (e) {
@@ -109,7 +110,14 @@ async function fetchDataAsyncTable(urlString, methodType, args) {
 
                 {
                     data: "Acciones", render: function (data, type, row) {
-                        return '<a title="Editar" href="#" onclick="return OpenModalAddUpdateEntidades(' + row.CVE_ID_ENT + ',' + '\'' + row.DESC_ENT + '\'' + ',\'' + row.SIGLAS_ENT + '\'' + ',\'' + row.ID_T_ENT + '\'' + ')"><i style="color:black" class="fas fa-fw fa-edit fa-lg"></i></a> | <a title="Eliminar" href="#" onclick="OpenModalDelete(' + row.CVE_ID_ENT + ',\'' + row.ID_T_ENT + '\'' + ')"><i style="color:red" class="fas fa-solid fa-trash fa-lg"></i></a>';
+
+                        if (row.VIG_FLAG == 1) {
+                            return '<a title="Editar" href="#" onclick="return OpenModalAddUpdateEntidades(' + row.CVE_ID_ENT + ',' + '\'' + row.DESC_ENT + '\'' + ',\'' + row.SIGLAS_ENT + '\'' + ',\'' + row.ID_T_ENT + '\'' + ')"><i style="color:black" class="fas fa-fw fa-edit fa-lg"></i></a> | <a title="Eliminar" href="#" onclick="OpenModalDelete(' + row.CVE_ID_ENT + ',\'' + row.ID_T_ENT + '\'' + ')"><i style="color:red" class="fas fa-solid fa-trash fa-lg"></i></a>';
+                        }
+                        else {
+                            return '<a title="Editar" href="#" onclick="return OpenModalAddUpdateEntidades(' + row.CVE_ID_ENT + ',' + '\'' + row.DESC_ENT + '\'' + ',\'' + row.SIGLAS_ENT + '\'' + ',\'' + row.ID_T_ENT + '\'' + ')"><i style="color:black;display:none" class="fas fa-fw fa-edit fa-lg"></i></a><a title="Eliminar" href="#" onclick="OpenModalDelete(' + row.CVE_ID_ENT + ',\'' + row.ID_T_ENT + '\'' + ')"><i style="color:red;display:none" class="fas fa-solid fa-trash fa-lg"></i></a>';
+                        }
+                        
                     }, sortable: false, className: "uniqueClassName"
                 }
             ],
@@ -124,7 +132,7 @@ async function fetchDataAsyncTable(urlString, methodType, args) {
 
 async function AddUpdateEntidades() {
 
-    //if (!($('#frmAddUpdateUsuario').valid())) return false;
+    if (!($('#formAddUpdateEntidades').valid())) return false;
 
 
     var response;
@@ -134,9 +142,9 @@ async function AddUpdateEntidades() {
 
     argsEntidades = {
 
-        CVE_ID_ENT: $('#IdInputClave').val(),
-        DESC_ENT: $('#IdinputDescripcion').val(),
-        SIGLAS_ENT: $('#IdInputSiglas').val(),
+        CVE_ID_ENT: $('#IdEntidadHidden').val(),
+        DESC_ENT: $('#IdinputDescripcionEntidad').val(),
+        SIGLAS_ENT: $('#IdInputSiglasEntidad').val(),
         ID_T_ENT: $('#IdSelectedTipo').val()
     };
     //console.log($('#IdEntidadHidden').val())
@@ -322,7 +330,7 @@ async function fetchDataAsyncTableHistorial(urlString, methodType, args) {
                 { 'data': 'DESC_T_ENT', className: "text-left" },
                 { 'data': 'CVE_ID_ENT', className: "uniqueClassName", "visible": false },
 
-             
+
             ],
 
             columnDefs: [
@@ -416,26 +424,26 @@ async function fetchDataAsync(urlString, methodType, args) {
 
 
 function OpenModalAddUpdateEntidades(CVE_ID_ENT, DESC_ENT, SIGLAS_ENT, ID_T_ENT) {
-    
+
 
     if (CVE_ID_ENT != 0) {
         $("#ModalCenterTitle").html('Editar Entidad');
         $("#ModalCenterTitleH6").html('Editar Entidad');
-        $("#IdInputClave").val(CVE_ID_ENT);
-        $('#IdInputClave').attr('disabled', 'disabled');
-        $("#IdinputDescripcion").val(DESC_ENT);
-        $("#IdInputSiglas").val(SIGLAS_ENT);
+        $("#IdInputClaveEntidad").val(CVE_ID_ENT);
+        $('#IdInputClaveEntidad').attr('disabled', 'disabled');
+        $("#IdinputDescripcionEntidad").val(DESC_ENT);
+        $("#IdInputSiglasEntidad").val(SIGLAS_ENT);
         $("#IdSelectedTipo").val(ID_T_ENT);
         $('#IdSelectedTipo').attr('disabled', 'disabled');
     }
     else {
         $("#ModalCenterTitle").html('Registrar Entidad');
         $("#ModalCenterTitleH6").html('Registrar Entidad');
-
+        $("#IdInputClaveEntidad").attr('disabled', true);
         ResetControls();
     }
 
-     
+
     $("#IdEntidadHidden").val(CVE_ID_ENT);
     $('#ModalAddUpdateEntidades').modal({ backdrop: 'static', keyboard: false });
     $('#ModalAddUpdateEntidades').modal('show');
@@ -459,16 +467,19 @@ function ResetControls() {
 
 }
 function CloseModalAddUpdateEntidades() {
-    //$("#frmAddUpdateUsuario").trigger("reset");
+
+    $("#formAddUpdateEntidades").trigger("reset");
+    $("#formAddUpdateEntidades").data('validator').resetForm();
     $("#ModalAddUpdateEntidades").modal('hide');
-    //$("#frmAddUpdateUsuario").data('validator').resetForm();
+    
 }
 
 
 function CloseModalDelete() {
+    $("#formAddUpdateEntidades").trigger("reset");
+    $("#formAddUpdateEntidades").data('validator').resetForm();
     $("#ModalDelete").modal('hide');
 }
-
 
 
 
@@ -482,13 +493,10 @@ $().ready(function () {
     }, 'Seleccione un elemento de la lista');
 
 
-    $("#frmAddUpdateUsuario").validate({
+
+    $("#formAddUpdateEntidades").validate({
 
         errorElement: 'span',
-        //errorContainer: "#formconsole",
-        //errorLabelContainer: "#formconsole",
-        //    wrapper: "span",
-        //  errorElement: "div",
 
         errorPlacement: function (error, element) {
 
@@ -502,81 +510,52 @@ $().ready(function () {
 
         rules: {
 
-            IDDSC_USUARIO: "required",
-            IDNombre: "required",
-            IDApellidoPat: "required",
-            IDApellidoMat: "required",
-            IDddlPerfil: { valueNotEquals: "-1" },
-
-            IDDSC_USUARIO: {
+            IdinputDescripcionEntidad: "required",
+            IdinputDescripcionEntidad: {
                 required: true,
                 minlength: 1,
-                maxlength: 100
+                maxlength: 500
             },
 
-            IDNombre: {
+            IdInputSiglasEntidad: "required",
+            IdInputSiglasEntidad: {
                 required: true,
                 minlength: 1,
-                maxlength: 100
+                maxlength: 500
             },
 
-            IDApellidoPat: {
-                required: true,
-                minlength: 1,
-                maxlength: 100
-            },
-
-            IDApellidoMat: {
-                required: true,
-                minlength: 1,
-                maxlength: 100
-            },
-
-            IDddlPerfil: {
-
+            IdSelectedTipo: { valueNotEquals: "-1" },
+            IdSelectedTipo: {
                 negativo: true
-
-            }
+            },
 
         },
-
-
         highlight: function (element) {
             $(element).parent().addClass('error')
         },
         unhighlight: function (element) {
             $(element).parent().removeClass('error')
         },
-
         messages: {
 
-            IDDSC_USUARIO: {
-                required: "Por favor ingresa el usuario",
+
+
+            IdinputDescripcionEntidad: {
+                required: "Por favor ingresa la Descripción",
+                minlength: "La Descripción no debe ser menor a 1 caracter",
+                maxlength: "La Descripción no debe de ser mayor a 500 caracteres"
+            },
+
+            IdInputSiglasEntidad: {
+                required: "Por favor ingresa las Siglas",
                 minlength: "El nombre no debe ser menor a 1 caracter",
-                maxlength: "El nombre no debe de ser mayor a 100 caracteres"
+                maxlength: "El nombre no debe de ser mayor a 500 caracteres"
             },
 
-            IDNombre: {
-                required: "Por favor ingresa el nombre",
-                minlength: "El nombre no debe ser menor a 1 caracter",
-                maxlength: "El nombre no debe de ser mayor a 100 caracteres"
-            },
-
-            IDApellidoPat: {
-                required: "Por favor ingresa el apellido paterno",
-                minlength: "El apellido paterno no debe ser menor a 1 caracter",
-                maxlength: "El apellido paterno no debe de ser mayor a 100 caracteres"
-            },
-
-            IDApellidoMat: {
-                required: "Por favor ingresa el apellido materno",
-                minlength: "El apellido materno no debe ser menor a 1 caracter",
-                maxlength: "El apellido materno no debe de ser mayor a 100 caracteres"
-            },
-
-            IDddlTipoNormatividad: {
+            IdSelectedTipo: {
                 negativo: "Seleccione un elemento de la lista"
-            }
+            },
+
         }
 
     });
