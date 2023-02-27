@@ -576,6 +576,88 @@ function CloseModalDelete() {
 
 //***************************************************************************
 
+async function GetAllDataTipoEntidadVigentes() {
+    CardStylesTwo();
+    var url = '';
+
+    //url = $("#FQDN").val() + 'api/usuarios/ObtenerUsuarios';
+    url = 'http://localhost:6435/Api/TipoEntidad/GetTipoEntidadVigentes';
+
+    try {
+        response = await fetchDataAsyncTableTipoEntidadVigentes('' + url + '', 'GET', {});
+    } catch (error) {
+        console.log(error)
+        response = error.responseJSON;
+        mensaje = response.mensaje;
+    }
+}
+
+async function fetchDataAsyncTableTipoEntidadVigentes(urlString, methodType, args) {
+
+    return await $.ajax({
+        contentType: 'application/json',
+        url: urlString,
+        data: args,
+        dataType: 'json',
+        type: methodType
+    }).then(function (response) {
+
+        var s = '<option value="-1">Selecciona un Tipo de Entidad</option>';
+        for (var i = 0; i < response.length; i++) {
+            s += '<option value="' + response[i].ID_T_ENT + '">' + response[i].DESC_T_ENT + '</option>';
+        }
+        $("#IdSelectedTipoEntidad").html(s);
+    });
+}
+
+function SelectedTipoEntidad() {
+
+    var idTipoEntidad = $("#IdSelectedTipoEntidad").val();
+    GetAllEntidad(idTipoEntidad);
+}
+
+
+async function GetAllEntidad(idTipoEntidad) {
+    var url = '';
+
+    //url = $("#FQDN").val() + 'api/usuarios/ObtenerUsuarios';
+    url = 'http://localhost:6435/api/Entidades/GetEntidadesById';
+
+    try {
+        response = await fetchDataAsyncTableEntidad('' + url + '', 'POST', { "ID_T_ENT": idTipoEntidad });
+    } catch (error) {
+        console.log(error)
+        response = error.responseJSON;
+        mensaje = response.mensaje;
+    }
+}
+
+
+async function fetchDataAsyncTableEntidad(urlString, methodType, args) {
+
+    return await $.ajax({
+        contentType: 'application/json',
+        url: urlString,
+        data: JSON.stringify(args),
+        dataType: 'json',
+        type: methodType
+    }).then(function (response) {
+
+        var s = '<option value="-1">Selecciona una Entidad</option>';
+        for (var i = 0; i < response.length; i++) {
+            s += '<option value="' + response[i].ID_T_ENT + '">' + response[i].SIGLAS_ENT + '</option>';
+        }
+        $("#IdSelectedEntidad").html(s);
+    });
+}
+
+
+function AddUpdateAreas() {
+
+    var urlString = '';
+
+    //url = $("#FQDN").val() + 'api/usuarios/ObtenerUsuarios';
+    urlString = '';
 
 $().ready(function () {
 
