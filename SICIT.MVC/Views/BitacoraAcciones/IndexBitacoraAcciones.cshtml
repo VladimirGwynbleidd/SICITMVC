@@ -1,7 +1,249 @@
-﻿
-@{
-    ViewBag.Title = "IndexBitacoraAcciones";
-}
+﻿<script src="~/Content/jQueryv3.6.2/jQuery_v3.6.2.js"></script>
+<script src="~/Content/DataTables/datatables.js"></script>
+<script src="~/Content/Bootstrap5.2.3/js/bootstrap.js"></script>
 
-<h2>IndexBitacoraAcciones</h2>
+<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+<script src="~/Scripts/BitacoraAcciones/BitacoraAcciones.js"></script>
+<link href="~/Content/DataTables/datatables.css" rel="stylesheet" />
+@*<link href="~/Content/Bootstrap5.2.3/css/bootstrap.css" rel="stylesheet" />*@
+@*<link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
+    rel="stylesheet">*@
+
+<link href="~/Content/toastr/toastr.css" rel="stylesheet" />
+@*<link href="~/Content/Start/css/sb-admin-2.css" rel="stylesheet" />*@
+<script src="~/Content/toastr/toastr.js"></script>
+<script src="~/Scripts/Validate/jquery.validate.js"></script>
+<script src="~/Scripts/Methods/additional-methods.min.js"></script>
+
+
+<link rel="stylesheet" href="//code.jquery.com/ui/1.13.2/themes/base/jquery-ui.css">
+<script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js"></script>
+
+<style>
+    .error {
+        color: #F00;
+    }
+
+    .selected {
+        background-color: blue;
+    }
+
+    .error {
+        font-size: 16px;
+    }
+</style>
+<script>
+    $(function () {
+        $("#datepicker").datepicker();
+    });
+</script>
+<!-- [ Main Content ] start -->
+<div class="pcoded-main-container">
+
+    @*<p>Date: <input type="text" id="datepicker"></p>*@
+
+    <div class="pcoded-wrapper">
+        <div class="pcoded-content">
+            <div class="pcoded-inner-content">
+                <!-- [ breadcrumb ] start -->
+                <div class="page-header">
+                    <div class="page-block">
+                        <div class="row align-items-center">
+                            <div class="col-md-12">
+                                <div class="page-header-title">
+                                    @* <h5 class="m-b-10">Bootstrap Basic Tables</h5>*@
+                                </div>
+                                <ul class="breadcrumb">
+                                    <li class="breadcrumb-item"><a href="@Url.Action("Index", "Home")"><i class="fas fa-home"></i></a></li>
+                                    <li class="breadcrumb-item"><a>Seguridad</a></li>
+                                    <li class="breadcrumb-item"><a>Bitacora de Acciones</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
+
+
+
+
+                <!-- [ breadcrumb ] end -->
+                <div class="main-body">
+
+
+                    <div class="modal-content">
+
+
+                        <div class="modal-body">
+                            <div class="container-fluid">
+                                <!-- Content Row -->
+                                <div class="row">
+
+                                    <div class="col-lg-12">
+
+                                        <!-- Overflow Hidden -->
+                                        <div class="card mb-4">
+                                            <div class="card-header py-3">
+                                                <h6 class="m-0 font-weight-bold text-primary">Bitacora de Acciones</h6>
+                                            </div>
+                                            <div class="card-body">
+                                                <div class="container align-items-center justify-content-center">
+                                                    <form class="needs-validation form-group" id="formBitacoraAcciones" autocomplete="off" registration novalidate>
+
+                                                        <div class="form-row">
+                                                            <div class="col-md-6">
+                                                                <div class="form-group col-6" style="padding-right:17px">
+                                                                    <input id="IDFechaIni" name="IDFechaIni" class="form-control"  type="date" lang="es-mx" />
+                                                                    <span id="startDateSelected"></span>
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-md-6">
+                                                                <div class="form-group col-6" style="padding-right:17px">
+                                                                    <input id="IDFechaFin" name="IDFechaFin" class="form-control" type="date" lang="es-mx" />
+                                                                    <span id="endDateSelected"></span>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </form>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+
+
+                                <div class="row">
+
+                                    <div class="col-lg-12">
+                                        <div class="card mb-4">
+                                            <div class="card-header py-3">
+                                                @*<h6 class="m-0 font-weight-bold text-primary">Datos del Trabajador</h6>*@
+                                            </div>
+                                            <div class="card-body">
+                                                <div class="table-responsive" style="width:100%">
+                                                    <table id="dataTableBitacoraAcciones" class="table table-hover no-wrap" data-page-size="10" style="width:100%">
+                                                        <thead>
+                                                            <tr class="text-center">
+
+                                                                <th class="text-center">
+                                                                    usuario
+                                                                </th>
+                                                                <th class="text-center">
+                                                                    Descripción Actividad
+                                                                </th>
+                                                                <th class="text-center">
+                                                                    Fecha Actividad
+                                                                </th>
+                                                            </tr>
+                                                        </thead>
+                                                        <thead>
+                                                            <tr>
+
+                                                                <td><input type="text" class="form-control filter-input" placeholder="Buscar" data-column="0" /></td>
+                                                                <td><input type="text" class="form-control filter-input" placeholder="Buscar" data-column="1" /></td>
+                                                                <td>&nbsp;</td>
+                                                            </tr>
+                                                        </thead>
+                                                        <tbody class="tbody"></tbody>
+                                                    </table>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+
+                            </div>
+
+                        </div>
+                        <!-- /.container-fluid -->
+
+                        <div class="modal-footer">
+                            <button id="btnFiltroSICOD" class="btn btn-primary float-right" onclick="ConsultarBitacoraAcciones();" type="submit" value="submit">Aceptar</button>
+                            <button class="btn btn-danger float-right" onclick="CloseModalAddUpdatePuesto();">Cancelar</button>
+                        </div>
+                    </div>
+                </div>
+
+
+
+
+
+
+
+
+
+
+            </div>
+        </div>
+    </div>
+</div>
+<!-- [ Main Content ] end -->
+<!-- Modal ModalAddUpdateUser-->
+<div class="modal fade" style="padding-top:3%!important" id="ModalAddUpdatePuesto" tabindex="-1" role="dialog" data-backdrop="static" data-keyboard="false">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                @*<h3 class="m-0 font-weight-bold text-primary" id="ModalCenterTitle"><span class="fas fa-user-o fa-lg" aria-hidden="true"></span> Registro de Puesto</h3>*@
+                <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <!-- Overflow Hidden -->
+
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-primary float-right" onclick="AddUpdatePuestos();" type="submit" value="submit">Aceptar</button>
+                <button class="btn btn-danger float-right" onclick="CloseModalAddUpdatePuesto();">Cancelar</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<!-- Extra large modal -->
+
+<div class="modal fade" id="exampleModalXl" tabindex="-1" role="dialog" aria-labelledby="myExtraLargeModalLabel" style="display: none;" aria-hidden="true">
+    <div class="modal-dialog modal-xl" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Extra Large Modal</h5>
+                <button class="btn-close" type="button" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <p>This is an example of an extra large modal!</p>
+            </div>
+            <div class="modal-footer"><button class="btn btn-primary" type="button" data-bs-dismiss="modal">Close</button></div>
+        </div>
+    </div>
+</div>
+
+
+
+
+<!-- Modal ModalDelete -->
+<div class="modal fade" style="padding-top:3%!important" id="ModalDelete" tabindex="-1" role="dialog" data-backdrop="static" data-keyboard="false">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title">Eliminar Puesto</h4>
+                <button type="button" class="close" data-bs-dismiss="modal"
+                        aria-hidden="true">
+                    &times;
+                </button>
+            </div>
+            <div class="modal-body" style="height: 75px">
+                <p>¿Estás seguro de eliminar el registro?</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary" id="confirm-delete-ok" onclick="DeletePuesto();">Aceptar</button>
+                <button type="button" class="btn btn-danger" onclick="CloseModalDelete();">Cancelar</button>
+            </div>
+        </div>
+    </div>
+</div>
+
 

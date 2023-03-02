@@ -123,6 +123,7 @@
     <Compile Include="Controllers\AreasController.cs" />
     <Compile Include="Controllers\BitacoraAccionesController.cs" />
     <Compile Include="Controllers\BitacoraSesionesController.cs" />
+    <Compile Include="Controllers\ConsultasController.cs" />
     <Compile Include="Controllers\EntidadController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\LoginController.cs" />
@@ -2376,7 +2377,10 @@
     <Content Include="Images\Spinner.gif" />
     <Content Include="Scripts\Afores\Afores.js" />
     <Content Include="Scripts\Areas\Areas.js" />
+    <Content Include="Scripts\BitacoraAcciones\BitacoraAcciones.js" />
+    <Content Include="Scripts\BitacoraSesiones\BitacoraSesiones.js" />
     <Content Include="Scripts\carousel.js" />
+    <Content Include="Scripts\Consultas\Consultas.js" />
     <Content Include="Scripts\Entidad\EntidadJS.js" />
     <Content Include="Scripts\jquery.jcarousel.js" />
     <Content Include="Scripts\js.css" />
@@ -2417,7 +2421,6 @@
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Models\" />
-    <Folder Include="Scripts\BitacoraSesiones\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />
@@ -2426,6 +2429,7 @@
     <Content Include="fonts\glyphicons-halflings-regular.eot" />
     <None Include="packages.config" />
     <Content Include="Views\Monitor\IndexMonitor.cshtml" />
+    <Content Include="Views\Consultas\IndexConsultas.cshtml" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

@@ -66,16 +66,40 @@ async function fetchDataAsyncTableTipoEntidad(urlString, methodType, args) {
 
                 { 'data': 'DESC_T_ENT', className: "text-left" },
                 { 'data': 'ESPC_T_ENT', className: "text-left" },
+                {
+                    data: "Vigente", render: function (data, type, row) {
 
+                        switch (row.VIG_FLAG) {
+                            case 0:
+                                return '<i style="color:red" class="fas fa-solid fa-circle fa-lg"></i>';
+                                break;
+                            case 1:
+                                return '<i style="color:green" class="fas fa-solid fa-circle fa-lg"></i>';
+                                break;
+                        }
+
+
+                    }, sortable: false, className: "uniqueClassName"
+                },
                 {
                     data: "Acciones", render: function (data, type, row) {
-                        return '<a title="Editar" href="#" onclick="return OpenModalAddUpdateTipoEntidad(' + row.ID_T_ENT + ',' + '\'' + row.DESC_T_ENT + '\'' + ',\'' + row.ESPC_T_ENT + '\'' + ')"><i style="color:black" class="fas fa-fw fa-edit fa-lg"></i></a> | <a title="Eliminar" href="#" onclick="OpenModalDelete(' + row.ID_T_ENT + ')"><i style="color:red" class="fas fa-solid fa-trash fa-lg"></i></a>';
+
+                        switch (row.VIG_FLAG) {
+                            case 0:
+                                return '';
+                                break;
+                            case 1:
+                                return '<a title="Editar" href="#" onclick="return OpenModalAddUpdateTipoEntidad(' + row.ID_T_ENT + ',' + '\'' + row.DESC_T_ENT + '\'' + ',\'' + row.ESPC_T_ENT + '\'' + ')"><i style="color:black" class="fas fa-fw fa-edit fa-lg"></i></a> | <a title="Eliminar" href="#" onclick="OpenModalDelete(' + row.ID_T_ENT + ')"><i style="color:red" class="fas fa-solid fa-trash fa-lg"></i></a>';
+                                break;
+                        }
                     }, sortable: false, className: "uniqueClassName"
-                }
+                },
+
+               
             ],
 
             columnDefs: [
-                { className: "dt-center", targets: [0, 1, 2, 3] }
+                { className: "dt-center", targets: [0, 1, 2, 3, 4] }
             ]
         });
     });
@@ -141,16 +165,31 @@ async function fetchDataAsyncTableTipoEntidadVigentes(urlString, methodType, arg
 
                 { 'data': 'DESC_T_ENT', className: "text-left" },
                 { 'data': 'ESPC_T_ENT', className: "text-left" },
+                {
+                    data: "Vigente", render: function (data, type, row) {
 
+                        switch (row.VIG_FLAG) {
+                            case 0:
+                                return '<i style="color:red" class="fas fa-solid fa-circle fa-lg"></i>';
+                                break;
+                            case 1:
+                                return '<i style="color:green" class="fas fa-solid fa-circle fa-lg"></i>';
+                                break;
+                        }
+
+
+                    }, sortable: false, className: "uniqueClassName"
+                },
                 {
                     data: "Acciones", render: function (data, type, row) {
                         return '<a title="Editar" href="#" onclick="return OpenModalAddUpdateTipoEntidad(' + row.ID_T_ENT + ',' + '\'' + row.DESC_T_ENT + '\'' + ',\'' + row.ESPC_T_ENT + '\'' + ')"><i style="color:black" class="fas fa-fw fa-edit fa-lg"></i></a> | <a title="Eliminar" href="#" onclick="OpenModalDelete(' + row.ID_T_ENT + ')"><i style="color:red" class="fas fa-solid fa-trash fa-lg"></i></a>';
                     }, sortable: false, className: "uniqueClassName"
-                }
+                },
+
             ],
 
             columnDefs: [
-                { className: "dt-center", targets: [0, 1, 2, 3] }
+                { className: "dt-center", targets: [0, 1, 2, 3, 4] }
             ]
         });
     });
@@ -219,14 +258,20 @@ async function fetchDataAsyncTableUsuariosHistorial(urlString, methodType, args)
                 { 'data': 'ESPC_T_ENT', className: "text-left" },
 
                 {
-                    data: "Acciones", render: function (data, type, row) {
-                        return '<a title="Editar" href="#" onclick="return OpenModalAddUpdateTipoEntidad(' + row.ID_T_ENT + ',' + '\'' + row.DESC_T_ENT + '\'' + ',\'' + row.ESPC_T_ENT + '\'' + ')"><i style="color:black" class="fas fa-fw fa-edit fa-lg"></i></a> | <a title="Eliminar" href="#" onclick="OpenModalDelete(' + row.ID_T_ENT + ')"><i style="color:red" class="fas fa-solid fa-trash fa-lg"></i></a>';
+                    data: "Vigente", render: function (data, type, row) {
+
+                        switch (row.VIG_FLAG) {
+                            case 0:
+                                return '<i style="color:red" class="fas fa-solid fa-circle fa-lg"></i>';
+                                break;
+                        }
+
                     }, sortable: false, className: "uniqueClassName"
                 }
             ],
 
             columnDefs: [
-                { className: "dt-center", targets: [0, 1, 2] }
+                { className: "dt-center", targets: [0, 1, 2, 3] }
             ]
         });
     });

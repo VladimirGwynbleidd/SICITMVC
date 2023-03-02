@@ -1,0 +1,286 @@
+﻿<script src="~/Content/jQueryv3.6.2/jQuery_v3.6.2.js"></script>
+<script src="~/Content/DataTables/datatables.js"></script>
+<script src="~/Content/Bootstrap5.2.3/js/bootstrap.js"></script>
+
+<script src="~/Scripts/Consultas/Consultas.js"></script>
+
+<link href="~/Content/DataTables/datatables.css" rel="stylesheet" />
+@*<link href="~/Content/Bootstrap5.2.3/css/bootstrap.css" rel="stylesheet" />*@
+@*<link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
+    rel="stylesheet">*@
+
+<link href="~/Content/toastr/toastr.css" rel="stylesheet" />
+@*<link href="~/Content/Start/css/sb-admin-2.css" rel="stylesheet" />*@
+<script src="~/Content/toastr/toastr.js"></script>
+<script src="~/Scripts/Validate/jquery.validate.js"></script>
+<script src="~/Scripts/Methods/additional-methods.min.js"></script>
+
+<style>
+    .error {
+        color: #F00;
+    }
+
+    .selected {
+        background-color: blue;
+    }
+
+    .error {
+        font-size: 16px;
+    }
+</style>
+<!-- [ Main Content ] start -->
+<div class="pcoded-main-container">
+
+
+
+    <div class="pcoded-wrapper">
+        <div class="pcoded-content">
+            <div class="pcoded-inner-content">
+                <!-- [ breadcrumb ] start -->
+                <div class="page-header">
+                    <div class="page-block">
+                        <div class="row align-items-center">
+                            <div class="col-md-12">
+                                <div class="page-header-title">
+                                    @* <h5 class="m-b-10">Bootstrap Basic Tables</h5>*@
+                                </div>
+                                <ul class="breadcrumb">
+                                    <li class="breadcrumb-item"><a href="@Url.Action("Index", "Home")"><i class="fas fa-home"></i></a></li>
+                                    <li class="breadcrumb-item"><a>Consultas</a></li>
+                                    <li class="breadcrumb-item"><a>Consultas</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
+
+
+
+
+                <!-- [ breadcrumb ] end -->
+                <div class="main-body">
+
+
+                    <div class="modal-content">
+
+
+                        <div class="modal-body">
+                            <div class="container-fluid">
+                                <!-- Content Row -->
+                                <div class="row">
+
+                                    <div class="col-lg-12">
+
+                                        <!-- Overflow Hidden -->
+                                        <div class="card mb-4">
+                                            <div class="card-header py-3">
+                                                <h6 class="m-0 font-weight-bold text-primary">Consultas</h6>
+                                            </div>
+                                            <div class="card-body">
+                                                <form class="needs-validation form-group" id="formAddUpdatePuestos" autocomplete="off" registration novalidate>
+
+                                                    <div class="form-row">
+                                                        <div class="col-md-6">
+                                                            <div class="col-md-10">
+                                                                <label for="lblOrigenConsultas">Origen</label>
+                                                                <input type="text" class="form-control" id="InputOrigenConsultas" placeholder="Origen">
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-md-6">
+                                                            <div class="col-md-10">
+                                                                <label for="lblAreaConsultas">No. Junta / Área</label>
+                                                                <input type="text" class="form-control" id="InputAreaConsultas" placeholder="No. Junta / Área">
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="form-row">
+                                                        <div class="col">
+                                                            <div class="col-md-10">
+                                                                <label for="lblActorConsultas">Actor</label>
+                                                                <input type="text" class="form-control" id="InputActorConsultas" placeholder="Actor">
+                                                            </div>
+                                                        </div>
+                                                        <div class="col">
+                                                            <div class="col-md-10">
+                                                                <label for="lblDemandadoConsultas">Demandado</label>
+                                                                <input type="text" class="form-control" id="InputDemandadoConsultas" placeholder="Demandado">
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="form-row">
+                                                        <div class="col">
+                                                            <div class="col-md-10">
+                                                                <label for="lblExpedienteConsultas">Expediente</label>
+                                                                <input type="text" class="form-control" id="InputExpedienteConsultas" placeholder="Expediente">
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </form>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+
+
+                                <div class="row">
+
+                                    <div class="col-lg-12">
+
+                                        <!-- Overflow Hidden -->
+                                        <div class="card mb-4">
+                                            <div class="card-header py-3">
+                                                <h6 class="m-0 font-weight-bold text-primary">Datos del Trabajador</h6>
+                                            </div>
+                                            <div class="card-body">
+                                                <form class="needs-validation form-group" id="formAddUpdatePuestos" autocomplete="off" registration novalidate>
+
+                                                    <div class="form-row">
+                                                        <div class="col">
+                                                            <div class="col-md-10">
+                                                                <label for="lblNSSConsultas">NSS</label>
+                                                                <input type="text" class="form-control" id="InputNSSConsultas" placeholder="NSS">
+                                                            </div>
+                                                        </div>
+                                                        <div class="col">
+                                                            <div class="col-md-10">
+                                                                <label for="lblNombresConsultas">Nombres</label>
+                                                                <input type="text" class="form-control" id="InputNombresConsultas" placeholder="Nombres">
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="form-row">
+                                                        <div class="col">
+                                                            <div class="col-md-10">
+                                                                <label for="lblRFCConsultas">RFC</label>
+                                                                <input type="text" class="form-control" id="InputRFCConsultas" placeholder="RFC">
+                                                            </div>
+                                                        </div>
+                                                        <div class="col">
+                                                            <div class="col-md-10">
+                                                                <label for="lblApellidoPaternoConsultas">Apellido paterno</label>
+                                                                <input type="text" class="form-control" id="InputApellidoPaternoConsultas" placeholder="Apellido paterno">
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="form-row">
+                                                        <div class="col">
+                                                            <div class="col-md-10">
+                                                                <label for="lblCURPConsultas">CURP</label>
+                                                                <input type="text" class="form-control" id="InputCURPConsultas" placeholder="CURP">
+                                                            </div>
+                                                        </div>
+                                                        <div class="col">
+                                                            <div class="col-md-10">
+                                                                <label for="lblApellidoMaternoConsultas">Apellido materno</label>
+                                                                <input type="text" class="form-control" id="InputApellidoMaternoConsultas" placeholder="Apellido materno">
+                                                            </div>
+                                                        </div>
+                                                    </div>
+
+                                                </form>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="container d-flex align-items-center justify-content-center">
+                                <div>
+                                    <label for="lblSelectedEntidad">Entidad</label>
+                                    <select class="form-select" id="IdSelectedTipoConsulta" name="IdSelectedTipoConsulta"></select>
+                                </div>
+                            </div>
+
+                        </div>
+                        <!-- /.container-fluid -->
+
+                        <div class="modal-footer">
+                            <button class="btn btn-primary float-right" onclick="AddUpdatePuestos();" type="submit" value="submit">Aceptar</button>
+                            <button class="btn btn-danger float-right" onclick="CloseModalAddUpdatePuesto();">Cancelar</button>
+                        </div>
+                    </div>
+                </div>
+
+
+
+
+
+
+
+
+
+
+            </div>
+        </div>
+    </div>
+</div>
+<!-- [ Main Content ] end -->
+<!-- Modal ModalAddUpdateUser-->
+<div class="modal fade" style="padding-top:3%!important" id="ModalAddUpdatePuesto" tabindex="-1" role="dialog" data-backdrop="static" data-keyboard="false">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                @*<h3 class="m-0 font-weight-bold text-primary" id="ModalCenterTitle"><span class="fas fa-user-o fa-lg" aria-hidden="true"></span> Registro de Puesto</h3>*@
+                <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <!-- Overflow Hidden -->
+
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-primary float-right" onclick="AddUpdatePuestos();" type="submit" value="submit">Aceptar</button>
+                <button class="btn btn-danger float-right" onclick="CloseModalAddUpdatePuesto();">Cancelar</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<!-- Extra large modal -->
+
+<div class="modal fade" id="exampleModalXl" tabindex="-1" role="dialog" aria-labelledby="myExtraLargeModalLabel" style="display: none;" aria-hidden="true">
+    <div class="modal-dialog modal-xl" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Extra Large Modal</h5>
+                <button class="btn-close" type="button" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <p>This is an example of an extra large modal!</p>
+            </div>
+            <div class="modal-footer"><button class="btn btn-primary" type="button" data-bs-dismiss="modal">Close</button></div>
+        </div>
+    </div>
+</div>
+
+
+
+
+<!-- Modal ModalDelete -->
+<div class="modal fade" style="padding-top:3%!important" id="ModalDelete" tabindex="-1" role="dialog" data-backdrop="static" data-keyboard="false">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title">Eliminar Puesto</h4>
+                <button type="button" class="close" data-bs-dismiss="modal"
+                        aria-hidden="true">
+                    &times;
+                </button>
+            </div>
+            <div class="modal-body" style="height: 75px">
+                <p>¿Estás seguro de eliminar el registro?</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary" id="confirm-delete-ok" onclick="DeletePuesto();">Aceptar</button>
+                <button type="button" class="btn btn-danger" onclick="CloseModalDelete();">Cancelar</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+

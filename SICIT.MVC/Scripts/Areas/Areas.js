@@ -652,13 +652,6 @@ async function fetchDataAsyncTableEntidad(urlString, methodType, args) {
 }
 
 
-function AddUpdateAreas() {
-
-    var urlString = '';
-
-    //url = $("#FQDN").val() + 'api/usuarios/ObtenerUsuarios';
-    urlString = '';
-
 $().ready(function () {
 
 
@@ -725,6 +718,4 @@ $().ready(function () {
         }
 
     });
-
-
-});
+})
