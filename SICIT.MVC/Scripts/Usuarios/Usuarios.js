@@ -242,7 +242,7 @@ async function fetchDataAsyncPuestoId(urlString, methodType, args) {
 
         var s = '<option value="-1">Selecciona un Puesto</option>';
         for (var i = 0; i < response.length; i++) {
-            s += '<option value="' + response[i].ID_T_ENT + '">' + response[i].DESCRIPCION_PUESTO + '</option>';
+            s += '<option value="' + response[i].ID_PUESTO + '">' + response[i].DESCRIPCION_PUESTO + '</option>';
         }
         $("#IdSelectedPuesto").html(s);
     });
@@ -610,8 +610,57 @@ function CloseModalAddUpdateUsuarios() {
 
 function AddUpdateUsuarios() {
 
+   
+
+    var urlString = '';
+
+    //url = $("#FQDN").val() + 'api/usuarios/ObtenerUsuarios';
+    urlString = 'http://localhost:6435/api/usuarios/Insert';
+
 
     if ($("#formNewUser").valid()) {
+
+        var args = {
+
+            "USUARIO": $("#IdInputUsuario").val(),
+            "ID_PERFIL": $("#IdSelectedPerfil").val(),
+            "ID_PUESTO": $("#IdSelectedPuesto").val(),
+            "ID_AREA": $("#IdSelectedArea").val(),
+            "ID_T_ENT": $("#IdSelectedTipoEntidad").val(),
+            "CVE_ID_ENT": $("#IdSelectedEntidad").val(),
+            "NOMBRES": $("#IDNombre").val(),
+            "APELLIDO_PATERNO": $("#IDApellidoPaterno").val(),
+            "APELLIDO_MATERNO": $("#IDApellidoMaterno").val(),
+            "TELEFONO": $("#IDTelefono").val(),
+            "EMAIL": $("#IDEMail").val(),
+            //"PRIMERA_SESION": $("#IdInputUsuario").val(),
+            //"VIG_FLAG": $("#IdInputUsuario").val(),
+            //"FECH_INI_VIG": $("#IdInputUsuario").val(),
+            //"FECH_FIN_VIG": $("#IdInputUsuario").val(),
+            //"ENVIO_EMAIL": $("#IdInputUsuario").val(),
+            //"DESCRIPCION_PERFIL": $("#IdInputUsuario").val(),
+            //"DESC_T_ENT": $("#IdInputUsuario").val(),
+            //"SIGLAS_ENT": $("#IdInputUsuario").val(),
+            //"DESC_AREA": $("#IdInputUsuario").val(),
+            //"DESCRIPCION_PUESTO": $("#IdInputUsuario").val(),
+            //"CONTRASENA": $("#IdInputUsuario").val(),
+
+        };
+
+
+
+        $.ajax({
+            contentType: 'application/json',
+            url: urlString,
+            data: JSON.stringify(args),
+            dataType: 'json',
+            type: 'POST'
+        }).then(function (response) {
+        
+        });
+
+
+
 
     }
 
