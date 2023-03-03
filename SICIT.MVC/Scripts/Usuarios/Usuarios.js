@@ -38,7 +38,7 @@ function changeEventHandlerTipoEntidad(event) {
     $("#IdSelectedEntidad").attr('disabled', false);
     $('#IdSelectedEntidad').val("-1");
 
-    GetEntidadId(id);    
+    GetEntidadId(id);
 }
 
 async function GetAllTipoEntidades() {
@@ -402,10 +402,24 @@ async function fetchDataAsyncTableUsuarios(urlString, methodType, args) {
                 //{ 'data': 'APELLIDO_MATERNO', className: "text-left" },
                 { 'data': 'DESCRIPCION_PERFIL', className: "uniqueClassName" },
                 { 'data': 'DESC_T_ENT', className: "text-left" },
-                { 'data': 'SIGLAS_ENT', className: "text-left" }, 
+                { 'data': 'SIGLAS_ENT', className: "text-left" },
                 { 'data': 'DESC_AREA', className: "uniqueClassName" },
                 { 'data': 'DESCRIPCION_PUESTO', className: "uniqueClassName" },
+                {
+                    data: "Vigente", render: function (data, type, row) {
 
+                        switch (row.VIG_FLAG) {
+                            case false:
+                                return '<i style="color:red" class="fas fa-solid fa-circle fa-lg"></i>';
+                                break;
+                            case true:
+                                return '<i style="color:green" class="fas fa-solid fa-circle fa-lg"></i>';
+                                break;
+                        }
+
+
+                    }, sortable: false, className: "uniqueClassName"
+                },
                 {
                     data: "Acciones", render: function (data, type, row) {
                         return '<a title="Editar" href="#" onclick="return OpenModalAddUpdateUsuarios(' + row.CVE_ID_ENT + ',' + '\'' + row.DESC_ENT + '\'' + ',\'' + row.SIGLAS_ENT + '\'' + ',\'' + row.ID_T_ENT + '\'' + ')"><i style="color:black" class="fas fa-fw fa-edit fa-lg"></i></a> | <a title="Eliminar" href="#" onclick="OpenModalDelete(' + row.CVE_ID_ENT + ',\'' + row.ID_T_ENT + '\'' + ')"><i style="color:red" class="fas fa-solid fa-trash fa-lg"></i></a>';
@@ -414,7 +428,7 @@ async function fetchDataAsyncTableUsuarios(urlString, methodType, args) {
             ],
 
             columnDefs: [
-                { className: "dt-center", targets: [0, 1, 2, 3, 4, 5, 6, 7] }
+                { className: "dt-center", targets: [0, 1, 2, 3, 4, 5, 6, 7, 8] }
             ]
         });
     });
@@ -487,7 +501,21 @@ async function fetchDataAsyncTableUsuariosVigentes(urlString, methodType, args) 
                 { 'data': 'SIGLAS_ENT', className: "text-left" },
                 { 'data': 'DESC_AREA', className: "uniqueClassName" },
                 { 'data': 'DESCRIPCION_PUESTO', className: "uniqueClassName" },
+                {
+                    data: "Vigente", render: function (data, type, row) {
 
+                        switch (row.VIG_FLAG) {
+                            case false:
+                                return '<i style="color:red" class="fas fa-solid fa-circle fa-lg"></i>';
+                                break;
+                            case true:
+                                return '<i style="color:green" class="fas fa-solid fa-circle fa-lg"></i>';
+                                break;
+                        }
+
+
+                    }, sortable: false, className: "uniqueClassName"
+                },
                 {
                     data: "Acciones", render: function (data, type, row) {
                         return '<a title="Editar" href="#" onclick="return OpenModalAddUpdateUsuarios(' + row.CVE_ID_ENT + ',' + '\'' + row.DESC_ENT + '\'' + ',\'' + row.SIGLAS_ENT + '\'' + ',\'' + row.ID_T_ENT + '\'' + ')"><i style="color:black" class="fas fa-fw fa-edit fa-lg"></i></a> | <a title="Eliminar" href="#" onclick="OpenModalDelete(' + row.CVE_ID_ENT + ',\'' + row.ID_T_ENT + '\'' + ')"><i style="color:red" class="fas fa-solid fa-trash fa-lg"></i></a>';
@@ -496,7 +524,7 @@ async function fetchDataAsyncTableUsuariosVigentes(urlString, methodType, args) 
             ],
 
             columnDefs: [
-                { className: "dt-center", targets: [0, 1, 2, 3, 4, 5, 6, 7] }
+                { className: "dt-center", targets: [0, 1, 2, 3, 4, 5, 6, 7, 8] }
             ]
         });
     });
@@ -567,12 +595,22 @@ async function fetchDataAsyncTableUsuariosHistorial(urlString, methodType, args)
                 { 'data': 'SIGLAS_ENT', className: "text-left" },
                 { 'data': 'DESC_AREA', className: "uniqueClassName" },
                 { 'data': 'DESCRIPCION_PUESTO', className: "uniqueClassName" },
-
                 {
-                    data: "Acciones", render: function (data, type, row) {
-                        return '<a title="Editar" href="#" onclick="return OpenModalAddUpdateUsuarios(' + row.CVE_ID_ENT + ',' + '\'' + row.DESC_ENT + '\'' + ',\'' + row.SIGLAS_ENT + '\'' + ',\'' + row.ID_T_ENT + '\'' + ')"><i style="color:black" class="fas fa-fw fa-edit fa-lg"></i></a> | <a title="Eliminar" href="#" onclick="OpenModalDelete(' + row.CVE_ID_ENT + ',\'' + row.ID_T_ENT + '\'' + ')"><i style="color:red" class="fas fa-solid fa-trash fa-lg"></i></a>';
+                    data: "Vigente", render: function (data, type, row) {
+
+                        switch (row.VIG_FLAG) {
+                            case false:
+                                return '<i style="color:red" class="fas fa-solid fa-circle fa-lg"></i>';
+                                break;
+                        }
+
                     }, sortable: false, className: "uniqueClassName"
                 }
+                //{
+                //    data: "Acciones", render: function (data, type, row) {
+                //        return '<a title="Editar" href="#" onclick="return OpenModalAddUpdateUsuarios(' + row.CVE_ID_ENT + ',' + '\'' + row.DESC_ENT + '\'' + ',\'' + row.SIGLAS_ENT + '\'' + ',\'' + row.ID_T_ENT + '\'' + ')"><i style="color:black" class="fas fa-fw fa-edit fa-lg"></i></a> | <a title="Eliminar" href="#" onclick="OpenModalDelete(' + row.CVE_ID_ENT + ',\'' + row.ID_T_ENT + '\'' + ')"><i style="color:red" class="fas fa-solid fa-trash fa-lg"></i></a>';
+                //    }, sortable: false, className: "uniqueClassName"
+                //}
             ],
 
             columnDefs: [
@@ -610,7 +648,7 @@ function CloseModalAddUpdateUsuarios() {
 
 function AddUpdateUsuarios() {
 
-   
+
 
     var urlString = '';
 
@@ -656,7 +694,7 @@ function AddUpdateUsuarios() {
             dataType: 'json',
             type: 'POST'
         }).then(function (response) {
-        
+
         });
 
 

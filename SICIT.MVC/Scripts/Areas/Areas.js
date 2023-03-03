@@ -201,7 +201,21 @@ async function fetchDataAsyncTableAreas(urlString, methodType, args) {
 
                 { 'data': 'ID_T_ENT', className: "uniqueClassName", "visible": false },
                 { 'data': 'CVE_ID_ENTAS', className: "uniqueClassName", "visible": false },
+                {
+                    data: "Vigente", render: function (data, type, row) {
 
+                        switch (row.VIG_FLAG) {
+                            case 0:
+                                return '<i style="color:red" class="fas fa-solid fa-circle fa-lg"></i>';
+                                break;
+                            case 1:
+                                return '<i style="color:green" class="fas fa-solid fa-circle fa-lg"></i>';
+                                break;
+                        }
+
+
+                    }, sortable: false, className: "uniqueClassName"
+                },
                 {
                     data: "Acciones", render: function (data, type, row) {
                         return '<a title="Editar" href="#" onclick="return OpenModalAddUpdateAreas(' + row.ID_AREA + ',' + '\'' + row.DESC_AREA + '\'' + ',\'' + row.DESC_T_ENT + '\'' + ',\'' + row.SIGLAS_ENT + '\'' + ',\'' + row.ID_T_ENT + '\'' + ',\'' + row.CVE_ID_ENTAS + '\'' + ')"><i style="color:black" class="fas fa-fw fa-edit fa-lg"></i></a> | <a title="Eliminar" href="#" onclick="OpenModalDelete(' + row.ID_AREA + ')"><i style="color:red" class="fas fa-solid fa-trash fa-lg"></i></a>';
@@ -210,7 +224,7 @@ async function fetchDataAsyncTableAreas(urlString, methodType, args) {
             ],
 
             columnDefs: [
-                { className: "dt-center", targets: [0, 1, 2, 3, 4, 5, 6] }
+                { className: "dt-center", targets: [0, 1, 2, 3, 4, 5, 6, 7] }
             ]
         });
     });
@@ -279,7 +293,21 @@ async function fetchDataAsyncTableAreasVigentes(urlString, methodType, args) {
 
                 { 'data': 'ID_T_ENT', className: "uniqueClassName", "visible": false },
                 { 'data': 'CVE_ID_ENTAS', className: "uniqueClassName", "visible": false },
+                {
+                    data: "Vigente", render: function (data, type, row) {
 
+                        switch (row.VIG_FLAG) {
+                            case 0:
+                                return '<i style="color:red" class="fas fa-solid fa-circle fa-lg"></i>';
+                                break;
+                            case 1:
+                                return '<i style="color:green" class="fas fa-solid fa-circle fa-lg"></i>';
+                                break;
+                        }
+
+
+                    }, sortable: false, className: "uniqueClassName"
+                },
                 {
                     data: "Acciones", render: function (data, type, row) {
                         return '<a title="Editar" href="#" onclick="return OpenModalAddUpdateAreas(' + row.ID_AREA + ',' + '\'' + row.DESC_AREA + '\'' + ',\'' + row.DESC_T_ENT + '\'' + ',\'' + row.SIGLAS_ENT + '\'' + ',\'' + row.ID_T_ENT + '\'' + ',\'' + row.CVE_ID_ENTAS + '\'' + ')"><i style="color:black" class="fas fa-fw fa-edit fa-lg"></i></a> | <a title="Eliminar" href="#" onclick="OpenModalDelete(' + row.ID_AREA + ')"><i style="color:red" class="fas fa-solid fa-trash fa-lg"></i></a>';
@@ -288,7 +316,7 @@ async function fetchDataAsyncTableAreasVigentes(urlString, methodType, args) {
             ],
 
             columnDefs: [
-                { className: "dt-center", targets: [0, 1, 2, 3, 4, 5, 6] }
+                { className: "dt-center", targets: [0, 1, 2, 3, 4, 5, 6, 7] }
             ]
         });
     });
@@ -360,8 +388,14 @@ async function fetchDataAsyncTableAreasHistorial(urlString, methodType, args) {
                 { 'data': 'CVE_ID_ENTAS', className: "uniqueClassName", "visible": false },
 
                 {
-                    data: "Acciones", render: function (data, type, row) {
-                        return '<a title="Editar" href="#" onclick="return OpenModalAddUpdateAreas(' + row.ID_AREA + ',' + '\'' + row.DESC_AREA + '\'' + ',\'' + row.DESC_T_ENT + '\'' + ',\'' + row.SIGLAS_ENT + '\'' + ',\'' + row.ID_T_ENT + '\'' + ',\'' + row.CVE_ID_ENTAS + '\'' + ')"><i style="color:black" class="fas fa-fw fa-edit fa-lg"></i></a> | <a title="Eliminar" href="#" onclick="OpenModalDelete(' + row.ID_AREA + ')"><i style="color:red" class="fas fa-solid fa-trash fa-lg"></i></a>';
+                    data: "Vigente", render: function (data, type, row) {
+
+                        switch (row.VIG_FLAG) {
+                            case 0:
+                                return '<i style="color:red" class="fas fa-solid fa-circle fa-lg"></i>';
+                                break;
+                        }
+
                     }, sortable: false, className: "uniqueClassName"
                 }
             ],
@@ -680,7 +714,7 @@ $().ready(function () {
 
             IdSelectedTipoEntidad: { valueNotEquals: "-1" },
             IdSelectedEntidad: { valueNotEquals: "-1" },
-            
+
 
 
             IdinputDescripcionAreas: "required",

@@ -255,19 +255,30 @@ async function fetchDataAsyncTablePuestos(urlString, methodType, args) {
                 { 'data': 'ID_T_ENT', className: "uniqueClassName", "visible": false },
                 { 'data': 'CVE_ID_ENT', className: "uniqueClassName", "visible": false },
                 { 'data': 'ID_AREA', className: "uniqueClassName", "visible": false },
+                {
+                    data: "Vigente", render: function (data, type, row) {
 
+                        switch (row.VIG_FLAG) {
+                            case 0:
+                                return '<i style="color:red" class="fas fa-solid fa-circle fa-lg"></i>';
+                                break;
+                            case 1:
+                                return '<i style="color:green" class="fas fa-solid fa-circle fa-lg"></i>';
+                                break;
+                        }
+
+
+                    }, sortable: false, className: "uniqueClassName"
+                },
                 {
                     data: "Acciones", render: function (data, type, row) {
 
-                        var armarAcciones = '';
-
-                        //alert(row.VIG_FLAG)
                         if (row.VIG_FLAG == 1) {
                             return '<a title="Editar" href="#" onclick="return OpenModalAddUpdatePuesto(' + row.ID_PUESTO + ',' + '\'' + row.DESCRIPCION_PUESTO + '\'' + ',\'' + row.ID_T_ENT + '\'' + ',\'' + row.CVE_ID_ENT + '\'' + ',\'' + row.ID_AREA + '\'' + ')"><i style="color:black" class="fas fa-fw fa-edit fa-lg"></i></a> | <a title="Eliminar" href="#" onclick="OpenModalDelete(' + row.ID_PUESTO + ')"><i style="color:red" class="fas fa-solid fa-trash fa-lg"></i></a>';
                         }
                         else {
                             return '<a title="Editar" href="#" onclick="return OpenModalAddUpdatePuesto(' + row.ID_PUESTO + ',' + '\'' + row.DESCRIPCION_PUESTO + '\'' + ',\'' + row.ID_T_ENT + '\'' + ',\'' + row.CVE_ID_ENT + '\'' + ',\'' + row.ID_AREA + '\'' + ')"><i style="color:black;display:none" class="fas fa-fw fa-edit fa-lg"></i></a> <a title="Eliminar" href="#" onclick="OpenModalDelete(' + row.ID_PUESTO + ')"><i style="color:red;display:none" class="fas fa-solid fa-trash fa-lg"></i></a>';
-                        } 
+                        }
 
 
                     }, sortable: false, className: "uniqueClassName"
@@ -275,7 +286,7 @@ async function fetchDataAsyncTablePuestos(urlString, methodType, args) {
             ],
 
             columnDefs: [
-                { className: "dt-center", targets: [0, 1, 2, 3, 4, 5, 6, 7] }
+                { className: "dt-center", targets: [0, 1, 2, 3, 4, 5, 6, 7, 8] }
             ]
         });
     });
@@ -346,7 +357,21 @@ async function fetchDataAsyncTablePuestosVigentes(urlString, methodType, args) {
                 { 'data': 'ID_T_ENT', className: "uniqueClassName", "visible": false },
                 { 'data': 'CVE_ID_ENT', className: "uniqueClassName", "visible": false },
                 { 'data': 'ID_AREA', className: "uniqueClassName", "visible": false },
+                {
+                    data: "Vigente", render: function (data, type, row) {
 
+                        switch (row.VIG_FLAG) {
+                            case 0:
+                                return '<i style="color:red" class="fas fa-solid fa-circle fa-lg"></i>';
+                                break;
+                            case 1:
+                                return '<i style="color:green" class="fas fa-solid fa-circle fa-lg"></i>';
+                                break;
+                        }
+
+
+                    }, sortable: false, className: "uniqueClassName"
+                },
                 {
                     data: "Acciones", render: function (data, type, row) {
                         return '<a title="Editar" href="#" onclick="return OpenModalAddUpdatePuesto(' + row.ID_PUESTO + ',' + '\'' + row.DESCRIPCION_PUESTO + '\'' + ',\'' + row.ID_T_ENT + '\'' + ',\'' + row.CVE_ID_ENT + '\'' + ',\'' + row.ID_AREA + '\'' + ')"><i style="color:black" class="fas fa-fw fa-edit fa-lg"></i></a> | <a title="Eliminar" href="#" onclick="OpenModalDelete(' + row.ID_PUESTO + ',' + '\'' + row.ID_T_ENT + '\'' + ',\'' + row.CVE_ID_ENT + '\'' + ',\'' + row.ID_AREA + '\'' + ')"><i style="color:red" class="fas fa-solid fa-trash fa-lg"></i></a>';
@@ -355,7 +380,7 @@ async function fetchDataAsyncTablePuestosVigentes(urlString, methodType, args) {
             ],
 
             columnDefs: [
-                { className: "dt-center", targets: [0, 1, 2, 3, 4, 5, 6, 7] }
+                { className: "dt-center", targets: [0, 1, 2, 3, 4, 5, 6, 7, 8] }
             ]
         });
     });
@@ -430,7 +455,17 @@ async function fetchDataAsyncTablePuestosHistorial(urlString, methodType, args) 
                 { 'data': 'CVE_ID_ENT', className: "uniqueClassName", "visible": false },
                 { 'data': 'ID_AREA', className: "uniqueClassName", "visible": false },
 
+                {
+                    data: "Vigente", render: function (data, type, row) {
 
+                        switch (row.VIG_FLAG) {
+                            case 0:
+                                return '<i style="color:red" class="fas fa-solid fa-circle fa-lg"></i>';
+                                break;
+                        }
+
+                    }, sortable: false, className: "uniqueClassName"
+                }
             ],
 
             columnDefs: [

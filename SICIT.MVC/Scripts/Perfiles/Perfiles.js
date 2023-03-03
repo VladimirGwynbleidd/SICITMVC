@@ -79,7 +79,21 @@ async function fetchDataAsyncTablePerfil(urlString, methodType, args) {
                 { 'data': 'FECH_INI_VIG', className: "uniqueClassName", "visible": false },
                 { 'data': 'FECH_FIN_VIG', className: "uniqueClassName", "visible": false },
                 { 'data': 'VIG_FLAG', className: "uniqueClassName", "visible": false },
+                {
+                    data: "Vigente", render: function (data, type, row) {
 
+                        switch (row.VIG_FLAG) {
+                            case 0:
+                                return '<i style="color:red" class="fas fa-solid fa-circle fa-lg"></i>';
+                                break;
+                            case 1:
+                                return '<i style="color:green" class="fas fa-solid fa-circle fa-lg"></i>';
+                                break;
+                        }
+
+
+                    }, sortable: false, className: "uniqueClassName"
+                },
                 {
                     data: "Acciones", render: function (data, type, row) {
 
@@ -93,7 +107,7 @@ async function fetchDataAsyncTablePerfil(urlString, methodType, args) {
             ],
 
             columnDefs: [
-                { className: "dt-center", targets: [0, 1, 2, 3, 4, 5] }
+                { className: "dt-center", targets: [0, 1, 2, 3, 4, 5, 6] }
             ]
         });
     });
@@ -175,7 +189,21 @@ async function fetchDataAsyncTablePerfilVigentes(urlString, methodType, args) {
                 { 'data': 'FECH_INI_VIG', className: "uniqueClassName", "visible": false },
                 { 'data': 'FECH_FIN_VIG', className: "uniqueClassName", "visible": false },
                 { 'data': 'VIG_FLAG', className: "uniqueClassName", "visible": false },
+                {
+                    data: "Vigente", render: function (data, type, row) {
 
+                        switch (row.VIG_FLAG) {
+                            case 0:
+                                return '<i style="color:red" class="fas fa-solid fa-circle fa-lg"></i>';
+                                break;
+                            case 1:
+                                return '<i style="color:green" class="fas fa-solid fa-circle fa-lg"></i>';
+                                break;
+                        }
+
+
+                    }, sortable: false, className: "uniqueClassName"
+                },
                 {
                     data: "Acciones", render: function (data, type, row) {
 
@@ -190,7 +218,7 @@ async function fetchDataAsyncTablePerfilVigentes(urlString, methodType, args) {
             ],
 
             columnDefs: [
-                { className: "dt-center", targets: [0, 1, 2, 3, 4, 5] }
+                { className: "dt-center", targets: [0, 1, 2, 3, 4, 5, 6] }
             ]
         });
     });
@@ -273,12 +301,12 @@ async function fetchDataAsyncTablePerfilHistorial(urlString, methodType, args) {
                 { 'data': 'FECH_FIN_VIG', className: "uniqueClassName", "visible": false },
                 { 'data': 'VIG_FLAG', className: "uniqueClassName", "visible": false },
                 {
-                    data: "Estatus", render: function (data, type, row) {
+                    data: "Vigente", render: function (data, type, row) {
 
-                        if (row.VIG_FLAG != 0) {
-                            return '<i style="color:green" class="fas fa-solid fa-circle fa-lg"></i></a>';
-                        } else {
-                            return '<i style="color:red" class="fas fa-solid fa-circle fa-lg"></i></a>';
+                        switch (row.VIG_FLAG) {
+                            case 0:
+                                return '<i style="color:red" class="fas fa-solid fa-circle fa-lg"></i>';
+                                break;
                         }
 
                     }, sortable: false, className: "uniqueClassName"
@@ -353,7 +381,7 @@ async function AddUpdatePerfiles() {
                 else {
                     toastr.success(response.Mensaje, 'Se ha modificado correctamente el perfil').css("width", "250px");
                 }
-                
+
             }
             else {
                 toastr.error(response.Mensaje, 'Perfiles').css("width", "200px");
@@ -369,7 +397,7 @@ async function AddUpdatePerfiles() {
 
 
 async function fetchDataAsync(urlString, methodType, args) {
-    
+
     return await $.ajax({
         contentType: 'application/json',
         url: urlString,
@@ -383,7 +411,7 @@ async function fetchDataAsync(urlString, methodType, args) {
 }
 
 function OpenModalAddUpdatePerfiles(ID_PERFIL, DESCRIPCION_PERFIL) {
-    
+
     if (ID_PERFIL != 0) {
         $("#ModalCenterTitle").html('Editar Perfil');
         $("#ModalCenterTitleH6").html('Editar Perfil');
@@ -419,7 +447,7 @@ async function DeletePerfiles() {
 
     argsEntidades = {
         ID_PERFIL: $('#IdPerfilHidden').val(),
-        
+
     };
 
     //url = $("#FQDN").val() + 'api/usuarios/delete';
@@ -446,9 +474,9 @@ async function DeletePerfiles() {
         }
 
         if (response.Exito) {
-            
+
             GetAllDataPerfilVigentes();
-            
+
             $("#ModalDelete").modal('hide');
 
             toastr.success(response.Mensaje, 'Se ha eliminado correctamente el perfil').css("width", "250px");
@@ -475,7 +503,7 @@ function CloseModalAddUpdatePerfiles() {
     $("#formAddUpdatePerfiles").trigger("reset");
     $("#formAddUpdatePerfiles").data('validator').resetForm();
     $("#ModalAddUpdatePerfiles").modal('hide');
-    
+
 }
 
 function CloseModalDelete() {
