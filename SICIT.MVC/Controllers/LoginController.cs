@@ -1,6 +1,7 @@
 ﻿using Newtonsoft.Json;
 using SICIT.MVC.Models;
 using SICIT.MVC.Tools;
+using SICIT.MVC.UTILERIAS;
 using System;
 using System.Collections.Generic;
 using System.Configuration;
@@ -47,8 +48,20 @@ namespace SITIC.MVC.Controllers
 
                             if (deserializedAcceso.CONTRASENA == p)
                             {
+
+                                string servicio = ConfigurationManager.AppSettings["ServiceUrl"];
+                                Acceso accesoPagina = new Acceso();
+
+                                accesoPagina.GUID = Guid.NewGuid().ToString().Substring(0, 24);
+                                accesoPagina.USUARIOSESION = deserializedAcceso.USUARIO; //"mojeda";
+                                accesoPagina.VIG_FLAG = deserializedAcceso.VIG_FLAG; //true;
+                                accesoPagina.FQDN = servicio;
+                                accesoPagina.IP = GetIpAddress();
+
+
                                 if (deserializedAcceso.PRIMERA_SESION == 1)
                                 {
+
                                     Session["Usuario"] = deserializedAcceso.USUARIO;
                                     return Json(new { Exito = "true", PrimeraSesion = 1 });
                                 }
@@ -83,5 +96,34 @@ namespace SITIC.MVC.Controllers
                 return Json(new { Exito = "false", Mensaje = "Sistema no disponible en este momento" });
             }
         }
+
+
+        public static string GetIpAddress()
+        {
+            string localIP = string.Empty;
+
+            try
+            {
+                localIP = System.Web.HttpContext.Current.Request.ServerVariables["HTTP_X_FORWARDED_FOR"];
+
+                if (!string.IsNullOrEmpty(localIP))
+                {
+                    string[] forwardedIps = localIP.Split(new char[] { ',' }, StringSplitOptions.RemoveEmptyEntries);
+                    localIP = forwardedIps[forwardedIps.Length - 1];
+                }
+
+                if (string.IsNullOrEmpty(localIP))
+                    localIP = System.Web.HttpContext.Current.Request.ServerVariables["REMOTE_ADDR"];
+
+                if (string.IsNullOrEmpty(localIP))
+                    localIP = "Sin IP Asignada";
+            }
+            catch (Exception ex)
+            {
+                EventLog.WriteEntry("Error al ejecutar el método IndexAcceso - GetIpAddress: " + ex.InnerException.Message, System.Diagnostics.EventLogEntryType.Error);
+            }
+            return localIP;
+        }
+
     }
 }

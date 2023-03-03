@@ -12,8 +12,7 @@ async function GetAllDataTipoEntidad() {
     CardStylesOne();
     var url = '';
 
-    //url = $("#FQDN").val() + 'api/usuarios/ObtenerUsuarios';
-    url = 'http://localhost:6435/Api/TipoEntidad/GetTipoEntidad';
+    url = $("#FQDN").val() + 'Api/TipoEntidad/GetTipoEntidad';
 
     try {
         response = await fetchDataAsyncTableTipoEntidad('' + url + '', 'GET', {});
@@ -111,8 +110,7 @@ async function GetAllDataTipoEntidadVigentes() {
     CardStylesTwo();
     var url = '';
 
-    //url = $("#FQDN").val() + 'api/usuarios/ObtenerUsuarios';
-    url = 'http://localhost:6435/Api/TipoEntidad/GetTipoEntidadVigentes';
+    url = $("#FQDN").val() + 'Api/TipoEntidad/GetTipoEntidadVigentes';
 
     try {
         response = await fetchDataAsyncTableTipoEntidadVigentes('' + url + '', 'GET', {});
@@ -201,8 +199,7 @@ async function GetAllDataTipoEntidadHistorial() {
     CardStylesThree();
     var url = '';
 
-    //url = $("#FQDN").val() + 'api/usuarios/ObtenerUsuarios';
-    url = 'http://localhost:6435/Api/TipoEntidad/GetTipoEntidadHistorial';
+    url = $("#FQDN").val() + 'Api/TipoEntidad/GetTipoEntidadHistorial';
 
     try {
         response = await fetchDataAsyncTableUsuariosHistorial('' + url + '', 'GET', {});
@@ -303,7 +300,7 @@ async function AddUpdateTipoEntidad() {
         };
         console.log($('#IdTipoEntidadHidden').val())
         /*url = $('#IDUsuario').val() == 0 ? $("#FQDN").val() + 'api/usuarios/post' : $("#FQDN").val() + 'api/usuarios/put';*/
-        url = $('#IdTipoEntidadHidden').val() == 0 ? 'http://localhost:6435/Api/TipoEntidad/Post' : 'http://localhost:6435/Api/TipoEntidad/Put';
+        url = $('#IdTipoEntidadHidden').val() == 0 ? $("#FQDN").val() + 'Api/TipoEntidad/Post' : $("#FQDN").val() + 'Api/TipoEntidad/Put';
 
         try {
 
@@ -405,8 +402,7 @@ async function DeleteTipoEntidad() {
 
     };
 
-    //url = $("#FQDN").val() + 'api/usuarios/delete';
-    url = 'http://localhost:6435/Api/TipoEntidad/Delete';
+    url = $("#FQDN").val() + 'Api/TipoEntidad/Delete';
 
     try {
         response = await fetchDataAsyncTipoEntidad('' + url + '', 'DELETE', JSON.stringify(argsTipoEntidades));

@@ -62,8 +62,7 @@ async function GetAllTipoEntidades() {
 
     var url = '';
 
-    //url = $("#FQDN").val() + 'api/Entidades/GetEntidades';
-    url = 'http://localhost:6435/Api/Entidades/GetTipoEntidades';
+    url = $("#FQDN").val() + 'Api/Entidades/GetTipoEntidades';
 
 
     try {
@@ -115,8 +114,7 @@ async function GetAllEntidades(id) {
 
         ID_T_ENT: id
     };
-    //url = $("#FQDN").val() + 'api/Entidades/GetEntidades';
-    url = 'http://localhost:6435/Api/Entidades/GetEntidadesById';
+    url = $("#FQDN").val() + 'Api/Entidades/GetEntidadesById';
 
 
     try {
@@ -158,8 +156,7 @@ async function GetAllAreas(idArea) {
         ID_T_ENT: $('#IdSelectedTipoEntidad').val()
     };
 
-    //url = $("#FQDN").val() + 'api/Entidades/GetEntidades';
-    url = 'http://localhost:6435/Api/Areas/GetAreasById';
+    url = $("#FQDN").val() + 'Api/Areas/GetAreasById';
 
 
     try {
@@ -196,8 +193,7 @@ async function GetAllPuestos() {
     CardStylesOne();
     var url = '';
 
-    //url = $("#FQDN").val() + 'api/usuarios/ObtenerUsuarios';
-    url = 'http://localhost:6435/Api/Puestos/GetPuestos';
+    url = $("#FQDN").val() + 'Api/Puestos/GetPuestos';
 
     try {
         response = await fetchDataAsyncTablePuestos('' + url + '', 'GET', {});
@@ -298,8 +294,7 @@ async function GetAllDataPuestosVigentes() {
     CardStylesTwo();
     var url = '';
 
-    //url = $("#FQDN").val() + 'api/usuarios/ObtenerUsuarios';
-    url = 'http://localhost:6435/Api/Puestos/GetTipoPuestosVigentes';
+    url = $("#FQDN").val() + 'Api/Puestos/GetTipoPuestosVigentes';
 
     try {
         response = await fetchDataAsyncTablePuestosVigentes('' + url + '', 'GET', {});
@@ -392,8 +387,7 @@ async function GetAllDataPuestosHistorial() {
     CardStylesThree();
     var url = '';
 
-    //url = $("#FQDN").val() + 'api/usuarios/ObtenerUsuarios';
-    url = 'http://localhost:6435/Api/Puestos/GetTipoPuestosHistorial';
+    url = $("#FQDN").val() + 'Api/Puestos/GetTipoPuestosHistorial';
 
     try {
         response = await fetchDataAsyncTablePuestosHistorial('' + url + '', 'GET', {});
@@ -504,8 +498,7 @@ async function AddUpdatePuestos() {
         };
         //console.log($('#IdPuestoHidden').val())
         //console.log(argsPuestos)
-        /*url = $('#IDUsuario').val() == 0 ? $("#FQDN").val() + 'api/usuarios/post' : $("#FQDN").val() + 'api/usuarios/put';*/
-        url = $('#IdPuestoHidden').val() == 0 ? 'http://localhost:6435/Api/Puestos/Post' : 'http://localhost:6435/Api/Puestos/Put';
+        url = $('#IdPuestoHidden').val() == 0 ? $("#FQDN").val() + 'Api/Puestos/Post' : $("#FQDN").val() + 'Api/Puestos/Put';
 
         try {
 
@@ -644,8 +637,7 @@ async function DeletePuesto() {
         ID_AREA: $('#IdAreaHidden').val()
     };
 
-    //url = $("#FQDN").val() + 'api/usuarios/delete';
-    url = 'http://localhost:6435/Api/Puestos/Delete';
+    url = $("#FQDN").val() + 'Api/Puestos/Delete';
 
     try {
         response = await fetchDataAsyncPuesto('' + url + '', 'DELETE', JSON.stringify(argsPuestos));

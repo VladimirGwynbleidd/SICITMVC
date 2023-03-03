@@ -55,7 +55,7 @@ async function GetAllTipoEntidades() {
     var url = '';
 
     //url = $("#FQDN").val() + 'api/Entidades/GetEntidades';
-    url = 'http://localhost:6435/Api/Entidades/GetTipoEntidades';
+    url = $("#FQDN").val() + 'api/Entidades/GetEntidades';
 
 
     try {
@@ -106,8 +106,8 @@ async function GetAllEntidades(id) {
 
         ID_T_ENT: id
     };
-    //url = $("#FQDN").val() + 'api/Entidades/GetEntidades';
-    url = 'http://localhost:6435/Api/Entidades/GetEntidadesById';
+    url = $("#FQDN").val() + 'Api/Entidades/GetEntidadesById';
+    //url = 'http://localhost:6435/Api/Entidades/GetEntidadesById';
 
 
     try {
@@ -145,7 +145,8 @@ async function GetAllAreas() {
     var url = '';
 
     //url = $("#FQDN").val() + 'api/usuarios/ObtenerUsuarios';
-    url = 'http://localhost:6435/Api/Areas/GetAreas';
+    //url = 'http://localhost:6435/Api/Areas/GetAreas';
+    url = $("#FQDN").val() + 'Api/Areas/GetAreas';
 
     try {
         response = await fetchDataAsyncTableAreas('' + url + '', 'GET', {});
@@ -237,7 +238,8 @@ async function GetAllDataAreasVigentes() {
     var url = '';
 
     //url = $("#FQDN").val() + 'api/usuarios/ObtenerUsuarios';
-    url = 'http://localhost:6435/Api/Areas/GetTipoAreasVigentes';
+    //url = 'http://localhost:6435/Api/Areas/GetTipoAreasVigentes';
+    url = $("#FQDN").val() + 'Api/Areas/GetTipoAreasVigentes';
 
     try {
         response = await fetchDataAsyncTableAreasVigentes('' + url + '', 'GET', {});
@@ -329,7 +331,8 @@ async function GetAllDataAreasHistorial() {
     var url = '';
 
     //url = $("#FQDN").val() + 'api/usuarios/ObtenerUsuarios';
-    url = 'http://localhost:6435/Api/Areas/GetTipoAreasHistorial';
+    //url = 'http://localhost:6435/Api/Areas/GetTipoAreasHistorial';
+    url = $("#FQDN").val() + 'Api/Areas/GetTipoAreasHistorial';
 
     try {
         response = await fetchDataAsyncTableAreasHistorial('' + url + '', 'GET', {});
@@ -433,7 +436,9 @@ async function AddUpdateAreas() {
     console.log(JSON.stringify(argsAreas))
 
     /*url = $('#IDUsuario').val() == 0 ? $("#FQDN").val() + 'api/usuarios/post' : $("#FQDN").val() + 'api/usuarios/put';*/
+    //url = $('#IdAreaHidden').val() == 0 ? 'http://localhost:6435/Api/Areas/Post' : 'http://localhost:6435/Api/Areas/Put';
     url = $('#IdAreaHidden').val() == 0 ? 'http://localhost:6435/Api/Areas/Post' : 'http://localhost:6435/Api/Areas/Put';
+
 
     try {
 
@@ -558,7 +563,8 @@ async function DeleteArea() {
     };
 
     //url = $("#FQDN").val() + 'api/usuarios/delete';
-    url = 'http://localhost:6435/Api/Areas/Delete';
+    //url = 'http://localhost:6435/Api/Areas/Delete';
+    url = $("#FQDN").val() + 'Api/Areas/Delete';
 
     try {
         response = await fetchDataAsyncAreas('' + url + '', 'DELETE', JSON.stringify(argsAreas));
@@ -615,7 +621,8 @@ async function GetAllDataTipoEntidadVigentes() {
     var url = '';
 
     //url = $("#FQDN").val() + 'api/usuarios/ObtenerUsuarios';
-    url = 'http://localhost:6435/Api/TipoEntidad/GetTipoEntidadVigentes';
+    //url = 'http://localhost:6435/Api/TipoEntidad/GetTipoEntidadVigentes';
+    url = $("#FQDN").val() + 'Api/TipoEntidad/GetTipoEntidadVigentes';
 
     try {
         response = await fetchDataAsyncTableTipoEntidadVigentes('' + url + '', 'GET', {});
@@ -655,7 +662,9 @@ async function GetAllEntidad(idTipoEntidad) {
     var url = '';
 
     //url = $("#FQDN").val() + 'api/usuarios/ObtenerUsuarios';
-    url = 'http://localhost:6435/api/Entidades/GetEntidadesById';
+    //url = 'http://localhost:6435/api/Entidades/GetEntidadesById';
+
+    url = $("#FQDN").val() + 'api/Entidades/GetEntidadesById';
 
     try {
         response = await fetchDataAsyncTableEntidad('' + url + '', 'POST', { "ID_T_ENT": idTipoEntidad });

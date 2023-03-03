@@ -163,7 +163,7 @@
                                                 <div class="text-xs font-weight-bold text-success text-uppercase mb-1">
                                                     @*<button class="nav-link" id="pills-profile-tab" data-bs-toggle="pill" data-bs-target="#pills-profile" type="button" role="tab" aria-controls="pills-profile" aria-selected="false">Profile</button>*@
                                                 </div>
-                                                <div id="textCardTwo"  class="h5 mb-0 font-weight-bold text-gray-800">Vigentes</div>
+                                                <div id="textCardTwo" class="h5 mb-0 font-weight-bold text-gray-800">Vigentes</div>
                                             </div>
                                             <div class="col-auto">
                                                 <i class="fas fa-database fa-2x text-gray-300"></i>
@@ -185,7 +185,7 @@
                                                 </div>
                                                 <div class="row no-gutters align-items-center">
                                                     <div class="col-auto">
-                                                        <div  id="textCardThree"  class="h5 mb-0 mr-3 font-weight-bold text-gray-800">Historial</div>
+                                                        <div id="textCardThree" class="h5 mb-0 mr-3 font-weight-bold text-gray-800">Historial</div>
                                                     </div>
                                                     <div class="col">
                                                         @*<div class="progress progress-sm mr-2">
@@ -377,8 +377,8 @@
                                         <div class="card-header py-3">
                                             @*<h6 class="m-0 font-weight-bold text-primary">Afores</h6>*@
                                             @*<button type="button" class="btn btn-primary" data-toggle="modal" onclick="OpenModalAddUpdateEntidades(0);">
-                            Agregar Entidad
-                        </button>*@
+                                                    Agregar Entidad
+                                                </button>*@
                                         </div>
                                         <div>
                                             <!-- Button trigger modal -->
@@ -583,3 +583,6 @@
 </div>
 
 
+<input type="text" id="USUARIOSESION" value="@ViewData["USUARIOSESION"]" hidden />
+<input type="text" id="FQDN" value="@ViewData["FQDN"]" hidden />
+<input type="text" id="GUID" value="@ViewData["GUID"]" hidden />

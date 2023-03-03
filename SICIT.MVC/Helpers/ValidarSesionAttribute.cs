@@ -1,9 +1,10 @@
-﻿using System.Web;
+﻿
+using System.Web;
 using System.Web.Mvc;
 
 namespace SICIT.MVC.Helpers
 {
-    public class ValidarSesionAttribute : ActionFilterAttribute
+    public class ValidarSesionAttribute: ActionFilterAttribute
     {
         public override void OnActionExecuting(ActionExecutingContext filterContext)
         {
@@ -15,5 +16,6 @@ namespace SICIT.MVC.Helpers
 
             base.OnActionExecuting(filterContext);
         }
+
     }
 }

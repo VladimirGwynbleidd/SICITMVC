@@ -14,7 +14,8 @@ async function GetAllTipoEntidades() {
     var url = '';
 
     //url = $("#FQDN").val() + 'api/Entidades/GetEntidades';
-    url = 'http://localhost:6435/Api/Entidades/GetTipoEntidades';
+    //url = 'http://localhost:6435/Api/Entidades/GetTipoEntidades';
+    url = $("#FQDN").val() + 'Api/Entidades/GetTipoEntidades';
 
 
     try {
@@ -51,7 +52,8 @@ async function GetAllDataEntidades() {
     var url = '';
 
     //url = $("#FQDN").val() + 'api/usuarios/ObtenerUsuarios';
-    url = 'http://localhost:6435/api/Entidades/GetEntidades';
+    //url = 'http://localhost:6435/api/Entidades/GetEntidades';
+    url = $("#FQDN").val() + 'api/Entidades/GetEntidades';
 
     try {
         response = await fetchDataAsyncTable('' + url + '', 'GET', {});
@@ -163,7 +165,8 @@ async function AddUpdateEntidades() {
     };
     //console.log($('#IdEntidadHidden').val())
     /*url = $('#IDUsuario').val() == 0 ? $("#FQDN").val() + 'api/usuarios/post' : $("#FQDN").val() + 'api/usuarios/put';*/
-    url = $('#IdEntidadHidden').val() == 0 ? 'http://localhost:6435/api/Entidades/Post' : 'http://localhost:6435/api/Entidades/Put';
+    //url = $('#IdEntidadHidden').val() == 0 ? 'http://localhost:6435/api/Entidades/Post' : 'http://localhost:6435/api/Entidades/Put';
+    url = $('#IdEntidadHidden').val() == 0 ? $("#FQDN").val() + 'api/Entidades/Post' : $("#FQDN").val() + 'api/Entidades/Put';
 
     try {
 
@@ -213,7 +216,9 @@ async function GetAllDataVigentes() {
 
     //url = $("#FQDN").val() + 'api/usuarios/ObtenerUsuarios';
     //url = 'http://localhost:6435/Api/Entidades/GetEntidadesById';
-    url = 'http://localhost:6435/Api/Entidades/GetEntidadesVigentes';
+    //url = 'http://localhost:6435/Api/Entidades/GetEntidadesVigentes';
+
+    url = $("#FQDN").val() + 'Api/Entidades/GetEntidadesVigentes';
 
     try {
         response = await fetchDataAsyncTableVigentes('' + url + '', 'GET', {});
@@ -310,7 +315,8 @@ async function GetAllDataHistorial() {
     var url = '';
 
     //url = $("#FQDN").val() + 'api/usuarios/ObtenerUsuarios';
-    url = 'http://localhost:6435/api/Entidades/GetEntidadesHistorial';
+    //url = 'http://localhost:6435/api/Entidades/GetEntidadesHistorial';
+    url = $("#FQDN").val() + 'api/Entidades/GetEntidadesHistorial';
 
     try {
         response = await fetchDataAsyncTableHistorial('' + url + '', 'GET', {});
@@ -401,7 +407,8 @@ async function DeleteEntidad() {
     };
 
     //url = $("#FQDN").val() + 'api/usuarios/delete';
-    url = 'http://localhost:6435/api/Entidades/Delete';
+    //url = 'http://localhost:6435/api/Entidades/Delete';
+    url = $("#FQDN").val() + 'api/Entidades/Delete';
 
     try {
         response = await fetchDataAsync('' + url + '', 'DELETE', JSON.stringify(argsEntidades));

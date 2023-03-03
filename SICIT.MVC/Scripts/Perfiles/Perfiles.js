@@ -12,7 +12,8 @@ async function GetAllPerfil() {
     var url = '';
 
     //url = $("#FQDN").val() + 'api/usuarios/ObtenerUsuarios';
-    url = 'http://localhost:6435/Api/Perfil/GetPerfil';
+    //url = 'http://localhost:6435/Api/Perfil/GetPerfil';
+    url = $("#FQDN").val() + 'Api/Perfil/GetPerfil';
 
     try {
         response = await fetchDataAsyncTablePerfil('' + url + '', 'GET', {});
@@ -122,7 +123,8 @@ async function GetAllDataPerfilVigentes() {
     var url = '';
 
     //url = $("#FQDN").val() + 'api/usuarios/ObtenerUsuarios';
-    url = 'http://localhost:6435/Api/Perfil/GetTipoPerfilVigentes';
+    //url = 'http://localhost:6435/Api/Perfil/GetTipoPerfilVigentes';
+    url = $("#FQDN").val() + 'Api/Perfil/GetTipoPerfilVigentes';
 
     try {
         response = await fetchDataAsyncTablePerfilVigentes('' + url + '', 'GET', {});
@@ -232,7 +234,8 @@ async function GetAllDataPerfilHistorial() {
     var url = '';
 
     //url = $("#FQDN").val() + 'api/usuarios/ObtenerUsuarios';
-    url = 'http://localhost:6435/Api/Perfil/GetTipoPerfilHistorial';
+    //url = 'http://localhost:6435/Api/Perfil/GetTipoPerfilHistorial';
+    url = $("#FQDN").val() + 'Api/Perfil/GetTipoPerfilHistorial';
 
     try {
         response = await fetchDataAsyncTablePerfilHistorial('' + url + '', 'GET', {});
@@ -343,7 +346,8 @@ async function AddUpdatePerfiles() {
         };
         //console.log($('#IdEntidadHidden').val())
         /*url = $('#IDUsuario').val() == 0 ? $("#FQDN").val() + 'api/usuarios/post' : $("#FQDN").val() + 'api/usuarios/put';*/
-        url = $('#IdPerfilHidden').val() == 0 ? 'http://localhost:6435/api/Perfiles/Post' : 'http://localhost:6435/api/Perfiles/Put';
+        //url = $('#IdPerfilHidden').val() == 0 ? 'http://localhost:6435/api/Perfiles/Post' : 'http://localhost:6435/api/Perfiles/Put';
+        url = $('#IdPerfilHidden').val() == 0 ? $("#FQDN").val() + 'api/Perfiles/Post' : $("#FQDN").val() + 'api/Perfiles/Put';
 
         try {
 
@@ -451,7 +455,8 @@ async function DeletePerfiles() {
     };
 
     //url = $("#FQDN").val() + 'api/usuarios/delete';
-    url = 'http://localhost:6435/api/Perfiles/Delete';
+    //url = 'http://localhost:6435/api/Perfiles/Delete';
+    url = $("#FQDN").val() + 'api/Perfiles/Delete';
 
     try {
         response = await fetchDataAsync('' + url + '', 'DELETE', JSON.stringify(argsEntidades));

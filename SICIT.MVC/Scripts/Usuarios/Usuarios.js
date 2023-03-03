@@ -437,21 +437,7 @@ async function fetchDataAsyncTableUsuarios(urlString, methodType, args) {
                 { 'data': 'SIGLAS_ENT', className: "text-left" },
                 { 'data': 'DESC_AREA', className: "uniqueClassName" },
                 { 'data': 'DESCRIPCION_PUESTO', className: "uniqueClassName" },
-                {
-                    data: "Vigente", render: function (data, type, row) {
 
-                        switch (row.VIG_FLAG) {
-                            case false:
-                                return '<i style="color:red" class="fas fa-solid fa-circle fa-lg"></i>';
-                                break;
-                            case true:
-                                return '<i style="color:green" class="fas fa-solid fa-circle fa-lg"></i>';
-                                break;
-                        }
-
-
-                    }, sortable: false, className: "uniqueClassName"
-                },
                 {
                     data: "Acciones", render: function (data, type, row) {
 
@@ -468,7 +454,7 @@ async function fetchDataAsyncTableUsuarios(urlString, methodType, args) {
             ],
 
             columnDefs: [
-                { className: "dt-center", targets: [0, 1, 2, 3, 4, 5, 6, 7, 8] }
+                { className: "dt-center", targets: [0, 1, 2, 3, 4, 5, 6, 7] }
             ]
         });
     });
@@ -541,21 +527,7 @@ async function fetchDataAsyncTableUsuariosVigentes(urlString, methodType, args) 
                 { 'data': 'SIGLAS_ENT', className: "text-left" },
                 { 'data': 'DESC_AREA', className: "uniqueClassName" },
                 { 'data': 'DESCRIPCION_PUESTO', className: "uniqueClassName" },
-                {
-                    data: "Vigente", render: function (data, type, row) {
 
-                        switch (row.VIG_FLAG) {
-                            case false:
-                                return '<i style="color:red" class="fas fa-solid fa-circle fa-lg"></i>';
-                                break;
-                            case true:
-                                return '<i style="color:green" class="fas fa-solid fa-circle fa-lg"></i>';
-                                break;
-                        }
-
-
-                    }, sortable: false, className: "uniqueClassName"
-                },
                 {
                     data: "Acciones", render: function (data, type, row) {
                         return '<a title="Editar" href="#" onclick="return OpenModalAddUpdateUsuarios(' + row.CVE_ID_ENT + ',' + '\'' + row.DESC_ENT + '\'' + ',\'' + row.SIGLAS_ENT + '\'' + ',\'' + row.ID_T_ENT + '\'' + ',\'' + row.USUARIO + '\'' + ')"><i style="color:black" class="fas fa-fw fa-edit fa-lg"></i></a> | <a title="Eliminar" href="#" onclick="OpenModalDelete(' + '\'' + row.USUARIO + '\'' + ')"><i style="color:red" class="fas fa-solid fa-trash fa-lg"></i></a>';
@@ -564,7 +536,7 @@ async function fetchDataAsyncTableUsuariosVigentes(urlString, methodType, args) 
             ],
 
             columnDefs: [
-                { className: "dt-center", targets: [0, 1, 2, 3, 4, 5, 6, 7, 8] }
+                { className: "dt-center", targets: [0, 1, 2, 3, 4, 5, 6, 7] }
             ]
         });
     });
@@ -635,25 +607,12 @@ async function fetchDataAsyncTableUsuariosHistorial(urlString, methodType, args)
                 { 'data': 'SIGLAS_ENT', className: "text-left" },
                 { 'data': 'DESC_AREA', className: "uniqueClassName" },
                 { 'data': 'DESCRIPCION_PUESTO', className: "uniqueClassName" },
-                {
-                    data: "Vigente", render: function (data, type, row) {
-
-                        switch (row.VIG_FLAG) {
-                            case false:
-                                return '<i style="color:red" class="fas fa-solid fa-circle fa-lg"></i>';
-                                break;
-                        }
 
                 {
                     data: "Acciones", render: function (data, type, row) {
-                        return '<a title="Editar" href="#" onclick="return OpenModalAddUpdateUsuarios(' + row.CVE_ID_ENT + ',' + '\'' + row.DESC_ENT + '\'' + ',\'' + row.SIGLAS_ENT + '\'' + ',\'' + row.ID_T_ENT + '\'' + ')"><i style="color:black" class="fas fa-fw fa-edit fa-lg"></i></a> | <a title="Eliminar" href="#" onclick="OpenModalDelete(' + row.CVE_ID_ENT + ',\'' + row.ID_T_ENT + '\'' + ')"><i style="color:red" class="fas fa-solid fa-trash fa-lg"></i></a>';
+                        return '<i style="color:red" class="fas fa-solid fa-circle fa-lg"></i></a>';
                     }, sortable: false, className: "uniqueClassName"
                 }
-                //{
-                //    data: "Acciones", render: function (data, type, row) {
-                //        return '<a title="Editar" href="#" onclick="return OpenModalAddUpdateUsuarios(' + row.CVE_ID_ENT + ',' + '\'' + row.DESC_ENT + '\'' + ',\'' + row.SIGLAS_ENT + '\'' + ',\'' + row.ID_T_ENT + '\'' + ')"><i style="color:black" class="fas fa-fw fa-edit fa-lg"></i></a> | <a title="Eliminar" href="#" onclick="OpenModalDelete(' + row.CVE_ID_ENT + ',\'' + row.ID_T_ENT + '\'' + ')"><i style="color:red" class="fas fa-solid fa-trash fa-lg"></i></a>';
-                //    }, sortable: false, className: "uniqueClassName"
-                //}
             ],
 
             columnDefs: [
@@ -742,8 +701,6 @@ function OpenModalAddUpdateUsuarios(CVE_ID_ENT, DESC_ENT, SIGLAS_ENT, ID_T_ENT, 
 
 
 async function AddUpdateUsuarios() {
-
-   
 
     var urlString = '';
 
@@ -872,15 +829,27 @@ async function resetPassword() {
         "USUARIO": $("#IdInputUsuario").val(),
     }
 
-        $.ajax({
-            contentType: 'application/json',
-            url: urlString,
-            data: JSON.stringify(args),
-            dataType: 'json',
-            type: 'POST'
-        }).then(function (response) {
-        
-        });
+    return await $.ajax({
+        contentType: 'application/json',
+        url: urlString,
+        data: JSON.stringify(args),
+        dataType: 'json',
+        type: 'POST'
+    }).then(function (response) {
+
+        if (response.Exito) {
+
+            GetAllDataUsuariosVigentes();
+
+            $("#ModalAddUpdateUsuarios").modal('hide');
+            toastr.success('Se ha reestablecio correctamente la contraseña del usuario').css("width", "250px");
+            $("#chbReestablecerPassword").prop("checked", false);
+
+        }
+        else {
+            toastr.error(response.Mensaje, 'Usuarios').css("width", "200px");
+        }
+    });
 
 }
 
