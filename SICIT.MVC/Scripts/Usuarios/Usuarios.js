@@ -1,10 +1,20 @@
 ﻿$(document).ready(function () {
-
+    hiddenControls();
     disabledDDL();
     GetAllDataUsuariosVigentes();
     GetAllTipoEntidades();
+
 });
 
+function resetControls() {
+    disabledDDL();
+    $("#IDNombre").val("");
+    $("#IDApellidoPaterno").val("");
+    $("#IDApellidoMaterno").val("");
+    $("#IDTelefono").val("");
+    $("#IDEMail").val("");
+    $("#IdInputUsuario").val("");
+}
 
 function disabledDDL() {
     $("#IdSelectedEntidad").attr('disabled', true);
@@ -15,6 +25,28 @@ function disabledDDL() {
     $('#IdSelectedPerfil').val("-1");
     $('#IdSelectedPuesto').attr('disabled', true);
     $('#IdSelectedPuesto').val("-1");
+}
+
+
+function hiddenControls() {
+
+    $("#IdSelectedTipoEntidadHidden").attr('hidden', true);
+    $("#IdSelectedTipoEntidad").attr('hidden', false);
+
+    $("#IdSelectedEntidadHidden").attr('hidden', true);
+    $("#IdSelectedEntidad").attr('hidden', false);
+
+    $("#IdSelectedAreaHidden").attr('hidden', true);
+    $("#IdSelectedArea").attr('hidden', false);
+
+    $("#IdSelectedPuestoHidden").attr('hidden', true);
+    $("#IdSelectedPuesto").attr('hidden', false);
+
+    $("#IdSelectedPerfilHidden").attr('hidden', true);
+    $("#IdSelectedPerfil").attr('hidden', false);
+
+    $("#chbReestablecerPassword").attr('hidden', true);
+    $("#labelChbReestablecerPassword").attr('hidden', true);
 }
 
 
@@ -329,7 +361,7 @@ async function fetchDataAsyncPerfilVigentes(urlString, methodType, args) {
 
         var s = '<option value="-1">Selecciona un Perfil</option>';
         for (var i = 0; i < response.length; i++) {
-            s += '<option value="' + response[i].ID_T_ENT + '">' + response[i].DESCRIPCION_PERFIL + '</option>';
+            s += '<option value="' + response[i].ID_PERFIL + '">' + response[i].DESCRIPCION_PERFIL + '</option>';
         }
         $("#IdSelectedPerfil").html(s);
     });
@@ -422,7 +454,15 @@ async function fetchDataAsyncTableUsuarios(urlString, methodType, args) {
                 },
                 {
                     data: "Acciones", render: function (data, type, row) {
-                        return '<a title="Editar" href="#" onclick="return OpenModalAddUpdateUsuarios(' + row.CVE_ID_ENT + ',' + '\'' + row.DESC_ENT + '\'' + ',\'' + row.SIGLAS_ENT + '\'' + ',\'' + row.ID_T_ENT + '\'' + ')"><i style="color:black" class="fas fa-fw fa-edit fa-lg"></i></a> | <a title="Eliminar" href="#" onclick="OpenModalDelete(' + row.CVE_ID_ENT + ',\'' + row.ID_T_ENT + '\'' + ')"><i style="color:red" class="fas fa-solid fa-trash fa-lg"></i></a>';
+
+                        switch (row.VIG_FLAG) {
+                            case false:
+                                return '<i style="color:red" class="fas fa-solid fa-circle fa-lg"></i></a>';
+                                break;
+                            case true:
+                                return '<a title="Editar" href="#" onclick="return OpenModalAddUpdateUsuarios(' + row.CVE_ID_ENT + ',' + '\'' + row.DESC_ENT + '\'' + ',\'' + row.SIGLAS_ENT + '\'' + ',\'' + row.ID_T_ENT + '\'' + ',\'' + row.USUARIO + '\'' + ')"><i style="color:black" class="fas fa-fw fa-edit fa-lg"></i></a> | <a title="Eliminar" href="#" onclick="OpenModalDelete(' + '\'' + row.USUARIO + '\'' + ')"><i style="color:red" class="fas fa-solid fa-trash fa-lg"></i></a>';
+                                break;
+                        }
                     }, sortable: false, className: "uniqueClassName"
                 }
             ],
@@ -518,7 +558,7 @@ async function fetchDataAsyncTableUsuariosVigentes(urlString, methodType, args) 
                 },
                 {
                     data: "Acciones", render: function (data, type, row) {
-                        return '<a title="Editar" href="#" onclick="return OpenModalAddUpdateUsuarios(' + row.CVE_ID_ENT + ',' + '\'' + row.DESC_ENT + '\'' + ',\'' + row.SIGLAS_ENT + '\'' + ',\'' + row.ID_T_ENT + '\'' + ')"><i style="color:black" class="fas fa-fw fa-edit fa-lg"></i></a> | <a title="Eliminar" href="#" onclick="OpenModalDelete(' + row.CVE_ID_ENT + ',\'' + row.ID_T_ENT + '\'' + ')"><i style="color:red" class="fas fa-solid fa-trash fa-lg"></i></a>';
+                        return '<a title="Editar" href="#" onclick="return OpenModalAddUpdateUsuarios(' + row.CVE_ID_ENT + ',' + '\'' + row.DESC_ENT + '\'' + ',\'' + row.SIGLAS_ENT + '\'' + ',\'' + row.ID_T_ENT + '\'' + ',\'' + row.USUARIO + '\'' + ')"><i style="color:black" class="fas fa-fw fa-edit fa-lg"></i></a> | <a title="Eliminar" href="#" onclick="OpenModalDelete(' + '\'' + row.USUARIO + '\'' + ')"><i style="color:red" class="fas fa-solid fa-trash fa-lg"></i></a>';
                     }, sortable: false, className: "uniqueClassName"
                 }
             ],
@@ -604,6 +644,9 @@ async function fetchDataAsyncTableUsuariosHistorial(urlString, methodType, args)
                                 break;
                         }
 
+                {
+                    data: "Acciones", render: function (data, type, row) {
+                        return '<a title="Editar" href="#" onclick="return OpenModalAddUpdateUsuarios(' + row.CVE_ID_ENT + ',' + '\'' + row.DESC_ENT + '\'' + ',\'' + row.SIGLAS_ENT + '\'' + ',\'' + row.ID_T_ENT + '\'' + ')"><i style="color:black" class="fas fa-fw fa-edit fa-lg"></i></a> | <a title="Eliminar" href="#" onclick="OpenModalDelete(' + row.CVE_ID_ENT + ',\'' + row.ID_T_ENT + '\'' + ')"><i style="color:red" class="fas fa-solid fa-trash fa-lg"></i></a>';
                     }, sortable: false, className: "uniqueClassName"
                 }
                 //{
@@ -620,71 +663,152 @@ async function fetchDataAsyncTableUsuariosHistorial(urlString, methodType, args)
     });
 }
 
-function OpenModalAddUpdateUsuarios(CVE_ID_ENT, DESC_ENT, SIGLAS_ENT, ID_T_ENT) {
+function OpenModalAddUpdateUsuarios(CVE_ID_ENT, DESC_ENT, SIGLAS_ENT, ID_T_ENT, USUARIO) {
+
 
     if (CVE_ID_ENT != 0) {
+
+        $("#IdTipoAlta").val(1);
         $("#ModalCenterTitle").html('Editar Usuario');
         $("#ModalCenterTitleH6").html('Editar Usuario');
+        var urlString = 'http://localhost:6435/api/usuarios/GetUsuarioById';
 
+        $.ajax({
+            contentType: 'application/json',
+            url: urlString,
+            data: JSON.stringify({ "USUARIO": USUARIO }),
+            dataType: 'json',
+            type: 'POST'
+        }).then(function (response) {
+
+            $("#IDNombre").val(response[0].NOMBRES);
+            $("#IDApellidoPaterno").val(response[0].APELLIDO_PATERNO);
+            $("#IDApellidoMaterno").val(response[0].APELLIDO_MATERNO);
+            $("#IDTelefono").val(response[0].TELEFONO);
+            $("#IDEMail").val(response[0].EMAIL);
+
+            $('#IdInputUsuario').attr('disabled', true);
+            $("#IdInputUsuario").val(response[0].USUARIO);
+
+            $('#IdSelectedTipoEntidadHidden').attr('disabled', true);
+            $("#IdSelectedTipoEntidadHidden").attr('hidden', false);
+            $("#IdSelectedTipoEntidad").attr('hidden', true);
+            var option = '<option value="' + response[0].ID_T_ENT + '">' + response[0].DESC_T_ENT + '</option>';
+            $("#IdSelectedTipoEntidadHidden").html(option);
+
+            $('#IdSelectedEntidadHidden').attr('disabled', true);
+            $("#IdSelectedEntidadHidden").attr('hidden', false);
+            $("#IdSelectedEntidad").attr('hidden', true);
+            option = '<option value="' + response[0].CVE_ID_ENT + '">' + response[0].SIGLAS_ENT + '</option>';
+            $("#IdSelectedEntidadHidden").html(option);
+
+            $('#IdSelectedAreaHidden').attr('disabled', true);
+            $("#IdSelectedAreaHidden").attr('hidden', false);
+            $("#IdSelectedArea").attr('hidden', true);
+            option = '<option value="' + response[0].ID_AREA + '">' + response[0].DESC_AREA + '</option>';
+            $("#IdSelectedAreaHidden").html(option);
+
+            $('#IdSelectedPuestoHidden').attr('disabled', true);
+            $("#IdSelectedPuestoHidden").attr('hidden', false);
+            $("#IdSelectedPuesto").attr('hidden', true);
+            option = '<option value="' + response[0].ID_PUESTO + '">' + response[0].DESCRIPCION_PUESTO + '</option>';
+            $("#IdSelectedPuestoHidden").html(option);
+
+            $('#IdSelectedPerfilHidden').attr('disabled', true);
+            $("#IdSelectedPerfilHidden").attr('hidden', false);
+            $("#IdSelectedPerfil").attr('hidden', true);
+            option = '<option value="' + response[0].ID_PERFIL + '">' + response[0].DESCRIPCION_PERFIL + '</option>';
+            $("#IdSelectedPerfilHidden").html(option);
+
+            $("#labelChbReestablecerPassword").attr('hidden', false);
+            $("#chbReestablecerPassword").attr('hidden', false);
+
+        });
     }
     else {
         $("#ModalCenterTitle").html('Registrar Usuario');
         $("#ModalCenterTitleH6").html('Registrar Usuario');
+        $("#IdTipoAlta").val(0);
+        hiddenControls();
+        disabledDDL();
+        resetControls();
 
-        //ResetControls();
     }
-
 
     $('#ModalAddUpdateUsuarios').modal({ backdrop: 'static', keyboard: false });
     $('#ModalAddUpdateUsuarios').modal('show');
 
 }
 
-function CloseModalAddUpdateUsuarios() {
-    //$("#frmAddUpdateUsuario").trigger("reset");
-    $("#ModalAddUpdateUsuarios").modal('hide');
-    //$("#frmAddUpdateUsuario").data('validator').resetForm();
-}
 
-function AddUpdateUsuarios() {
+async function AddUpdateUsuarios() {
 
-
+   
 
     var urlString = '';
 
-    //url = $("#FQDN").val() + 'api/usuarios/ObtenerUsuarios';
-    urlString = 'http://localhost:6435/api/usuarios/Insert';
+    toastr.options = {
+        "closeButton": false,
+        "debug": false,
+        "newestOnTop": false,
+        "progressBar": true,
+        "positionClass": "toast-top-right",
+        "preventDuplicates": true,
+        "onclick": null,
+        "showDuration": "100",
+        "hideDuration": "1000",
+        "timeOut": "5000",
+        "extendedTimeOut": "1000",
+        "showEasing": "swing",
+        "hideEasing": "linear",
+        "showMethod": "show",
+        "hideMethod": "hide"
+    }
 
+    //url = $("#FQDN").val() + 'api/usuarios/ObtenerUsuarios';
+
+    var operacion = $("#IdTipoAlta").val();
 
     if ($("#formNewUser").valid()) {
 
-        var args = {
+        var args;
+        if (operacion == 0) {
+            urlString = 'http://localhost:6435/api/usuarios/Insert';
 
-            "USUARIO": $("#IdInputUsuario").val(),
-            "ID_PERFIL": $("#IdSelectedPerfil").val(),
-            "ID_PUESTO": $("#IdSelectedPuesto").val(),
-            "ID_AREA": $("#IdSelectedArea").val(),
-            "ID_T_ENT": $("#IdSelectedTipoEntidad").val(),
-            "CVE_ID_ENT": $("#IdSelectedEntidad").val(),
-            "NOMBRES": $("#IDNombre").val(),
-            "APELLIDO_PATERNO": $("#IDApellidoPaterno").val(),
-            "APELLIDO_MATERNO": $("#IDApellidoMaterno").val(),
-            "TELEFONO": $("#IDTelefono").val(),
-            "EMAIL": $("#IDEMail").val(),
-            //"PRIMERA_SESION": $("#IdInputUsuario").val(),
-            //"VIG_FLAG": $("#IdInputUsuario").val(),
-            //"FECH_INI_VIG": $("#IdInputUsuario").val(),
-            //"FECH_FIN_VIG": $("#IdInputUsuario").val(),
-            //"ENVIO_EMAIL": $("#IdInputUsuario").val(),
-            //"DESCRIPCION_PERFIL": $("#IdInputUsuario").val(),
-            //"DESC_T_ENT": $("#IdInputUsuario").val(),
-            //"SIGLAS_ENT": $("#IdInputUsuario").val(),
-            //"DESC_AREA": $("#IdInputUsuario").val(),
-            //"DESCRIPCION_PUESTO": $("#IdInputUsuario").val(),
-            //"CONTRASENA": $("#IdInputUsuario").val(),
+            args = {
 
-        };
+                "USUARIO": $("#IdInputUsuario").val(),
+                "ID_PERFIL": $("#IdSelectedPerfil").val(),
+                "ID_PUESTO": $("#IdSelectedPuesto").val(),
+                "ID_AREA": $("#IdSelectedArea").val(),
+                "ID_T_ENT": $("#IdSelectedTipoEntidad").val(),
+                "CVE_ID_ENT": $("#IdSelectedEntidad").val(),
+                "NOMBRES": $("#IDNombre").val(),
+                "APELLIDO_PATERNO": $("#IDApellidoPaterno").val(),
+                "APELLIDO_MATERNO": $("#IDApellidoMaterno").val(),
+                "TELEFONO": $("#IDTelefono").val(),
+                "EMAIL": $("#IDEMail").val(),
+            };
+        }
+        else {
 
+            urlString = 'http://localhost:6435/api/usuarios/Update';
+
+            args = {
+
+                "USUARIO": $("#IdInputUsuario").val(),
+                "ID_PERFIL": $("#IdSelectedPerfilHidden").val(),
+                "ID_PUESTO": $("#IdSelectedPuestoHidden").val(),
+                "ID_AREA": $("#IdSelectedAreaHidden").val(),
+                "ID_T_ENT": $("#IdSelectedTipoEntidadHidden").val(),
+                "CVE_ID_ENT": $("#IdSelectedEntidadHidden").val(),
+                "NOMBRES": $("#IDNombre").val(),
+                "APELLIDO_PATERNO": $("#IDApellidoPaterno").val(),
+                "APELLIDO_MATERNO": $("#IDApellidoMaterno").val(),
+                "TELEFONO": $("#IDTelefono").val(),
+                "EMAIL": $("#IDEMail").val(),
+            };
+        }
 
 
         $.ajax({
@@ -695,24 +819,133 @@ function AddUpdateUsuarios() {
             type: 'POST'
         }).then(function (response) {
 
+            if (response.Exito) {
+
+                GetAllDataUsuariosVigentes();
+
+                $("#ModalAddUpdateUsuarios").modal('hide');
+                if ($("#IdTipoAlta").val() == 0) {
+                    toastr.success('Se ha agregado correctamente el usuario').css("width", "250px");
+                    //toastr.success(response.Mensaje, 'Se ha agregado correctamente el usuario').css("width", "250px");
+                }
+                else {
+                    toastr.success('Se ha modificado correctamente el usuario').css("width", "250px");
+                }
+
+            }
+            else {
+                toastr.error(response.Mensaje, 'Usuarios').css("width", "200px");
+            }
+
         });
-
-
-
 
     }
 
 }
 
+function CloseModalAddUpdateUsuarios() {
+    $("#formNewUser").trigger("reset");
+    $("#formNewUser").data('validator').resetForm();
+    $("#ModalAddUpdateUsuarios").modal('hide');
+
+}
+
+function OpenModalDelete(ID_USUARIO) {
+    $("#IDUsuario").val(ID_USUARIO);
+    $('#ModalDelete').modal({ backdrop: 'static', keyboard: false, show: true })
+    $('#ModalDelete').modal('show');
+}
+
+function CloseModalDelete() {
+    $("#formNewUser").trigger("reset");
+    $("#formNewUser").data('validator').resetForm();
+    $("#ModalDelete").modal('hide');
+}
+
+async function resetPassword() {
+
+    var urlString = '';
+    //url = $("#FQDN").val() + 'api/usuarios/ObtenerUsuarios';
+    urlString = 'http://localhost:6435/api/usuarios/ResetPassword';
+
+    var args = {
+        "USUARIO": $("#IdInputUsuario").val(),
+    }
+
+        $.ajax({
+            contentType: 'application/json',
+            url: urlString,
+            data: JSON.stringify(args),
+            dataType: 'json',
+            type: 'POST'
+        }).then(function (response) {
+        
+        });
+
+}
+
+
+async function DeleteUsuario() {
+    var urlString = '';
+
+    argsEntidades = {
+        USUARIO: $("#IDUsuario").val(),
+    };
+
+    //url = $("#FQDN").val() + 'api/usuarios/delete';
+    urlString = 'http://localhost:6435/api/usuarios/DeleteUsuario';
+
+    try {
+
+        return await $.ajax({
+            contentType: 'application/json',
+            url: urlString,
+            data: JSON.stringify(argsEntidades),
+            dataType: 'json',
+            type: 'POST'
+        }).then(function (response) {
+
+            toastr.options = {
+                "closeButton": false,
+                "debug": false,
+                "newestOnTop": false,
+                "progressBar": true,
+                "positionClass": "toast-top-right",
+                "preventDuplicates": true,
+                "onclick": null,
+                "showDuration": "100",
+                "hideDuration": "1000",
+                "timeOut": "5000",
+                "extendedTimeOut": "1000",
+                "showEasing": "swing",
+                "hideEasing": "linear",
+                "showMethod": "show",
+                "hideMethod": "hide"
+            }
+
+
+            if (response.Exito) {
+                $("#ModalDelete").modal('hide');
+                toastr.success('Se ha eliminado correctamente el usuario').css("width", "250px");
+                GetAllDataPerfilVigentes();
+            }
+            else {
+                toastr.error('Usuarios').css("width", "250px");
+            }
+
+        });
+
+    } catch (error) {
+
+    }
+}
+
 
 $().ready(function () {
-
 
     $.validator.addMethod('negativo', function (value, element) {
         return (value != '-1');
     }, 'Seleccione un elemento de la lista');
-
-
 
     $("#formNewUser").validate({
 

@@ -49,6 +49,9 @@
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
+    <Reference Include="System.Net.Http.Formatting, Version=5.2.9.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebApi.Client.5.2.9\lib\net45\System.Net.Http.Formatting.dll</HintPath>
+    </Reference>
     <Reference Include="System.Web.DynamicData" />
     <Reference Include="System.Web.Entity" />
     <Reference Include="System.Web.ApplicationServices" />
@@ -123,6 +126,7 @@
     <Compile Include="Controllers\AreasController.cs" />
     <Compile Include="Controllers\BitacoraAccionesController.cs" />
     <Compile Include="Controllers\BitacoraSesionesController.cs" />
+    <Compile Include="Controllers\CambiarPasswordController.cs" />
     <Compile Include="Controllers\ConsultasController.cs" />
     <Compile Include="Controllers\EntidadController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
@@ -135,7 +139,11 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Helpers\ValidarSesionAttribute.cs" />
+    <Compile Include="Models\Usuarios.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Tools\Success.cs" />
+    <Compile Include="Tools\HashPassword.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\Ani.css" />
@@ -2379,11 +2387,13 @@
     <Content Include="Scripts\Areas\Areas.js" />
     <Content Include="Scripts\BitacoraAcciones\BitacoraAcciones.js" />
     <Content Include="Scripts\BitacoraSesiones\BitacoraSesiones.js" />
+    <Content Include="Scripts\CambiarPassword\CambiarPassword.js" />
     <Content Include="Scripts\carousel.js" />
     <Content Include="Scripts\Consultas\Consultas.js" />
     <Content Include="Scripts\Entidad\EntidadJS.js" />
     <Content Include="Scripts\jquery.jcarousel.js" />
     <Content Include="Scripts\js.css" />
+    <Content Include="Scripts\Login\Login.js" />
     <Content Include="Scripts\Methods\additional-methods.js" />
     <Content Include="Scripts\Methods\additional-methods.min.js" />
     <Content Include="Scripts\Monitor\Monitor.js" />
@@ -2420,7 +2430,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Models\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />
@@ -2430,6 +2439,7 @@
     <None Include="packages.config" />
     <Content Include="Views\Monitor\IndexMonitor.cshtml" />
     <Content Include="Views\Consultas\IndexConsultas.cshtml" />
+    <Content Include="Views\CambiarPassword\CambiarPasswordIndex.cshtml" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

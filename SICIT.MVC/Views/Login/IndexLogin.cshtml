@@ -6,21 +6,8 @@
 <!DOCTYPE html>
 <html>
 <head>
-
-
-    <link href="~/Content/Bootstrap5.2.3/css/bootstrap.css" rel="stylesheet" />
-
     <link href="~/Content/fonts/fontawesome/css/fontawesome-all.min.css" rel="stylesheet" />
-    @*<link href="~/Content/plugins/animation/css/animate.min.css" rel="stylesheet" />*@
-    @*<link href="~/Content/DataTables/datatables.css" rel="stylesheet" />*@
-    @*<link href="~/Content/css/style.css" rel="stylesheet" />*@
-    <script src="~/Scripts/jquery.validate.min.js"></script>
-    @*<script src=https://kit.fontawesome.com/03c49d4443.js crossorigin ="anonymous"></script>*@
-    <script src="~/Scripts/Login/Acceso.js"></script>
 
-
-    @*<link rel="stylesheet"
-        href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" />*@
 
     <style>
         .error {
@@ -465,32 +452,34 @@
                                 <h3>Sistema de Consultas de Información de Trabajadores</h3>
                                 @*<div class="row justify-content-center align-items-center">
 
-            </div>*@
+                                    </div>*@
                             </div>
 
 
                             <h3 class="mb-4">SITIC</h3>
-
-                            <div class="input-group mb-3">
-                                <input type="text" id="IdUser" name="IdUser" class="form-control input_user" placeholder="Usuario" maxlength="20">
+                            <div class="form-row">
+                                <div class="input-group mb-3">
+                                    <input type="text" id="IdUser" name="IdUser" class="form-control input_user" placeholder="Usuario" maxlength="20">
+                                </div>
                             </div>
-                            <div class="input-group mb-4">
-                                <input type="password" id="Password" name="Password" class="form-control input_pass" placeholder="Contraseña" maxlength="20">
-
+                            <div class="form-row">
+                                <div class="input-group mb-4">
+                                    <input type="password" id="Password" name="Password" class="form-control input_pass" placeholder="Contraseña" maxlength="20">
+                                </div>
                             </div>
-                            <button type="submit" id="btnSesion" name="button" class="btn btn-info btn-md">Iniciar Sesión</button>
-
-                            <div id="divErrores">
-                                <ul id="lista"></ul>
+                            <div class="form-row">
+                                <div class="input-group mb-4" style="justify-content: center;">
+                                    <button type="button" id="btnSesion" name="button" onclick="iniciarSesion();" class="btn btn-info btn-md">Iniciar Sesión</button>
+                                </div>
                             </div>
 
 
                             <div class="input-group mb-4">
                             </div>
                             @*<div class="justify-content-center align-items-center" style="text-align:center">
-            <a href=""><img src="~/Images/ImagesTDC/Book.png" height="50px" /></a>
-            <a href=""><img src="~/Images/ImagesTDC/Exclamation.png" height="50px" /></a>
-        </div>*@
+                                    <a href=""><img src="~/Images/ImagesTDC/Book.png" height="50px" /></a>
+                                    <a href=""><img src="~/Images/ImagesTDC/Exclamation.png" height="50px" /></a>
+                                </div>*@
 
 
 
@@ -499,34 +488,34 @@
                             <div id="carouselBasicExample" class="carousel slide" data-bs-ride="carousel">
                                 <!-- Indicators -->
                                 @*<div class="carousel-indicators">
-                <button type="button"
-                        data-bs-target="#carouselBasicExample"
-                        data-bs-slide-to="0"
-                        class="active"
-                        aria-current="true"
-                        aria-label="Slide 1"></button>
-                <button type="button"
-                        data-bs-target="#carouselBasicExample"
-                        data-bs-slide-to="1"
-                        aria-label="Slide 2"></button>
-                <button type="button"
-                        data-bs-target="#carouselBasicExample"
-                        data-bs-slide-to="2"
-                        aria-label="Slide 3"></button>
-            </div>*@
+                                        <button type="button"
+                                                data-bs-target="#carouselBasicExample"
+                                                data-bs-slide-to="0"
+                                                class="active"
+                                                aria-current="true"
+                                                aria-label="Slide 1"></button>
+                                        <button type="button"
+                                                data-bs-target="#carouselBasicExample"
+                                                data-bs-slide-to="1"
+                                                aria-label="Slide 2"></button>
+                                        <button type="button"
+                                                data-bs-target="#carouselBasicExample"
+                                                data-bs-slide-to="2"
+                                                aria-label="Slide 3"></button>
+                                    </div>*@
 
                                 <!-- Inner -->
                                 <div class="carousel-inner">
                                     <!-- Single item -->
                                     <div class="carousel-item active">
-                                        <img src="~/Images/ImagesTDC/Book.png" class="d-block w-55" alt="Sunset Over the City" />
+                                        <img src="~/Images/ImagesTDC/Book.png" height="50px" class="d-block w-55" alt="Sunset Over the City" />
                                         <div class="carousel-caption d-none d-md-block">
                                         </div>
                                     </div>
 
                                     <!-- Single item -->
                                     <div class="carousel-item">
-                                        <img src="~/Images/ImagesTDC/Exclamation.png" class="d-block w-55 " />
+                                        <img src="~/Images/ImagesTDC/Exclamation.png" height="50px" class="d-block w-55 " />
                                         <div class="carousel-caption d-none d-md-block">
 
                                         </div>
@@ -534,7 +523,7 @@
 
                                     <!-- Single item -->
                                     <div class="carousel-item">
-                                        <img src="~/Images/ImagesTDC/handHelp.png" class="d-block w-55" alt="Cliff Above a Stormy Sea" />
+                                        <img src="~/Images/ImagesTDC/handHelp.png" height="50px" class="d-block w-55" alt="Cliff Above a Stormy Sea" />
                                         <div class="carousel-caption d-none d-md-block">
 
                                         </div>
@@ -595,8 +584,19 @@
     </footer>
 
 
-
-
+    <script src="~/Content/jQueryv3.6.2/jQuery_v3.6.2.js"></script>
+    <script src="~/Scripts/Validate/jquery.validate.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+    <script src="~/Content/Bootstrap5.2.3/js/bootstrap.js"></script>
+    <script src="~/Scripts/jquery.jcarousel.js"></script>
+    <script src="~/Scripts/carousel.js"></script>
+    <link href="~/Scripts/js.css" rel="stylesheet" />
+    <link href="~/Content/toastr/toastr.css" rel="stylesheet" />
+    <script src="~/Content/toastr/toastr.js"></script>
+    <script src="~/Scripts/Login/Login.js"></script>
+    <link href="~/Content/Bootstrap5.2.3/css/bootstrap.css" rel="stylesheet" />
+    <link href="~/Content/toastr/toastr.css" rel="stylesheet" />
+    <script src="~/Content/toastr/toastr.js"></script>
 </body>
 
 
@@ -687,11 +687,6 @@
     </footer>
 </body>-->
 
-<script src="~/Content/jQueryv3.6.2/jQuery_v3.6.2.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
-<script src="~/Content/Bootstrap5.2.3/js/bootstrap.js"></script>
-<script src="~/Scripts/jquery.jcarousel.js"></script>
-<script src="~/Scripts/carousel.js"></script>
-<link href="~/Scripts/js.css" rel="stylesheet" />
+
 </html>
 

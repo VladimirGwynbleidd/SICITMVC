@@ -5,9 +5,11 @@ using System.Linq;
 using System.Text;
 using System.Web;
 using System.Web.Mvc;
+using SICIT.MVC.Helpers;
 
 namespace SICIT.MVC.Controllers
 {
+    [ValidarSesion]
     public class MonitorController : Controller
     {
      
