@@ -296,7 +296,10 @@ async function AddUpdateTipoEntidad() {
 
             ID_T_ENT: $('#IdInputTipoEntidadClave').val(),
             DESC_T_ENT: $('#IdInputTipoEntidadDescripcion').val(),
-            ESPC_T_ENT: $('#IdinputTipoEntidadEspecificacion').val()
+            ESPC_T_ENT: $('#IdinputTipoEntidadEspecificacion').val(),
+
+            USUARIOSESION: $('#USUARIOSESION').val(),
+            GUID: $('#GUID').val()
         };
         console.log($('#IdTipoEntidadHidden').val())
         /*url = $('#IDUsuario').val() == 0 ? $("#FQDN").val() + 'api/usuarios/post' : $("#FQDN").val() + 'api/usuarios/put';*/
@@ -400,6 +403,8 @@ async function DeleteTipoEntidad() {
     argsTipoEntidades = {
         ID_T_ENT: $('#IdTipoEntidadHidden').val(),
 
+        USUARIOSESION: $('#USUARIOSESION').val(),
+        GUID: $('#GUID').val()
     };
 
     url = $("#FQDN").val() + 'Api/TipoEntidad/Delete';

@@ -62,12 +62,14 @@ namespace SITIC.MVC.Controllers
                                 if (deserializedAcceso.PRIMERA_SESION == 1)
                                 {
 
-                                    Session["Usuario"] = deserializedAcceso.USUARIO;
+                                    //Session["Usuario"] = deserializedAcceso.USUARIO;
+                                    Session["Usuario"] = accesoPagina;
                                     return Json(new { Exito = "true", PrimeraSesion = 1 });
                                 }
                                 else
                                 {
-                                    Session["Acceso"] = deserializedAcceso;
+                                    //Session["Acceso"] = deserializedAcceso;
+                                    Session["Acceso"] = accesoPagina;
                                     return Json(new { Exito = "true", PrimeraSesion = 0 });
                                 }
                             }

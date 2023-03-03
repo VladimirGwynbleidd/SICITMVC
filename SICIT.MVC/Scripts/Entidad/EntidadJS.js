@@ -161,7 +161,10 @@ async function AddUpdateEntidades() {
         CVE_ID_ENT: $('#IdEntidadHidden').val(),
         DESC_ENT: $('#IdinputDescripcionEntidad').val(),
         SIGLAS_ENT: $('#IdInputSiglasEntidad').val(),
-        ID_T_ENT: $('#IdSelectedTipo').val()
+        ID_T_ENT: $('#IdSelectedTipo').val(),
+
+        USUARIOSESION: $('#USUARIOSESION').val(),
+        GUID: $('#GUID').val()
     };
     //console.log($('#IdEntidadHidden').val())
     /*url = $('#IDUsuario').val() == 0 ? $("#FQDN").val() + 'api/usuarios/post' : $("#FQDN").val() + 'api/usuarios/put';*/
@@ -403,7 +406,10 @@ async function DeleteEntidad() {
 
     argsEntidades = {
         CVE_ID_ENT: $('#IdEntidadHidden').val(),
-        ID_T_ENT: $('#IdTipoEntidadHidden').val()
+        ID_T_ENT: $('#IdTipoEntidadHidden').val(),
+
+        USUARIOSESION: $('#USUARIOSESION').val(),
+        GUID: $('#GUID').val()
     };
 
     //url = $("#FQDN").val() + 'api/usuarios/delete';

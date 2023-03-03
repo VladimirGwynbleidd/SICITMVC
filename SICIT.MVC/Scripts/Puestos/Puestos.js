@@ -494,7 +494,10 @@ async function AddUpdatePuestos() {
             DESCRIPCION_PUESTO: $('#IdinputDescripcionPuesto').val(),
             ID_T_ENT: $('#IdSelectedTipoEntidad').val(),
             CVE_ID_ENT: $('#IdSelectedEntidad').val(),
-            ID_AREA: $('#IdSelectedArea').val()
+            ID_AREA: $('#IdSelectedArea').val(),
+
+            USUARIOSESION: $('#USUARIOSESION').val(),
+            GUID: $('#GUID').val()
         };
         //console.log($('#IdPuestoHidden').val())
         //console.log(argsPuestos)
@@ -634,7 +637,10 @@ async function DeletePuesto() {
 
         ID_T_ENT: $('#IdTipoEntidadHidden').val(),
         CVE_ID_ENT: $('#IdEntidadHidden').val(),
-        ID_AREA: $('#IdAreaHidden').val()
+        ID_AREA: $('#IdAreaHidden').val(),
+
+        USUARIOSESION: $('#USUARIOSESION').val(),
+        GUID: $('#GUID').val()
     };
 
     url = $("#FQDN").val() + 'Api/Puestos/Delete';

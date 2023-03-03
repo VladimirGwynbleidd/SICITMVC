@@ -343,6 +343,9 @@ async function AddUpdatePerfiles() {
 
             ID_PERFIL: $('#IdPerfilHidden').val(),
             DESCRIPCION_PERFIL: $('#IdinputDescripcionPerfiles').val(),
+
+            USUARIOSESION: $('#USUARIOSESION').val(),
+            GUID: $('#GUID').val()
         };
         //console.log($('#IdEntidadHidden').val())
         /*url = $('#IDUsuario').val() == 0 ? $("#FQDN").val() + 'api/usuarios/post' : $("#FQDN").val() + 'api/usuarios/put';*/
@@ -451,7 +454,8 @@ async function DeletePerfiles() {
 
     argsEntidades = {
         ID_PERFIL: $('#IdPerfilHidden').val(),
-
+        USUARIOSESION: $('#USUARIOSESION').val(),
+        GUID: $('#GUID').val()
     };
 
     //url = $("#FQDN").val() + 'api/usuarios/delete';

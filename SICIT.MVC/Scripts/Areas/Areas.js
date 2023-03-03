@@ -432,6 +432,8 @@ async function AddUpdateAreas() {
         //SIGLAS_ENT: $("#IdSelectedEntidad :selected").text(),
         ID_T_ENT: $('#IdSelectedTipoEntidad').val(),
         CVE_ID_ENT: $('#IdSelectedEntidad').val(),
+        USUARIOSESION: $('#USUARIOSESION').val(),
+        GUID: $('#GUID').val()
     };
     console.log(JSON.stringify(argsAreas))
 
@@ -560,6 +562,8 @@ async function DeleteArea() {
 
     argsAreas = {
         ID_AREA: $('#IdAreaHidden').val(),
+        USUARIOSESION: $('#USUARIOSESION').val(),
+        GUID: $('#GUID').val()
     };
 
     //url = $("#FQDN").val() + 'api/usuarios/delete';
