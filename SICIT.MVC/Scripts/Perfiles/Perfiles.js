@@ -101,7 +101,7 @@ async function fetchDataAsyncTablePerfil(urlString, methodType, args) {
                         if (row.VIG_FLAG != 0) {
                             return '<a title="Editar" href="#" onclick="return OpenModalAddUpdatePerfiles(' + row.ID_PERFIL + ',' + '\'' + row.DESCRIPCION_PERFIL + '\'' + ')"><i style="color:black" class="fas fa-fw fa-edit fa-lg"></i></a> | <a title="Eliminar" href="#" onclick="OpenModalDelete(' + row.ID_PERFIL + ')"><i style="color:red" class="fas fa-solid fa-trash fa-lg"></i></a>';
                         } else {
-                            return '<i style="color:red" class="fas fa-solid fa-circle fa-lg"></i></a>';
+                            return '';
                         }
                     }, sortable: false, className: "uniqueClassName"
                 }

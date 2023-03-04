@@ -1,0 +1,358 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xs:schema xmlns:tns="http://www.procesar.com.mx/SICIT/SICITService/" targetNamespace="http://www.procesar.com.mx/SICIT/SICITService/" version="1.0" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:element name="consultaCuentaIndividualCURP" type="tns:consultaCuentaIndividualCURP" />
+  <xs:element name="consultaCuentaIndividualCURPResponse" type="tns:consultaCuentaIndividualCURPResponse" />
+  <xs:element name="consultaCuentaIndividualNSS" type="tns:consultaCuentaIndividualNSS" />
+  <xs:element name="consultaCuentaIndividualNSSResponse" type="tns:consultaCuentaIndividualNSSResponse" />
+  <xs:element name="consultaCuentaIndividualRFC" type="tns:consultaCuentaIndividualRFC" />
+  <xs:element name="consultaCuentaIndividualRFCResponse" type="tns:consultaCuentaIndividualRFCResponse" />
+  <xs:element name="consultaHistoricoAportacionCURP" type="tns:consultaHistoricoAportacionCURP" />
+  <xs:element name="consultaHistoricoAportacionCURPResponse" type="tns:consultaHistoricoAportacionCURPResponse" />
+  <xs:element name="consultaHistoricoAportacionNSS" type="tns:consultaHistoricoAportacionNSS" />
+  <xs:element name="consultaHistoricoAportacionNSSResponse" type="tns:consultaHistoricoAportacionNSSResponse" />
+  <xs:element name="consultaHistoricoAportacionRFC" type="tns:consultaHistoricoAportacionRFC" />
+  <xs:element name="consultaHistoricoAportacionRFCResponse" type="tns:consultaHistoricoAportacionRFCResponse" />
+  <xs:element name="consultaRetiroResolPensionCURP" type="tns:consultaRetiroResolPensionCURP" />
+  <xs:element name="consultaRetiroResolPensionCURPResponse" type="tns:consultaRetiroResolPensionCURPResponse" />
+  <xs:element name="consultaRetiroResolPensionNSS" type="tns:consultaRetiroResolPensionNSS" />
+  <xs:element name="consultaRetiroResolPensionNSSResponse" type="tns:consultaRetiroResolPensionNSSResponse" />
+  <xs:element name="consultaRetiroResolPensionRFC" type="tns:consultaRetiroResolPensionRFC" />
+  <xs:element name="consultaRetiroResolPensionRFCResponse" type="tns:consultaRetiroResolPensionRFCResponse" />
+  <xs:element name="consultaTraspasoCURP" type="tns:consultaTraspasoCURP" />
+  <xs:element name="consultaTraspasoCURPResponse" type="tns:consultaTraspasoCURPResponse" />
+  <xs:element name="consultaTraspasoNSS" type="tns:consultaTraspasoNSS" />
+  <xs:element name="consultaTraspasoNSSResponse" type="tns:consultaTraspasoNSSResponse" />
+  <xs:element name="consultaTraspasoRFC" type="tns:consultaTraspasoRFC" />
+  <xs:element name="consultaTraspasoRFCResponse" type="tns:consultaTraspasoRFCResponse" />
+  <xs:complexType name="consultaRetiroResolPensionCURP">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="curp" type="xs:string" />
+      <xs:element minOccurs="0" name="folio" type="xs:long" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="consultaRetiroResolPensionCURPResponse">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="return" type="tns:retiroDTO" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="retiroDTO">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="cuentaIndividualDTO" type="tns:cuentaIndividualDTO" />
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="datamartDTO" nillable="true" type="tns:datamartDTO" />
+      <xs:element minOccurs="0" name="descRechazo" type="xs:string" />
+      <xs:element minOccurs="0" name="fechaHoraRespuesta" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="folio" type="xs:long" />
+      <xs:element minOccurs="0" name="idRechazo" type="xs:int" />
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="movimientoRetiroDTO" nillable="true" type="tns:movimientoRetiroDTO" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="cuentaIndividualDTO">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="afiliacion" type="xs:string" />
+      <xs:element minOccurs="0" name="afore" type="xs:string" />
+      <xs:element minOccurs="0" name="apellidoMaterno" type="xs:string" />
+      <xs:element minOccurs="0" name="apellidoPaterno" type="xs:string" />
+      <xs:element minOccurs="0" name="fechaRegistro" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="nombre" type="xs:string" />
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="procesos" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="datamartDTO">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="diagnostico" type="xs:string" />
+      <xs:element minOccurs="0" name="fechaCarga" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="fechaPension" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="nss" type="xs:string" />
+      <xs:element minOccurs="0" name="pension" type="xs:string" />
+      <xs:element minOccurs="0" name="prestacion" type="xs:string" />
+      <xs:element minOccurs="0" name="regimen" type="xs:string" />
+      <xs:element minOccurs="0" name="seguro" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="movimientoRetiroDTO">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="administradora" type="xs:string" />
+      <xs:element minOccurs="0" name="cs" type="xs:decimal" />
+      <xs:element minOccurs="0" name="cv" type="xs:decimal" />
+      <xs:element minOccurs="0" name="fechaMovimiento" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="movimiento" type="xs:string" />
+      <xs:element minOccurs="0" name="nss" type="xs:string" />
+      <xs:element minOccurs="0" name="pension" type="xs:string" />
+      <xs:element minOccurs="0" name="prestacion" type="xs:string" />
+      <xs:element minOccurs="0" name="regimen" type="xs:string" />
+      <xs:element minOccurs="0" name="retiro92" type="xs:decimal" />
+      <xs:element minOccurs="0" name="retiro97" type="xs:decimal" />
+      <xs:element minOccurs="0" name="seguro" type="xs:string" />
+      <xs:element minOccurs="0" name="vivienda92" type="xs:decimal" />
+      <xs:element minOccurs="0" name="vivienda97" type="xs:decimal" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="consultaTraspasoCURP">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="curp" type="xs:string" />
+      <xs:element minOccurs="0" name="folio" type="xs:long" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="consultaTraspasoCURPResponse">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="return" type="tns:traspasoDTO" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="traspasoDTO">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="cuentaIndividualDTO" type="tns:cuentaIndividualDTO" />
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="traspasoAforeAforeDTO" nillable="true" type="tns:traspasoAforeAforeDTO" />
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="traspasoAforeAforeComplementariosDTO" nillable="true" type="tns:traspasoAforeAforeComplementariosDTO" />
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="transferenciaAcreditadoDTO" nillable="true" type="tns:transferenciaAcreditadoDTO" />
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="traspasoSAR92AceptadoDTO" nillable="true" type="tns:traspasoSAR92AceptadoDTO" />
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="traspasoBdnsar92DTO" nillable="true" type="tns:traspasoBdnsar92DTO" />
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="traspasoSarIsssteDTO" nillable="true" type="tns:traspasoSarIsssteDTO" />
+      <xs:element minOccurs="0" name="fechaHoraRespuesta" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="folio" type="xs:long" />
+      <xs:element minOccurs="0" name="idRechazo" type="xs:int" />
+      <xs:element minOccurs="0" name="descRechazo" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="traspasoAforeAforeDTO">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="nss" type="xs:string" />
+      <xs:element minOccurs="0" name="claveAforeReceptora" type="xs:string" />
+      <xs:element minOccurs="0" name="claveAforeCedente" type="xs:string" />
+      <xs:element minOccurs="0" name="curp" type="xs:string" />
+      <xs:element minOccurs="0" name="rfc" type="xs:string" />
+      <xs:element minOccurs="0" name="apellidoPaterno" type="xs:string" />
+      <xs:element minOccurs="0" name="apellidoMaterno" type="xs:string" />
+      <xs:element minOccurs="0" name="nombre" type="xs:string" />
+      <xs:element minOccurs="0" name="fechaLiquidacion" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="saldoSar92" type="xs:decimal" />
+      <xs:element minOccurs="0" name="saldoSar97" type="xs:decimal" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="traspasoAforeAforeComplementariosDTO">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="nss" type="xs:string" />
+      <xs:element minOccurs="0" name="claveAforeReceptora" type="xs:string" />
+      <xs:element minOccurs="0" name="claveAforeCedente" type="xs:string" />
+      <xs:element minOccurs="0" name="curp" type="xs:string" />
+      <xs:element minOccurs="0" name="rfc" type="xs:string" />
+      <xs:element minOccurs="0" name="apellidoPaterno" type="xs:string" />
+      <xs:element minOccurs="0" name="apellidoMaterno" type="xs:string" />
+      <xs:element minOccurs="0" name="nombre" type="xs:string" />
+      <xs:element minOccurs="0" name="fechaLiquidacion" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="saldoSar92" type="xs:decimal" />
+      <xs:element minOccurs="0" name="saldoSar97" type="xs:decimal" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="transferenciaAcreditadoDTO">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="nssCedente" type="xs:string" />
+      <xs:element minOccurs="0" name="rfcCedente" type="xs:string" />
+      <xs:element minOccurs="0" name="nci" type="xs:string" />
+      <xs:element minOccurs="0" name="entidadCedente" type="xs:string" />
+      <xs:element minOccurs="0" name="curp" type="xs:string" />
+      <xs:element minOccurs="0" name="entidadReceptora" type="xs:string" />
+      <xs:element minOccurs="0" name="fechaLiquidacion" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="importeSalSar9296" type="xs:decimal" />
+      <xs:element minOccurs="0" name="imporSalVivi92" type="xs:decimal" />
+      <xs:element minOccurs="0" name="importSalVivi97" type="xs:decimal" />
+      <xs:element minOccurs="0" name="nssReceptora" type="xs:string" />
+      <xs:element minOccurs="0" name="rfcReceptora" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="traspasoSAR92AceptadoDTO">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="nombreSegunAfore" type="xs:string" />
+      <xs:element minOccurs="0" name="apellidoPatSegunAfore" type="xs:string" />
+      <xs:element minOccurs="0" name="apellidoMatSegunAfore" type="xs:string" />
+      <xs:element minOccurs="0" name="nssSegunAfore" type="xs:string" />
+      <xs:element minOccurs="0" name="rfcSegunAfore" type="xs:string" />
+      <xs:element minOccurs="0" name="curpSegunAfore" type="xs:string" />
+      <xs:element minOccurs="0" name="nssIcefa" type="xs:string" />
+      <xs:element minOccurs="0" name="rfcIcefa" type="xs:string" />
+      <xs:element minOccurs="0" name="nombreSegunIcefa" type="xs:string" />
+      <xs:element minOccurs="0" name="icefaCedente" type="xs:string" />
+      <xs:element minOccurs="0" name="entidadReceptora" type="xs:string" />
+      <xs:element minOccurs="0" name="importeTotalSar" type="xs:decimal" />
+      <xs:element minOccurs="0" name="importeTotalVivienda" type="xs:decimal" />
+      <xs:element minOccurs="0" name="nci" type="xs:string" />
+      <xs:element minOccurs="0" name="fechaLiquidacion" type="xs:dateTime" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="traspasoBdnsar92DTO">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="nss" type="xs:string" />
+      <xs:element minOccurs="0" name="rfc" type="xs:string" />
+      <xs:element minOccurs="0" name="nci" type="xs:string" />
+      <xs:element minOccurs="0" name="nombreIcefa" type="xs:string" />
+      <xs:element minOccurs="0" name="curp" type="xs:string" />
+      <xs:element minOccurs="0" name="nombre" type="xs:string" />
+      <xs:element minOccurs="0" name="saldoActuRetiroImss" type="xs:decimal" />
+      <xs:element minOccurs="0" name="saldoActuViviendaInfonavit" type="xs:decimal" />
+      <xs:element minOccurs="0" name="fechaLiquidacion" type="xs:dateTime" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="traspasoSarIsssteDTO">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="apellidoMat" type="xs:string" />
+      <xs:element minOccurs="0" name="apellidoPat" type="xs:string" />
+      <xs:element minOccurs="0" name="curpAfore" type="xs:string" />
+      <xs:element minOccurs="0" name="curpSegunIcefa" type="xs:string" />
+      <xs:element minOccurs="0" name="entidadReceptora" type="xs:string" />
+      <xs:element minOccurs="0" name="fechaTraspaso" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="icefaCedente" type="xs:string" />
+      <xs:element minOccurs="0" name="importeTotalSar" type="xs:decimal" />
+      <xs:element minOccurs="0" name="importeTotalVivienda" type="xs:decimal" />
+      <xs:element minOccurs="0" name="nci" type="xs:string" />
+      <xs:element minOccurs="0" name="nombre" type="xs:string" />
+      <xs:element minOccurs="0" name="nssAfore" type="xs:string" />
+      <xs:element minOccurs="0" name="nssSegunIcefa" type="xs:string" />
+      <xs:element minOccurs="0" name="rfcAfore" type="xs:string" />
+      <xs:element minOccurs="0" name="rfcSegunIcefa" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="consultaCuentaIndividualCURP">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="curp" type="xs:string" />
+      <xs:element minOccurs="0" name="folio" type="xs:long" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="consultaCuentaIndividualCURPResponse">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="return" type="tns:registroDTO" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="registroDTO">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="cuentaIndividualDTO" type="tns:cuentaIndividualDTO" />
+      <xs:element minOccurs="0" name="fechaHoraRespuesta" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="folio" type="xs:long" />
+      <xs:element minOccurs="0" name="idRechazo" type="xs:int" />
+      <xs:element minOccurs="0" name="descRechazo" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="consultaHistoricoAportacionRFC">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="rfc" type="xs:string" />
+      <xs:element minOccurs="0" name="folio" type="xs:long" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="consultaHistoricoAportacionRFCResponse">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="return" type="tns:recaudacionDTO" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="recaudacionDTO">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="cuentaIndividualDTO" type="tns:cuentaIndividualDTO" />
+      <xs:element minOccurs="0" name="descRechazo" type="xs:string" />
+      <xs:element minOccurs="0" name="fechaHoraRespuesta" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="folio" type="xs:long" />
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="historicoAportacionesDTO" nillable="true" type="tns:historicoAportacionesDTO" />
+      <xs:element minOccurs="0" name="idRechazo" type="xs:int" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="historicoAportacionesDTO">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="entidadDestino" type="xs:string" />
+      <xs:element minOccurs="0" name="entidadRecaudadora" type="xs:string" />
+      <xs:element minOccurs="0" name="fechaDisperison" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="fechaPago" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="fechaValorRCV" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="importeRCV" type="xs:decimal" />
+      <xs:element minOccurs="0" name="importeVivienda" type="xs:decimal" />
+      <xs:element minOccurs="0" name="nombreTrabajador" type="xs:string" />
+      <xs:element minOccurs="0" name="nssPatron" type="xs:string" />
+      <xs:element minOccurs="0" name="nssTrabajador" type="xs:string" />
+      <xs:element minOccurs="0" name="periodoPago" type="xs:string" />
+      <xs:element minOccurs="0" name="salarioIntegrado" type="xs:decimal" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="consultaCuentaIndividualRFC">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="rfc" type="xs:string" />
+      <xs:element minOccurs="0" name="folio" type="xs:long" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="consultaCuentaIndividualRFCResponse">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="return" type="tns:registroDTO" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="consultaTraspasoRFC">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="rfc" type="xs:string" />
+      <xs:element minOccurs="0" name="folio" type="xs:long" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="consultaTraspasoRFCResponse">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="return" type="tns:traspasoDTO" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="consultaRetiroResolPensionRFC">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="rfc" type="xs:string" />
+      <xs:element minOccurs="0" name="folio" type="xs:long" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="consultaRetiroResolPensionRFCResponse">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="return" type="tns:retiroDTO" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="consultaRetiroResolPensionNSS">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="nss" type="xs:string" />
+      <xs:element minOccurs="0" name="folio" type="xs:long" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="consultaRetiroResolPensionNSSResponse">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="return" type="tns:retiroDTO" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="consultaHistoricoAportacionCURP">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="curp" type="xs:string" />
+      <xs:element minOccurs="0" name="folio" type="xs:long" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="consultaHistoricoAportacionCURPResponse">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="return" type="tns:recaudacionDTO" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="consultaTraspasoNSS">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="nss" type="xs:string" />
+      <xs:element minOccurs="0" name="folio" type="xs:long" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="consultaTraspasoNSSResponse">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="return" type="tns:traspasoDTO" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="consultaHistoricoAportacionNSS">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="nss" type="xs:string" />
+      <xs:element minOccurs="0" name="folio" type="xs:long" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="consultaHistoricoAportacionNSSResponse">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="return" type="tns:recaudacionDTO" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="consultaCuentaIndividualNSS">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="nss" type="xs:string" />
+      <xs:element minOccurs="0" name="folio" type="xs:long" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="consultaCuentaIndividualNSSResponse">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="return" type="tns:registroDTO" />
+    </xs:sequence>
+  </xs:complexType>
+</xs:schema>

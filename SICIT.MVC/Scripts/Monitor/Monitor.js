@@ -173,7 +173,7 @@ async function fetchDataAsyncTableSinRevisar(urlString, methodType, args) {
                                 return '<a title="Editar" href="#" onclick="getReporte(' + row.NUM_FOLIO + ')"><i style="color:green" class="fas fa-solid fa-circle fa-lg"></i></a>';
                                 break;
                             case 1:
-                                return '<i style="color:yellow" class="fas fa-solid fa-circle fa-lg"></i></a>';
+                                return '<i style="color:blue" class="fas fa-solid fa-circle fa-lg"></i></a>';
                                 break;
                             case 2:
                                 return '<i style="color:red" class="fas fa-solid fa-circle fa-lg"></i></a>';
@@ -267,7 +267,7 @@ async function fetchDataAsyncTableHistorial(urlString, methodType, args) {
                                 return '<a title="Editar" href="#" onclick="getReporte(' + row.NUM_FOLIO + ')"><i style="color:green" class="fas fa-solid fa-circle fa-lg"></i></a>';
                                 break;
                             case 1:
-                                return '<i style="color:yellow" class="fas fa-solid fa-circle fa-lg"></i></a>';
+                                return '<i style="color:blue" class="fas fa-solid fa-circle fa-lg"></i></a>';
                                 break;
                             case 2:
                                 return '<i style="color:red" class="fas fa-solid fa-circle fa-lg"></i></a>';

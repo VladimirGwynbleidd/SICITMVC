@@ -1,5 +1,7 @@
 ﻿using SICIT.MVC.Helpers;
 using System.Web.Mvc;
+//using SICIT.MVC.ServicioSICIT;
+using SICIT.MVC.ServicioSICIT;
 
 namespace SICIT.MVC.Controllers
 {
@@ -9,6 +11,12 @@ namespace SICIT.MVC.Controllers
         // GET: Consultas
         public ActionResult IndexConsultas()
         {
+            //SICITServicePortClient client = new SICITServicePortClient();
+            ServicioSICIT.SICITServicePortClient valor = new SICITServicePortClient(); 
+            
+            
+
+
             return View();
         }
 

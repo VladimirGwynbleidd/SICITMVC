@@ -7,5 +7,6 @@
         public string USUARIOSESION { get; set; }
         public string GUID { get; set; }
         public string IP { get; set; }
+        public string NOMBRE_COMPLETO { get; set; }
     }
 }

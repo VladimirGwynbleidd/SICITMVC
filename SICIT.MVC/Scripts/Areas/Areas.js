@@ -219,7 +219,17 @@ async function fetchDataAsyncTableAreas(urlString, methodType, args) {
                 },
                 {
                     data: "Acciones", render: function (data, type, row) {
-                        return '<a title="Editar" href="#" onclick="return OpenModalAddUpdateAreas(' + row.ID_AREA + ',' + '\'' + row.DESC_AREA + '\'' + ',\'' + row.DESC_T_ENT + '\'' + ',\'' + row.SIGLAS_ENT + '\'' + ',\'' + row.ID_T_ENT + '\'' + ',\'' + row.CVE_ID_ENTAS + '\'' + ')"><i style="color:black" class="fas fa-fw fa-edit fa-lg"></i></a> | <a title="Eliminar" href="#" onclick="OpenModalDelete(' + row.ID_AREA + ')"><i style="color:red" class="fas fa-solid fa-trash fa-lg"></i></a>';
+
+                        switch (row.VIG_FLAG) {
+                            case 0:
+                                return '';
+                                break;
+                            case 1:
+                                return '<a title="Editar" href="#" onclick="return OpenModalAddUpdateAreas(' + row.ID_AREA + ',' + '\'' + row.DESC_AREA + '\'' + ',\'' + row.DESC_T_ENT + '\'' + ',\'' + row.SIGLAS_ENT + '\'' + ',\'' + row.ID_T_ENT + '\'' + ',\'' + row.CVE_ID_ENTAS + '\'' + ')"><i style="color:black" class="fas fa-fw fa-edit fa-lg"></i></a> | <a title="Eliminar" href="#" onclick="OpenModalDelete(' + row.ID_AREA + ')"><i style="color:red" class="fas fa-solid fa-trash fa-lg"></i></a>';
+                                break;
+                        }
+
+
                     }, sortable: false, className: "uniqueClassName"
                 }
             ],
@@ -312,7 +322,14 @@ async function fetchDataAsyncTableAreasVigentes(urlString, methodType, args) {
                 },
                 {
                     data: "Acciones", render: function (data, type, row) {
-                        return '<a title="Editar" href="#" onclick="return OpenModalAddUpdateAreas(' + row.ID_AREA + ',' + '\'' + row.DESC_AREA + '\'' + ',\'' + row.DESC_T_ENT + '\'' + ',\'' + row.SIGLAS_ENT + '\'' + ',\'' + row.ID_T_ENT + '\'' + ',\'' + row.CVE_ID_ENTAS + '\'' + ')"><i style="color:black" class="fas fa-fw fa-edit fa-lg"></i></a> | <a title="Eliminar" href="#" onclick="OpenModalDelete(' + row.ID_AREA + ')"><i style="color:red" class="fas fa-solid fa-trash fa-lg"></i></a>';
+
+                        switch (row.VIG_FLAG) {
+                            case 1:
+                                return '<a title="Editar" href="#" onclick="return OpenModalAddUpdateAreas(' + row.ID_AREA + ',' + '\'' + row.DESC_AREA + '\'' + ',\'' + row.DESC_T_ENT + '\'' + ',\'' + row.SIGLAS_ENT + '\'' + ',\'' + row.ID_T_ENT + '\'' + ',\'' + row.CVE_ID_ENTAS + '\'' + ')"><i style="color:black" class="fas fa-fw fa-edit fa-lg"></i></a> | <a title="Eliminar" href="#" onclick="OpenModalDelete(' + row.ID_AREA + ')"><i style="color:red" class="fas fa-solid fa-trash fa-lg"></i></a>';
+                                break;
+                        }
+
+
                     }, sortable: false, className: "uniqueClassName"
                 }
             ],

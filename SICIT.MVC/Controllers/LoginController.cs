@@ -57,7 +57,7 @@ namespace SITIC.MVC.Controllers
                                 accesoPagina.VIG_FLAG = deserializedAcceso.VIG_FLAG; //true;
                                 accesoPagina.FQDN = servicio;
                                 accesoPagina.IP = GetIpAddress();
-
+                                accesoPagina.NOMBRE_COMPLETO = string.Format("{0} {1} {2}", deserializedAcceso.NOMBRES, deserializedAcceso.APELLIDO_PATERNO, deserializedAcceso.APELLIDO_MATERNO);
 
                                 if (deserializedAcceso.PRIMERA_SESION == 1)
                                 {

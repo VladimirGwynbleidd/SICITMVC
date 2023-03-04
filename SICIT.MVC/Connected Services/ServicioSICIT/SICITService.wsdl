@@ -1,0 +1,246 @@
+<?xml version="1.0" encoding="utf-8"?>
+<definitions xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:tns="http://www.procesar.com.mx/SICIT/SICITService/" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" name="SICITService" targetNamespace="http://www.procesar.com.mx/SICIT/SICITService/" xmlns="http://schemas.xmlsoap.org/wsdl/">
+  <types>
+    <xsd:schema>
+      <xsd:import schemaLocation="http://192.168.1.237:80/SICIT/SICITService?xsd=1" namespace="http://www.procesar.com.mx/SICIT/SICITService/" />
+    </xsd:schema>
+  </types>
+  <message name="consultaCuentaIndividualCURP">
+    <part name="parameters" element="tns:consultaCuentaIndividualCURP" />
+  </message>
+  <message name="consultaCuentaIndividualCURPResponse">
+    <part name="parameters" element="tns:consultaCuentaIndividualCURPResponse" />
+  </message>
+  <message name="consultaCuentaIndividualNSS">
+    <part name="parameters" element="tns:consultaCuentaIndividualNSS" />
+  </message>
+  <message name="consultaCuentaIndividualNSSResponse">
+    <part name="parameters" element="tns:consultaCuentaIndividualNSSResponse" />
+  </message>
+  <message name="consultaCuentaIndividualRFC">
+    <part name="parameters" element="tns:consultaCuentaIndividualRFC" />
+  </message>
+  <message name="consultaCuentaIndividualRFCResponse">
+    <part name="parameters" element="tns:consultaCuentaIndividualRFCResponse" />
+  </message>
+  <message name="consultaHistoricoAportacionCURP">
+    <part name="parameters" element="tns:consultaHistoricoAportacionCURP" />
+  </message>
+  <message name="consultaHistoricoAportacionCURPResponse">
+    <part name="parameters" element="tns:consultaHistoricoAportacionCURPResponse" />
+  </message>
+  <message name="consultaHistoricoAportacionNSS">
+    <part name="parameters" element="tns:consultaHistoricoAportacionNSS" />
+  </message>
+  <message name="consultaHistoricoAportacionNSSResponse">
+    <part name="parameters" element="tns:consultaHistoricoAportacionNSSResponse" />
+  </message>
+  <message name="consultaHistoricoAportacionRFC">
+    <part name="parameters" element="tns:consultaHistoricoAportacionRFC" />
+  </message>
+  <message name="consultaHistoricoAportacionRFCResponse">
+    <part name="parameters" element="tns:consultaHistoricoAportacionRFCResponse" />
+  </message>
+  <message name="consultaRetiroResolPensionCURP">
+    <part name="parameters" element="tns:consultaRetiroResolPensionCURP" />
+  </message>
+  <message name="consultaRetiroResolPensionCURPResponse">
+    <part name="parameters" element="tns:consultaRetiroResolPensionCURPResponse" />
+  </message>
+  <message name="consultaRetiroResolPensionNSS">
+    <part name="parameters" element="tns:consultaRetiroResolPensionNSS" />
+  </message>
+  <message name="consultaRetiroResolPensionNSSResponse">
+    <part name="parameters" element="tns:consultaRetiroResolPensionNSSResponse" />
+  </message>
+  <message name="consultaRetiroResolPensionRFC">
+    <part name="parameters" element="tns:consultaRetiroResolPensionRFC" />
+  </message>
+  <message name="consultaRetiroResolPensionRFCResponse">
+    <part name="parameters" element="tns:consultaRetiroResolPensionRFCResponse" />
+  </message>
+  <message name="consultaTraspasoCURP">
+    <part name="parameters" element="tns:consultaTraspasoCURP" />
+  </message>
+  <message name="consultaTraspasoCURPResponse">
+    <part name="parameters" element="tns:consultaTraspasoCURPResponse" />
+  </message>
+  <message name="consultaTraspasoNSS">
+    <part name="parameters" element="tns:consultaTraspasoNSS" />
+  </message>
+  <message name="consultaTraspasoNSSResponse">
+    <part name="parameters" element="tns:consultaTraspasoNSSResponse" />
+  </message>
+  <message name="consultaTraspasoRFC">
+    <part name="parameters" element="tns:consultaTraspasoRFC" />
+  </message>
+  <message name="consultaTraspasoRFCResponse">
+    <part name="parameters" element="tns:consultaTraspasoRFCResponse" />
+  </message>
+  <portType name="SICITServicePort">
+    <operation name="consultaCuentaIndividualCURP">
+      <input message="tns:consultaCuentaIndividualCURP" />
+      <output message="tns:consultaCuentaIndividualCURPResponse" />
+    </operation>
+    <operation name="consultaCuentaIndividualNSS">
+      <input message="tns:consultaCuentaIndividualNSS" />
+      <output message="tns:consultaCuentaIndividualNSSResponse" />
+    </operation>
+    <operation name="consultaCuentaIndividualRFC">
+      <input message="tns:consultaCuentaIndividualRFC" />
+      <output message="tns:consultaCuentaIndividualRFCResponse" />
+    </operation>
+    <operation name="consultaHistoricoAportacionCURP">
+      <input message="tns:consultaHistoricoAportacionCURP" />
+      <output message="tns:consultaHistoricoAportacionCURPResponse" />
+    </operation>
+    <operation name="consultaHistoricoAportacionNSS">
+      <input message="tns:consultaHistoricoAportacionNSS" />
+      <output message="tns:consultaHistoricoAportacionNSSResponse" />
+    </operation>
+    <operation name="consultaHistoricoAportacionRFC">
+      <input message="tns:consultaHistoricoAportacionRFC" />
+      <output message="tns:consultaHistoricoAportacionRFCResponse" />
+    </operation>
+    <operation name="consultaRetiroResolPensionCURP">
+      <input message="tns:consultaRetiroResolPensionCURP" />
+      <output message="tns:consultaRetiroResolPensionCURPResponse" />
+    </operation>
+    <operation name="consultaRetiroResolPensionNSS">
+      <input message="tns:consultaRetiroResolPensionNSS" />
+      <output message="tns:consultaRetiroResolPensionNSSResponse" />
+    </operation>
+    <operation name="consultaRetiroResolPensionRFC">
+      <input message="tns:consultaRetiroResolPensionRFC" />
+      <output message="tns:consultaRetiroResolPensionRFCResponse" />
+    </operation>
+    <operation name="consultaTraspasoCURP">
+      <input message="tns:consultaTraspasoCURP" />
+      <output message="tns:consultaTraspasoCURPResponse" />
+    </operation>
+    <operation name="consultaTraspasoNSS">
+      <input message="tns:consultaTraspasoNSS" />
+      <output message="tns:consultaTraspasoNSSResponse" />
+    </operation>
+    <operation name="consultaTraspasoRFC">
+      <input message="tns:consultaTraspasoRFC" />
+      <output message="tns:consultaTraspasoRFCResponse" />
+    </operation>
+  </portType>
+  <binding name="SICITServiceSOAPBinding" type="tns:SICITServicePort">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <operation name="consultaCuentaIndividualCURP">
+      <soap:operation soapAction="http://www.procesar.com.mx/SICIT/SICITService/consultaCuentaIndividualCURP/" />
+      <input>
+        <soap:body use="literal" />
+      </input>
+      <output>
+        <soap:body use="literal" />
+      </output>
+    </operation>
+    <operation name="consultaCuentaIndividualNSS">
+      <soap:operation soapAction="http://www.procesar.com.mx/SICIT/SICITService/consultaCuentaIndividualNSS/" />
+      <input>
+        <soap:body use="literal" />
+      </input>
+      <output>
+        <soap:body use="literal" />
+      </output>
+    </operation>
+    <operation name="consultaCuentaIndividualRFC">
+      <soap:operation soapAction="http://www.procesar.com.mx/SICIT/SICITService/consultaCuentaIndividualRFC/" />
+      <input>
+        <soap:body use="literal" />
+      </input>
+      <output>
+        <soap:body use="literal" />
+      </output>
+    </operation>
+    <operation name="consultaHistoricoAportacionCURP">
+      <soap:operation soapAction="http://www.procesar.com.mx/SICIT/SICITService/consultaHistoricoAportacionCURP/" />
+      <input>
+        <soap:body use="literal" />
+      </input>
+      <output>
+        <soap:body use="literal" />
+      </output>
+    </operation>
+    <operation name="consultaHistoricoAportacionNSS">
+      <soap:operation soapAction="http://www.procesar.com.mx/SICIT/SICITService/consultaHistoricoAportacionNSS/" />
+      <input>
+        <soap:body use="literal" />
+      </input>
+      <output>
+        <soap:body use="literal" />
+      </output>
+    </operation>
+    <operation name="consultaHistoricoAportacionRFC">
+      <soap:operation soapAction="http://www.procesar.com.mx/SICIT/SICITService/consultaHistoricoAportacionRFC/" />
+      <input>
+        <soap:body use="literal" />
+      </input>
+      <output>
+        <soap:body use="literal" />
+      </output>
+    </operation>
+    <operation name="consultaRetiroResolPensionCURP">
+      <soap:operation soapAction="http://www.procesar.com.mx/SICIT/SICITService/consultaRetiroResolPensionCURP/" />
+      <input>
+        <soap:body use="literal" />
+      </input>
+      <output>
+        <soap:body use="literal" />
+      </output>
+    </operation>
+    <operation name="consultaRetiroResolPensionNSS">
+      <soap:operation soapAction="http://www.procesar.com.mx/SICIT/SICITService/consultaRetiroResolPensionNSS/" />
+      <input>
+        <soap:body use="literal" />
+      </input>
+      <output>
+        <soap:body use="literal" />
+      </output>
+    </operation>
+    <operation name="consultaRetiroResolPensionRFC">
+      <soap:operation soapAction="http://www.procesar.com.mx/SICIT/SICITService/consultaRetiroResolPensionRFC/" />
+      <input>
+        <soap:body use="literal" />
+      </input>
+      <output>
+        <soap:body use="literal" />
+      </output>
+    </operation>
+    <operation name="consultaTraspasoCURP">
+      <soap:operation soapAction="http://www.procesar.com.mx/SICIT/SICITService/consultaTraspasoCURP/" />
+      <input>
+        <soap:body use="literal" />
+      </input>
+      <output>
+        <soap:body use="literal" />
+      </output>
+    </operation>
+    <operation name="consultaTraspasoNSS">
+      <soap:operation soapAction="http://www.procesar.com.mx/SICIT/SICITService/consultaTraspasoNSS/" />
+      <input>
+        <soap:body use="literal" />
+      </input>
+      <output>
+        <soap:body use="literal" />
+      </output>
+    </operation>
+    <operation name="consultaTraspasoRFC">
+      <soap:operation soapAction="http://www.procesar.com.mx/SICIT/SICITService/consultaTraspasoRFC/" />
+      <input>
+        <soap:body use="literal" />
+      </input>
+      <output>
+        <soap:body use="literal" />
+      </output>
+    </operation>
+  </binding>
+  <service name="SICITService">
+    <port name="SICITServiceSOAP" binding="tns:SICITServiceSOAPBinding">
+      <soap:address location="http://192.168.1.237:80/SICIT/SICITService" />
+    </port>
+  </service>
+</definitions>

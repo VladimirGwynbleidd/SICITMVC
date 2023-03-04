@@ -52,6 +52,8 @@
     <Reference Include="System.Net.Http.Formatting, Version=5.2.9.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.AspNet.WebApi.Client.5.2.9\lib\net45\System.Net.Http.Formatting.dll</HintPath>
     </Reference>
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.ServiceModel" />
     <Reference Include="System.Web.DynamicData" />
     <Reference Include="System.Web.Entity" />
     <Reference Include="System.Web.ApplicationServices" />
@@ -123,6 +125,11 @@
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="Connected Services\ServicioSICIT\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Compile>
     <Compile Include="Controllers\AreasController.cs" />
     <Compile Include="Controllers\BitacoraAccionesController.cs" />
     <Compile Include="Controllers\BitacoraSesionesController.cs" />
@@ -147,6 +154,64 @@
     <Compile Include="Tools\HashPassword.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Connected Services\ServicioSICIT\SICIT.MVC.ServicioSICIT.consultaCuentaIndividualCURPResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Connected Services\ServicioSICIT\SICIT.MVC.ServicioSICIT.consultaCuentaIndividualNSSResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Connected Services\ServicioSICIT\SICIT.MVC.ServicioSICIT.consultaCuentaIndividualRFCResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Connected Services\ServicioSICIT\SICIT.MVC.ServicioSICIT.consultaHistoricoAportacionCURPResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Connected Services\ServicioSICIT\SICIT.MVC.ServicioSICIT.consultaHistoricoAportacionNSSResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Connected Services\ServicioSICIT\SICIT.MVC.ServicioSICIT.consultaHistoricoAportacionRFCResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Connected Services\ServicioSICIT\SICIT.MVC.ServicioSICIT.consultaRetiroResolPensionCURPResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Connected Services\ServicioSICIT\SICIT.MVC.ServicioSICIT.consultaRetiroResolPensionNSSResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Connected Services\ServicioSICIT\SICIT.MVC.ServicioSICIT.consultaRetiroResolPensionRFCResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Connected Services\ServicioSICIT\SICIT.MVC.ServicioSICIT.consultaTraspasoCURPResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Connected Services\ServicioSICIT\SICIT.MVC.ServicioSICIT.consultaTraspasoNSSResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Connected Services\ServicioSICIT\SICIT.MVC.ServicioSICIT.consultaTraspasoRFCResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Connected Services\ServicioSICIT\SICIT.MVC.ServicioSICIT.recaudacionDTO.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Connected Services\ServicioSICIT\SICIT.MVC.ServicioSICIT.registroDTO.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Connected Services\ServicioSICIT\SICIT.MVC.ServicioSICIT.retiroDTO.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Connected Services\ServicioSICIT\SICIT.MVC.ServicioSICIT.traspasoDTO.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <None Include="Connected Services\ServicioSICIT\SICITService.wsdl" />
+    <None Include="Connected Services\ServicioSICIT\SICITService.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Connected Services\ServicioSICIT\configuration91.svcinfo" />
+    <None Include="Connected Services\ServicioSICIT\configuration.svcinfo" />
+    <None Include="Connected Services\ServicioSICIT\Reference.svcmap">
+      <Generator>WCF Proxy Generator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
     <Content Include="Content\Ani.css" />
     <Content Include="Content\Animate.css" />
     <Content Include="Content\argon.css" />
@@ -2148,6 +2213,7 @@
     <Content Include="Content\toastr\toastr.css" />
     <Content Include="Content\toastr\toastr.js" />
     <Content Include="Content\util.css" />
+    <Content Include="Css\Acceso.css" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
@@ -2447,6 +2513,12 @@
       <Project>{ea1c3371-2027-4dd8-a8e5-ca39213fe9b7}</Project>
       <Name>SICIT.MVC.UTILERIAS</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadata Include="Connected Services\" />
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadataStorage Include="Connected Services\ServicioSICIT\" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

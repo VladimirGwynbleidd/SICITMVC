@@ -77,8 +77,7 @@ async function GetAllTipoEntidades() {
 
     var url = '';
 
-    //url = $("#FQDN").val() + 'api/Entidades/GetEntidades';
-    url = 'http://localhost:6435/Api/Entidades/GetTipoEntidades';
+    url = $("#FQDN").val() + 'Api/Entidades/GetTipoEntidades';
 
 
     try {
@@ -119,8 +118,7 @@ async function GetEntidadId(idTipoEntidad) {
     };
 
 
-    //url = $("#FQDN").val() + 'api/usuarios/ObtenerUsuarios';
-    url = 'http://localhost:6435/api/Entidades/GetEntidadesById';
+    url = $("#FQDN").val() + 'api/Entidades/GetEntidadesById';
 
     try {
         response = await fetchDataAsyncEntidad('' + url + '', 'POST', JSON.stringify(argsEntidades));
@@ -185,8 +183,7 @@ async function GetAllDataAreasId(idEntidad) {
         ID_T_ENT: $('#IdSelectedTipoEntidad').val()
     };
 
-    //url = $("#FQDN").val() + 'api/usuarios/ObtenerUsuarios';
-    url = 'http://localhost:6435/Api/Areas/GetAreasById';
+    url = $("#FQDN").val() + 'Api/Areas/GetAreasById';
 
     try {
         response = await fetchDataAsyncAreasId('' + url + '', 'POST', JSON.stringify(argsAreas));
@@ -249,8 +246,7 @@ async function GetAllDataPuestoId(idPuesto) {
         CVE_ID_ENT: $('#IdSelectedEntidad').val(),
     };
 
-    //url = $("#FQDN").val() + 'api/usuarios/ObtenerUsuarios';
-    url = 'http://localhost:6435/Api/Puestos/GetPuestoById';
+    url = $("#FQDN").val() + 'Api/Puestos/GetPuestoById';
 
     try {
         response = await fetchDataAsyncPuestoId('' + url + '', 'POST', JSON.stringify(argsPuestos));
@@ -284,8 +280,7 @@ async function fetchDataAsyncPuestoId(urlString, methodType, args) {
 async function GetAllDataPuestosVigentes() {
     var url = '';
 
-    //url = $("#FQDN").val() + 'api/usuarios/ObtenerUsuarios';
-    url = 'http://localhost:6435/Api/Puestos/GetTipoPuestosVigentes';
+    url = $("#FQDN").val() + 'Api/Puestos/GetTipoPuestosVigentes';
 
     try {
         response = await fetchDataAsyncPuestoVigentes('' + url + '', 'GET', {});
@@ -336,8 +331,7 @@ async function GetAllDataPerfilVigentes() {
 
     var url = '';
 
-    //url = $("#FQDN").val() + 'api/usuarios/ObtenerUsuarios';
-    url = 'http://localhost:6435/Api/Perfil/GetTipoPerfilVigentes';
+    url = $("#FQDN").val() + 'Api/Perfil/GetTipoPerfilVigentes';
 
     try {
         response = await fetchDataAsyncPerfilVigentes('' + url + '', 'GET', {});
@@ -372,8 +366,7 @@ async function GetAllDataUsuarios() {
     CardStylesOne();
     var url = '';
 
-    //url = $("#FQDN").val() + 'api/usuarios/ObtenerUsuarios';
-    url = 'http://localhost:6435/api/usuarios/getusuarios';
+    url = $("#FQDN").val() + 'api/usuarios/getusuarios';
 
     try {
         response = await fetchDataAsyncTableUsuarios('' + url + '', 'GET', {});
@@ -452,6 +445,9 @@ async function fetchDataAsyncTableUsuarios(urlString, methodType, args) {
                     data: "Acciones", render: function (data, type, row) {
 
                         switch (row.VIG_FLAG) {
+                            case false:
+                                return '';
+                                break;
                             case true:
                                 return '<a title="Editar" href="#" onclick="return OpenModalAddUpdateUsuarios(' + row.CVE_ID_ENT + ',' + '\'' + row.DESC_ENT + '\'' + ',\'' + row.SIGLAS_ENT + '\'' + ',\'' + row.ID_T_ENT + '\'' + ',\'' + row.USUARIO + '\'' + ')"><i style="color:black" class="fas fa-fw fa-edit fa-lg"></i></a> | <a title="Eliminar" href="#" onclick="OpenModalDelete(' + '\'' + row.USUARIO + '\'' + ')"><i style="color:red" class="fas fa-solid fa-trash fa-lg"></i></a>';
                                 break;
@@ -473,8 +469,7 @@ async function GetAllDataUsuariosVigentes() {
     CardStylesTwo();
     var url = '';
 
-    //url = $("#FQDN").val() + 'api/usuarios/ObtenerUsuarios';
-    url = 'http://localhost:6435/api/usuarios/GetUsuariosVigentes';
+    url = $("#FQDN").val() + 'api/usuarios/GetUsuariosVigentes';
 
     try {
         response = await fetchDataAsyncTableUsuariosVigentes('' + url + '', 'GET', {});
@@ -567,8 +562,7 @@ async function GetAllDataUsuariosHistorial() {
     CardStylesThree();
     var url = '';
 
-    //url = $("#FQDN").val() + 'api/usuarios/ObtenerUsuarios';
-    url = 'http://localhost:6435/api/usuarios/GetUsuariosHistorial';
+    url = $("#FQDN").val() + 'api/usuarios/GetUsuariosHistorial';
 
     try {
         response = await fetchDataAsyncTableUsuariosHistorial('' + url + '', 'GET', {});
@@ -657,7 +651,7 @@ function OpenModalAddUpdateUsuarios(CVE_ID_ENT, DESC_ENT, SIGLAS_ENT, ID_T_ENT, 
         $("#IdTipoAlta").val(1);
         $("#ModalCenterTitle").html('Editar Usuario');
         $("#ModalCenterTitleH6").html('Editar Usuario');
-        var urlString = 'http://localhost:6435/api/usuarios/GetUsuarioById';
+        var urlString = $("#FQDN").val() + 'api/usuarios/GetUsuarioById';
 
         $.ajax({
             contentType: 'application/json',
@@ -757,7 +751,7 @@ async function AddUpdateUsuarios() {
 
         var args;
         if (operacion == 0) {
-            urlString = 'http://localhost:6435/api/usuarios/Insert';
+            urlString = $("#FQDN").val() + 'api/usuarios/Insert';
 
             args = {
 
@@ -776,7 +770,7 @@ async function AddUpdateUsuarios() {
         }
         else {
 
-            urlString = 'http://localhost:6435/api/usuarios/Update';
+            urlString = $("#FQDN").val() + 'api/usuarios/Update';
 
             args = {
 
@@ -850,7 +844,7 @@ async function resetPassword() {
 
     var urlString = '';
     //url = $("#FQDN").val() + 'api/usuarios/ObtenerUsuarios';
-    urlString = 'http://localhost:6435/api/usuarios/ResetPassword';
+    urlString = $("#FQDN").val() + 'api/usuarios/ResetPassword';
 
     var args = {
         "USUARIO": $("#IdInputUsuario").val(),
@@ -888,8 +882,7 @@ async function DeleteUsuario() {
         USUARIO: $("#IDUsuario").val(),
     };
 
-    //url = $("#FQDN").val() + 'api/usuarios/delete';
-    urlString = 'http://localhost:6435/api/usuarios/DeleteUsuario';
+    urlString = $("#FQDN").val() + 'api/usuarios/DeleteUsuario';
 
     try {
 
