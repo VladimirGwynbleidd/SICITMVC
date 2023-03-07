@@ -7,23 +7,15 @@
 <html>
 <head>
 
-    @*<script src="~/Content/JQuery_v3.6.0/JQuery3.6.js"></script>*@
     <script src="~/Content/jQueryv3.6.2/jQuery_v3.6.2.js"></script>
 
-    @*<link href="~/Content/bootstrap-4.6.2/css/bootstrap.css" rel="stylesheet" />*@
     <link href="~/Content/Bootstrap5.2.3/css/bootstrap.css" rel="stylesheet" />
 
-    @*<script src="~/Content/bootstrap-4.6.2/js/bootstrap.js"></script>*@
     <script src="~/Content/Bootstrap5.2.3/js/bootstrap.js"></script>
 
     <link href="~/Css/Acceso.css" rel="stylesheet" />
 
-    @*<script src="https://kit.fontawesome.com/03c49d4443.js" crossorigin="anonymous"></script>*@
-
-    @*<script src="~/Scripts/Acceso/Acceso.js"></script>*@
     <script src="~/Scripts/Login/Login.js"></script>
-
-    @*<script src="~/Scripts/jquery.validate.min.js"></script>*@
 
     <link href="~/Content/fonts/fontawesome/css/fontawesome-all.min.css" rel="stylesheet" />
 
@@ -34,7 +26,7 @@
     <link href="~/Content/toastr/toastr.css" rel="stylesheet" />
     <script src="~/Content/toastr/toastr.js"></script>
 
-    <style>
+    <style type="text/css">
         .error {
             color: #F00;
         }
@@ -47,106 +39,57 @@
         #page-content {
             flex: 1 0 auto;
         }
+
+        footer {
+            position: fixed;
+            height: 60px;
+            bottom: 0;
+            width: 100%;
+        }
     </style>
 
     <style>
-        .carousel-inner > .item > img,
-        .carousel-inner > .item > a > img {
-            width: 70%;
-            margin: auto;
+        .carousel-indicators [data-bs-target] {
+            background-color: #084298;
         }
-    </style>
 
-    <style>
-        img {
+        .carousel-control-next-icon {
+            background-color: #084298;
+            width: 57%;
+        }
+
+        .carousel-control-prev-icon {
+            background-color: #084298;
+            width: 57%;
+        }
+
+        .carousel-control-next {
+            right: 45%;
+        }
+
+        .carousel-control-prev {
+            left: 45%;
+        }
+
+        element.style {
+            width: 12px;
+        }
+
+
+        table {
+            font-family: arial, sans-serif;
+            font-size: small;
+            border-collapse: collapse;
             width: 100%;
         }
 
-        .height {
-            height: 10px;
+        td, th {
+            border: 0px solid #dddddd;
+            padding: 5px;
         }
 
-        /* Image-container design */
-        .image-container {
-            max-width: 800px;
-            position: relative;
-            margin: auto;
-        }
-
-        .next {
-            right: 0;
-        }
-
-        /* Next and previous icon design */
-        .previous,
-        .next {
-            cursor: pointer;
-            position: absolute;
-            top: 50%;
-            padding: 10px;
-            margin-top: -25px;
-        }
-
-        /* caption decorate */
-        .captionText {
-            color: #000000;
-            font-size: 14px;
-            position: absolute;
-            padding: 12px 12px;
-            bottom: 8px;
-            width: 100%;
-            text-align: center;
-        }
-
-        /* Slider image number */
-        .slideNumber {
-            background-color: #5574C5;
-            color: white;
-            border-radius: 25px;
-            right: 0;
-            opacity: .5;
-            margin: 5px;
-            width: 30px;
-            height: 30px;
-            text-align: center;
-            font-weight: bold;
-            font-size: 24px;
-            position: absolute;
-        }
-
-        .fa {
-            font-size: 32px;
-        }
-
-            .fa:hover {
-                transform: rotate(360deg);
-                transition: 1s;
-                color: white;
-            }
-
-        .footerdot {
-            cursor: pointer;
-            height: 15px;
-            width: 15px;
-            margin: 0 2px;
-            background-color: #bbbbbb;
-            border-radius: 50%;
-            display: inline-block;
-            transition: background-color 0.5s ease;
-        }
-
-            .active,
-            .footerdot:hover {
-                background-color: black;
-            }
-
-        .carousel .carousel-item {
-            max-height: 550px;
-        }
-
-        .carousel-item img {
-            object-fit: cover;
-            max-height: 550px;
+        tr:nth-child(even) {
+            background-color: #dddddd;
         }
     </style>
 </head>
@@ -205,13 +148,48 @@
             </div>
         </div>
     </div>
-    <div id="page-content">
-        <div class="container text-center">
-            <div class="row justify-content-center">
 
+    <br />
+    <div align="center">
+
+        <div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="carousel">
+            <div class="carousel-indicators carousel-indicators" style="width:70%;max-height:5%">
+                @* Variable Max para establecer posición vertical*@
+                <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+                <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1" aria-label="Slide 2"></button>
+                <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2" aria-label="Slide 3"></button>
             </div>
+            <div class="carousel-inner" style="width:7.5%">
+                <div class="carousel-item active" data-bs-interval="2000">
+                    <a href="#">
+                        <img src="~/Images/ImagesTDC/Exclamation.png" class="d-block" alt="..." style="width:100px" data-bs-toggle="modal" data-bs-target="#ModalAcercaDe">
+                    </a>
+                </div>
+                <div class="carousel-item" data-bs-interval="2000">
+                    <a href="#">
+                        <img src="~/Images/ImagesTDC/Book.png" class="d-block" alt="..." style="width:100px;height:93.27px" data-bs-toggle="modal" data-bs-target="#ModalEmbebido">
+                    </a>
+                </div>
+                <div class="carousel-item" data-bs-interval="2000">
+                    <a href="#">
+                        <img src="~/Images/ImagesTDC/handHelp.png" class="d-block" alt="..." style="width:100px" data-bs-toggle="modal" data-bs-target="#ModalContacto">
+                    </a>
+                </div>
+            </div>
+            <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev" style="width:20px">
+                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Previous</span>
+            </button>
+            <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="next" style="width:20px">
+                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Next</span>
+            </button>
         </div>
+
+
     </div>
+
+    <br />
     <footer id="sticky-footer" class="flex-shrink-0 bg-dark text-white-50">
         <div class="container text-center">
             <small style="font-size:small">
@@ -223,3 +201,137 @@
 </body>
 
 </html>
+
+
+<!-- Modal AcercaDe-->
+<div class="modal fade modal-lg" id="ModalAcercaDe" tabindex="-1" role="dialog" aria-labelledby="ModalCenterTitle" aria-hidden="true" data-bs-backdrop="static">
+    <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLongTitle">Acerca de</h5>
+                <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body" style="padding-left:40px;padding-right:40px">
+                <p><b>Sistema de Consulta de Información de Trabajadores (SICIT)</b></p>
+                <div style="text-align:justify">
+                    Esta Comisión está desarrollando el sistema web denominado Sistema de Consultas de Información de los Trabajadores (SICIT), mediante el cual la JFCA tendrá la facultad de llevar a cabo consultas en línea de los trabajadores que así requiera, en donde dichas consultas se clasifican de dos tipos:
+                    <br /><br />
+                    <ul>
+                        <li><b>Inmediatas;</b> es decir en el momento que se envía la petición segundos después obtendrá el resultado esperado en pantalla.</li>
+                        <li><b>Históricas;</b> estas son definidas por consultas que  la Empresa Operadora de la Base de Datos Nacional del SAR, no podría dar en línea y se tardaría un tiempo, en resolver.</li>
+                    </ul>
+
+                    Para un mejor control sobre las consultas que se lleven a cabo en el SICIT, el sistema generará un número de folio por consulta.
+
+                    <br /><br />
+
+                    El sistema web (SICIT) radicará en un servidor de la Comisión y solo se habilitará a la JEFCA mediante una red privada virtual (VPN), en donde cabe aclarar que no será público y sólo podrán accesar con usuario y contraseña previamente definido por la CONSAR.
+
+                    <br /><br />
+
+                    Los usuarios y contraseñas, serán asignados por solicitud especifica dirigida al área Jurídica de esta comisión, y a su vez dicha área pedirá la petición por Solicitud a la DGI del alta de nuevos usuarios al sistema.
+
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<!-- Modal Archivo Embebido-->
+<div class="modal fade in" data-bs-backdrop="static" data-bs-keyboard="false" id="ModalEmbebido" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">
+                    <label id="lblTituloModal">Manual de Usuario SICIT</label>
+                </h5>
+                <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="form-group">
+                    <div id="divResultado" name="divResultado" style="text-align: left"></div>
+                    <embed id="pdf" title="Archivo PDF" src="~/MANUAL/MANUAL USUARIO SICIT.pdf" frameborder="0" style="width:100%; height:400px">
+                </div>
+
+                <div style="text-align: right;">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+                        Cerrar
+                    </button>
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+</div>
+
+
+<!-- Modal Contacto-->
+<div class="modal fade modal-lg" id="ModalContacto" tabindex="-1" role="dialog" aria-labelledby="ModalCenterTitle" aria-hidden="true" data-bs-backdrop="static">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLongTitle">Contacto</h5>
+                <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body" style="padding-left:40px;padding-right:40px">
+                <p><b>Sistema de Consulta de Información de Trabajadores (SICIT)</b></p>
+
+                <div>
+                    <table border="0" align="center">
+                        <tr>
+                            <td colspan="2" align="center"><b>DIRECCIÓN GENERAL DE INFORMÁTICA</b></td>
+                        </tr>
+                        <tr>
+                            <td><a href="mailto:">Ing. Carlos Maximiliano Huitrón Escamilla</a></td>
+                            <td>Dirección General de Administración</td>
+                        </tr>
+                        <tr>
+                            <td><a href="mailto:">Lic. Alberto Róldan Velasco Montesinos</a></td>
+                            <td>Director de Desarrollo de Sistemas</td>
+                        </tr>
+                        <tr>
+                            <td><a href="mailto:">Ing. Oscar Alberto Carillo Plata</a></td>
+                            <td>Subdirector de Desarrollo de Sistemas</td>
+                        </tr>
+                    </table>
+                    <br />
+                    <table border="0" align="center">
+                        <tr>
+                            <td colspan="2" align="center"><b>DIRECCIÓN GENERAL ADJUNTA DE LO CONTENCIOSO</b></td>
+                        </tr>
+                        <tr>
+                            <td><a href="mailto:">Lic. Claudia López Vázquez</a></td>
+                            <td>Directora General Adjunta de lo Contencioso</td>
+                        </tr>
+                    </table>
+                    <br />
+                    <table border="0" align="center">
+                        <tr>
+                            <td colspan="3" align="center"><b>ATENCIÓN SICIT</b></td>
+                        </tr>
+                        <tr>
+                            <td><a href="mailto:">Ing. Francisco Javier Carmona Váldovinos</a></td>
+                            <td>Atención a SICIT</td>
+                            <td>Tel. 3000-2561 Horario L-V 9:00-18:00 hrs.</td>
+                        </tr>
+                    </table>
+
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+            </div>
+        </div>
+    </div>
+</div>

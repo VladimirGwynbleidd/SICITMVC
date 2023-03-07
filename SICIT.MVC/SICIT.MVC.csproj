@@ -2503,6 +2503,7 @@
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
     <Content Include="fonts\glyphicons-halflings-regular.ttf" />
     <Content Include="fonts\glyphicons-halflings-regular.eot" />
+    <Content Include="MANUAL\MANUAL USUARIO SICIT.pdf" />
     <None Include="packages.config" />
     <Content Include="Views\Monitor\IndexMonitor.cshtml" />
     <Content Include="Views\Consultas\IndexConsultas.cshtml" />
