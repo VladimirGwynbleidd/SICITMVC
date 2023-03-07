@@ -589,8 +589,9 @@ async function OpenModalAddUpdatePuesto(ID_PUESTO, DESCRIPCION_PUESTO, ID_T_ENT,
         $("#IdSelectedArea").val(ID_AREA);
 
 
-        $("#IdSelectedEntidad").attr('disabled', false);
-        $('#IdSelectedArea').attr('disabled', false);
+        $('#IdSelectedTipoEntidad').attr('disabled', true);
+        $("#IdSelectedEntidad").attr('disabled', true);
+        $('#IdSelectedArea').attr('disabled', true);
 
 
     }

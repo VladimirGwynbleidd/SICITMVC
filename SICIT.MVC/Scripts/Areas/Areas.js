@@ -55,7 +55,7 @@ async function GetAllTipoEntidades() {
     var url = '';
 
     //url = $("#FQDN").val() + 'api/Entidades/GetEntidades';
-    url = $("#FQDN").val() + 'api/Entidades/GetEntidades';
+    url = $("#FQDN").val() + 'api/Entidades/GetTipoEntidades';
 
 
     try {
@@ -453,10 +453,8 @@ async function AddUpdateAreas() {
         GUID: $('#GUID').val()
     };
     console.log(JSON.stringify(argsAreas))
-
-    /*url = $('#IDUsuario').val() == 0 ? $("#FQDN").val() + 'api/usuarios/post' : $("#FQDN").val() + 'api/usuarios/put';*/
+    url = $('#IdAreaHidden').val() == 0 ? $("#FQDN").val() + 'api/Areas/Post' : $("#FQDN").val() + 'api/Areas/Put';
     //url = $('#IdAreaHidden').val() == 0 ? 'http://localhost:6435/Api/Areas/Post' : 'http://localhost:6435/Api/Areas/Put';
-    url = $('#IdAreaHidden').val() == 0 ? 'http://localhost:6435/Api/Areas/Post' : 'http://localhost:6435/Api/Areas/Put';
 
 
     try {
@@ -487,15 +485,15 @@ async function AddUpdateAreas() {
         if (response.Exito) {
             GetAllDataAreasVigentes();
             $("#ModalAddUpdateAreas").modal('hide');
-            toastr.info(response.Mensaje, 'Entidades').css("width", "250px");
+            toastr.info(response.Mensaje, 'Áreas').css("width", "250px");
         }
         else {
-            toastr.error(response.Mensaje, 'Entidades').css("width", "200px");
+            toastr.error(response.Mensaje, 'Áreas').css("width", "200px");
         }
     } catch (error) {
         response = error.responseJSON;
         mensaje = response.Mensaje;
-        toastr.error('Error', 'Usuarios').css("width", "150px");
+        toastr.error('Error', 'Áreas').css("width", "150px");
     }
 }
 
@@ -571,8 +569,6 @@ function ResetControlsAreas() {
 
 async function DeleteArea() {
 
-    //alert("1")
-
     var argsUsuario;
     var response;
     var url = '';
@@ -598,13 +594,13 @@ async function DeleteArea() {
         }
 
         if (response.Exito) {
-            GetAllDataVigentes();
+            GetAllDataAreasVigentes();
             $("#ModalDelete").modal('hide');
 
-            toastr.success(response.Mensaje, 'Entidades').css("width", "250px");
+            toastr.success(response.Mensaje, 'Áreas').css("width", "250px");
         }
         else {
-            toastr.error(response.Mensaje, 'Entidades').css("width", "250px");
+            toastr.error(response.Mensaje, 'Áreas').css("width", "250px");
         }
     } catch (error) {
         response = error.responseJSON;
@@ -625,9 +621,9 @@ function OpenModalDelete(ID_AREA) {
 
 
 function CloseModalAddUpdateAreas() {
-    //$("#frmAddUpdateUsuario").trigger("reset");
+    $("#formAddUpdateAreas").trigger("reset");
+    $("#formAddUpdateAreas").data('validator').resetForm();
     $("#ModalAddUpdateAreas").modal('hide');
-    //$("#frmAddUpdateUsuario").data('validator').resetForm();
 }
 
 

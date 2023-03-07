@@ -766,6 +766,9 @@ async function AddUpdateUsuarios() {
                 "APELLIDO_MATERNO": $("#IDApellidoMaterno").val(),
                 "TELEFONO": $("#IDTelefono").val(),
                 "EMAIL": $("#IDEMail").val(),
+
+                "USUARIOSESION": $("#USUARIOSESION").val(),
+                "GUID": $("#GUID").val()
             };
         }
         else {
@@ -785,6 +788,9 @@ async function AddUpdateUsuarios() {
                 "APELLIDO_MATERNO": $("#IDApellidoMaterno").val(),
                 "TELEFONO": $("#IDTelefono").val(),
                 "EMAIL": $("#IDEMail").val(),
+
+                "USUARIOSESION": $("#USUARIOSESION").val(),
+                "GUID": $("#GUID").val()
             };
         }
 
@@ -848,6 +854,9 @@ async function resetPassword() {
 
     var args = {
         "USUARIO": $("#IdInputUsuario").val(),
+
+        USUARIOSESION: $("#USUARIOSESION").val(),
+        GUID: $("#GUID").val()
     }
 
     return await $.ajax({
@@ -880,6 +889,9 @@ async function DeleteUsuario() {
 
     argsEntidades = {
         USUARIO: $("#IDUsuario").val(),
+
+        USUARIOSESION: $("#USUARIOSESION").val(),
+        GUID: $("#GUID").val()
     };
 
     urlString = $("#FQDN").val() + 'api/usuarios/DeleteUsuario';
@@ -914,9 +926,10 @@ async function DeleteUsuario() {
 
 
             if (response.Exito) {
+                GetAllDataUsuariosVigentes();
                 $("#ModalDelete").modal('hide');
                 toastr.success('Se ha eliminado correctamente el usuario').css("width", "250px");
-                GetAllDataPerfilVigentes();
+                
             }
             else {
                 toastr.error('Usuarios').css("width", "250px");

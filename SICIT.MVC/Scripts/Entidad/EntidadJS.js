@@ -197,7 +197,7 @@ async function AddUpdateEntidades() {
 
 
         if (response.Exito) {
-            GetAllDataEntidades();
+            GetAllDataVigentes();
             $("#ModalAddUpdateEntidades").modal('hide');
             toastr.info(response.Mensaje, 'Entidades').css("width", "250px");
         }

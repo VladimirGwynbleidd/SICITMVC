@@ -1,23 +1,31 @@
 ﻿using Newtonsoft.Json;
+using SICIT.MVC.Helpers;
 using SICIT.MVC.Models;
 using SICIT.MVC.Tools;
 using System;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.Linq;
 using System.Net.Http;
 using System.Threading.Tasks;
-using System.Web;
 using System.Web.Mvc;
-
+using SICIT.MVC.UTILERIAS;
+using System.Collections.Generic;
 
 namespace SICIT.MVC.Controllers
 {
+
     public class CambiarPasswordController : Controller
     {
         public ActionResult CambiarPasswordIndex()
         {
-            return View();
+            try
+            {
+                return View();
+
+            }
+            catch (Exception ex)
+            {
+                EventLog.WriteEntry("Error al ejecutar el método CambiarPasswordIndex - : " + ex.InnerException.Message, System.Diagnostics.EventLogEntryType.Error);
+                return View();
+            }
         }
 
         [HttpPost]
@@ -27,8 +35,8 @@ namespace SICIT.MVC.Controllers
             {
                 var result = string.Empty;
                 var newPass = HashPassword.CreatePassword(pass);
-                var usuario = Session["Usuario"].ToString();
-                var acceso = new Usuarios { USUARIO = usuario, CONTRASENA = newPass, PRIMERA_SESION = 0 };
+                var usuario = Session["Usuario"] as Acceso;
+                var acceso = new Usuarios { USUARIO = usuario.USUARIOSESION.ToString(), CONTRASENA = newPass, PRIMERA_SESION = 0 };
 
                 try
                 {
