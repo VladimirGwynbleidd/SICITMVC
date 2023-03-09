@@ -94,6 +94,26 @@ async function fetchDataAsyncTableBitacoraAcciones(urlString, methodType, args) 
             scrollCollapse: true,
 
             scrollX: true,
+            dom: '<"top"<"left-col"B><"center-col"l><"right-col"f>>rtip',
+            buttons: {
+                dom: {
+                    button: {
+                        tag: 'i',
+                        className: ''
+                    }
+                },
+                buttons: [
+                    {
+                        extend: 'excelHtml5',
+                        text: '<i class="fas fa-file-excel btn btn-success"></i>',
+                        title: 'Bitacora Acciones',
+                        exportOptions: {
+                            columns: [0, 1, 2, 3, 4]
+                        },
+                    },
+
+                ]
+            },
             columns: [
                 { 'data': 'USUARIO', className: "uniqueClassName" },
                 { 'data': 'EVENTO', className: "uniqueClassName" },

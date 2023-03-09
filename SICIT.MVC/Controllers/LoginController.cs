@@ -68,8 +68,16 @@ namespace SITIC.MVC.Controllers
                                 }
                                 else
                                 {
+                                    BitacoraSesiones bita = new BitacoraSesiones();
+
+                                    bita.ID_SESION = accesoPagina.GUID;
+                                    bita.USUARIO = accesoPagina.USUARIOSESION;
+                                    bita.DIRECCION_IP = accesoPagina.IP;
+
                                     //Session["Acceso"] = deserializedAcceso;
                                     Session["Acceso"] = accesoPagina;
+                                    var bitaSesion = BitacoraSesion(bita);
+
                                     return Json(new { Exito = "true", PrimeraSesion = 0 });
                                 }
                             }
@@ -97,6 +105,67 @@ namespace SITIC.MVC.Controllers
             {
                 return Json(new { Exito = "false", Mensaje = "Sistema no disponible en este momento" });
             }
+        }
+
+
+        [HttpPost]
+        public async Task<ActionResult> ObtenerParametros()
+        {
+            var result = string.Empty;
+
+            try
+            {
+                string servicio = ConfigurationManager.AppSettings["ServiceUrl"];
+                string VPath = "Api/Parametros/ObtenerParametros";
+                var baseUrl = new Uri(servicio);
+
+                var client = new HttpClient();
+                client.BaseAddress = baseUrl;
+
+                var response = await client.GetAsync(VPath);
+
+                if (response.IsSuccessStatusCode)
+                {
+                    result = await response.Content.ReadAsStringAsync();
+                }
+
+            }
+            catch (Exception ex)
+            {
+                EventLog.WriteEntry("Error al ejecutar el método Login - ObtenerParametros: " + ex.InnerException.Message, System.Diagnostics.EventLogEntryType.Error);
+            }
+
+            return Json(result);
+        }
+
+
+        public async Task<ActionResult> BitacoraSesion(BitacoraSesiones bita)
+        {
+            var result = string.Empty;
+
+            try
+            {
+                string servicio = ConfigurationManager.AppSettings["ServiceUrl"];
+                string VPath = "Api/BitacoraSesiones/AgregarBitacora";
+                var baseUrl = new Uri(servicio);
+
+                var client = new HttpClient();
+                client.BaseAddress = baseUrl;
+
+                var response = await client.PostAsJsonAsync(VPath, bita);
+
+                if (response.IsSuccessStatusCode)
+                {
+                    result = await response.Content.ReadAsStringAsync();
+                }
+
+            }
+            catch (Exception ex)
+            {
+                EventLog.WriteEntry("Error al ejecutar el método Login - BitacoraSesion: " + ex.InnerException.Message, System.Diagnostics.EventLogEntryType.Error);
+            }
+
+            return Json(result);
         }
 
 

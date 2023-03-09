@@ -2,15 +2,204 @@
 <script src="~/Content/DataTables/datatables.js"></script>
 <script src="~/Content/Bootstrap5.2.3/js/bootstrap.js"></script>
 
-
-<script src="~/Scripts/Puestos/Puestos.js"></script>
+<script src="~/Scripts/Entidad/EntidadJS.js"></script>
 <link href="~/Content/DataTables/datatables.css" rel="stylesheet" />
 @*<link href="~/Content/Bootstrap5.2.3/css/bootstrap.css" rel="stylesheet" />*@
 @*<link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
     rel="stylesheet">*@
+<script src="~/Content/DataTables/DatatableTools.js"></script>
 
 <link href="~/Content/toastr/toastr.css" rel="stylesheet" />
 @*<link href="~/Content/Start/css/sb-admin-2.css" rel="stylesheet" />*@
 <script src="~/Content/toastr/toastr.js"></script>
 <script src="~/Scripts/Validate/jquery.validate.js"></script>
 <script src="~/Scripts/Methods/additional-methods.min.js"></script>
+<link href="~/Content/DataTables/DatatableTools.css" rel="stylesheet" />
+
+<!-- [ Main Content ] start -->
+
+<style>
+    .error {
+        color: #F00;
+    }
+
+    .selected {
+        background-color: blue;
+    }
+
+    .error {
+        font-size: 16px;
+    }
+
+    .custom-btn {
+        cursor: pointer;
+        margin-right: 5px;
+    }
+
+    /* div.dataTables_wrapper div.dataTables_filter {
+            padding-top: 0.8em;
+        }
+
+        div.dataTables_wrapper div.dataTables_paginate {
+            padding-top: 0.8em;
+        }*/
+
+    /*    div.dataTables_wrapper div.dataTables_info {
+            padding-top: 1.7em;
+        }
+
+        div.dataTables_wrapper div.dataTables_length {
+            padding-top: 0.3em;
+        } */
+
+    /*div.dataTables_filter,
+        div.dataTables_length {
+            display: inline-block;
+            margin-left: 15em;
+        }
+    */
+
+    .left-col {
+        float: left;
+        width: 5%;
+    }
+
+    .center-col {
+        float: left;
+        width: 65%;
+    }
+
+    .right-col {
+        float: left;
+        width: 30%;
+    }
+</style>
+
+<div class="pcoded-main-container">
+
+
+    SICIT
+   
+</div>
+<!-- [ Main Content ] end -->
+<!-- Modal ModalAddUpdateUser-->
+<div class="modal fade" style="padding-top:3%!important" id="ModalAddUpdateEntidades" tabindex="-1" role="dialog" data-backdrop="static" data-keyboard="false">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                @*<h3 class="m-0 font-weight-bold text-primary" id="ModalCenterTitle"><span class="fas fa-user-o fa-lg" aria-hidden="true"></span> Registro de Entidad</h3>*@
+                <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <!-- Overflow Hidden -->
+                <form class="needs-validation form-group" id="formAddUpdateEntidades" autocomplete="off" registration novalidate>
+                    <div class="card mb-2">
+                        <div class="card-header py-3 text-center">
+                            <h3 id="ModalCenterTitleH6" class="m-0 font-weight-bold text-primary"></h3>
+                        </div>
+
+                        <div class="card-body">
+                            <div class="form-group">
+                                <div class="input-group col-md-12">
+                                    <input type="text" class="form-control" id="IdEntidadHidden" hidden>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="input-group col-md-12">
+                                    <input type="text" class="form-control" id="IdTipoEntidadHidden" hidden>
+                                </div>
+                            </div>
+                            <div class="form-row">
+                                <div class="col-md-2 mb-3">
+                                    <label class="my-1 mr-2" for="lblClave">Clave:</label>
+                                    <input type="text" class="form-control" id="IdInputClaveEntidad" placeholder="Clave">
+                                </div>
+                            </div>
+                            <div class="form-row">
+                                <div class="col-md-9 mb-3">
+                                    <label class="my-1 mr-2" for="lblDescripcion">Descripción:</label>
+                                    <input type="text" class="form-control" id="IdinputDescripcionEntidad" name="IdinputDescripcionEntidad" placeholder="Descripción">
+                                </div>
+                            </div>
+                            <div class="form-row">
+                                <div class="col-md-9 mb-3">
+                                    <label for="lblSiglas">Siglas</label>
+                                    <input type="text" class="form-control" id="IdInputSiglasEntidad" name="IdInputSiglasEntidad" placeholder="Siglas">
+                                    <div class="invalid-feedback">
+                                        Please provide a valid city.
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-row">
+                                <div class="col-md-5 mb-3">
+                                    <label for="lblSelectedTipo">Tipo</label>
+                                    <select class="form-select" id="IdSelectedTipo" name="IdSelectedTipo"></select>
+                                    <div class="invalid-feedback">
+                                        Please provide a valid city.
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                    @*<div class="border-top my-3 border-5"></div>*@
+                    <!-- Overflow Hidden -->
+
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-primary float-right" onclick="AddUpdateEntidades();" type="submit" value="submit">Aceptar</button>
+                <button class="btn btn-danger float-right" onclick="CloseModalAddUpdateEntidades();">Cancelar</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<!-- Extra large modal -->
+
+<div class="modal fade" id="exampleModalXl" tabindex="-1" role="dialog" aria-labelledby="myExtraLargeModalLabel" style="display: none;" aria-hidden="true">
+    <div class="modal-dialog modal-xl" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Extra Large Modal</h5>
+                <button class="btn-close" type="button" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <p>This is an example of an extra large modal!</p>
+            </div>
+            <div class="modal-footer"><button class="btn btn-primary" type="button" data-bs-dismiss="modal">Close</button></div>
+        </div>
+    </div>
+</div>
+
+
+
+
+<!-- Modal ModalDelete -->
+<div class="modal fade" style="padding-top:3%!important" id="ModalDelete" tabindex="-1" role="dialog" data-backdrop="static" data-keyboard="false">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title">Eliminar Entidad</h4>
+                <button type="button" class="close" data-bs-dismiss="modal"
+                        aria-hidden="true">
+                    &times;
+                </button>
+            </div>
+            <div class="modal-body" style="height: 75px">
+                <p>¿Estás seguro de eliminar el registro?</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary" id="confirm-delete-ok" onclick="DeleteEntidad();">Aceptar</button>
+                <button type="button" class="btn btn-danger" onclick="CloseModalDelete();">Cancelar</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<input type="text" id="USUARIOSESION" value="@ViewData["USUARIOSESION"]" hidden />
+<input type="text" id="FQDN" value="@ViewData["FQDN"]" hidden />
+<input type="text" id="GUID" value="@ViewData["GUID"]" hidden />

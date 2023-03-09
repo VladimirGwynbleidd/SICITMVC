@@ -31,6 +31,21 @@
     .error {
         font-size: 16px;
     }
+
+    .left-col {
+        float: left;
+        width: 5%;
+    }
+
+    .center-col {
+        float: left;
+        width: 65%;
+    }
+
+    .right-col {
+        float: left;
+        width: 30%;
+    }
 </style>
 <!-- [ Main Content ] start -->
 <div class="pcoded-main-container">
@@ -80,7 +95,7 @@
                                         <!-- Overflow Hidden -->
                                         <div class="card mb-4">
                                             <div class="card-header py-3">
-                                                <h6 class="m-0 font-weight-bold text-primary">Bitacora de Acciones</h6>
+                                                <h6 class="m-0 font-weight-bold text-primary">Bitacora de Sesiones</h6>
                                             </div>
                                             <div class="card-body">
                                                 <div class="container align-items-center justify-content-center">
@@ -102,6 +117,10 @@
                                                         </div>
                                                     </form>
                                                 </div>
+                                            </div>
+                                            <div class="modal-footer">
+                                                <button id="btnFiltroSICOD" class="btn btn-primary float-right" onclick="FiltrarBitacoraSesiones();" type="submit" value="submit">Aceptar</button>
+                                                <button class="btn btn-danger float-right" onclick="CloseModalAddUpdatePuesto();">Cancelar</button>
                                             </div>
                                         </div>
                                     </div>
@@ -141,9 +160,12 @@
                                                         </thead>
                                                         <thead>
                                                             <tr>
-
                                                                 <td>&nbsp;</td>
-                                                                <td><input type="text" class="form-control filter-input" placeholder="Buscar" data-column="1" /></td>
+                                                                <td>
+                                                                    <select id="ddlUsuarios" name="ddlUsuarios" data-column="1">
+                                                                        <option class="form-control filter-select"></option>
+                                                                    </select>
+                                                                </td>
                                                                 <td>&nbsp;</td>
                                                                 <td>&nbsp;</td>
                                                                 <td>&nbsp;</td>
@@ -163,10 +185,7 @@
                         </div>
                         <!-- /.container-fluid -->
 
-                        <div class="modal-footer">
-                            <button id="btnFiltroSICOD" class="btn btn-primary float-right" onclick="FiltrarBitacoraSesiones();" type="submit" value="submit">Aceptar</button>
-                            <button class="btn btn-danger float-right" onclick="CloseModalAddUpdatePuesto();">Cancelar</button>
-                        </div>
+
                     </div>
                 </div>
 

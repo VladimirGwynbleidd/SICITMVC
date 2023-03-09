@@ -101,6 +101,38 @@ async function fetchDataAsyncTable(urlString, methodType, args) {
             searching: true,
             responsive: true,
             pagination: "bootstrap",
+            dom: '<"top"<"left-col"B><"center-col"l><"right-col"f>>rtip',
+            buttons: {
+                dom: {
+                    button: {
+                        tag: 'i',
+                        className: ''
+                    }
+                },
+                buttons: [
+                    {
+                        extend: 'excelHtml5',
+                        text: '<i class="fas fa-file-excel btn btn-success"></i>',
+                        title: 'Entidades Todas',
+                        exportOptions: {
+                            columns: [0, 1, 2, 3],
+
+                            format: {
+                                body: function (data, row, column, node) {
+
+                                    if (column == 5) {
+                                        return node.innerText.replaceAll('|', '');
+                                    }
+                                    else {
+                                        return data;
+                                    }
+                                }
+                            }
+                        },
+                    },
+
+                ]
+            },
             columns: [
                 { 'data': 'CVE_ID_ENT', className: "uniqueClassName" },
                 //{ 'data': 'ID_T_ENT', className: "uniqueClassName" },
@@ -182,7 +214,7 @@ async function AddUpdateEntidades() {
             "debug": false,
             "newestOnTop": false,
             "progressBar": true,
-            "positionClass": "toast-top-center",
+            "positionClass": "toast-top-right",
             "preventDuplicates": true,
             "onclick": null,
             "showDuration": "100",
@@ -199,15 +231,20 @@ async function AddUpdateEntidades() {
         if (response.Exito) {
             GetAllDataVigentes();
             $("#ModalAddUpdateEntidades").modal('hide');
-            toastr.info(response.Mensaje, 'Entidades').css("width", "250px");
+            if ($('#IdEntidadHidden').val() == 0) {
+                toastr.success(response.Mensaje, 'Se ha agregado correctamente la Entidad').css("width", "250px");
+            }
+            else {
+                toastr.success(response.Mensaje, 'Se ha actualizado correctamente la Entidad').css("width", "250px");
+            }
         }
         else {
-            toastr.error(response.Mensaje, 'Entidades').css("width", "200px");
+            toastr.error(response.Mensaje, 'Error al registrar o actulizar la Entidad').css("width", "200px");
         }
     } catch (error) {
         response = error.responseJSON;
         mensaje = response.Mensaje;
-        toastr.error('Error', 'Usuarios').css("width", "150px");
+        toastr.error('Error', 'Error al registrar o actulizar la Entidad').css("width", "150px");
     }
 }
 
@@ -241,7 +278,7 @@ async function fetchDataAsyncTableVigentes(urlString, methodType, args) {
         dataType: 'json',
         type: methodType
     }).then(function (response) {
-        $('#dataTableVigentes').DataTable({
+        var table = $('#dataTableVigentes').DataTable({
             language: {
                 "decimal": "",
                 "emptyTable": "No hay información",
@@ -262,12 +299,107 @@ async function fetchDataAsyncTableVigentes(urlString, methodType, args) {
                     "previous": "Anterior"
                 }
             },
+            //"bJQueryUI": true,
+            //"bSort": false,
+            //"bPaginate": true,
+            //"sPaginationType": "full_numbers",
+            //"iDisplayLength": 10,
+            //pagingType: 'full_numbers',
+            /* "bLengthChange": false,*/
+
             destroy: true,
             data: response,
             sort: true,
             searching: true,
             responsive: true,
             pagination: "bootstrap",
+            //buttons: ['excel', 'csv', 'pdf', 'copy'],
+            //"lengthMenu": [50, 100, 500, 1000, 2000, 5000, 10000, 50000, 100000],
+            /*dom: '<"top"Blf>rt<"bottom"p><"clear">',*/
+            //dom: 'B<"clear">lfrtip',
+            //dom: 'lBfrtip',
+            //dom: 'lfrtip',
+            //Dom: '<"top"i>rt<"bottom"flpi><"clear">',
+            //dom: "<'row'<'col-3'B><'col-9 text-right'lf>><'row'<'col-sm-12'tr>><'row'<'col-sm-12'ip>>",
+            /*     dom: '<"container-fluid"<"row"<"col"B><"col"l><"col"f>>>rtip',*/
+            //dom: '<"top"<"left-col"B><"center-col"l><"right-col"f>>rtip',
+            //dom: 'T<"clear">lftipr',
+            //dom: "<'row'<'col-sm-12 col-md-6'f><'col-sm-12 col-md-6'B>>" +
+            //    "<'row'<'col-sm-12'tr>>" +
+            //    "<'row'<'col-sm-12 col-md-5'i><'col-sm-12 col-md-7'p>>",
+            //buttons: {
+            //    dom: {
+            //        button: {
+            //            tag: 'i',
+            //            className: ''
+            //        }
+            //    },
+            //    buttons: [
+            //        //{
+            //        //    titleAttr: 'Download as PDF',
+            //        //    extend: 'pdfHtml5',
+            //        //    className: 'custom-btn fa fa-file-pdf-o',
+            //        //    text: ''
+            //        //},
+            //        //{
+            //        //    titleAttr: 'Download as Excel',
+            //        //    extend: 'excelHtml5',
+            //        //    className: 'custom-btn btn btn-success fa fa-file-excel fa-2x color:green',
+            //        //    text: ''
+            //        //},
+            //        {
+            //            //EXCEL
+            //            extend: 'excelHtml5',
+            //            text: '<i class="fas fa-file-excel btn btn-success"></i>', //u can define a diferent text or icon
+            //            title: 'Entidades Vigentes',
+            //        },
+            //        //{
+            //        //    titleAttr: 'Download as CSV',
+            //        //    extend: 'csvHtml5',
+            //        //    className: 'custom-btn fa fa-file-text-o',
+            //        //    text: ''
+            //        //},
+            //        //{
+            //        //    titleAttr: 'Print',
+            //        //    extend: 'print',
+            //        //    className: 'custom-btn fa fa-print',
+            //        //    text: ''
+            //        //},
+
+            //    ]
+            //},  
+            dom: '<"top"<"left-col"B><"center-col"l><"right-col"f>>rtip',
+            buttons: {
+                dom: {
+                    button: {
+                        tag: 'i',
+                        className: ''
+                    }
+                },
+                buttons: [
+                    {
+                        extend: 'excelHtml5',
+                        text: '<i class="fas fa-file-excel btn btn-success"></i>',
+                        title: 'Entidades Vigentes',
+                        exportOptions: {
+                            columns: [0, 1, 2, 3],
+
+                            format: {
+                                body: function (data, row, column, node) {
+
+                                    if (column == 5) {
+                                        return node.innerText.replaceAll('|', '');
+                                    }
+                                    else {
+                                        return data;
+                                    }
+                                }
+                            }
+                        },
+                    },
+
+                ]
+            },
             columns: [
                 { 'data': 'CVE_ID_ENT', className: "uniqueClassName" },
                 //{ 'data': 'ID_T_ENT', className: "uniqueClassName" },
@@ -309,6 +441,20 @@ async function fetchDataAsyncTableVigentes(urlString, methodType, args) {
                 { className: "dt-center", targets: [0, 1, 2, 3, 4, 5, 6, 7] }
             ]
         });
+
+
+        var tableTools = new $.fn.dataTable.TableTools(table, {
+            'aButtons': [
+                {
+                    'Extends': 'xls',
+                    'ButtonText': 'Save to Excel',
+                    'FileName': 'Data.xls'
+                }],
+            'sSwfPath': '//cdn.datatables.net/tabletools/2.2.4/swf/copy_csv_xls_pdf.swf'
+        });
+        $(tableTools.fnContainer()).insertBefore('#datatable_wrapper');
+
+
     });
 }
 
@@ -366,6 +512,55 @@ async function fetchDataAsyncTableHistorial(urlString, methodType, args) {
             searching: true,
             responsive: true,
             pagination: "bootstrap",
+            //dom: '<"top"<"left-col"B><"center-col"l><"right-col"f>>rtip',
+            //buttons: {
+            //    dom: {
+            //        button: {
+            //            tag: 'i',
+            //            className: ''
+            //        }
+            //    },
+            //    buttons: [
+            //        {
+            //            extend: 'excelHtml5',
+            //            text: '<i class="fas fa-file-excel btn btn-success"></i>', //u can define a diferent text or icon
+            //            title: 'Entidades Historial',
+            //        },
+
+            //    ]
+            //},
+            dom: '<"top"<"left-col"B><"center-col"l><"right-col"f>>rtip',
+            buttons: {
+                dom: {
+                    button: {
+                        tag: 'i',
+                        className: ''
+                    }
+                },
+                buttons: [
+                    {
+                        extend: 'excelHtml5',
+                        text: '<i class="fas fa-file-excel btn btn-success"></i>',
+                        title: 'Entidades Historial',
+                        exportOptions: {
+                            columns: [0, 1, 2, 3],
+
+                            format: {
+                                body: function (data, row, column, node) {
+
+                                    if (column == 5) {
+                                        return node.innerText.replaceAll('|', '');
+                                    }
+                                    else {
+                                        return data;
+                                    }
+                                }
+                            }
+                        },
+                    },
+
+                ]
+            },
             columns: [
                 { 'data': 'CVE_ID_ENT', className: "uniqueClassName" },
                 //{ 'data': 'ID_T_ENT', className: "uniqueClassName" },
@@ -412,33 +607,42 @@ async function DeleteEntidad() {
         GUID: $('#GUID').val()
     };
 
-    //url = $("#FQDN").val() + 'api/usuarios/delete';
-    //url = 'http://localhost:6435/api/Entidades/Delete';
     url = $("#FQDN").val() + 'api/Entidades/Delete';
 
     try {
         response = await fetchDataAsync('' + url + '', 'DELETE', JSON.stringify(argsEntidades));
 
         toastr.options = {
-            "timeOut": 2500,
-            "closeButton": true,
+            "closeButton": false,
+            "debug": false,
+            "newestOnTop": false,
             "progressBar": true,
-            "newestOnTop": true
+            "positionClass": "toast-top-right",
+            "preventDuplicates": true,
+            "onclick": null,
+            "showDuration": "100",
+            "hideDuration": "1000",
+            "timeOut": "5000",
+            "extendedTimeOut": "1000",
+            "showEasing": "swing",
+            "hideEasing": "linear",
+            "showMethod": "show",
+            "hideMethod": "hide"
         }
 
         if (response.Exito) {
             GetAllDataVigentes();
             $("#ModalDelete").modal('hide');
 
-            toastr.success(response.Mensaje, 'Entidades').css("width", "250px");
+            toastr.success(response.Mensaje, 'Se ha eliminado correctamente la Entidad').css("width", "250px");
         }
         else {
-            toastr.error(response.Mensaje, 'Entidades').css("width", "250px");
+            toastr.error(response.Mensaje, 'Error al eliminar la Entidad').css("width", "250px");
         }
     } catch (error) {
         response = error.responseJSON;
         mensaje = response.Mensaje;
-        toastr.error('Error', 'Entidades').css("width", "250px");
+        toastr.error('Error', 'Error al eliminar la Entidad').css("width", "250px");
     }
 }
 

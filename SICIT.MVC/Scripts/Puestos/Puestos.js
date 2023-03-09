@@ -241,6 +241,26 @@ async function fetchDataAsyncTablePuestos(urlString, methodType, args) {
             searching: true,
             responsive: true,
             pagination: "bootstrap",
+            dom: '<"top"<"left-col"B><"center-col"l><"right-col"f>>rtip',
+            buttons: {
+                dom: {
+                    button: {
+                        tag: 'i',
+                        className: ''
+                    }
+                },
+                buttons: [
+                    {
+                        extend: 'excelHtml5',
+                        text: '<i class="fas fa-file-excel btn btn-success"></i>',
+                        title: 'Puestos Todos',
+                        exportOptions: {
+                            columns: [0, 1, 2, 3, 4]
+                        },
+                    },
+
+                ]
+            },
             columns: [
                 { 'data': 'ID_PUESTO', className: "uniqueClassName" },
                 { 'data': 'DESCRIPCION_PUESTO', className: "uniqueClassName" },
@@ -342,6 +362,26 @@ async function fetchDataAsyncTablePuestosVigentes(urlString, methodType, args) {
             searching: true,
             responsive: true,
             pagination: "bootstrap",
+            dom: '<"top"<"left-col"B><"center-col"l><"right-col"f>>rtip',
+            buttons: {
+                dom: {
+                    button: {
+                        tag: 'i',
+                        className: ''
+                    }
+                },
+                buttons: [
+                    {
+                        extend: 'excelHtml5',
+                        text: '<i class="fas fa-file-excel btn btn-success"></i>',
+                        title: 'Puestos Vigentes',
+                        exportOptions: {
+                            columns: [0, 1, 2, 3, 4]
+                        },
+                    },
+
+                ]
+            },
             columns: [
                 { 'data': 'ID_PUESTO', className: "uniqueClassName" },
                 { 'data': 'DESCRIPCION_PUESTO', className: "uniqueClassName" },
@@ -438,6 +478,26 @@ async function fetchDataAsyncTablePuestosHistorial(urlString, methodType, args) 
             searching: true,
             responsive: true,
             pagination: "bootstrap",
+            dom: '<"top"<"left-col"B><"center-col"l><"right-col"f>>rtip',
+            buttons: {
+                dom: {
+                    button: {
+                        tag: 'i',
+                        className: ''
+                    }
+                },
+                buttons: [
+                    {
+                        extend: 'excelHtml5',
+                        text: '<i class="fas fa-file-excel btn btn-success"></i>',
+                        title: 'Puestos Historial',
+                        exportOptions: {
+                            columns: [0, 1, 2, 3, 4]
+                        },
+                    },
+
+                ]
+            },
             columns: [
                 { 'data': 'ID_PUESTO', className: "uniqueClassName" },
                 { 'data': 'DESCRIPCION_PUESTO', className: "uniqueClassName" },
@@ -499,8 +559,7 @@ async function AddUpdatePuestos() {
             USUARIOSESION: $('#USUARIOSESION').val(),
             GUID: $('#GUID').val()
         };
-        //console.log($('#IdPuestoHidden').val())
-        //console.log(argsPuestos)
+        
         url = $('#IdPuestoHidden').val() == 0 ? $("#FQDN").val() + 'Api/Puestos/Post' : $("#FQDN").val() + 'Api/Puestos/Put';
 
         try {
@@ -514,7 +573,7 @@ async function AddUpdatePuestos() {
                 "debug": false,
                 "newestOnTop": false,
                 "progressBar": true,
-                "positionClass": "toast-top-center",
+                "positionClass": "toast-top-right",
                 "preventDuplicates": true,
                 "onclick": null,
                 "showDuration": "100",
@@ -531,15 +590,20 @@ async function AddUpdatePuestos() {
             if (response.Exito) {
                 GetAllDataPuestosVigentes();
                 $("#ModalAddUpdatePuesto").modal('hide');
-                toastr.info(response.Mensaje, 'Puestos').css("width", "250px");
+                if ($('#IdPuestoHidden').val() == 0) {
+                    toastr.success(response.Mensaje, 'Se ha agregado correctamente el Puesto').css("width", "250px");
+                }
+                else {
+                    toastr.success(response.Mensaje, 'Se ha actualizado correctamente el Puesto').css("width", "250px");
+                }
             }
             else {
-                toastr.error(response.Mensaje, 'Puestos').css("width", "200px");
+                toastr.error(response.Mensaje, 'Error al registrar o actulizar el Puesto').css("width", "200px");
             }
         } catch (error) {
             response = error.responseJSON;
             mensaje = response.Mensaje;
-            toastr.error('Error', 'Usuarios').css("width", "150px");
+            toastr.error('Error', 'Error al registrar o actulizar el Puesto').css("width", "150px");
         }
     }
 
@@ -650,25 +714,36 @@ async function DeletePuesto() {
         response = await fetchDataAsyncPuesto('' + url + '', 'DELETE', JSON.stringify(argsPuestos));
 
         toastr.options = {
-            "timeOut": 2500,
-            "closeButton": true,
+            "closeButton": false,
+            "debug": false,
+            "newestOnTop": false,
             "progressBar": true,
-            "newestOnTop": true
+            "positionClass": "toast-top-right",
+            "preventDuplicates": true,
+            "onclick": null,
+            "showDuration": "100",
+            "hideDuration": "1000",
+            "timeOut": "5000",
+            "extendedTimeOut": "1000",
+            "showEasing": "swing",
+            "hideEasing": "linear",
+            "showMethod": "show",
+            "hideMethod": "hide"
         }
 
         if (response.Exito) {
             GetAllDataPuestosVigentes();
             $("#ModalDelete").modal('hide');
 
-            toastr.success(response.Mensaje, 'Puestos').css("width", "250px");
+            toastr.success(response.Mensaje, 'Se ha eliminado correctamente el Puesto').css("width", "250px");
         }
         else {
-            toastr.error(response.Mensaje, 'Puestos').css("width", "250px");
+            toastr.error(response.Mensaje, 'Error al eliminar el Puesto').css("width", "250px");
         }
     } catch (error) {
         response = error.responseJSON;
         mensaje = response.Mensaje;
-        toastr.error('Error', 'Puestos').css("width", "250px");
+        toastr.error('Error', 'Error al eliminar el Puesto').css("width", "250px");
     }
 }
 
@@ -704,11 +779,16 @@ function ResetControlsPuestos() {
     $("#IdInputClave").attr('disabled', false);
 
 
+
+    $("#IdSelectedTipoEntidad").attr('disabled', false);
+    $('#IdSelectedTipoEntidad').val("-1");
+
+
     $("#IdSelectedEntidad").attr('disabled', true);
-    $('#IdSelectedEntidad').val("-1");
+    $('#IdSelectedEntidad').val("");
 
     $("#IdSelectedArea").attr('disabled', true);
-    $('#IdSelectedArea').val("-1");
+    $('#IdSelectedArea').val("");
 
 
 

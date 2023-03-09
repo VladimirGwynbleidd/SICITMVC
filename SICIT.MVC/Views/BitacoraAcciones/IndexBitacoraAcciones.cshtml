@@ -31,6 +31,21 @@
     .error {
         font-size: 16px;
     }
+
+    .left-col {
+        float: left;
+        width: 5%;
+    }
+
+    .center-col {
+        float: left;
+        width: 65%;
+    }
+
+    .right-col {
+        float: left;
+        width: 30%;
+    }
 </style>
 <script>
     $(function () {
@@ -94,7 +109,7 @@
                                                         <div class="form-row">
                                                             <div class="col-md-6">
                                                                 <div class="form-group col-6" style="padding-right:17px">
-                                                                    <input id="IDFechaIni" name="IDFechaIni" class="form-control"  type="date" lang="es-mx" />
+                                                                    <input id="IDFechaIni" name="IDFechaIni" class="form-control" type="date" lang="es-mx" />
                                                                     <span id="startDateSelected"></span>
                                                                 </div>
                                                             </div>
@@ -107,6 +122,10 @@
                                                         </div>
                                                     </form>
                                                 </div>
+                                            </div>
+                                            <div class="modal-footer">
+                                                <button id="btnFiltroSICOD" class="btn btn-primary float-right" onclick="ConsultarBitacoraAcciones();" type="submit" value="submit">Aceptar</button>
+                                                <button class="btn btn-danger float-right" onclick="CloseModalAddUpdatePuesto();">Cancelar</button>
                                             </div>
                                         </div>
                                     </div>
@@ -160,10 +179,7 @@
                         </div>
                         <!-- /.container-fluid -->
 
-                        <div class="modal-footer">
-                            <button id="btnFiltroSICOD" class="btn btn-primary float-right" onclick="ConsultarBitacoraAcciones();" type="submit" value="submit">Aceptar</button>
-                            <button class="btn btn-danger float-right" onclick="CloseModalAddUpdatePuesto();">Cancelar</button>
-                        </div>
+                     
                     </div>
                 </div>
 

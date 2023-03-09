@@ -24,8 +24,8 @@ async function ConsultarBitacoraSesiones() {
 
 async function FiltrarBitacoraSesiones() {
     argsFechas = {
-        fecha_inicial: $('#IDFechaIni').val(),
-        fecha_final: $('#IDFechaFin').val(),
+        F_FECH_DESDE: $('#IDFechaIni').val(),
+        F_FECH_HASTA: $('#IDFechaFin').val(),
         USUARIO: "",
         EVENTO: "",
     };
@@ -89,23 +89,45 @@ async function fetchDataAsyncTableBitacoraSesiones(urlString, methodType, args) 
             scrollCollapse: true,
 
             scrollX: true,
+            dom: '<"top"<"left-col"B><"center-col"l><"right-col"f>>rtip',
+            buttons: {
+                dom: {
+                    button: {
+                        tag: 'i',
+                        className: ''
+                    }
+                },
+                buttons: [
+                    {
+                        extend: 'excelHtml5',
+                        text: '<i class="fas fa-file-excel btn btn-success"></i>',
+                        title: 'Bitacora Sesiones',
+                        exportOptions: {
+                            columns: [0, 1, 2, 3, 4]
+                        },
+                    },
+
+                ]
+            },
             columns: [
                 { 'data': 'FECHA', className: "uniqueClassName" },
                 { 'data': 'USUARIO', className: "uniqueClassName" },
                 { 'data': 'DIRECCION_IP', className: "uniqueClassName" },
                 { 'data': 'HORA_INICIO', className: "uniqueClassName" },
                 { 'data': 'HORA_FIN', className: "uniqueClassName" },
-
-
             ],
-
-            //columnDefs: [
-            //    { className: "dt-left", targets: [6] },
-            //    { className: "dt-center", targets: [0, 1, 2, 3, 4, 5, 7, 8, 9, 10, 11, 12, 13, 14] }
-            //]
         });
 
-        $('.filter-input').keyup(function () {
+
+        var filtroUsuarios = table.column(1).data().unique().sort(function (a, b) {
+            return a.toLowerCase().localeCompare(b.toLowerCase());
+        });
+
+        $.each(filtroUsuarios, function (key, value) {
+            $("#ddlUsuarios").append('<option>' + value + '</option>');
+        });
+
+        $('#ddlUsuarios').on('change', function () {
             table.column($(this).data('column'))
                 .search($(this).val())
                 .draw();

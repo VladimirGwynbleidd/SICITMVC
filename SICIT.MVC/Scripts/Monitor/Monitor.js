@@ -67,8 +67,8 @@ async function fetchDataAsyncTableTodos(urlString, methodType, args) {
                 { 'data': 'NUM_FOLIO', className: "uniqueClassName" },
                 //{ 'data': 'ID_T_ENT', className: "uniqueClassName" },
                 { 'data': 'ID_PAQUETE', className: "text-center" },
-                { 'data': 'FECH_FIN_OPER', className: "text-left" },
                 { 'data': 'FECH_INI_OPER', className: "uniqueClassName", "visible": true },
+                { 'data': 'FECH_FIN_OPER', className: "text-left" },
                 { 'data': 'FECH_PROP_TERM', className: "uniqueClassName", "visible": true },
                 //{ 'data': 'ID_ESTATUS', className: "text-left" },
 
@@ -161,8 +161,8 @@ async function fetchDataAsyncTableSinRevisar(urlString, methodType, args) {
                 { 'data': 'NUM_FOLIO', className: "uniqueClassName" },
                 //{ 'data': 'ID_T_ENT', className: "uniqueClassName" },
                 { 'data': 'ID_PAQUETE', className: "text-center" },
-                { 'data': 'FECH_FIN_OPER', className: "text-left" },
                 { 'data': 'FECH_INI_OPER', className: "uniqueClassName", "visible": true },
+                { 'data': 'FECH_FIN_OPER', className: "text-left" },
                 { 'data': 'FECH_PROP_TERM', className: "uniqueClassName", "visible": true },
                 //{ 'data': 'ID_ESTATUS', className: "text-left" },
 
@@ -255,8 +255,8 @@ async function fetchDataAsyncTableHistorial(urlString, methodType, args) {
                 { 'data': 'NUM_FOLIO', className: "uniqueClassName" },
                 //{ 'data': 'ID_T_ENT', className: "uniqueClassName" },
                 { 'data': 'ID_PAQUETE', className: "text-center" },
-                { 'data': 'FECH_FIN_OPER', className: "text-left" },
                 { 'data': 'FECH_INI_OPER', className: "uniqueClassName", "visible": true },
+                { 'data': 'FECH_FIN_OPER', className: "text-left" },
                 { 'data': 'FECH_PROP_TERM', className: "uniqueClassName", "visible": true },
                 //{ 'data': 'ID_ESTATUS', className: "text-left" },
 

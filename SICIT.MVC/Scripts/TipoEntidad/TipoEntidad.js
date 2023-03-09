@@ -60,6 +60,26 @@ async function fetchDataAsyncTableTipoEntidad(urlString, methodType, args) {
             searching: true,
             responsive: true,
             pagination: "bootstrap",
+            dom: '<"top"<"left-col"B><"center-col"l><"right-col"f>>rtip',
+            buttons: {
+                dom: {
+                    button: {
+                        tag: 'i',
+                        className: ''
+                    }
+                },
+                buttons: [
+                    {
+                        extend: 'excelHtml5',
+                        text: '<i class="fas fa-file-excel btn btn-success"></i>',
+                        title: 'Tipo Entidad Todos',
+                        exportOptions: {
+                            columns: [0, 1, 2]
+                        },
+                    },
+
+                ]
+            },
             columns: [
                 { 'data': 'ID_T_ENT', className: "uniqueClassName" },
 
@@ -158,6 +178,26 @@ async function fetchDataAsyncTableTipoEntidadVigentes(urlString, methodType, arg
             searching: true,
             responsive: true,
             pagination: "bootstrap",
+            dom: '<"top"<"left-col"B><"center-col"l><"right-col"f>>rtip',
+            buttons: {
+                dom: {
+                    button: {
+                        tag: 'i',
+                        className: ''
+                    }
+                },
+                buttons: [
+                    {
+                        extend: 'excelHtml5',
+                        text: '<i class="fas fa-file-excel fa-3x btn btn-success"></i>',
+                        title: 'Tipo de Entidad Vigentes',
+                        exportOptions: {
+                            columns: [0, 1, 2]
+                        },
+                    },
+
+                ]
+            },
             columns: [
                 { 'data': 'ID_T_ENT', className: "uniqueClassName" },
 
@@ -248,6 +288,26 @@ async function fetchDataAsyncTableUsuariosHistorial(urlString, methodType, args)
             searching: true,
             responsive: true,
             pagination: "bootstrap",
+            dom: '<"top"<"left-col"B><"center-col"l><"right-col"f>>rtip',
+            buttons: {
+                dom: {
+                    button: {
+                        tag: 'i',
+                        className: ''
+                    }
+                },
+                buttons: [
+                    {
+                        extend: 'excelHtml5',
+                        text: '<i class="fas fa-file-excel btn btn-success"></i>',
+                        title: 'Tipo de Entidad Historial',
+                        exportOptions: {
+                            columns: [0, 1, 2]
+                        },
+                    },
+
+                ]
+            },
             columns: [
                 { 'data': 'ID_T_ENT', className: "uniqueClassName" },
 
@@ -316,7 +376,7 @@ async function AddUpdateTipoEntidad() {
                 "debug": false,
                 "newestOnTop": false,
                 "progressBar": true,
-                "positionClass": "toast-top-center",
+                "positionClass": "toast-top-right",
                 "preventDuplicates": true,
                 "onclick": null,
                 "showDuration": "100",
@@ -333,15 +393,21 @@ async function AddUpdateTipoEntidad() {
             if (response.Exito) {
                 GetAllDataTipoEntidadVigentes();
                 $("#ModalAddUpdateTipoEntidad").modal('hide');
-                toastr.info(response.Mensaje, 'Entidades').css("width", "250px");
+                if ($('#IdTipoEntidadHidden').val() == 0) {
+                    toastr.success(response.Mensaje, 'Se ha agregado correctamente el Tipo de Entidad').css("width", "250px");
+                }
+                else {
+                    toastr.success(response.Mensaje, 'Se ha actualizado correctamente el Tipo de Entidad').css("width", "250px");
+                }
+
             }
             else {
-                toastr.error(response.Mensaje, 'Entidades').css("width", "200px");
+                toastr.error(response.Mensaje, 'Error al registrar o actulizar el Tipo de Entidad').css("width", "200px");
             }
         } catch (error) {
             response = error.responseJSON;
             mensaje = response.Mensaje;
-            toastr.error('Error', 'Usuarios').css("width", "150px");
+            toastr.error('Error', 'Error al registrar o actulizar el Tipo de Entidad').css("width", "150px");
         }
     }
 }
@@ -413,25 +479,36 @@ async function DeleteTipoEntidad() {
         response = await fetchDataAsyncTipoEntidad('' + url + '', 'DELETE', JSON.stringify(argsTipoEntidades));
 
         toastr.options = {
-            "timeOut": 2500,
-            "closeButton": true,
+            "closeButton": false,
+            "debug": false,
+            "newestOnTop": false,
             "progressBar": true,
-            "newestOnTop": true
+            "positionClass": "toast-top-right",
+            "preventDuplicates": true,
+            "onclick": null,
+            "showDuration": "100",
+            "hideDuration": "1000",
+            "timeOut": "5000",
+            "extendedTimeOut": "1000",
+            "showEasing": "swing",
+            "hideEasing": "linear",
+            "showMethod": "show",
+            "hideMethod": "hide"
         }
 
         if (response.Exito) {
             GetAllDataTipoEntidadVigentes();
             $("#ModalDelete").modal('hide');
 
-            toastr.success(response.Mensaje, 'Entidades').css("width", "250px");
+            toastr.success(response.Mensaje, 'Se ha eliminado correctamente el Tipo de Entidad').css("width", "250px");
         }
         else {
-            toastr.error(response.Mensaje, 'Entidades').css("width", "250px");
+            toastr.error(response.Mensaje, 'Error al eliminar el Tipo de Entidad').css("width", "250px");
         }
     } catch (error) {
         response = error.responseJSON;
         mensaje = response.Mensaje;
-        toastr.error('Error', 'Entidades').css("width", "250px");
+        toastr.error('Error', 'Error al eliminar el Tipo de Entidad').css("width", "250px");
     }
 }
 

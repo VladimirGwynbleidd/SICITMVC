@@ -61,19 +61,26 @@ async function fetchDataAsyncTablePerfil(urlString, methodType, args) {
             searching: true,
             responsive: true,
             pagination: "bootstrap",
-            dom: '<"top"Bf>rt<"bottom"lpi><"clear">',
-            buttons: [
-                {
-                    extend: 'excelHtml5',
-                    text: 'Exportar a Excel',
-                    titleAttr: 'Exportar a Excel',
-                    title: 'CatálogoPerfiles',
-                    className: 'btn btn-success',
-                    exportOptions: {
-                        columns: [0, 1, 4]
+            dom: '<"top"<"left-col"B><"center-col"l><"right-col"f>>rtip',
+            buttons: {
+                dom: {
+                    button: {
+                        tag: 'i',
+                        className: ''
                     }
                 },
-            ],
+                buttons: [
+                    {
+                        extend: 'excelHtml5',
+                        text: '<i class="fas fa-file-excel btn btn-success"></i>',
+                        title: 'Perfil Todos',
+                        exportOptions: {
+                            columns: [0, 1]
+                        },
+                    },
+
+                ]
+            },
             columns: [
                 { 'data': 'ID_PERFIL', className: "uniqueClassName" },
                 { 'data': 'DESCRIPCION_PERFIL', className: "uniqueClassName" },
@@ -145,7 +152,7 @@ async function fetchDataAsyncTablePerfilVigentes(urlString, methodType, args) {
         dataType: 'json',
         type: methodType
     }).then(function (response) {
-        $('#dataTablePerfilesVigentes').DataTable({
+        var table = $('#dataTablePerfilesVigentes').DataTable({
             language: {
                 "decimal": "",
                 "emptyTable": "No hay información",
@@ -172,19 +179,26 @@ async function fetchDataAsyncTablePerfilVigentes(urlString, methodType, args) {
             searching: true,
             responsive: true,
             pagination: "bootstrap",
-            dom: '<"top"Bf>rt<"bottom"lpi><"clear">',
-            buttons: [
-                {
-                    extend: 'excelHtml5',
-                    text: 'Exportar a Excel',
-                    titleAttr: 'Exportar a Excel',
-                    title: 'CatálogoPerfiles',
-                    className: 'btn btn-success',
-                    exportOptions: {
-                        columns: [0, 1, 4]
+            dom: '<"top"<"left-col"B><"center-col"l><"right-col"f>>rtip',
+            buttons: {
+                dom: {
+                    button: {
+                        tag: 'i',
+                        className: ''
                     }
                 },
-            ],
+                buttons: [
+                    {
+                        extend: 'excelHtml5',
+                        text: '<i class="fas fa-file-excel btn btn-success"></i>',
+                        title: 'Perfil Vigentes',
+                        exportOptions: {
+                            columns: [0, 1]
+                        },
+                    },
+
+                ]
+            },
             columns: [
                 { 'data': 'ID_PERFIL', className: "uniqueClassName" },
                 { 'data': 'DESCRIPCION_PERFIL', className: "uniqueClassName" },
@@ -257,7 +271,7 @@ async function fetchDataAsyncTablePerfilHistorial(urlString, methodType, args) {
         dataType: 'json',
         type: methodType
     }).then(function (response) {
-        $('#dataTablePerfilesHistorial').DataTable({
+        var table = $('#dataTablePerfilesHistorial').DataTable({
             language: {
                 "decimal": "",
                 "emptyTable": "No hay información",
@@ -284,19 +298,26 @@ async function fetchDataAsyncTablePerfilHistorial(urlString, methodType, args) {
             searching: true,
             responsive: true,
             pagination: "bootstrap",
-            dom: '<"top"Bf>rt<"bottom"lpi><"clear">',
-            buttons: [
-                {
-                    extend: 'excelHtml5',
-                    text: 'Exportar a Excel',
-                    titleAttr: 'Exportar a Excel',
-                    title: 'CatálogoPerfiles',
-                    className: 'btn btn-success',
-                    exportOptions: {
-                        columns: [0, 1, 4]
+            dom: '<"top"<"left-col"B><"center-col"l><"right-col"f>>rtip',
+            buttons: {
+                dom: {
+                    button: {
+                        tag: 'i',
+                        className: ''
                     }
                 },
-            ],
+                buttons: [
+                    {
+                        extend: 'excelHtml5',
+                        text: '<i class="fas fa-file-excel btn btn-success"></i>',
+                        title: 'Perfil Historial',
+                        exportOptions: {
+                            columns: [0, 1]
+                        },
+                    },
+
+                ]
+            },
             columns: [
                 { 'data': 'ID_PERFIL', className: "uniqueClassName" },
                 { 'data': 'DESCRIPCION_PERFIL', className: "uniqueClassName" },
@@ -347,9 +368,7 @@ async function AddUpdatePerfiles() {
             USUARIOSESION: $('#USUARIOSESION').val(),
             GUID: $('#GUID').val()
         };
-        //console.log($('#IdEntidadHidden').val())
-        /*url = $('#IDUsuario').val() == 0 ? $("#FQDN").val() + 'api/usuarios/post' : $("#FQDN").val() + 'api/usuarios/put';*/
-        //url = $('#IdPerfilHidden').val() == 0 ? 'http://localhost:6435/api/Perfiles/Post' : 'http://localhost:6435/api/Perfiles/Put';
+        
         url = $('#IdPerfilHidden').val() == 0 ? $("#FQDN").val() + 'api/Perfiles/Post' : $("#FQDN").val() + 'api/Perfiles/Put';
 
         try {
@@ -386,17 +405,17 @@ async function AddUpdatePerfiles() {
                     toastr.success(response.Mensaje, 'Se ha agregado correctamente el perfil').css("width", "250px");
                 }
                 else {
-                    toastr.success(response.Mensaje, 'Se ha modificado correctamente el perfil').css("width", "250px");
+                    toastr.success(response.Mensaje, 'Se ha actualizado correctamente el perfil').css("width", "250px");
                 }
 
             }
             else {
-                toastr.error(response.Mensaje, 'Perfiles').css("width", "200px");
+                toastr.error(response.Mensaje, 'Error al registrar o actulizar el Perfil').css("width", "200px");
             }
         } catch (error) {
             response = error.responseJSON;
             mensaje = response.Mensaje;
-            toastr.error('Error', 'Perfiles').css("width", "150px");
+            toastr.error('Error', 'Error al registrar o actulizar el Perfil').css("width", "150px");
         }
     }
 
@@ -491,12 +510,12 @@ async function DeletePerfiles() {
             toastr.success(response.Mensaje, 'Se ha eliminado correctamente el perfil').css("width", "250px");
         }
         else {
-            toastr.error(response.Mensaje, 'Perfiles').css("width", "250px");
+            toastr.error(response.Mensaje, 'Error al eliminar el Perfil').css("width", "250px");
         }
     } catch (error) {
         response = error.responseJSON;
         mensaje = response.Mensaje;
-        toastr.error('Error', 'Perfiles').css("width", "250px");
+        toastr.error('Error', 'Error al eliminar el Perfil').css("width", "250px");
     }
 }
 

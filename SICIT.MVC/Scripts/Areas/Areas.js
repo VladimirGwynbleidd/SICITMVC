@@ -194,6 +194,26 @@ async function fetchDataAsyncTableAreas(urlString, methodType, args) {
             searching: true,
             responsive: true,
             pagination: "bootstrap",
+            dom: '<"top"<"left-col"B><"center-col"l><"right-col"f>>rtip',
+            buttons: {
+                dom: {
+                    button: {
+                        tag: 'i',
+                        className: ''
+                    }
+                },
+                buttons: [
+                    {
+                        extend: 'excelHtml5',
+                        text: '<i class="fas fa-file-excel btn btn-success"></i>',
+                        title: 'Áreas Todas',
+                        exportOptions: {
+                            columns: [0, 1, 2, 3]
+                        },
+                    },
+
+                ]
+            },
             columns: [
                 { 'data': 'ID_AREA', className: "uniqueClassName" },
                 { 'data': 'DESC_AREA', className: "uniqueClassName" },
@@ -297,6 +317,26 @@ async function fetchDataAsyncTableAreasVigentes(urlString, methodType, args) {
             searching: true,
             responsive: true,
             pagination: "bootstrap",
+            dom: '<"top"<"left-col"B><"center-col"l><"right-col"f>>rtip',
+            buttons: {
+                dom: {
+                    button: {
+                        tag: 'i',
+                        className: ''
+                    }
+                },
+                buttons: [
+                    {
+                        extend: 'excelHtml5',
+                        text: '<i class="fas fa-file-excel btn btn-success"></i>',
+                        title: 'Áreas Vigentes',
+                        exportOptions: {
+                            columns: [0, 1, 2, 3]
+                        },
+                    },
+
+                ]
+            },
             columns: [
                 { 'data': 'ID_AREA', className: "uniqueClassName" },
                 { 'data': 'DESC_AREA', className: "uniqueClassName" },
@@ -398,6 +438,26 @@ async function fetchDataAsyncTableAreasHistorial(urlString, methodType, args) {
             searching: true,
             responsive: true,
             pagination: "bootstrap",
+            dom: '<"top"<"left-col"B><"center-col"l><"right-col"f>>rtip',
+            buttons: {
+                dom: {
+                    button: {
+                        tag: 'i',
+                        className: ''
+                    }
+                },
+                buttons: [
+                    {
+                        extend: 'excelHtml5',
+                        text: '<i class="fas fa-file-excel btn btn-success"></i>',
+                        title: 'Áreas Historial',
+                        exportOptions: {
+                            columns: [0, 1, 2, 3]
+                        },
+                    },
+
+                ]
+            },
             columns: [
                 { 'data': 'ID_AREA', className: "uniqueClassName" },
                 { 'data': 'DESC_AREA', className: "uniqueClassName" },
@@ -468,7 +528,7 @@ async function AddUpdateAreas() {
             "debug": false,
             "newestOnTop": false,
             "progressBar": true,
-            "positionClass": "toast-top-center",
+            "positionClass": "toast-top-right",
             "preventDuplicates": true,
             "onclick": null,
             "showDuration": "100",
@@ -485,15 +545,20 @@ async function AddUpdateAreas() {
         if (response.Exito) {
             GetAllDataAreasVigentes();
             $("#ModalAddUpdateAreas").modal('hide');
-            toastr.info(response.Mensaje, 'Áreas').css("width", "250px");
+            if ($('#IdAreaHidden').val() == 0) {
+                toastr.success(response.Mensaje, 'Se ha agregado correctamente el Área').css("width", "250px");
+            }
+            else {
+                toastr.success(response.Mensaje, 'Se ha actualizado correctamente el Área').css("width", "250px");
+            }
         }
         else {
-            toastr.error(response.Mensaje, 'Áreas').css("width", "200px");
+            toastr.error(response.Mensaje, 'Error al registrar o actulizar el Área').css("width", "200px");
         }
     } catch (error) {
         response = error.responseJSON;
         mensaje = response.Mensaje;
-        toastr.error('Error', 'Áreas').css("width", "150px");
+        toastr.error('Error', 'Error al registrar o actulizar el Área').css("width", "150px");
     }
 }
 
@@ -587,25 +652,36 @@ async function DeleteArea() {
         response = await fetchDataAsyncAreas('' + url + '', 'DELETE', JSON.stringify(argsAreas));
 
         toastr.options = {
-            "timeOut": 2500,
-            "closeButton": true,
+            "closeButton": false,
+            "debug": false,
+            "newestOnTop": false,
             "progressBar": true,
-            "newestOnTop": true
+            "positionClass": "toast-top-right",
+            "preventDuplicates": true,
+            "onclick": null,
+            "showDuration": "100",
+            "hideDuration": "1000",
+            "timeOut": "5000",
+            "extendedTimeOut": "1000",
+            "showEasing": "swing",
+            "hideEasing": "linear",
+            "showMethod": "show",
+            "hideMethod": "hide"
         }
 
         if (response.Exito) {
             GetAllDataAreasVigentes();
             $("#ModalDelete").modal('hide');
 
-            toastr.success(response.Mensaje, 'Áreas').css("width", "250px");
+            toastr.success(response.Mensaje, 'Se ha eliminado correctamente el Área').css("width", "250px");
         }
         else {
-            toastr.error(response.Mensaje, 'Áreas').css("width", "250px");
+            toastr.error(response.Mensaje, 'Error al eliminar el Área').css("width", "250px");
         }
     } catch (error) {
         response = error.responseJSON;
         mensaje = response.Mensaje;
-        toastr.error('Error', 'Entidades').css("width", "250px");
+        toastr.error('Error', 'Error al eliminar el Área').css("width", "250px");
     }
 }
 

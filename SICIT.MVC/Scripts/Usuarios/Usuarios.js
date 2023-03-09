@@ -414,6 +414,26 @@ async function fetchDataAsyncTableUsuarios(urlString, methodType, args) {
             searching: true,
             responsive: true,
             pagination: "bootstrap",
+            dom: '<"top"<"left-col"B><"center-col"l><"right-col"f>>rtip',
+            buttons: {
+                dom: {
+                    button: {
+                        tag: 'i',
+                        className: ''
+                    }
+                },
+                buttons: [
+                    {
+                        extend: 'excelHtml5',
+                        text: '<i class="fas fa-file-excel btn btn-success"></i>',
+                        title: 'Usuarios Todos',
+                        exportOptions: {
+                            columns: [0, 1, 2, 3, 4, 5, 6]
+                        },
+                    },
+
+                ]
+            },
             columns: [
                 { 'data': 'USUARIO', className: "uniqueClassName" },
                 {
@@ -517,6 +537,26 @@ async function fetchDataAsyncTableUsuariosVigentes(urlString, methodType, args) 
             searching: true,
             responsive: true,
             pagination: "bootstrap",
+            dom: '<"top"<"left-col"B><"center-col"l><"right-col"f>>rtip',
+            buttons: {
+                dom: {
+                    button: {
+                        tag: 'i',
+                        className: ''
+                    }
+                },
+                buttons: [
+                    {
+                        extend: 'excelHtml5',
+                        text: '<i class="fas fa-file-excel btn btn-success"></i>',
+                        title: 'Usuarios Vigentes',
+                        exportOptions: {
+                            columns: [0, 1, 2, 3, 4, 5, 6]
+                        },
+                    },
+
+                ]
+            },
             columns: [
                 { 'data': 'USUARIO', className: "uniqueClassName" },
                 {
@@ -610,6 +650,26 @@ async function fetchDataAsyncTableUsuariosHistorial(urlString, methodType, args)
             searching: true,
             responsive: true,
             pagination: "bootstrap",
+            dom: '<"top"<"left-col"B><"center-col"l><"right-col"f>>rtip',
+            buttons: {
+                dom: {
+                    button: {
+                        tag: 'i',
+                        className: ''
+                    }
+                },
+                buttons: [
+                    {
+                        extend: 'excelHtml5',
+                        text: '<i class="fas fa-file-excel btn btn-success"></i>',
+                        title: 'Usuarios Historial',
+                        exportOptions: {
+                            columns: [0, 1, 2, 3, 4, 5, 6]
+                        },
+                    },
+
+                ]
+            },
             columns: [
                 { 'data': 'USUARIO', className: "uniqueClassName" },
                 {
@@ -742,7 +802,6 @@ async function AddUpdateUsuarios() {
         "showMethod": "show",
         "hideMethod": "hide"
     }
-
     //url = $("#FQDN").val() + 'api/usuarios/ObtenerUsuarios';
 
     var operacion = $("#IdTipoAlta").val();
@@ -810,15 +869,14 @@ async function AddUpdateUsuarios() {
                 $("#ModalAddUpdateUsuarios").modal('hide');
                 if ($("#IdTipoAlta").val() == 0) {
                     toastr.success('Se ha agregado correctamente el usuario').css("width", "250px");
-                    //toastr.success(response.Mensaje, 'Se ha agregado correctamente el usuario').css("width", "250px");
                 }
                 else {
-                    toastr.success('Se ha modificado correctamente el usuario').css("width", "250px");
+                    toastr.success('Se ha actualizado correctamente el usuario').css("width", "250px");
                 }
 
             }
             else {
-                toastr.error(response.Mensaje, 'Usuarios').css("width", "200px");
+                toastr.error(response.Mensaje, 'Error al registrar o actulizar el Usuario').css("width", "200px");
             }
 
         });
@@ -872,12 +930,12 @@ async function resetPassword() {
             GetAllDataUsuariosVigentes();
 
             $("#ModalAddUpdateUsuarios").modal('hide');
-            toastr.success('Se ha reestablecio correctamente la contraseña del usuario').css("width", "250px");
+            toastr.success('Se ha reestablecio correctamente la contraseña del Usuario').css("width", "250px");
             $("#chbReestablecerPassword").prop("checked", false);
 
         }
         else {
-            toastr.error(response.Mensaje, 'Usuarios').css("width", "200px");
+            toastr.error(response.Mensaje, 'Error al reestablecer la contraseña').css("width", "200px");
         }
     });
 
@@ -905,7 +963,6 @@ async function DeleteUsuario() {
             dataType: 'json',
             type: 'POST'
         }).then(function (response) {
-
             toastr.options = {
                 "closeButton": false,
                 "debug": false,
@@ -928,11 +985,11 @@ async function DeleteUsuario() {
             if (response.Exito) {
                 GetAllDataUsuariosVigentes();
                 $("#ModalDelete").modal('hide');
-                toastr.success('Se ha eliminado correctamente el usuario').css("width", "250px");
-                
+                toastr.success('Se ha eliminado correctamente el Usuario').css("width", "250px");
+
             }
             else {
-                toastr.error('Usuarios').css("width", "250px");
+                toastr.error('Error al eliminar el Usuario').css("width", "250px");
             }
 
         });

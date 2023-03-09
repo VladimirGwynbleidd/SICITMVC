@@ -1,8 +1,58 @@
 ﻿$(document).ready(function () {
-
-
-
+    getDisponibilidad();
 });
+
+function getDisponibilidad() {
+
+    var urlString = '';
+
+    urlString = '/Login/ObtenerParametros';
+
+    $.ajax({
+        url: urlString,
+        type: "POST",
+        contentType: 'application/json',
+        data: {},
+        dataType: "json",
+        success: function (response) {
+            if (JSON.parse(response).Exito) {
+                var x = JSON.parse(response).ResponseDataEnumerable;
+
+                if (x.length > 0) {
+                    if (x[0].en_horario == 0) {
+                        $("#ModalMensaje").modal('show');
+                        $("#lblMensajeModal").html(x[0].mensaje_horario);
+                        soloLectura(true);
+                    }
+                    else {
+
+                    }
+                }
+                else {
+                    toastr.error('Ocurrió un error, servicio no disponible', 'Login.');
+                    soloLectura(true);
+                }
+
+            }
+            else {
+                toastr.error('Ocurrió un error, servicio no disponible', 'Login.');
+                soloLectura(true);
+            }
+        },
+        error: function (err) {
+            console.log(err.statusText);
+            toastr.error('Ocurrió un error, servicio no disponible', 'Login.')
+            soloLectura(true);
+        }
+    });
+
+}
+
+function soloLectura(bool) {
+    $("#IdUser").prop("disabled", bool);
+    $("#Password").prop("disabled", bool);
+    $("#btnSesion").prop("disabled", bool);
+}
 
 async function iniciarSesion() {
     var urlString = '';
