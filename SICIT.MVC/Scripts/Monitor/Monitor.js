@@ -168,9 +168,14 @@ async function fetchDataAsyncTableSinRevisar(urlString, methodType, args) {
 
                 {
                     data: "Acciones", render: function (data, type, row) {
+
+                        var btnPDF = '<a title="Ver Archivo" href="#" onclick="DescargarArchivo(' + row.NUM_FOLIO + ',' + row.ID_PAQUETE + ')"><i style="color:red" class="fas fa-duotone fa-file-pdf fa-lg"></i></a>';
+
+                        var circleGreen = '<a title="Concluido"><i style="color:green" class="fas fa-solid fa-circle fa-lg"></i></a>';
+
                         switch (row.ID_ESTATUS) {
                             case 0:
-                                return '<a title="Editar" href="#" onclick="getReporte(' + row.NUM_FOLIO + ')"><i style="color:green" class="fas fa-solid fa-circle fa-lg"></i></a>';
+                                return circleGreen + ' | ' + btnPDF;
                                 break;
                             case 1:
                                 return '<i style="color:blue" class="fas fa-solid fa-circle fa-lg"></i></a>';
@@ -287,6 +292,70 @@ async function fetchDataAsyncTableHistorial(urlString, methodType, args) {
 }
 
 
+
+
+function DescargarArchivo(idFolio, idPaquete) {
+
+    var formato = 'pdf';
+
+    argsMonitor = {
+        NUM_FOLIO: idFolio,
+        ID_PAQUETE: idPaquete
+    };
+
+    $.ajax({
+        contentType: 'application/json',
+        dataType: 'json',
+        type: "POST",
+        url: '/Monitor/ObtenerArchivoConcluido',
+        data: JSON.stringify(argsMonitor),
+        success: function (response) {
+
+            if (response.Exito) {
+
+                var dato = response.ResponseDataEnumerable[0];
+
+                var respuesta = dato.G_DOC_ARCHIVO_BASE64;
+                var nombreArchivo = dato.T_DSC_ARCHIVO;
+
+                const blob = base64ToBlob(respuesta, formato);
+                guardarArchivo(blob, nombreArchivo);
+
+            }
+            else {
+                toastr.error(response.Mensaje, 'Monitor');
+            }
+        },
+        error: function (error) {
+            console.log(error.statusText);
+            toastr.error('Ocurrió un error al extraer el archivo', 'Monitor')
+        }
+    });
+};
+
+function base64ToBlob(base64, type = "application/pdf") {
+    const binStr = atob(base64);
+    const len = binStr.length;
+    const arr = new Uint8Array(len);
+    for (let i = 0; i < len; i++) {
+        arr[i] = binStr.charCodeAt(i);
+    }
+    return new Blob([arr], { type: type });
+}
+
+function guardarArchivo(blob, filename) {
+
+    if (window.navigator.msSaveOrOpenBlob) {
+        window.navigator.msSaveOrOpenBlob(blob, filename);
+    } else {
+        const a = document.createElement('a');
+        document.body.appendChild(a);
+        const url = window.URL.createObjectURL(blob);
+        a.href = url;
+        a.download = filename;
+        a.click();
+    }
+}
 
 
 function getReporte(data) {

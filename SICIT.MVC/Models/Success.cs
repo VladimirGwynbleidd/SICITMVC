@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 
-namespace SICIT.MVC.Tools
+namespace SICIT.MVC.Models
 {
     [Serializable]
     public class Success<T>

@@ -114,7 +114,7 @@ async function fetchDataAsyncTableTipoEntidad(urlString, methodType, args) {
                     }, sortable: false, className: "uniqueClassName"
                 },
 
-               
+
             ],
 
             columnDefs: [
@@ -179,6 +179,9 @@ async function fetchDataAsyncTableTipoEntidadVigentes(urlString, methodType, arg
             responsive: true,
             pagination: "bootstrap",
             dom: '<"top"<"left-col"B><"center-col"l><"right-col"f>>rtip',
+            //dom: "<'row'<'col-sm-6'Bl><'col-sm-6'f>>" +
+            //    "<'row'<'col-sm-12'tr>>" +
+            //    "<'row'<'col-sm-5'i><'col-sm-7'p>>",
             buttons: {
                 dom: {
                     button: {

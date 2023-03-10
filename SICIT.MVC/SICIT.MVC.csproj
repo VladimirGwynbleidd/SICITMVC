@@ -148,10 +148,12 @@
     </Compile>
     <Compile Include="Helpers\ValidarSesionAttribute.cs" />
     <Compile Include="Models\Acceso.cs" />
+    <Compile Include="Models\Accion.cs" />
+    <Compile Include="Models\Archivo.cs" />
     <Compile Include="Models\BitacoraSesiones.cs" />
     <Compile Include="Models\Usuarios.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Tools\Success.cs" />
+    <Compile Include="Models\Success.cs" />
     <Compile Include="Tools\HashPassword.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -2507,6 +2509,9 @@
     <Content Include="fonts\glyphicons-halflings-regular.ttf" />
     <Content Include="fonts\glyphicons-halflings-regular.eot" />
     <Content Include="MANUAL\MANUAL USUARIO SICIT.pdf" />
+    <Content Include="Documentos\Folio10202_Consulta3.pdf" />
+    <Content Include="Documentos\Folio30457_Consulta4.pdf" />
+    <Content Include="Documentos\Folio30461_Consulta3.pdf" />
     <None Include="packages.config" />
     <Content Include="Views\Monitor\IndexMonitor.cshtml" />
     <Content Include="Views\Consultas\IndexConsultas.cshtml" />

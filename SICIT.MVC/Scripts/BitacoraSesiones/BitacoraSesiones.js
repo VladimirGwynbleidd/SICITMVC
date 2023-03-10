@@ -6,7 +6,7 @@ $(document).ready(function () {
 
 async function ConsultarBitacoraSesiones() {
 
-    //if (!($('#formBitacoraAcciones').valid())) return false;
+   
 
     url = 'http://localhost:6435/Api/BitacoraSesiones/GetBitacoraSesiones';
     //url = $("#FQDN").val() + 'api/SICOD/GetFoliosSicod';
@@ -23,6 +23,9 @@ async function ConsultarBitacoraSesiones() {
 
 
 async function FiltrarBitacoraSesiones() {
+
+    if (!($('#formBitacoraSesiones').valid())) return false;
+
     argsFechas = {
         F_FECH_DESDE: $('#IDFechaIni').val(),
         F_FECH_HASTA: $('#IDFechaFin').val(),
@@ -183,7 +186,7 @@ $().ready(function () {
     }, "La fecha ingresada no puede ser mayor a la fecha actual");
 
 
-    $("#formBitacoraAcciones").validate({
+    $("#formBitacoraSesiones").validate({
 
         errorElement: 'span',
 

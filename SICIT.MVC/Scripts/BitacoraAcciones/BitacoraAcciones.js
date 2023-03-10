@@ -5,6 +5,9 @@ $(document).ready(function () {
     $("#IDFechaIni").datepicker({
         dateFormat: "dd-mm-yy"
     });
+    //$('#divTableBitacoraAcciones').css('visibility', 'hidden');
+    //$('#divTableBitacoraAcciones').css('display', 'none');
+    //document.getElementById('divTableBitacoraAcciones').style.display = "none";
 });
 
 async function ConsultarBitacoraAcciones() {
@@ -34,6 +37,7 @@ async function ConsultarBitacoraAcciones() {
 
     try {
         response = await fetchDataAsyncTableBitacoraAcciones(url, 'POST', JSON.stringify(argsFolios));
+        $('#divTableBitacoraAcciones').css('visibility', 'visible');
         console.log(response)
     } catch (error) {
         console.log(error);
@@ -91,8 +95,8 @@ async function fetchDataAsyncTableBitacoraAcciones(urlString, methodType, args) 
             searching: true,
             responsive: true,
             pagination: "bootstrap",
-            scrollCollapse: true,
-
+            scrollCollapse: false,
+            
             scrollX: true,
             dom: '<"top"<"left-col"B><"center-col"l><"right-col"f>>rtip',
             buttons: {
@@ -108,7 +112,7 @@ async function fetchDataAsyncTableBitacoraAcciones(urlString, methodType, args) 
                         text: '<i class="fas fa-file-excel btn btn-success"></i>',
                         title: 'Bitacora Acciones',
                         exportOptions: {
-                            columns: [0, 1, 2, 3, 4]
+                            columns: [0, 1, 2]
                         },
                     },
 
@@ -122,17 +126,34 @@ async function fetchDataAsyncTableBitacoraAcciones(urlString, methodType, args) 
 
             ],
 
-            //columnDefs: [
-            //    { className: "dt-left", targets: [6] },
-            //    { className: "dt-center", targets: [0, 1, 2, 3, 4, 5, 7, 8, 9, 10, 11, 12, 13, 14] }
-            //]
+            columnDefs: [
+                { className: "dt-center", targets: [2] }
+            ],
+            "stateSave": true,
+            "bstateSave": true,
         });
 
-        $('.filter-input').keyup(function () {
+
+        var filtroUsuarios = table.column(0).data().unique().sort(function (a, b) {
+            return a.toLowerCase().localeCompare(b.toLowerCase());
+        });
+
+        $.each(filtroUsuarios, function (key, value) {
+            $("#ddlUsuarios").append('<option>' + value + '</option>');
+        });
+
+        $('#ddlUsuarios').on('change', function () {
             table.column($(this).data('column'))
                 .search($(this).val())
                 .draw();
         });
+
+
+        //$('.filter-input').keyup(function () {
+        //    table.column($(this).data('column'))
+        //        .search($(this).val())
+        //        .draw();
+        //});
 
     });
 }
