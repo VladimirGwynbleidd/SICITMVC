@@ -98,7 +98,7 @@ async function iniciarSesion() {
                 toastr.error(response.Mensaje).css("width", "250px");
             } else {
                 if (response.PrimeraSesion == 0) {
-                    window.location.href = '/Home/Index/';
+                    window.location.href = '/Home/Index';
                 }
                 else {
                     window.location.href = '/CambiarPassword/CambiarPasswordIndex/';

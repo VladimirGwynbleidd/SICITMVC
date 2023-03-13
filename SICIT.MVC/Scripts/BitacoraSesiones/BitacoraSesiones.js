@@ -6,7 +6,7 @@ $(document).ready(function () {
 
 async function ConsultarBitacoraSesiones() {
 
-   
+
 
     url = 'http://localhost:6435/Api/BitacoraSesiones/GetBitacoraSesiones';
     //url = $("#FQDN").val() + 'api/SICOD/GetFoliosSicod';
@@ -118,6 +118,9 @@ async function fetchDataAsyncTableBitacoraSesiones(urlString, methodType, args) 
                 { 'data': 'DIRECCION_IP', className: "uniqueClassName" },
                 { 'data': 'HORA_INICIO', className: "uniqueClassName" },
                 { 'data': 'HORA_FIN', className: "uniqueClassName" },
+            ],
+            columnDefs: [
+                { className: "dt-center", targets: [2, 3, 4] }
             ],
         });
 
